@@ -44,6 +44,28 @@ const BlogArticlePage = () => {
         <meta property="og:type" content="article" />
         <meta property="article:author" content={article.author.name} />
         <link rel="canonical" href={`/blog/${article.slug}`} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": article.title,
+          "description": article.excerpt,
+          "image": article.imageUrl,
+          "author": {
+            "@type": "Person",
+            "name": article.author.name,
+            "jobTitle": article.author.role
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "NuevaPY",
+            "url": "https://nuevapy.com"
+          },
+          "datePublished": article.date,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `/blog/${article.slug}`
+          }
+        })}</script>
       </Helmet>
 
       {/* Hero */}
