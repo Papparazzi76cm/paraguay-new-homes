@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, TrendingUp, Building, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useFeaturedProjects, type Project } from "@/hooks/useProjects";
 
 import project1 from "@/assets/project-1.jpg";
@@ -28,6 +29,7 @@ const statusColor: Record<string, string> = {
 };
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+  <Link to={`/proyecto/${project.slug}`}>
   <motion.article
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -91,6 +93,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       </div>
     </div>
   </motion.article>
+  </Link>
 );
 
 const FeaturedProjects = () => {
