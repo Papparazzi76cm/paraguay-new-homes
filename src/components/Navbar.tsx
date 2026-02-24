@@ -24,13 +24,18 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {["Proyectos", "Inversión", "Para Promotores", "Blog"].map((item) => (
+          {[
+            { label: "Proyectos", href: "/#proyectos" },
+            { label: "Inversión", href: "#" },
+            { label: "Para Promotores", href: "/para-promotores" },
+            { label: "Blog", href: "#" },
+          ].map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors"
             >
-              {item}
+              {item.label}
             </a>
           ))}
           <button className="bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-medium border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-colors">
@@ -55,13 +60,19 @@ const Navbar = () => {
           className="md:hidden bg-foreground/95 backdrop-blur-xl px-6 pb-6"
         >
           <div className="flex flex-col gap-4">
-            {["Proyectos", "Inversión", "Para Promotores", "Blog"].map((item) => (
+            {[
+              { label: "Proyectos", href: "/#proyectos" },
+              { label: "Inversión", href: "#" },
+              { label: "Para Promotores", href: "/para-promotores" },
+              { label: "Blog", href: "#" },
+            ].map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.label}
+                href={item.href}
                 className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2"
+                onClick={() => setMobileOpen(false)}
               >
-                {item}
+                {item.label}
               </a>
             ))}
             <button className="bg-primary text-primary-foreground px-5 py-3 rounded-xl text-sm font-medium mt-2">
