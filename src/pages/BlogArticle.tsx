@@ -1,8 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { blogArticles } from "@/data/blogArticles";
 
 const BlogArticlePage = () => {
@@ -12,6 +14,9 @@ const BlogArticlePage = () => {
   if (!article) {
     return (
       <main className="min-h-screen">
+        <Helmet>
+          <title>Artículo no encontrado | NuevaPY Blog</title>
+        </Helmet>
         <section className="bg-foreground">
           <Navbar />
           <div className="container pt-32 pb-20 text-center">
@@ -30,6 +35,17 @@ const BlogArticlePage = () => {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>{article.title} | NuevaPY Blog</title>
+        <meta name="description" content={article.excerpt} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:image" content={article.imageUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="article:author" content={article.author.name} />
+        <link rel="canonical" href={`/blog/${article.slug}`} />
+      </Helmet>
+
       {/* Hero */}
       <section className="relative bg-foreground overflow-hidden">
         <Navbar />
@@ -136,6 +152,13 @@ const BlogArticlePage = () => {
               </button>
             </div>
           </motion.article>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="py-12 md:py-16">
+        <div className="container">
+          <NewsletterSignup />
         </div>
       </section>
 

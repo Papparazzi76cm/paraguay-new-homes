@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, BookOpen } from "lucide-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { blogArticles } from "@/data/blogArticles";
 
 const categories = ["Todos", ...Array.from(new Set(blogArticles.map((a) => a.category)))];
@@ -24,6 +26,15 @@ const Blog = () => {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>Blog | NuevaPY — Insights del mercado inmobiliario</title>
+        <meta name="description" content="Análisis, guías y tendencias para tomar mejores decisiones de inversión en el sector inmobiliario de Paraguay." />
+        <meta property="og:title" content="Blog | NuevaPY" />
+        <meta property="og:description" content="Insights del mercado inmobiliario paraguayo: análisis, guías y tendencias." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="/blog" />
+      </Helmet>
+
       {/* Hero */}
       <section className="relative bg-foreground overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsla(160,35%,25%,0.12),_transparent_60%)]" />
@@ -166,6 +177,13 @@ const Blog = () => {
               <p className="text-muted-foreground text-lg">No hay artículos en esta categoría todavía.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="pb-16 md:pb-24">
+        <div className="container">
+          <NewsletterSignup />
         </div>
       </section>
 
