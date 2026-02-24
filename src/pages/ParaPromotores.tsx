@@ -1,4 +1,10 @@
 import { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { Check, BarChart3, Users, Download, Building2, Eye, Zap, Shield, ArrowRight, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -264,6 +270,68 @@ const ParaPromotores = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 md:py-28">
+        <div className="container max-w-3xl">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Preguntas frecuentes
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Todo lo que necesitás saber antes de publicar tu proyecto.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeUp}>
+            <Accordion type="single" collapsible className="space-y-3">
+              {[
+                {
+                  q: "¿Cómo publico mi proyecto en NuevaPY?",
+                  a: "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos.",
+                },
+                {
+                  q: "¿Puedo cambiar de plan en cualquier momento?",
+                  a: "Sí. Podés subir o bajar de plan cuando quieras. El cambio se aplica en tu próximo ciclo de facturación y la diferencia se prorratea automáticamente.",
+                },
+                {
+                  q: "¿Qué tipo de leads voy a recibir?",
+                  a: "Recibís contactos de inversores y compradores que están activamente buscando proyectos de obra nueva en Paraguay. Cada lead incluye nombre, email, teléfono y el proyecto específico por el que consultan.",
+                },
+                {
+                  q: "¿Hay algún contrato de permanencia?",
+                  a: "No. Todos nuestros planes son mensuales y podés cancelar cuando quieras sin penalización. Si cancelás, tu cuenta permanece activa hasta el final del período pagado.",
+                },
+                {
+                  q: "¿Puedo integrar NuevaPY con mi CRM?",
+                  a: "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses.",
+                },
+                {
+                  q: "¿Cómo funciona el posicionamiento destacado?",
+                  a: "Los proyectos de planes Profesional y Premium aparecen primero en los resultados de búsqueda y en la sección de destacados de la home. Esto aumenta significativamente la visibilidad y los leads generados.",
+                },
+                {
+                  q: "¿Qué métodos de pago aceptan?",
+                  a: "Aceptamos tarjetas de crédito y débito (Visa, Mastercard), transferencia bancaria y pagos vía Tigo Money. La facturación es mensual en USD.",
+                },
+              ].map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="bg-card border border-border rounded-xl px-6 data-[state=open]:shadow-[var(--shadow-card)]"
+                >
+                  <AccordionTrigger className="text-left text-foreground font-medium text-[15px] hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
         </div>
       </section>
 
