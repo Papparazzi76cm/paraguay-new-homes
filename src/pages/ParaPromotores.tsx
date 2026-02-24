@@ -118,21 +118,20 @@ const ParaPromotores = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Para Promotores | NuevaPY — Publicá tus proyectos</title>
-        <meta name="description" content="Publicá tus desarrollos inmobiliarios en NuevaPY. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
-        <meta property="og:title" content="Para Promotores | NuevaPY" />
+        <title>Para Promotores | ProyectPY — Publicá tus proyectos</title>
+        <meta name="description" content="Publicá tus desarrollos inmobiliarios en ProyectPY. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
+        <meta property="og:title" content="Para Promotores | ProyectPY" />
         <meta property="og:description" content="Conectá tus proyectos con miles de inversores. Planes desde USD 149/mes." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/para-promotores" />
+...
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
           "mainEntity": [
-            { "@type": "Question", "name": "¿Cómo publico mi proyecto en NuevaPY?", "acceptedAnswer": { "@type": "Answer", "text": "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos." }},
+            { "@type": "Question", "name": "¿Cómo publico mi proyecto en ProyectPY?", "acceptedAnswer": { "@type": "Answer", "text": "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos." }},
             { "@type": "Question", "name": "¿Puedo cambiar de plan en cualquier momento?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Podés subir o bajar de plan cuando quieras. El cambio se aplica en tu próximo ciclo de facturación y la diferencia se prorratea automáticamente." }},
             { "@type": "Question", "name": "¿Qué tipo de leads voy a recibir?", "acceptedAnswer": { "@type": "Answer", "text": "Recibís contactos de inversores y compradores que están activamente buscando proyectos de obra nueva en Paraguay. Cada lead incluye nombre, email, teléfono y el proyecto específico por el que consultan." }},
             { "@type": "Question", "name": "¿Hay algún contrato de permanencia?", "acceptedAnswer": { "@type": "Answer", "text": "No. Todos nuestros planes son mensuales y podés cancelar cuando quieras sin penalización. Si cancelás, tu cuenta permanece activa hasta el final del período pagado." }},
-            { "@type": "Question", "name": "¿Puedo integrar NuevaPY con mi CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses." }},
+            { "@type": "Question", "name": "¿Puedo integrar ProyectPY con mi CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses." }},
             { "@type": "Question", "name": "¿Cómo funciona el posicionamiento destacado?", "acceptedAnswer": { "@type": "Answer", "text": "Los proyectos de planes Profesional y Premium aparecen primero en los resultados de búsqueda y en la sección de destacados de la home. Esto aumenta significativamente la visibilidad y los leads generados." }},
             { "@type": "Question", "name": "¿Qué métodos de pago aceptan?", "acceptedAnswer": { "@type": "Answer", "text": "Aceptamos tarjetas de crédito y débito (Visa, Mastercard), transferencia bancaria y pagos vía Tigo Money. La facturación es mensual en USD." }}
           ]
@@ -311,7 +310,7 @@ const ParaPromotores = () => {
             <Accordion type="single" collapsible className="space-y-3">
               {[
                 {
-                  q: "¿Cómo publico mi proyecto en NuevaPY?",
+                  q: "¿Cómo publico mi proyecto en ProyectPY?",
                   a: "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos.",
                 },
                 {
@@ -327,7 +326,7 @@ const ParaPromotores = () => {
                   a: "No. Todos nuestros planes son mensuales y podés cancelar cuando quieras sin penalización. Si cancelás, tu cuenta permanece activa hasta el final del período pagado.",
                 },
                 {
-                  q: "¿Puedo integrar NuevaPY con mi CRM?",
+                  q: "¿Puedo integrar ProyectPY con mi CRM?",
                   a: "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses.",
                 },
                 {
@@ -370,7 +369,7 @@ const ParaPromotores = () => {
                 ¿Listo para potenciar tus ventas?
               </h2>
               <p className="text-background/60 text-lg mb-8">
-                Unite a más de 50 promotores que ya confían en NuevaPY para conectar con inversores calificados.
+                Unite a más de 50 promotores que ya confían en ProyectPY para conectar con inversores calificados.
               </p>
               <button
                 onClick={() => setContactOpen(true)}

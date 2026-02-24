@@ -8,9 +8,9 @@ const Footer = () => (
         <div>
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold">N</span>
+              <span className="text-primary-foreground font-display font-bold">P</span>
             </div>
-            <span className="text-background font-display text-lg font-bold">NuevaPY</span>
+            <span className="text-background font-display text-lg font-bold">ProyectPY</span>
           </div>
           <p className="text-background/50 text-sm leading-relaxed">
             La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.
@@ -49,7 +49,7 @@ const Footer = () => (
               <MapPin className="w-4 h-4 shrink-0" /> Asunción, Paraguay
             </li>
             <li className="flex items-center gap-2 text-background/50 text-sm">
-              <Mail className="w-4 h-4 shrink-0" /> info@nuevapy.com
+              <Mail className="w-4 h-4 shrink-0" /> info@proyectpy.com
             </li>
             <li className="flex items-center gap-2 text-background/50 text-sm">
               <Phone className="w-4 h-4 shrink-0" /> +595 21 000 0000
@@ -59,7 +59,7 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-background/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-background/40 text-sm">© 2026 NuevaPY. Todos los derechos reservados.</p>
+        <p className="text-background/40 text-sm">© 2026 ProyectPY. Todos los derechos reservados.</p>
         <div className="flex gap-6">
           {["Términos", "Privacidad", "Cookies"].map((item) => (
             <a key={item} href="#" className="text-background/40 hover:text-background/60 text-sm transition-colors">{item}</a>

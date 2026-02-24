@@ -43,7 +43,7 @@ const Benefits = () => (
         viewport={{ once: true }}
         className="text-center mb-14"
       >
-        <span className="text-accent font-semibold text-sm uppercase tracking-wider">¿Por qué NuevaPY?</span>
+        <span className="text-accent font-semibold text-sm uppercase tracking-wider">¿Por qué ProyectPY?</span>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
           La plataforma que necesitabas
         </h2>

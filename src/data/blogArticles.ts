@@ -80,7 +80,7 @@ export const blogArticles: BlogArticle[] = [
     author: { name: "Ana Giménez", role: "Asesora Financiera" },
     content: [
       "Comprar en pozo puede ser una excelente decisión financiera, pero también implica riesgos que es importante conocer y mitigar. Estos son los errores más comunes que vemos en compradores primerizos.",
-      "Error 1: No investigar al promotor. Antes de comprometer tu dinero, verificá la trayectoria del desarrollador. ¿Cuántos proyectos ha completado? ¿Entregó a tiempo? ¿Qué dicen los compradores anteriores? En NuevaPY verificamos a todos nuestros promotores.",
+      "Error 1: No investigar al promotor. Antes de comprometer tu dinero, verificá la trayectoria del desarrollador. ¿Cuántos proyectos ha completado? ¿Entregó a tiempo? ¿Qué dicen los compradores anteriores? En ProyectPY verificamos a todos nuestros promotores.",
       "Error 2: Ignorar la ubicación futura. No alcanza con evaluar cómo está la zona hoy. Investigá los planes de desarrollo urbano, nuevas vialidades y proyectos de infraestructura que pueden impactar positiva o negativamente el valor de tu inversión.",
       "Error 3: No leer la letra chica del contrato. Las cláusulas sobre penalidades por atraso, especificaciones de acabados, áreas comunes incluidas y condiciones de rescisión son cruciales. Si es necesario, consultá con un abogado especializado.",
       "Error 4: Subestimar los costos adicionales. Más allá del precio del departamento, considerá: gastos de escrituración (2-3%), IVA (10%), expensas desde la entrega, y posibles diferencias de metraje final. Sumá al menos un 15% al presupuesto base.",
