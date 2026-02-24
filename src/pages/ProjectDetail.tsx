@@ -68,9 +68,9 @@ const ProjectDetail = () => {
             <ArrowLeft className="w-5 h-5" />
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-sm">N</span>
+                <span className="text-primary-foreground font-display font-bold text-sm">P</span>
               </div>
-              <span className="font-display font-bold text-base hidden sm:inline">NuevaPY</span>
+              <span className="font-display font-bold text-base hidden sm:inline">ProyectPY</span>
             </div>
           </Link>
           <button

@@ -15,10 +15,10 @@ const Navbar = () => {
       <div className="container flex items-center justify-between py-5">
         <a href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold text-lg">N</span>
+            <span className="text-primary-foreground font-display font-bold text-lg">P</span>
           </div>
           <span className="text-primary-foreground font-display text-xl font-bold tracking-tight">
-            NuevaPY
+            ProyectPY
           </span>
         </a>
 

@@ -13,23 +13,22 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>NuevaPY — Proyectos de obra nueva en Paraguay</title>
+        <title>ProyectPY — Proyectos de obra nueva en Paraguay</title>
         <meta name="description" content="Explorá los mejores proyectos inmobiliarios de obra nueva en Paraguay. Departamentos, casas y barrios cerrados con información verificada para inversores." />
-        <meta property="og:title" content="NuevaPY — Proyectos de obra nueva en Paraguay" />
+        <meta property="og:title" content="ProyectPY — Proyectos de obra nueva en Paraguay" />
         <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Paraguay." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/" />
+...
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "NuevaPY",
-          "url": "https://nuevapy.com",
+          "name": "ProyectPY",
+          "url": "https://proyectpy.com",
           "description": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+595-21-000-0000",
             "contactType": "customer service",
-            "email": "info@nuevapy.com",
+            "email": "info@proyectpy.com",
             "areaServed": "PY",
             "availableLanguage": "Spanish"
           },

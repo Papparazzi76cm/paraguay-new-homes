@@ -15,7 +15,7 @@ const BlogArticlePage = () => {
     return (
       <main className="min-h-screen">
         <Helmet>
-          <title>Artículo no encontrado | NuevaPY Blog</title>
+          <title>Artículo no encontrado | ProyectPY Blog</title>
         </Helmet>
         <section className="bg-foreground">
           <Navbar />
@@ -36,7 +36,7 @@ const BlogArticlePage = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>{article.title} | NuevaPY Blog</title>
+        <title>{article.title} | ProyectPY Blog</title>
         <meta name="description" content={article.excerpt} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.excerpt} />
@@ -57,8 +57,8 @@ const BlogArticlePage = () => {
           },
           "publisher": {
             "@type": "Organization",
-            "name": "NuevaPY",
-            "url": "https://nuevapy.com"
+            "name": "ProyectPY",
+            "url": "https://proyectpy.com"
           },
           "datePublished": article.date,
           "mainEntityOfPage": {
