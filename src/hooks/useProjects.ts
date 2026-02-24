@@ -26,17 +26,25 @@ export interface ProjectFilters {
   city?: string;
   type?: string;
   status?: string;
+  priceMin?: number;
+  priceMax?: number;
 }
 
 export const useProjects = (filters?: ProjectFilters) => {
   return useQuery({
     queryKey: ["projects", filters],
     queryFn: async () => {
-      let query = supabase.from("projects").select("*").order("featured", { ascending: false }).order("created_at", { ascending: false });
+      let query = supabase
+        .from("projects")
+        .select("*")
+        .order("featured", { ascending: false })
+        .order("created_at", { ascending: false });
 
       if (filters?.city) query = query.eq("location_city", filters.city);
       if (filters?.type) query = query.eq("project_type", filters.type as any);
       if (filters?.status) query = query.eq("status", filters.status as any);
+      if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
+      if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
 
       const { data, error } = await query;
       if (error) throw error;
@@ -45,15 +53,26 @@ export const useProjects = (filters?: ProjectFilters) => {
   });
 };
 
-export const useFeaturedProjects = () => {
+export const useFeaturedProjects = (filters?: ProjectFilters) => {
+  const hasFilters = filters && Object.values(filters).some((v) => v != null && v !== "");
+
   return useQuery({
-    queryKey: ["projects", "featured"],
+    queryKey: ["projects", "featured", filters],
     queryFn: async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from("projects")
         .select("*")
-        .order("featured", { ascending: false })
-        .limit(6);
+        .order("featured", { ascending: false });
+
+      if (filters?.city) query = query.eq("location_city", filters.city);
+      if (filters?.type) query = query.eq("project_type", filters.type as any);
+      if (filters?.status) query = query.eq("status", filters.status as any);
+      if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
+      if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
+
+      if (!hasFilters) query = query.limit(6);
+
+      const { data, error } = await query;
       if (error) throw error;
       return data as Project[];
     },
@@ -64,9 +83,7 @@ export const useProjectCities = () => {
   return useQuery({
     queryKey: ["project-cities"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("projects")
-        .select("location_city");
+      const { data, error } = await supabase.from("projects").select("location_city");
       if (error) throw error;
       const cities = [...new Set(data.map((d) => d.location_city))];
       return cities;
