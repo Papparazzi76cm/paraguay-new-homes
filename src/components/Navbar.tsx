@@ -28,7 +28,7 @@ const Navbar = () => {
             { label: "Proyectos", href: "/#proyectos" },
             { label: "Inversión", href: "/inversion" },
             { label: "Para Promotores", href: "/para-promotores" },
-            { label: "Blog", href: "#" },
+            { label: "Blog", href: "/blog" },
           ].map((item) => (
             <a
               key={item.label}
@@ -64,7 +64,7 @@ const Navbar = () => {
               { label: "Proyectos", href: "/#proyectos" },
               { label: "Inversión", href: "/inversion" },
               { label: "Para Promotores", href: "/para-promotores" },
-              { label: "Blog", href: "#" },
+              { label: "Blog", href: "/blog" },
             ].map((item) => (
               <a
                 key={item.label}
