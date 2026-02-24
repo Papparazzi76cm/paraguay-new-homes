@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   TrendingUp,
@@ -116,6 +117,14 @@ const Inversion = () => {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>Inversión Inmobiliaria en Paraguay | NuevaPY</title>
+        <meta name="description" content="Descubrí por qué invertir en obra nueva en Paraguay. Rentabilidad del 6-12% anual, simulador de inversión y guía completa para inversores." />
+        <meta property="og:title" content="Inversión Inmobiliaria en Paraguay | NuevaPY" />
+        <meta property="og:description" content="Guía completa de inversión inmobiliaria en Paraguay con simulador de rentabilidad." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="/inversion" />
+      </Helmet>
       {/* Hero */}
       <section className="relative bg-foreground overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsla(38,60%,55%,0.1),_transparent_60%)]" />

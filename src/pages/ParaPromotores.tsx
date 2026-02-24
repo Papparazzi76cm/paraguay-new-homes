@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { Check, BarChart3, Users, Download, Building2, Eye, Zap, Shield, ArrowRight, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -116,6 +117,14 @@ const ParaPromotores = () => {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>Para Promotores | NuevaPY — Publicá tus proyectos</title>
+        <meta name="description" content="Publicá tus desarrollos inmobiliarios en NuevaPY. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
+        <meta property="og:title" content="Para Promotores | NuevaPY" />
+        <meta property="og:description" content="Conectá tus proyectos con miles de inversores. Planes desde USD 149/mes." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="/para-promotores" />
+      </Helmet>
       {/* Hero */}
       <section className="relative bg-foreground overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsla(160,35%,30%,0.15),_transparent_60%)]" />
