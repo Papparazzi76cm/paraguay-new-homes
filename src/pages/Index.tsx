@@ -19,6 +19,26 @@ const Index = () => {
         <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Paraguay." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "NuevaPY",
+          "url": "https://nuevapy.com",
+          "description": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+595-21-000-0000",
+            "contactType": "customer service",
+            "email": "info@nuevapy.com",
+            "areaServed": "PY",
+            "availableLanguage": "Spanish"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Asunción",
+            "addressCountry": "PY"
+          }
+        })}</script>
       </Helmet>
       <Hero filters={filters} onFiltersChange={setFilters} />
       <FeaturedProjects filters={filters} />
