@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           {[
             { label: "Proyectos", href: "/#proyectos" },
-            { label: "Inversión", href: "#" },
+            { label: "Inversión", href: "/inversion" },
             { label: "Para Promotores", href: "/para-promotores" },
             { label: "Blog", href: "#" },
           ].map((item) => (
@@ -62,7 +62,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-4">
             {[
               { label: "Proyectos", href: "/#proyectos" },
-              { label: "Inversión", href: "#" },
+              { label: "Inversión", href: "/inversion" },
               { label: "Para Promotores", href: "/para-promotores" },
               { label: "Blog", href: "#" },
             ].map((item) => (
