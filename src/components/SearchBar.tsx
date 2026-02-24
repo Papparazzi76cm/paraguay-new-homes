@@ -10,9 +10,18 @@ const SearchBar = () => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const { data: cities } = useProjectCities();
 
+  const priceOptions = [
+    "0 - 50.000$",
+    "50.000 - 100.000$",
+    "100.000 - 250.000$",
+    "250.000 - 500.000$",
+    "+ 500.000$",
+  ];
+
   const filterOptions: Record<string, string[]> = {
     ciudad: cities || ["Asunción", "Luque", "San Lorenzo"],
     tipo: typeOptions,
+    precio: priceOptions,
     estado: statusOptions,
   };
 
