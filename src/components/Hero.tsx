@@ -2,8 +2,14 @@ import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-building.jpg";
 import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
+import type { ProjectFilters } from "@/hooks/useProjects";
 
-const Hero = () => {
+interface HeroProps {
+  filters: ProjectFilters;
+  onFiltersChange: (filters: ProjectFilters) => void;
+}
+
+const Hero = ({ filters, onFiltersChange }: HeroProps) => {
   return (
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
       {/* Background */}
@@ -49,7 +55,7 @@ const Hero = () => {
           Explorá proyectos verificados, compará desarrollos y tomá decisiones de inversión con confianza.
         </motion.p>
 
-        <SearchBar />
+        <SearchBar filters={filters} onFiltersChange={onFiltersChange} />
 
         {/* Stats */}
         <motion.div
