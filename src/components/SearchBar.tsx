@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { useProjectCities } from "@/hooks/useProjects";
 
-const filterOptions = {
-  ciudad: ["Asunción", "Luque", "San Lorenzo", "Lambaré", "Encarnación", "Ciudad del Este"],
-  tipo: ["Departamentos", "Casas", "Barrio Cerrado", "Mixto"],
-  estado: ["En Pozo", "En Construcción", "Entrega Inmediata"],
-};
+const typeOptions = ["Departamentos", "Casas", "Barrio Cerrado", "Mixto"];
+const statusOptions = ["En Pozo", "En Construcción", "Entrega Inmediata"];
 
 const SearchBar = () => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const { data: cities } = useProjectCities();
+
+  const filterOptions: Record<string, string[]> = {
+    ciudad: cities || ["Asunción", "Luque", "San Lorenzo"],
+    tipo: typeOptions,
+    estado: statusOptions,
+  };
 
   return (
     <motion.div
@@ -20,7 +25,6 @@ const SearchBar = () => {
     >
       <div className="bg-card rounded-2xl shadow-elevated p-2 md:p-3">
         <div className="flex flex-col md:flex-row md:items-center gap-2">
-          {/* Ciudad */}
           <FilterButton
             icon={<MapPin className="w-4 h-4" />}
             label="Ciudad"
@@ -28,10 +32,7 @@ const SearchBar = () => {
             active={activeFilter === "ciudad"}
             onClick={() => setActiveFilter(activeFilter === "ciudad" ? null : "ciudad")}
           />
-          
           <div className="hidden md:block w-px h-8 bg-border" />
-
-          {/* Tipo */}
           <FilterButton
             icon={<Building2 className="w-4 h-4" />}
             label="Tipo"
@@ -39,10 +40,7 @@ const SearchBar = () => {
             active={activeFilter === "tipo"}
             onClick={() => setActiveFilter(activeFilter === "tipo" ? null : "tipo")}
           />
-
           <div className="hidden md:block w-px h-8 bg-border" />
-
-          {/* Precio */}
           <FilterButton
             icon={<Banknote className="w-4 h-4" />}
             label="Precio"
@@ -50,10 +48,7 @@ const SearchBar = () => {
             active={activeFilter === "precio"}
             onClick={() => setActiveFilter(activeFilter === "precio" ? null : "precio")}
           />
-
           <div className="hidden md:block w-px h-8 bg-border" />
-
-          {/* Estado */}
           <FilterButton
             icon={<CalendarDays className="w-4 h-4" />}
             label="Estado"
@@ -61,23 +56,20 @@ const SearchBar = () => {
             active={activeFilter === "estado"}
             onClick={() => setActiveFilter(activeFilter === "estado" ? null : "estado")}
           />
-
-          {/* Search Button */}
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity shrink-0">
             <Search className="w-4 h-4" />
             <span className="md:hidden">Buscar</span>
           </button>
         </div>
 
-        {/* Dropdown */}
-        {activeFilter && filterOptions[activeFilter as keyof typeof filterOptions] && (
+        {activeFilter && filterOptions[activeFilter] && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="pt-3 pb-1 px-2 flex flex-wrap gap-2"
           >
-            {filterOptions[activeFilter as keyof typeof filterOptions].map((option) => (
+            {filterOptions[activeFilter].map((option) => (
               <button
                 key={option}
                 className="px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
