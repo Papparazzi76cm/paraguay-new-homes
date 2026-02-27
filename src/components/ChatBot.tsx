@@ -1,14 +1,106 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { useSubmitLead } from "@/hooks/useContactLead";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
+const InlinContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
+  const [form, setForm] = useState({ full_name: "", email: "", phone: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const submitLead = useSubmitLead();
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.full_name.trim()) e.full_name = "Requerido";
+    if (!form.email.trim()) e.email = "Requerido";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email inválido";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (!validate()) return;
+    submitLead.mutate(
+      {
+        full_name: form.full_name.trim().slice(0, 100),
+        email: form.email.trim().slice(0, 255),
+        phone: form.phone.trim().slice(0, 30) || undefined,
+        message: form.message.trim().slice(0, 1000) || undefined,
+        lead_type: "chatbot",
+      },
+      { onSuccess }
+    );
+  };
+
+  if (submitLead.isSuccess) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-primary">
+        <CheckCircle2 className="w-4 h-4" />
+        <span>¡Datos enviados! Te contactaremos pronto.</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      <div>
+        <input
+          placeholder="Nombre completo *"
+          value={form.full_name}
+          onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
+          className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
+        />
+        {errors.full_name && <p className="text-xs text-destructive mt-0.5">{errors.full_name}</p>}
+      </div>
+      <div>
+        <input
+          type="email"
+          placeholder="Email *"
+          value={form.email}
+          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+          className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
+        />
+        {errors.email && <p className="text-xs text-destructive mt-0.5">{errors.email}</p>}
+      </div>
+      <input
+        type="tel"
+        placeholder="Teléfono (opcional)"
+        value={form.phone}
+        onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+        className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
+      />
+      <textarea
+        placeholder="¿Qué proyecto te interesa? (opcional)"
+        value={form.message}
+        onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+        rows={2}
+        className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground resize-none"
+      />
+      <button
+        onClick={handleSubmit}
+        disabled={submitLead.isPending}
+        className="w-full text-sm font-medium bg-primary text-primary-foreground rounded-lg py-2 hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+      >
+        {submitLead.isPending ? (
+          <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</>
+        ) : (
+          "Enviar datos de contacto"
+        )}
+      </button>
+      {submitLead.isError && (
+        <p className="text-xs text-destructive">Error al enviar. Intentá de nuevo.</p>
+      )}
+    </div>
+  );
+};
+
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     { role: "assistant", content: "¡Hola! 👋 Soy el asistente de ProyectPY. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre proyectos inmobiliarios, inversión o publicación de proyectos." },
   ]);
@@ -18,12 +110,21 @@ const ChatBot = () => {
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages]);
+  }, [messages, showContactForm]);
+
+  const handleContactSuccess = () => {
+    setShowContactForm(false);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: "✅ ¡Perfecto! Recibimos tus datos. Un asesor de ProyectPY se pondrá en contacto con vos a la brevedad. ¿Hay algo más en lo que pueda ayudarte?" },
+    ]);
+  };
 
   const send = async () => {
     const text = input.trim();
     if (!text || isLoading) return;
 
+    setShowContactForm(false);
     const userMsg: Msg = { role: "user", content: text };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
@@ -88,7 +189,6 @@ const ChatBot = () => {
         }
       }
 
-      // Flush remaining
       if (textBuffer.trim()) {
         for (let raw of textBuffer.split("\n")) {
           if (!raw) continue;
@@ -153,9 +253,18 @@ const ChatBot = () => {
                   <p className="text-xs opacity-80">Inmobiliario • En línea</p>
                 </div>
               </div>
-              <button onClick={() => setOpen(false)} className="p-1 rounded-full hover:bg-primary-foreground/20 transition-colors">
-                <X className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setShowContactForm((v) => !v)}
+                  className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors"
+                  title="Dejá tus datos de contacto"
+                >
+                  <UserPlus className="w-4 h-4" />
+                </button>
+                <button onClick={() => setOpen(false)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -202,6 +311,24 @@ const ChatBot = () => {
                   )}
                 </div>
               ))}
+
+              {/* Inline contact form */}
+              {showContactForm && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex gap-2"
+                >
+                  <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <UserPlus className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="flex-1 bg-muted rounded-2xl rounded-bl-md px-3.5 py-3">
+                    <p className="text-sm font-medium text-foreground mb-2">📋 Dejá tus datos y te contactamos</p>
+                    <InlinContactForm onSuccess={handleContactSuccess} />
+                  </div>
+                </motion.div>
+              )}
+
               {isLoading && messages[messages.length - 1]?.role === "user" && (
                 <div className="flex gap-2">
                   <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -218,26 +345,37 @@ const ChatBot = () => {
               )}
             </div>
 
-            {/* Input */}
-            <form
-              onSubmit={(e) => { e.preventDefault(); send(); }}
-              className="p-3 border-t flex gap-2"
-            >
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Escribí tu pregunta..."
-                className="flex-1 text-sm bg-muted rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || isLoading}
-                className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:bg-primary/90 transition-colors"
+            {/* Contact CTA + Input */}
+            <div className="border-t">
+              {!showContactForm && (
+                <button
+                  onClick={() => setShowContactForm(true)}
+                  className="w-full text-xs text-muted-foreground hover:text-primary py-1.5 flex items-center justify-center gap-1 transition-colors"
+                >
+                  <UserPlus className="w-3 h-3" />
+                  ¿Te interesa un proyecto? Dejá tus datos
+                </button>
+              )}
+              <form
+                onSubmit={(e) => { e.preventDefault(); send(); }}
+                className="p-3 pt-1.5 flex gap-2"
               >
-                <Send className="w-4 h-4" />
-              </button>
-            </form>
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Escribí tu pregunta..."
+                  className="flex-1 text-sm bg-muted rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
+                  disabled={isLoading}
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isLoading}
+                  className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:bg-primary/90 transition-colors"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
