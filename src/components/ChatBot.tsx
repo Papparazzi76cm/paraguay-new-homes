@@ -176,7 +176,20 @@ const ChatBot = () => {
                   >
                     {msg.role === "assistant" ? (
                       <div className="prose prose-sm max-w-none dark:prose-invert [&>p]:m-0 [&>ul]:m-0 [&>ol]:m-0">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        <ReactMarkdown
+                          components={{
+                            a: ({ href, children }) => (
+                              <a
+                                href={href}
+                                className="text-primary underline hover:text-primary/80 font-medium"
+                                target={href?.startsWith("/") ? "_self" : "_blank"}
+                                rel="noopener noreferrer"
+                              >
+                                {children}
+                              </a>
+                            ),
+                          }}
+                        >{msg.content}</ReactMarkdown>
                       </div>
                     ) : (
                       msg.content
