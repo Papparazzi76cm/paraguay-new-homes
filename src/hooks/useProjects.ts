@@ -9,7 +9,7 @@ export type Project = {
   location_city: string;
   location_zone: string | null;
   project_type: "departamentos" | "casas" | "barrio_cerrado" | "mixto";
-  status: "en_pozo" | "en_construccion" | "entrega_inmediata";
+  status: "preventa" | "en_pozo" | "en_construccion" | "entrega_inmediata";
   price_from: number | null;
   price_currency: string;
   estimated_yield: number | null;

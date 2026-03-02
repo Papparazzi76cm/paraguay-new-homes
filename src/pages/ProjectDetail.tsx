@@ -23,6 +23,7 @@ import ProjectMap from "@/components/ProjectMap";
 import Footer from "@/components/Footer";
 
 const statusLabels: Record<string, string> = {
+  preventa: "Preventa",
   en_pozo: "En Pozo",
   en_construccion: "En Construcción",
   entrega_inmediata: "Entrega Inmediata",

@@ -255,7 +255,11 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
-      project_status: "en_pozo" | "en_construccion" | "entrega_inmediata"
+      project_status:
+        | "preventa"
+        | "en_pozo"
+        | "en_construccion"
+        | "entrega_inmediata"
       project_type: "departamentos" | "casas" | "barrio_cerrado" | "mixto"
     }
     CompositeTypes: {
@@ -385,7 +389,12 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
-      project_status: ["en_pozo", "en_construccion", "entrega_inmediata"],
+      project_status: [
+        "preventa",
+        "en_pozo",
+        "en_construccion",
+        "entrega_inmediata",
+      ],
       project_type: ["departamentos", "casas", "barrio_cerrado", "mixto"],
     },
   },

@@ -3,6 +3,7 @@ import { MapPin, TrendingUp } from "lucide-react";
 import type { Project } from "@/hooks/useProjects";
 
 const statusLabels: Record<string, string> = {
+  preventa: "Preventa",
   en_pozo: "En pozo",
   en_construccion: "En construcción",
   entrega_inmediata: "Entrega inmediata",

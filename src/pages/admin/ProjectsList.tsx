@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 const statusLabels: Record<string, string> = {
+  preventa: "Preventa",
   en_pozo: "En Pozo",
   en_construccion: "Construcción",
   entrega_inmediata: "Entrega",
