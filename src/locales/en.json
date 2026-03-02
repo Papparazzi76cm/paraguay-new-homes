@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "investment": "Investment",
+    "forDevelopers": "For Developers",
+    "blog": "Blog",
+    "admin": "Admin",
+    "adminPanel": "Admin Panel",
+    "publishProject": "Publish Project",
+    "themeSystem": "System",
+    "themeDark": "Dark",
+    "themeLight": "Light"
+  },
+  "hero": {
+    "badge": "New Build Specialists",
+    "title": "Your next investment in <italic>new build</italic> in Paraguay",
+    "subtitle": "Explore verified projects, compare developments and make investment decisions with confidence.",
+    "statsProjects": "Active projects",
+    "statsDevelopers": "Developers",
+    "statsCities": "Cities"
+  },
+  "search": {
+    "city": "City",
+    "cityPlaceholder": "Where are you looking?",
+    "type": "Type",
+    "typePlaceholder": "Project type",
+    "price": "Price",
+    "pricePlaceholder": "Price range",
+    "status": "Status",
+    "statusPlaceholder": "Construction stage",
+    "search": "Search",
+    "clear": "Clear"
+  },
+  "projectTypes": {
+    "departamentos": "Apartments",
+    "casas": "Houses",
+    "barrio_cerrado": "Gated Community",
+    "mixto": "Mixed"
+  },
+  "projectStatus": {
+    "preventa": "Pre-sale",
+    "en_pozo": "Off-plan",
+    "en_construccion": "Under Construction",
+    "entrega_inmediata": "Ready to Move In"
+  },
+  "featured": {
+    "curated": "Curated selection",
+    "searchResults": "Search results",
+    "featuredTitle": "Featured Projects",
+    "foundTitle": "Projects Found",
+    "featuredDesc": "Verified developments with the best investment-return ratio in the Paraguayan market.",
+    "foundDesc": "{{count}} project matches your search.",
+    "foundDesc_other": "{{count}} projects match your search.",
+    "noResults": "No projects found with the selected filters.",
+    "exploreAll": "Explore all projects",
+    "featured": "Featured",
+    "from": "From",
+    "yield": "Yield {{value}}%",
+    "delivery": "Delivery: {{date}}"
+  },
+  "benefits": {
+    "tag": "Why ProyectPY?",
+    "title": "The platform you needed",
+    "subtitle": "Tools designed for demanding investors and buyers looking for new builds in Paraguay.",
+    "newBuild": "New Build Only",
+    "newBuildDesc": "We focus exclusively on verified new projects. No resale, no unnecessary intermediaries.",
+    "verified": "Verified Information",
+    "verifiedDesc": "Each project goes through a verification process. Real data, confirmed developers.",
+    "renders": "Renders & 3D Tours",
+    "rendersDesc": "Visualize each project with professional renders, interactive plans and virtual tours.",
+    "comparator": "Project Comparator",
+    "comparatorDesc": "Compare up to 3 projects side by side: prices, amenities, returns and more.",
+    "simulator": "Return Simulator",
+    "simulatorDesc": "Calculate the estimated return on your investment with local market data.",
+    "financing": "Financing Options",
+    "financingDesc": "Learn about direct and bank financing options for each project."
+  },
+  "cta": {
+    "title": "Are you a real estate developer?",
+    "subtitle": "Publish your projects on Paraguay's premier new build platform. Reach qualified investors.",
+    "publishBtn": "Publish my development",
+    "plansBtn": "See plans and pricing"
+  },
+  "contact": {
+    "title": "Contact",
+    "namePlaceholder": "Full name",
+    "emailPlaceholder": "Email",
+    "phonePlaceholder": "Phone (optional)",
+    "messagePlaceholder": "Message (optional)",
+    "send": "Send message"
+  },
+  "newsletter": {
+    "title": "Get market insights",
+    "subtitle": "Subscribe to our newsletter and receive analysis, opportunities and trends from the Paraguayan real estate market directly in your inbox.",
+    "subscribe": "Subscribe",
+    "successTitle": "Subscription confirmed!",
+    "successDesc": "You'll receive our best articles and insights from the Paraguayan real estate market.",
+    "noSpam": "No spam. Unsubscribe anytime.",
+    "error": "An error occurred. Please try again."
+  },
+  "footer": {
+    "brandDesc": "The specialized platform for new build projects in Paraguay. Safe investment, verified information.",
+    "explore": "Explore",
+    "exploreProjects": "Projects",
+    "exploreNew": "New Launches",
+    "exploreOpportunities": "Opportunities",
+    "exploreComparator": "Comparator",
+    "exploreBlog": "Blog",
+    "forDevelopers": "For Developers",
+    "publish": "Publish Project",
+    "plans": "Plans & Pricing",
+    "dashboard": "Dashboard",
+    "support": "Support",
+    "contactTitle": "Contact",
+    "rights": "© 2026 ProyectPY. All rights reserved.",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "cookies": "Cookies"
+  },
+  "detail": {
+    "notFound": "Project not found",
+    "backHome": "Back to home",
+    "contact": "Contact",
+    "financingAvailable": "Financing available",
+    "fromPrice": "From",
+    "estYield": "Est. yield",
+    "deliveryLabel": "Delivery",
+    "typeLabel": "Type",
+    "aboutProject": "About the Project",
+    "interestedTitle": "Interested in this project?",
+    "interestedDesc": "Receive detailed information, plans and financing conditions.",
+    "requestInfo": "Request information",
+    "downloadDossier": "Download dossier",
+    "location": "Location"
+  },
+  "timeline": {
+    "title": "Construction Timeline",
+    "completed": "{{percent}}% completed",
+    "estimatedDelivery": "Estimated delivery:",
+    "currentPhase": "Current phase",
+    "current": "Current",
+    "preventa": "Pre-sale",
+    "preventaDesc": "Commercial launch",
+    "enPozo": "Off-plan",
+    "enPozoDesc": "Construction start",
+    "construccion": "Construction",
+    "construccionDesc": "Structure and finishes",
+    "entrega": "Delivery",
+    "entregaDesc": "Ready to move in"
+  }
+}

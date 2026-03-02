@@ -1,21 +1,8 @@
 import { useState } from "react";
 import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { useProjectCities, type ProjectFilters } from "@/hooks/useProjects";
-
-const typeOptions = [
-  { label: "Departamentos", value: "departamentos" },
-  { label: "Casas", value: "casas" },
-  { label: "Barrio Cerrado", value: "barrio_cerrado" },
-  { label: "Mixto", value: "mixto" },
-];
-
-const statusOptions = [
-  { label: "Preventa", value: "preventa" },
-  { label: "En Pozo", value: "en_pozo" },
-  { label: "En Construcción", value: "en_construccion" },
-  { label: "Entrega Inmediata", value: "entrega_inmediata" },
-];
 
 const priceRanges = [
   { label: "0 - 50.000$", min: 0, max: 50000 },
@@ -25,6 +12,9 @@ const priceRanges = [
   { label: "+ 500.000$", min: 500000, max: undefined },
 ];
 
+const statusKeys = ["preventa", "en_pozo", "en_construccion", "entrega_inmediata"] as const;
+const typeKeys = ["departamentos", "casas", "barrio_cerrado", "mixto"] as const;
+
 interface SearchBarProps {
   filters: ProjectFilters;
   onFiltersChange: (filters: ProjectFilters) => void;
@@ -33,6 +23,7 @@ interface SearchBarProps {
 const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const { data: cities } = useProjectCities();
+  const { t } = useTranslation();
 
   const selectedCity = filters.city || null;
   const selectedType = filters.type || null;
@@ -68,10 +59,6 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
 
   const hasAnyFilter = selectedCity || selectedType || selectedStatus || selectedPriceLabel;
 
-  const clearAll = () => {
-    onFiltersChange({});
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -83,8 +70,8 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
         <div className="flex flex-col md:flex-row md:items-center gap-2">
           <FilterButton
             icon={<MapPin className="w-4 h-4" />}
-            label="Ciudad"
-            placeholder={selectedCity || "¿Dónde buscas?"}
+            label={t("search.city")}
+            placeholder={selectedCity || t("search.cityPlaceholder")}
             active={activeFilter === "ciudad"}
             selected={!!selectedCity}
             onClick={() => setActiveFilter(activeFilter === "ciudad" ? null : "ciudad")}
@@ -92,8 +79,8 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
           <div className="hidden md:block w-px h-8 bg-border" />
           <FilterButton
             icon={<Building2 className="w-4 h-4" />}
-            label="Tipo"
-            placeholder={typeOptions.find((t) => t.value === selectedType)?.label || "Tipo de proyecto"}
+            label={t("search.type")}
+            placeholder={selectedType ? t(`projectTypes.${selectedType}`) : t("search.typePlaceholder")}
             active={activeFilter === "tipo"}
             selected={!!selectedType}
             onClick={() => setActiveFilter(activeFilter === "tipo" ? null : "tipo")}
@@ -101,8 +88,8 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
           <div className="hidden md:block w-px h-8 bg-border" />
           <FilterButton
             icon={<Banknote className="w-4 h-4" />}
-            label="Precio"
-            placeholder={selectedPriceLabel || "Rango de precio"}
+            label={t("search.price")}
+            placeholder={selectedPriceLabel || t("search.pricePlaceholder")}
             active={activeFilter === "precio"}
             selected={!!selectedPriceLabel}
             onClick={() => setActiveFilter(activeFilter === "precio" ? null : "precio")}
@@ -110,24 +97,24 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
           <div className="hidden md:block w-px h-8 bg-border" />
           <FilterButton
             icon={<CalendarDays className="w-4 h-4" />}
-            label="Estado"
-            placeholder={statusOptions.find((s) => s.value === selectedStatus)?.label || "Etapa de obra"}
+            label={t("search.status")}
+            placeholder={selectedStatus ? t(`projectStatus.${selectedStatus}`) : t("search.statusPlaceholder")}
             active={activeFilter === "estado"}
             selected={!!selectedStatus}
             onClick={() => setActiveFilter(activeFilter === "estado" ? null : "estado")}
           />
           {hasAnyFilter ? (
             <button
-              onClick={clearAll}
+              onClick={() => onFiltersChange({})}
               className="flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-5 py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors shrink-0"
             >
               <X className="w-4 h-4" />
-              <span className="md:hidden">Limpiar</span>
+              <span className="md:hidden">{t("search.clear")}</span>
             </button>
           ) : (
             <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity shrink-0">
               <Search className="w-4 h-4" />
-              <span className="md:hidden">Buscar</span>
+              <span className="md:hidden">{t("search.search")}</span>
             </button>
           )}
         </div>
@@ -142,27 +129,22 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
           )}
           {activeFilter === "tipo" && (
             <DropdownPanel key="tipo">
-              {typeOptions.map((opt) => (
-                <OptionChip key={opt.value} label={opt.label} selected={selectedType === opt.value} onClick={() => handleTypeSelect(opt.value)} />
+              {typeKeys.map((key) => (
+                <OptionChip key={key} label={t(`projectTypes.${key}`)} selected={selectedType === key} onClick={() => handleTypeSelect(key)} />
               ))}
             </DropdownPanel>
           )}
           {activeFilter === "precio" && (
             <DropdownPanel key="precio">
               {priceRanges.map((range) => (
-                <OptionChip
-                  key={range.label}
-                  label={range.label}
-                  selected={filters.priceMin === range.min && filters.priceMax === range.max}
-                  onClick={() => handlePriceSelect(range)}
-                />
+                <OptionChip key={range.label} label={range.label} selected={filters.priceMin === range.min && filters.priceMax === range.max} onClick={() => handlePriceSelect(range)} />
               ))}
             </DropdownPanel>
           )}
           {activeFilter === "estado" && (
             <DropdownPanel key="estado">
-              {statusOptions.map((opt) => (
-                <OptionChip key={opt.value} label={opt.label} selected={selectedStatus === opt.value} onClick={() => handleStatusSelect(opt.value)} />
+              {statusKeys.map((key) => (
+                <OptionChip key={key} label={t(`projectStatus.${key}`)} selected={selectedStatus === key} onClick={() => handleStatusSelect(key)} />
               ))}
             </DropdownPanel>
           )}
