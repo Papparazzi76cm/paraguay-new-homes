@@ -10,6 +10,7 @@ import AmenitiesList from "@/components/AmenitiesList";
 import YieldSimulator from "@/components/YieldSimulator";
 import ContactDialog from "@/components/ContactDialog";
 import ProjectMap from "@/components/ProjectMap";
+import UnitSearch from "@/components/UnitSearch";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 
@@ -97,6 +98,7 @@ const ProjectDetail = () => {
               </motion.div>
             )}
             {project.amenities && project.amenities.length > 0 && <AmenitiesList amenities={project.amenities} />}
+            <UnitSearch projectId={project.id} currency={project.price_currency} />
             <ConstructionTimeline status={project.status} deliveryDate={project.delivery_date} phaseDates={{ phase_preventa_date: project.phase_preventa_date, phase_en_pozo_date: project.phase_en_pozo_date, phase_construccion_date: project.phase_construccion_date, phase_entrega_date: project.phase_entrega_date }} />
             {project.latitude && project.longitude && (<ProjectMap latitude={project.latitude} longitude={project.longitude} title={project.title} city={project.location_city} />)}
           </div>

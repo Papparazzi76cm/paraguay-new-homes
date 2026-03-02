@@ -402,5 +402,19 @@
     "backToBlog": "Retour au blog",
     "share": "Partager",
     "relatedArticles": "Articles connexes"
+  },
+  "units": {
+    "title": "Unités Disponibles",
+    "typology": "Typologie",
+    "priceRange": "Gamme de prix",
+    "monoambiente": "Studio",
+    "1_dormitorio": "1 Chambre",
+    "2_dormitorios": "2 Chambres",
+    "3_dormitorios": "3 Chambres",
+    "clearFilters": "Effacer les filtres",
+    "noUnits": "Aucune unité disponible avec les filtres sélectionnés.",
+    "found": "{{count}} unité disponible",
+    "found_other": "{{count}} unités disponibles",
+    "floor": "Étage"
   }
 }
