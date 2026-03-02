@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useProjectBySlug, useProjectImages } from "@/hooks/useProjectDetail";
+import { useTranslatedText } from "@/hooks/useTranslatedText";
 import ProjectGallery from "@/components/ProjectGallery";
 import ConstructionTimeline from "@/components/ConstructionTimeline";
 import AmenitiesList from "@/components/AmenitiesList";
@@ -19,6 +20,7 @@ const ProjectDetail = () => {
   const { data: project, isLoading, error } = useProjectBySlug(slug || "");
   const { data: images } = useProjectImages(project?.id || "");
   const [contactOpen, setContactOpen] = useState(false);
+  const { translated: translatedDesc, isTranslating } = useTranslatedText(project?.description);
   const [copied, setCopied] = useState(false);
   const { t } = useTranslation();
 
@@ -94,7 +96,7 @@ const ProjectDetail = () => {
             {project.description && (
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card rounded-2xl p-6 md:p-8 shadow-card">
                 <h3 className="font-display text-xl font-semibold text-foreground mb-4">{t("detail.aboutProject")}</h3>
-                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground leading-relaxed">{isTranslating ? <span className="animate-pulse">{project.description}</span> : translatedDesc}</p>
               </motion.div>
             )}
             {project.amenities && project.amenities.length > 0 && <AmenitiesList amenities={project.amenities} />}
