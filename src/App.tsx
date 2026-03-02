@@ -11,10 +11,13 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
+import { useSystemTheme } from "./hooks/useSystemTheme";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useSystemTheme();
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -34,6 +37,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
