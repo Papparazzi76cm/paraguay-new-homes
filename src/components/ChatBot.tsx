@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2, RotateCcw } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useSubmitLead } from "@/hooks/useContactLead";
 import { useProjects } from "@/hooks/useProjects";
@@ -71,20 +71,44 @@ const InlineContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
   );
 };
 
+const STORAGE_KEY = "proyectpy-chat-history";
+const DEFAULT_MSG: Msg = { role: "assistant", content: "¡Hola! 👋 Soy el asistente de ProyectPY. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre proyectos inmobiliarios, inversión o publicación de proyectos." };
+
+function loadHistory(): Msg[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as Msg[];
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch { /* ignore */ }
+  return [DEFAULT_MSG];
+}
+
+function saveHistory(msgs: Msg[]) {
+  try {
+    // Keep last 50 messages to avoid bloating storage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs.slice(-50)));
+  } catch { /* ignore */ }
+}
+
 /* ── ChatBot ── */
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactShownOnce, setContactShownOnce] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([
-    { role: "assistant", content: "¡Hola! 👋 Soy el asistente de ProyectPY. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre proyectos inmobiliarios, inversión o publicación de proyectos." },
-  ]);
+  const [messages, setMessages] = useState<Msg[]>(loadHistory);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [dynamicChips, setDynamicChips] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data: allProjects } = useProjects();
+
+  // Persist messages to localStorage
+  useEffect(() => {
+    saveHistory(messages);
+  }, [messages]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -262,6 +286,15 @@ const ChatBot = () => {
                 </div>
               </div>
               <div className="flex items-center gap-1">
+                {messages.length > 1 && (
+                  <button
+                    onClick={() => { setMessages([DEFAULT_MSG]); setDynamicChips([]); setContactShownOnce(false); setShowContactForm(false); }}
+                    className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors"
+                    title="Nueva conversación"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                  </button>
+                )}
                 <button onClick={() => setShowContactForm((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title="Dejá tus datos de contacto">
                   <UserPlus className="w-4 h-4" />
                 </button>
@@ -313,12 +346,20 @@ const ChatBot = () => {
                     {/* Project cards */}
                     {matchedProjects.length > 0 && (
                       <motion.div
-                        initial={{ opacity: 0, y: 6 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
                         className={`mt-2 ml-9 grid gap-2 ${matchedProjects.length === 1 ? "grid-cols-1 max-w-[200px]" : "grid-cols-2"}`}
                       >
-                        {matchedProjects.map((p) => (
-                          <ProjectCard key={p.id} project={p} />
+                        {matchedProjects.map((p, idx) => (
+                          <motion.div
+                            key={p.id}
+                            initial={{ opacity: 0, y: 12, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            transition={{ duration: 0.3, delay: 0.15 + idx * 0.1 }}
+                          >
+                            <ProjectCard project={p} />
+                          </motion.div>
                         ))}
                       </motion.div>
                     )}
@@ -363,19 +404,31 @@ const ChatBot = () => {
                   ¿Te interesa un proyecto? Dejá tus datos
                 </button>
               )}
-              {chipsToShow.length > 0 && (
-                <div className="px-3 pt-1 flex flex-wrap gap-1.5">
-                  {chipsToShow.map((chip) => (
-                    <button
-                      key={chip}
-                      onClick={() => handleChipClick(chip)}
-                      className="text-xs border border-border rounded-full px-3 py-1 text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
-                    >
-                      {chip}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence mode="wait">
+                {chipsToShow.length > 0 && (
+                  <motion.div
+                    key={chipsToShow.join(",")}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.25 }}
+                    className="px-3 pt-1 flex flex-wrap gap-1.5"
+                  >
+                    {chipsToShow.map((chip, idx) => (
+                      <motion.button
+                        key={chip}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.2, delay: idx * 0.05 }}
+                        onClick={() => handleChipClick(chip)}
+                        className="text-xs border border-border rounded-full px-3 py-1 text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+                      >
+                        {chip}
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="p-3 pt-1.5 flex gap-2">
                 <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Escribí tu pregunta..." className="flex-1 text-sm bg-muted rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" disabled={isLoading} />
                 <button type="submit" disabled={!input.trim() || isLoading} className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:bg-primary/90 transition-colors">
