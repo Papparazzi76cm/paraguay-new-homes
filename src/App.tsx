@@ -11,6 +11,15 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
+import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
+import AdminLayout from "./components/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import ProjectsList from "./pages/admin/ProjectsList";
+import ProjectForm from "./pages/admin/ProjectForm";
+import ProjectImages from "./pages/admin/ProjectImages";
+import LeadsList from "./pages/admin/LeadsList";
+import SubscribersList from "./pages/admin/SubscribersList";
 import { useTheme } from "./hooks/useTheme";
 
 const queryClient = new QueryClient();
@@ -30,6 +39,20 @@ const App = () => {
           <Route path="/inversion" element={<Inversion />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
+          {/* Admin routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="projects" element={<ProjectsList />} />
+            <Route path="projects/new" element={<ProjectForm />} />
+            <Route path="projects/:id" element={<ProjectForm />} />
+            <Route path="projects/:id/images" element={<ProjectImages />} />
+            <Route path="leads" element={<LeadsList />} />
+            <Route path="subscribers" element={<SubscribersList />} />
+          </Route>
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
