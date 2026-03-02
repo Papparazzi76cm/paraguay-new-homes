@@ -41,6 +41,8 @@ const ProjectForm = () => {
     phase_en_pozo_date: "",
     phase_construccion_date: "",
     phase_entrega_date: "",
+    latitude: "",
+    longitude: "",
   });
 
   const { data: existing } = useQuery({
@@ -76,6 +78,8 @@ const ProjectForm = () => {
         phase_en_pozo_date: (existing as any).phase_en_pozo_date ?? "",
         phase_construccion_date: (existing as any).phase_construccion_date ?? "",
         phase_entrega_date: (existing as any).phase_entrega_date ?? "",
+        latitude: (existing as any).latitude?.toString() ?? "",
+        longitude: (existing as any).longitude?.toString() ?? "",
       });
     }
   }, [existing]);
@@ -111,6 +115,8 @@ const ProjectForm = () => {
         phase_en_pozo_date: form.phase_en_pozo_date || null,
         phase_construccion_date: form.phase_construccion_date || null,
         phase_entrega_date: form.phase_entrega_date || null,
+        latitude: form.latitude ? parseFloat(form.latitude) : null,
+        longitude: form.longitude ? parseFloat(form.longitude) : null,
       };
 
       if (isEditing) {
@@ -247,6 +253,21 @@ const ProjectForm = () => {
             <div className="space-y-2">
               <Label>Fecha entrega</Label>
               <Input value={form.phase_entrega_date} onChange={(e) => set("phase_entrega_date", e.target.value)} placeholder="Ej: Diciembre 2025" />
+            </div>
+          </div>
+        </div>
+
+        {/* Location coordinates */}
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Coordenadas del mapa</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Latitud</Label>
+              <Input type="number" step="any" value={form.latitude} onChange={(e) => set("latitude", e.target.value)} placeholder="Ej: -25.2637" />
+            </div>
+            <div className="space-y-2">
+              <Label>Longitud</Label>
+              <Input type="number" step="any" value={form.longitude} onChange={(e) => set("longitude", e.target.value)} placeholder="Ej: -57.5759" />
             </div>
           </div>
         </div>

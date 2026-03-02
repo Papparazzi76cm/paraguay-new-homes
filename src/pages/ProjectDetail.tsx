@@ -19,6 +19,7 @@ import ConstructionTimeline from "@/components/ConstructionTimeline";
 import AmenitiesList from "@/components/AmenitiesList";
 import YieldSimulator from "@/components/YieldSimulator";
 import ContactDialog from "@/components/ContactDialog";
+import ProjectMap from "@/components/ProjectMap";
 import Footer from "@/components/Footer";
 
 const statusLabels: Record<string, string> = {
@@ -178,6 +179,16 @@ const ProjectDetail = () => {
                 phase_entrega_date: project.phase_entrega_date,
               }}
             />
+
+            {/* Map */}
+            {project.latitude && project.longitude && (
+              <ProjectMap
+                latitude={project.latitude}
+                longitude={project.longitude}
+                title={project.title}
+                city={project.location_city}
+              />
+            )}
           </div>
 
           {/* Right column – 1/3 */}

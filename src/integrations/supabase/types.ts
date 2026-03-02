@@ -150,8 +150,10 @@ export type Database = {
           featured: boolean | null
           financing_available: boolean | null
           id: string
+          latitude: number | null
           location_city: string
           location_zone: string | null
+          longitude: number | null
           phase_construccion_date: string | null
           phase_en_pozo_date: string | null
           phase_entrega_date: string | null
@@ -175,8 +177,10 @@ export type Database = {
           featured?: boolean | null
           financing_available?: boolean | null
           id?: string
+          latitude?: number | null
           location_city: string
           location_zone?: string | null
+          longitude?: number | null
           phase_construccion_date?: string | null
           phase_en_pozo_date?: string | null
           phase_entrega_date?: string | null
@@ -200,8 +204,10 @@ export type Database = {
           featured?: boolean | null
           financing_available?: boolean | null
           id?: string
+          latitude?: number | null
           location_city?: string
           location_zone?: string | null
+          longitude?: number | null
           phase_construccion_date?: string | null
           phase_en_pozo_date?: string | null
           phase_entrega_date?: string | null

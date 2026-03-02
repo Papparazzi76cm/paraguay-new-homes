@@ -24,6 +24,8 @@ export type Project = {
   phase_en_pozo_date: string | null;
   phase_construccion_date: string | null;
   phase_entrega_date: string | null;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 export interface ProjectFilters {
