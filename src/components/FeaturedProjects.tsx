@@ -10,6 +10,7 @@ import project3 from "@/assets/project-3.jpg";
 const fallbackImages = [project1, project2, project3];
 
 const statusLabels: Record<string, string> = {
+  preventa: "Preventa",
   en_pozo: "En Pozo",
   en_construccion: "En Construcción",
   entrega_inmediata: "Entrega Inmediata",
@@ -23,6 +24,7 @@ const typeLabels: Record<string, string> = {
 };
 
 const statusColor: Record<string, string> = {
+  preventa: "bg-muted text-muted-foreground",
   en_pozo: "bg-accent text-accent-foreground",
   en_construccion: "bg-primary text-primary-foreground",
   entrega_inmediata: "bg-secondary text-secondary-foreground",

@@ -11,6 +11,7 @@ const typeOptions = [
 ];
 
 const statusOptions = [
+  { label: "Preventa", value: "preventa" },
   { label: "En Pozo", value: "en_pozo" },
   { label: "En Construcción", value: "en_construccion" },
   { label: "Entrega Inmediata", value: "entrega_inmediata" },

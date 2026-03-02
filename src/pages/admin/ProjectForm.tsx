@@ -186,6 +186,7 @@ const ProjectForm = () => {
             <Select value={form.status} onValueChange={(v) => set("status", v)}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
+                <SelectItem value="preventa">Preventa</SelectItem>
                 <SelectItem value="en_pozo">En Pozo</SelectItem>
                 <SelectItem value="en_construccion">En Construcción</SelectItem>
                 <SelectItem value="entrega_inmediata">Entrega Inmediata</SelectItem>
