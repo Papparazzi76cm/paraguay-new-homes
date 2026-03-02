@@ -14,7 +14,7 @@ async function fetchProjects(): Promise<string> {
 
   const { data, error } = await supabase
     .from("projects")
-    .select("title, slug, description, location_city, location_zone, project_type, status, price_from, price_currency, estimated_yield, delivery_date, financing_available, amenities, developer_name")
+    .select("title, slug, description, location_city, location_zone, project_type, status, price_from, price_currency, estimated_yield, delivery_date, financing_available, amenities, developer_name, cover_image_url")
     .order("featured", { ascending: false });
 
   if (error) {
@@ -71,6 +71,12 @@ Reglas:
 - Si el usuario busca algo que no coincide con ningún proyecto, decíselo honestamente y sugerí las opciones más cercanas
 - Podés comparar proyectos si el usuario lo pide
 - Si preguntan por precios, rentabilidad o ubicación, usá los datos reales
+
+## TARJETAS DE PROYECTO:
+Cuando recomiendes uno o más proyectos específicos, agregá al final de tu respuesta la etiqueta [PROJECT_CARDS:slug1,slug2] con los slugs de los proyectos recomendados (máximo 3). Esto mostrará tarjetas visuales con imagen, precio y link. Usá esta etiqueta solo cuando hagas recomendaciones concretas de proyectos.
+
+## SUGERENCIAS DE SEGUIMIENTO:
+Al final de CADA respuesta, agregá la etiqueta [SUGGESTIONS:sugerencia1|sugerencia2|sugerencia3] con 2-3 preguntas de seguimiento relevantes al tema de la conversación. Deben ser cortas (máximo 5 palabras cada una). Ejemplos: "Ver proyectos similares", "Comparar precios", "¿Tienen financiación?". No repitas sugerencias que ya se hayan usado.
 
 ## CAPTURA DE LEADS:
 Cuando detectes que el usuario muestra interés concreto en un proyecto (pregunta por precios, disponibilidad, quiere más información, pide contacto con un asesor, dice que le interesa, quiere agendar una visita, etc.), agregá la etiqueta [SHOW_CONTACT_FORM] al final de tu respuesta. Esto abrirá automáticamente un formulario de contacto en el chat. Solo usá esta etiqueta UNA VEZ por conversación, y solo cuando el interés sea claro. No la uses si el usuario solo hace preguntas generales.
