@@ -13,32 +13,52 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>ProyectPY — Proyectos de obra nueva en Paraguay</title>
-        <meta name="description" content="Explorá los mejores proyectos inmobiliarios de obra nueva en Paraguay. Departamentos, casas y barrios cerrados con información verificada para inversores." />
-        <meta property="og:title" content="ProyectPY — Proyectos de obra nueva en Paraguay" />
-        <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Paraguay." />
-...
+        <title>Inmobiliaria en Encarnación | Proyectos de obra nueva - ProyectPY</title>
+        <meta name="description" content="Explorá los mejores proyectos inmobiliarios de obra nueva y departamentos en pozo en Encarnación. Oportunidades de inversión en la Costanera y zonas de alta plusvalía." />
+        <meta property="og:title" content="Inmobiliaria en Encarnación | Proyectos de obra nueva - ProyectPY" />
+        <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Encarnación, Itapúa." />
+        
+        {/* Schema Markup Optimizado para Inmobiliaria Local */}
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "ProyectPY",
+          "@type": "RealEstateAgent",
+          "name": "ProyectPY Encarnación",
+          "image": "https://proyectpy.com/logo.png",
           "url": "https://proyectpy.com",
-          "description": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+595-21-000-0000",
-            "contactType": "customer service",
-            "email": "info@proyectpy.com",
-            "areaServed": "PY",
-            "availableLanguage": "Spanish"
-          },
+          "description": "La agencia inmobiliaria especializada en proyectos de obra nueva y departamentos en pozo en Encarnación, Paraguay. Inversión segura y alta rentabilidad.",
+          "telephone": "+595-71-000-0000",
+          "email": "info@proyectpy.com",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Asunción",
+            "streetAddress": "Av. Costanera República del Paraguay",
+            "addressLocality": "Encarnación",
+            "addressRegion": "Itapúa",
+            "postalCode": "0700",
             "addressCountry": "PY"
-          }
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-27.33056",
+            "longitude": "-55.86667"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          "areaServed": ["Encarnación", "Cambyretá", "Capitán Miranda", "San Juan del Paraná"],
+          "priceRange": "$$$"
         })}</script>
       </Helmet>
+      
       <Hero filters={filters} onFiltersChange={setFilters} />
       <FeaturedProjects filters={filters} />
       <Benefits />
