@@ -44,14 +44,13 @@ const Footer = () => {
             <h4 className="text-background font-semibold text-sm mb-4 font-sans">{t("footer.contactTitle")}</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-background/50 text-sm">
-                <MapPin className="w-4 h-4 shrink-0" /> Av. Costanera, Encarnación, Itapúa
+                <MapPin className="w-4 h-4 shrink-0" /> Asunción, Paraguay
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
                 <Mail className="w-4 h-4 shrink-0" /> info@proyectpy.com
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
-                {/* Usamos el prefijo 071 común de Encarnación para mayor credibilidad local */}
-                <Phone className="w-4 h-4 shrink-0" /> +595 71 000 000
+                <Phone className="w-4 h-4 shrink-0" /> +595 21 000 0000
               </li>
             </ul>
           </div>
