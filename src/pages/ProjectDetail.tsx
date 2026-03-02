@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2 } from "lucide-react";
+import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useProjectBySlug, useProjectImages } from "@/hooks/useProjectDetail";
 import ProjectGallery from "@/components/ProjectGallery";
@@ -18,7 +18,14 @@ const ProjectDetail = () => {
   const { data: project, isLoading, error } = useProjectBySlug(slug || "");
   const { data: images } = useProjectImages(project?.id || "");
   const [contactOpen, setContactOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { t } = useTranslation();
+
+  const handleShare = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   if (isLoading) {
     return (<div className="min-h-screen flex items-center justify-center bg-background"><Loader2 className="w-10 h-10 animate-spin text-primary" /></div>);
@@ -44,8 +51,11 @@ const ProjectDetail = () => {
               <span className="font-display font-bold text-base hidden sm:inline">ProyectPY</span>
             </div>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <LanguageSwitcher />
+            <button onClick={handleShare} className="p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" title={t("detail.share")}>
+              {copied ? <Check className="w-4 h-4 text-primary" /> : <Share2 className="w-4 h-4" />}
+            </button>
             <button onClick={() => setContactOpen(true)} className="bg-primary text-primary-foreground px-5 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
               <Send className="w-4 h-4" /> {t("detail.contact")}
             </button>

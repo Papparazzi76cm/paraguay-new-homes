@@ -131,7 +131,9 @@
     "interestedDesc": "Recibí información detallada, planos y condiciones de financiación.",
     "requestInfo": "Solicitar información",
     "downloadDossier": "Descargar dossier",
-    "location": "Ubicación"
+    "location": "Ubicación",
+    "share": "Compartir",
+    "linkCopied": "Enlace copiado"
   },
   "timeline": {
     "title": "Cronograma de Obra",

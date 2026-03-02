@@ -131,7 +131,9 @@
     "interestedDesc": "Erhalten Sie detaillierte Informationen, Pläne und Finanzierungsbedingungen.",
     "requestInfo": "Informationen anfordern",
     "downloadDossier": "Dossier herunterladen",
-    "location": "Standort"
+    "location": "Standort",
+    "share": "Teilen",
+    "linkCopied": "Link kopiert"
   },
   "timeline": {
     "title": "Bauzeitplan",
