@@ -1,0 +1,4 @@
+
+ALTER TABLE public.projects
+  ADD COLUMN latitude NUMERIC DEFAULT NULL,
+  ADD COLUMN longitude NUMERIC DEFAULT NULL;
