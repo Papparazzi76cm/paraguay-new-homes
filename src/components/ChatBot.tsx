@@ -114,12 +114,15 @@ const ChatBot = () => {
 
   const { data: allProjects } = useProjects();
 
-  // Initialize with welcome message if empty
+  // Initialize with welcome message if empty, and update when language changes
   useEffect(() => {
     if (messages.length === 0) {
       setMessages([DEFAULT_MSG]);
+    } else if (messages.length === 1 && messages[0].role === "assistant") {
+      // Update welcome message when language changes
+      setMessages([DEFAULT_MSG]);
     }
-  }, []);
+  }, [lang]);
 
   // Persist messages to localStorage
   useEffect(() => {
