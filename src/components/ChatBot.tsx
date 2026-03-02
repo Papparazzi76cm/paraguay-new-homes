@@ -98,9 +98,12 @@ const InlinContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
   );
 };
 
+const CONTACT_MARKER = "[SHOW_CONTACT_FORM]";
+
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [contactShownOnce, setContactShownOnce] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     { role: "assistant", content: "¡Hola! 👋 Soy el asistente de ProyectPY. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre proyectos inmobiliarios, inversión o publicación de proyectos." },
   ]);
@@ -134,12 +137,19 @@ const ChatBot = () => {
 
     const upsertAssistant = (chunk: string) => {
       assistantSoFar += chunk;
+      // Detect contact marker and strip it from displayed text
+      if (!contactShownOnce && assistantSoFar.includes(CONTACT_MARKER)) {
+        assistantSoFar = assistantSoFar.replace(CONTACT_MARKER, "").trimEnd();
+        setShowContactForm(true);
+        setContactShownOnce(true);
+      }
+      const displayContent = assistantSoFar;
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (last?.role === "assistant" && prev.length > 1 && prev[prev.length - 2]?.role === "user" && prev[prev.length - 2]?.content === text) {
-          return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantSoFar } : m));
+          return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: displayContent } : m));
         }
-        return [...prev, { role: "assistant", content: assistantSoFar }];
+        return [...prev, { role: "assistant", content: displayContent }];
       });
     };
 
