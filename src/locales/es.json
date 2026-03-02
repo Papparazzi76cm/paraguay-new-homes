@@ -402,5 +402,19 @@
     "backToBlog": "Volver al blog",
     "share": "Compartir",
     "relatedArticles": "Artículos relacionados"
+  },
+  "units": {
+    "title": "Unidades Disponibles",
+    "typology": "Tipología",
+    "priceRange": "Rango de precio",
+    "monoambiente": "Monoambiente",
+    "1_dormitorio": "1 Dormitorio",
+    "2_dormitorios": "2 Dormitorios",
+    "3_dormitorios": "3 Dormitorios",
+    "clearFilters": "Limpiar filtros",
+    "noUnits": "No hay unidades disponibles con los filtros seleccionados.",
+    "found": "{{count}} unidad disponible",
+    "found_other": "{{count}} unidades disponibles",
+    "floor": "Piso"
   }
 }

@@ -138,6 +138,53 @@ export type Database = {
           },
         ]
       }
+      project_units: {
+        Row: {
+          area_m2: number | null
+          available: boolean
+          created_at: string
+          floor: string | null
+          id: string
+          price: number | null
+          price_currency: string
+          project_id: string
+          typology: Database["public"]["Enums"]["unit_typology"]
+          unit_name: string
+        }
+        Insert: {
+          area_m2?: number | null
+          available?: boolean
+          created_at?: string
+          floor?: string | null
+          id?: string
+          price?: number | null
+          price_currency?: string
+          project_id: string
+          typology?: Database["public"]["Enums"]["unit_typology"]
+          unit_name: string
+        }
+        Update: {
+          area_m2?: number | null
+          available?: boolean
+          created_at?: string
+          floor?: string | null
+          id?: string
+          price?: number | null
+          price_currency?: string
+          project_id?: string
+          typology?: Database["public"]["Enums"]["unit_typology"]
+          unit_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_units_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           amenities: string[] | null
@@ -261,6 +308,11 @@ export type Database = {
         | "en_construccion"
         | "entrega_inmediata"
       project_type: "departamentos" | "casas" | "barrio_cerrado" | "mixto"
+      unit_typology:
+        | "monoambiente"
+        | "1_dormitorio"
+        | "2_dormitorios"
+        | "3_dormitorios"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -396,6 +448,12 @@ export const Constants = {
         "entrega_inmediata",
       ],
       project_type: ["departamentos", "casas", "barrio_cerrado", "mixto"],
+      unit_typology: [
+        "monoambiente",
+        "1_dormitorio",
+        "2_dormitorios",
+        "3_dormitorios",
+      ],
     },
   },
 } as const
