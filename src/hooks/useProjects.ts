@@ -20,6 +20,10 @@ export type Project = {
   cover_image_url: string | null;
   developer_name: string | null;
   created_at: string;
+  phase_preventa_date: string | null;
+  phase_en_pozo_date: string | null;
+  phase_construccion_date: string | null;
+  phase_entrega_date: string | null;
 };
 
 export interface ProjectFilters {
