@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2, RotateCcw } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2, RotateCcw, Maximize2, Minimize2 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import ReactMarkdown from "react-markdown";
 import { useSubmitLead } from "@/hooks/useContactLead";
 import { useProjects } from "@/hooks/useProjects";
@@ -101,7 +102,9 @@ const ChatBot = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [dynamicChips, setDynamicChips] = useState<string[]>([]);
+  const [fullscreen, setFullscreen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { data: allProjects } = useProjects();
 
@@ -257,7 +260,7 @@ const ChatBot = () => {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             whileHover={{ scale: 1.1 }}
-            onClick={() => setOpen(true)}
+            onClick={() => { setOpen(true); if (isMobile) setFullscreen(true); }}
             className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow"
             aria-label="Abrir chat"
           >
@@ -274,10 +277,14 @@ const ChatBot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-4rem)] rounded-2xl border bg-background shadow-2xl flex flex-col overflow-hidden"
+            className={`fixed z-50 border bg-background shadow-2xl flex flex-col overflow-hidden transition-all duration-300 ${
+              fullscreen
+                ? "inset-0 rounded-none"
+                : "bottom-6 right-6 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-4rem)] rounded-2xl"
+            }`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-primary text-primary-foreground rounded-t-2xl">
+            <div className={`flex items-center justify-between px-4 py-3 bg-primary text-primary-foreground ${fullscreen ? "" : "rounded-t-2xl"}`}>
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5" />
                 <div>
@@ -298,7 +305,10 @@ const ChatBot = () => {
                 <button onClick={() => setShowContactForm((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title="Dejá tus datos de contacto">
                   <UserPlus className="w-4 h-4" />
                 </button>
-                <button onClick={() => setOpen(false)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors">
+                <button onClick={() => setFullscreen((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title={fullscreen ? "Minimizar" : "Pantalla completa"}>
+                  {fullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                </button>
+                <button onClick={() => { setOpen(false); setFullscreen(false); }} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
