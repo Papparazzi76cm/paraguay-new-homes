@@ -11,12 +11,12 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
-import { useSystemTheme } from "./hooks/useSystemTheme";
+import { useTheme } from "./hooks/useTheme";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  useSystemTheme();
+  useTheme();
   return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
