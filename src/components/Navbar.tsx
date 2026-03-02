@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, Monitor } from "lucide-react";
+import { Menu, X, Sun, Moon, Monitor, Shield } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import { useAuth, useIsAdmin } from "@/hooks/useAuth";
 
 const NAV_ITEMS = [
   { label: "Proyectos", href: "/#proyectos" },
@@ -25,6 +26,8 @@ const nextTheme = (current: string) => {
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user } = useAuth();
+  const { isAdmin } = useIsAdmin(user?.id);
 
   return (
     <motion.nav
@@ -62,6 +65,14 @@ const Navbar = () => {
           >
             <ThemeIcon theme={theme} />
           </button>
+          {isAdmin && (
+            <a
+              href="/admin"
+              className="flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-medium transition-colors"
+            >
+              <Shield className="w-4 h-4" /> Admin
+            </a>
+          )}
           <button className="bg-white/10 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors">
             Publicar Proyecto
           </button>
@@ -104,6 +115,15 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            {isAdmin && (
+              <a
+                href="/admin"
+                className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2 flex items-center gap-2"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Shield className="w-4 h-4" /> Panel Admin
+              </a>
+            )}
             <button className="bg-primary text-primary-foreground px-5 py-3 rounded-xl text-sm font-medium mt-2">
               Publicar Proyecto
             </button>
