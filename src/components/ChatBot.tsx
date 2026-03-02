@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot, User, UserPlus, CheckCircle2, Loader2, RotateCcw, Maximize2, Minimize2 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useSubmitLead } from "@/hooks/useContactLead";
 import { useProjects } from "@/hooks/useProjects";
@@ -12,19 +13,20 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
-const INITIAL_CHIPS = ["Proyectos en Asunción", "Mejor rentabilidad", "Entrega inmediata", "¿Tienen financiación?"];
+/* Initial chips will be translated via t() */
 
 /* ── Inline Contact Form ── */
 const InlineContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ full_name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const submitLead = useSubmitLead();
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!form.full_name.trim()) e.full_name = "Requerido";
-    if (!form.email.trim()) e.email = "Requerido";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email inválido";
+    if (!form.full_name.trim()) e.full_name = t("chatbot.required");
+    if (!form.email.trim()) e.email = t("chatbot.required");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("chatbot.invalidEmail");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -47,7 +49,7 @@ const InlineContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
     return (
       <div className="flex items-center gap-2 text-sm text-primary">
         <CheckCircle2 className="w-4 h-4" />
-        <span>¡Datos enviados! Te contactaremos pronto.</span>
+        <span>{t("chatbot.dataSent")}</span>
       </div>
     );
   }
@@ -55,25 +57,24 @@ const InlineContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
   return (
     <div className="space-y-2">
       <div>
-        <input placeholder="Nombre completo *" value={form.full_name} onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
+        <input placeholder={t("chatbot.namePlaceholder")} value={form.full_name} onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
         {errors.full_name && <p className="text-xs text-destructive mt-0.5">{errors.full_name}</p>}
       </div>
       <div>
-        <input type="email" placeholder="Email *" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
+        <input type="email" placeholder={t("chatbot.emailPlaceholder")} value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
         {errors.email && <p className="text-xs text-destructive mt-0.5">{errors.email}</p>}
       </div>
-      <input type="tel" placeholder="Teléfono (opcional)" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
-      <textarea placeholder="¿Qué proyecto te interesa? (opcional)" value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} rows={2} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground resize-none" />
+      <input type="tel" placeholder={t("chatbot.phonePlaceholder")} value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
+      <textarea placeholder={t("chatbot.projectPlaceholder")} value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} rows={2} className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground resize-none" />
       <button onClick={handleSubmit} disabled={submitLead.isPending} className="w-full text-sm font-medium bg-primary text-primary-foreground rounded-lg py-2 hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
-        {submitLead.isPending ? (<><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</>) : "Enviar datos de contacto"}
+        {submitLead.isPending ? (<><Loader2 className="w-4 h-4 animate-spin" /> {t("chatbot.sendingContact")}</>) : t("chatbot.sendContact")}
       </button>
-      {submitLead.isError && <p className="text-xs text-destructive">Error al enviar. Intentá de nuevo.</p>}
+      {submitLead.isError && <p className="text-xs text-destructive">{t("chatbot.errorSend")}</p>}
     </div>
   );
 };
 
 const STORAGE_KEY = "proyectpy-chat-history";
-const DEFAULT_MSG: Msg = { role: "assistant", content: "¡Hola! 👋 Soy el asistente de ProyectPY. ¿En qué puedo ayudarte hoy? Puedo orientarte sobre proyectos inmobiliarios, inversión o publicación de proyectos." };
 
 function loadHistory(): Msg[] {
   try {
@@ -83,7 +84,7 @@ function loadHistory(): Msg[] {
       if (Array.isArray(parsed) && parsed.length > 0) return parsed;
     }
   } catch { /* ignore */ }
-  return [DEFAULT_MSG];
+  return [];
 }
 
 function saveHistory(msgs: Msg[]) {
@@ -95,6 +96,8 @@ function saveHistory(msgs: Msg[]) {
 
 /* ── ChatBot ── */
 const ChatBot = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.split("-")[0] || "es";
   const [open, setOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactShownOnce, setContactShownOnce] = useState(false);
@@ -106,7 +109,17 @@ const ChatBot = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  const INITIAL_CHIPS = [t("chatbot.chip1"), t("chatbot.chip2"), t("chatbot.chip3"), t("chatbot.chip4")];
+  const DEFAULT_MSG: Msg = { role: "assistant", content: t("chatbot.welcome") };
+
   const { data: allProjects } = useProjects();
+
+  // Initialize with welcome message if empty
+  useEffect(() => {
+    if (messages.length === 0) {
+      setMessages([DEFAULT_MSG]);
+    }
+  }, []);
 
   // Persist messages to localStorage
   useEffect(() => {
@@ -121,7 +134,7 @@ const ChatBot = () => {
     setShowContactForm(false);
     setMessages((prev) => [
       ...prev,
-      { role: "assistant", content: "✅ ¡Perfecto! Recibimos tus datos. Un asesor de ProyectPY se pondrá en contacto con vos a la brevedad. ¿Hay algo más en lo que pueda ayudarte?" },
+      { role: "assistant", content: t("chatbot.contactSuccess") },
     ]);
   };
 
@@ -158,12 +171,12 @@ const ChatBot = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: allMessages.map(({ role, content }) => ({ role, content })) }),
+        body: JSON.stringify({ messages: allMessages.map(({ role, content }) => ({ role, content })), lang }),
       });
 
       if (!resp.ok || !resp.body) {
         const errData = await resp.json().catch(() => null);
-        throw new Error(errData?.error || "Error al conectar con el asistente");
+        throw new Error(errData?.error || t("chatbot.errorConnect"));
       }
 
       const reader = resp.body.getReader();
@@ -236,7 +249,7 @@ const ChatBot = () => {
       console.error(e);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Lo siento, hubo un error. Por favor intentá de nuevo." },
+        { role: "assistant", content: t("chatbot.errorGeneric") },
       ]);
     } finally {
       setIsLoading(false);
@@ -262,7 +275,7 @@ const ChatBot = () => {
             whileHover={{ scale: 1.1 }}
             onClick={() => { setOpen(true); if (isMobile) setFullscreen(true); }}
             className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow"
-            aria-label="Abrir chat"
+            aria-label={t("chatbot.openChat")}
           >
             <MessageCircle className="w-6 h-6" />
           </motion.button>
@@ -288,8 +301,8 @@ const ChatBot = () => {
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5" />
                 <div>
-                  <p className="text-sm font-semibold">Asistente ProyectPY</p>
-                  <p className="text-xs opacity-80">Inmobiliario • En línea</p>
+                  <p className="text-sm font-semibold">{t("chatbot.assistant")}</p>
+                  <p className="text-xs opacity-80">{t("chatbot.subtitle")}</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -297,15 +310,15 @@ const ChatBot = () => {
                   <button
                     onClick={() => { setMessages([DEFAULT_MSG]); setDynamicChips([]); setContactShownOnce(false); setShowContactForm(false); }}
                     className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors"
-                    title="Nueva conversación"
+                    title={t("chatbot.newConversation")}
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
                 )}
-                <button onClick={() => setShowContactForm((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title="Dejá tus datos de contacto">
+                <button onClick={() => setShowContactForm((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title={t("chatbot.leaveData")}>
                   <UserPlus className="w-4 h-4" />
                 </button>
-                <button onClick={() => setFullscreen((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title={fullscreen ? "Minimizar" : "Pantalla completa"}>
+                <button onClick={() => setFullscreen((v) => !v)} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors" title={fullscreen ? t("chatbot.minimize") : t("chatbot.fullscreen")}>
                   {fullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                 </button>
                 <button onClick={() => { setOpen(false); setFullscreen(false); }} className="p-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors">
@@ -384,7 +397,7 @@ const ChatBot = () => {
                     <UserPlus className="w-4 h-4 text-primary" />
                   </div>
                   <div className="flex-1 bg-muted rounded-2xl rounded-bl-md px-3.5 py-3">
-                    <p className="text-sm font-medium text-foreground mb-2">📋 Dejá tus datos y te contactamos</p>
+                    <p className="text-sm font-medium text-foreground mb-2">{t("chatbot.leaveDataTitle")}</p>
                     <InlineContactForm onSuccess={handleContactSuccess} />
                   </div>
                 </motion.div>
@@ -411,7 +424,7 @@ const ChatBot = () => {
               {!showContactForm && (
                 <button onClick={() => setShowContactForm(true)} className="w-full text-xs text-muted-foreground hover:text-primary py-1.5 flex items-center justify-center gap-1 transition-colors">
                   <UserPlus className="w-3 h-3" />
-                  ¿Te interesa un proyecto? Dejá tus datos
+                  {t("chatbot.interestedCta")}
                 </button>
               )}
               <AnimatePresence mode="wait">
@@ -440,7 +453,7 @@ const ChatBot = () => {
                 )}
               </AnimatePresence>
               <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="p-3 pt-1.5 flex gap-2">
-                <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Escribí tu pregunta..." className="flex-1 text-sm bg-muted rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" disabled={isLoading} />
+                <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={t("chatbot.placeholder")} className="flex-1 text-sm bg-muted rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" disabled={isLoading} />
                 <button type="submit" disabled={!input.trim() || isLoading} className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:bg-primary/90 transition-colors">
                   <Send className="w-4 h-4" />
                 </button>
