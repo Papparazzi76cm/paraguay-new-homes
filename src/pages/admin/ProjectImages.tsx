@@ -134,39 +134,43 @@ const ProjectImages = () => {
   };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !id) return;
+    const files = e.target.files;
+    if (!files || files.length === 0 || !id) return;
     setUploading(true);
 
-    const fileExt = file.name.split(".").pop();
-    const filePath = `${id}/${Date.now()}.${fileExt}`;
+    let currentCount = images?.length ?? 0;
 
-    const { error: uploadError } = await supabase.storage
-      .from("project-images")
-      .upload(filePath, file);
+    for (const file of Array.from(files)) {
+      const fileExt = file.name.split(".").pop();
+      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
 
-    if (uploadError) {
-      toast.error("Error al subir imagen");
-      setUploading(false);
-      return;
+      const { error: uploadError } = await supabase.storage
+        .from("project-images")
+        .upload(filePath, file);
+
+      if (uploadError) {
+        toast.error(`Error al subir ${file.name}`);
+        continue;
+      }
+
+      const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
+
+      const { error: insertError } = await supabase.from("project_images").insert({
+        project_id: id,
+        image_url: urlData.publicUrl,
+        alt_text: file.name,
+        sort_order: ++currentCount,
+      });
+
+      if (insertError) {
+        toast.error(`Error al guardar ${file.name}`);
+      }
     }
 
-    const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
-
-    const { error: insertError } = await supabase.from("project_images").insert({
-      project_id: id,
-      image_url: urlData.publicUrl,
-      alt_text: file.name,
-      sort_order: (images?.length ?? 0) + 1,
-    });
-
-    if (insertError) {
-      toast.error("Error al guardar referencia");
-    } else {
-      queryClient.invalidateQueries({ queryKey: ["admin-project-images", id] });
-      toast.success("Imagen subida");
-    }
+    queryClient.invalidateQueries({ queryKey: ["admin-project-images", id] });
+    toast.success(`${files.length} imagen(es) subida(s)`);
     setUploading(false);
+    e.target.value = "";
   };
 
   return (
@@ -185,7 +189,7 @@ const ProjectImages = () => {
           <Upload className="w-4 h-4" />
           {uploading ? "Subiendo..." : "Subir imagen"}
         </Label>
-        <Input id="upload" type="file" accept="image/*" className="hidden" onChange={handleUpload} disabled={uploading} />
+        <Input id="upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
       </div>
 
       {isLoading ? (

@@ -131,7 +131,9 @@
     "interestedDesc": "Receive detailed information, plans and financing conditions.",
     "requestInfo": "Request information",
     "downloadDossier": "Download dossier",
-    "location": "Location"
+    "location": "Location",
+    "share": "Share",
+    "linkCopied": "Link copied"
   },
   "timeline": {
     "title": "Construction Timeline",

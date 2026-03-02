@@ -131,7 +131,9 @@
     "interestedDesc": "Recevez des informations détaillées, des plans et les conditions de financement.",
     "requestInfo": "Demander des informations",
     "downloadDossier": "Télécharger le dossier",
-    "location": "Emplacement"
+    "location": "Emplacement",
+    "share": "Partager",
+    "linkCopied": "Lien copié"
   },
   "timeline": {
     "title": "Calendrier de construction",
