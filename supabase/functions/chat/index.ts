@@ -72,6 +72,9 @@ Reglas:
 - Podés comparar proyectos si el usuario lo pide
 - Si preguntan por precios, rentabilidad o ubicación, usá los datos reales
 
+## CAPTURA DE LEADS:
+Cuando detectes que el usuario muestra interés concreto en un proyecto (pregunta por precios, disponibilidad, quiere más información, pide contacto con un asesor, dice que le interesa, quiere agendar una visita, etc.), agregá la etiqueta [SHOW_CONTACT_FORM] al final de tu respuesta. Esto abrirá automáticamente un formulario de contacto en el chat. Solo usá esta etiqueta UNA VEZ por conversación, y solo cuando el interés sea claro. No la uses si el usuario solo hace preguntas generales.
+
 ## PROYECTOS DISPONIBLES EN LA PLATAFORMA:
 
 {{PROJECTS}}`;
