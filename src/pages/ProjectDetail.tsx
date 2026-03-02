@@ -168,7 +168,16 @@ const ProjectDetail = () => {
             )}
 
             {/* Timeline */}
-            <ConstructionTimeline status={project.status} deliveryDate={project.delivery_date} />
+            <ConstructionTimeline
+              status={project.status}
+              deliveryDate={project.delivery_date}
+              phaseDates={{
+                phase_preventa_date: project.phase_preventa_date,
+                phase_en_pozo_date: project.phase_en_pozo_date,
+                phase_construccion_date: project.phase_construccion_date,
+                phase_entrega_date: project.phase_entrega_date,
+              }}
+            />
           </div>
 
           {/* Right column – 1/3 */}

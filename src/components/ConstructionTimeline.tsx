@@ -3,10 +3,10 @@ import { CheckCircle2, Clock, Circle, HardHat, Landmark, Home, ShoppingCart } fr
 import { Progress } from "@/components/ui/progress";
 
 const stages = [
-  { key: "preventa", label: "Preventa", description: "Lanzamiento comercial", icon: ShoppingCart },
-  { key: "en_pozo", label: "En Pozo", description: "Inicio de obra", icon: Landmark },
-  { key: "en_construccion", label: "Construcción", description: "Estructura y terminaciones", icon: HardHat },
-  { key: "entrega_inmediata", label: "Entrega", description: "Listo para habitar", icon: Home },
+  { key: "preventa", dateKey: "phase_preventa_date", label: "Preventa", description: "Lanzamiento comercial", icon: ShoppingCart },
+  { key: "en_pozo", dateKey: "phase_en_pozo_date", label: "En Pozo", description: "Inicio de obra", icon: Landmark },
+  { key: "en_construccion", dateKey: "phase_construccion_date", label: "Construcción", description: "Estructura y terminaciones", icon: HardHat },
+  { key: "entrega_inmediata", dateKey: "phase_entrega_date", label: "Entrega", description: "Listo para habitar", icon: Home },
 ];
 
 const statusOrder: Record<string, number> = {
@@ -19,9 +19,10 @@ const statusOrder: Record<string, number> = {
 interface ConstructionTimelineProps {
   status: string;
   deliveryDate?: string | null;
+  phaseDates?: Record<string, string | null>;
 }
 
-const ConstructionTimeline = ({ status, deliveryDate }: ConstructionTimelineProps) => {
+const ConstructionTimeline = ({ status, deliveryDate, phaseDates }: ConstructionTimelineProps) => {
   const currentStep = statusOrder[status] ?? 0;
   const progressPercent = Math.round((currentStep / (stages.length - 1)) * 100);
 
@@ -88,6 +89,9 @@ const ConstructionTimeline = ({ status, deliveryDate }: ConstructionTimelineProp
                 {stage.label}
               </p>
               <p className="text-xs text-muted-foreground mt-0.5">{stage.description}</p>
+              {phaseDates?.[stage.dateKey] && (
+                <p className="text-[11px] text-muted-foreground mt-1 font-medium">{phaseDates[stage.dateKey]}</p>
+              )}
               {active && (
                 <span className="mt-2 flex items-center gap-1 text-[11px] font-semibold text-primary">
                   <Clock className="w-3 h-3" /> Fase actual
@@ -136,6 +140,9 @@ const ConstructionTimeline = ({ status, deliveryDate }: ConstructionTimelineProp
                     {stage.label}
                   </p>
                   <p className="text-xs text-muted-foreground">{stage.description}</p>
+                  {phaseDates?.[stage.dateKey] && (
+                    <p className="text-[11px] text-muted-foreground mt-0.5 font-medium">{phaseDates[stage.dateKey]}</p>
+                  )}
                 </div>
                 {active && (
                   <span className="ml-auto flex items-center gap-1 text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full self-center">

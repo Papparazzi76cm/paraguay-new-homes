@@ -125,6 +125,10 @@ export type Database = {
           id: string
           location_city: string
           location_zone: string | null
+          phase_construccion_date: string | null
+          phase_en_pozo_date: string | null
+          phase_entrega_date: string | null
+          phase_preventa_date: string | null
           price_currency: string
           price_from: number | null
           project_type: Database["public"]["Enums"]["project_type"]
@@ -146,6 +150,10 @@ export type Database = {
           id?: string
           location_city: string
           location_zone?: string | null
+          phase_construccion_date?: string | null
+          phase_en_pozo_date?: string | null
+          phase_entrega_date?: string | null
+          phase_preventa_date?: string | null
           price_currency?: string
           price_from?: number | null
           project_type?: Database["public"]["Enums"]["project_type"]
@@ -167,6 +175,10 @@ export type Database = {
           id?: string
           location_city?: string
           location_zone?: string | null
+          phase_construccion_date?: string | null
+          phase_en_pozo_date?: string | null
+          phase_entrega_date?: string | null
+          phase_preventa_date?: string | null
           price_currency?: string
           price_from?: number | null
           project_type?: Database["public"]["Enums"]["project_type"]
