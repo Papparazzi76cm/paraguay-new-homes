@@ -345,7 +345,7 @@ const ChatBot = () => {
               )}
             </div>
 
-            {/* Contact CTA + Input */}
+            {/* Contact CTA + Suggestions + Input */}
             <div className="border-t">
               {!showContactForm && (
                 <button
@@ -355,6 +355,19 @@ const ChatBot = () => {
                   <UserPlus className="w-3 h-3" />
                   ¿Te interesa un proyecto? Dejá tus datos
                 </button>
+              )}
+              {messages.length <= 2 && !isLoading && (
+                <div className="px-3 pt-1.5 flex flex-wrap gap-1.5">
+                  {["Proyectos en Asunción", "Mejor rentabilidad", "Entrega inmediata", "¿Tienen financiación?"].map((chip) => (
+                    <button
+                      key={chip}
+                      onClick={() => { setInput(chip); }}
+                      className="text-xs border border-border rounded-full px-3 py-1 text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
               )}
               <form
                 onSubmit={(e) => { e.preventDefault(); send(); }}
