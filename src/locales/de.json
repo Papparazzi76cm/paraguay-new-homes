@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "projects": "Projekte",
+    "investment": "Investition",
+    "forDevelopers": "Für Entwickler",
+    "blog": "Blog",
+    "admin": "Admin",
+    "adminPanel": "Admin-Panel",
+    "publishProject": "Projekt veröffentlichen",
+    "themeSystem": "System",
+    "themeDark": "Dunkel",
+    "themeLight": "Hell"
+  },
+  "hero": {
+    "badge": "Spezialisten für Neubauten",
+    "title": "Ihre nächste Investition in <italic>Neubauten</italic> in Paraguay",
+    "subtitle": "Erkunden Sie verifizierte Projekte, vergleichen Sie Entwicklungen und treffen Sie Investitionsentscheidungen mit Vertrauen.",
+    "statsProjects": "Aktive Projekte",
+    "statsDevelopers": "Entwickler",
+    "statsCities": "Städte"
+  },
+  "search": {
+    "city": "Stadt",
+    "cityPlaceholder": "Wo suchen Sie?",
+    "type": "Typ",
+    "typePlaceholder": "Projekttyp",
+    "price": "Preis",
+    "pricePlaceholder": "Preisbereich",
+    "status": "Status",
+    "statusPlaceholder": "Bauphase",
+    "search": "Suchen",
+    "clear": "Löschen"
+  },
+  "projectTypes": {
+    "departamentos": "Wohnungen",
+    "casas": "Häuser",
+    "barrio_cerrado": "Geschlossene Siedlung",
+    "mixto": "Gemischt"
+  },
+  "projectStatus": {
+    "preventa": "Vorverkauf",
+    "en_pozo": "Im Bau geplant",
+    "en_construccion": "Im Bau",
+    "entrega_inmediata": "Sofort bezugsfertig"
+  },
+  "featured": {
+    "curated": "Kuratierte Auswahl",
+    "searchResults": "Suchergebnisse",
+    "featuredTitle": "Ausgewählte Projekte",
+    "foundTitle": "Gefundene Projekte",
+    "featuredDesc": "Verifizierte Entwicklungen mit dem besten Investitions-Rendite-Verhältnis auf dem paraguayischen Markt.",
+    "foundDesc": "{{count}} Projekt entspricht Ihrer Suche.",
+    "foundDesc_other": "{{count}} Projekte entsprechen Ihrer Suche.",
+    "noResults": "Keine Projekte mit den ausgewählten Filtern gefunden.",
+    "exploreAll": "Alle Projekte erkunden",
+    "featured": "Empfohlen",
+    "from": "Ab",
+    "yield": "Rendite {{value}}%",
+    "delivery": "Übergabe: {{date}}"
+  },
+  "benefits": {
+    "tag": "Warum ProyectPY?",
+    "title": "Die Plattform, die Sie brauchten",
+    "subtitle": "Werkzeuge für anspruchsvolle Investoren und Käufer, die nach Neubauten in Paraguay suchen.",
+    "newBuild": "Nur Neubauten",
+    "newBuildDesc": "Wir konzentrieren uns ausschließlich auf verifizierte neue Projekte. Kein Weiterverkauf, keine unnötigen Vermittler.",
+    "verified": "Verifizierte Informationen",
+    "verifiedDesc": "Jedes Projekt durchläuft einen Verifizierungsprozess. Echte Daten, bestätigte Entwickler.",
+    "renders": "Renderings & 3D-Touren",
+    "rendersDesc": "Visualisieren Sie jedes Projekt mit professionellen Renderings, interaktiven Plänen und virtuellen Touren.",
+    "comparator": "Projektvergleich",
+    "comparatorDesc": "Vergleichen Sie bis zu 3 Projekte nebeneinander: Preise, Annehmlichkeiten, Renditen und mehr.",
+    "simulator": "Renditesimulator",
+    "simulatorDesc": "Berechnen Sie die geschätzte Rendite Ihrer Investition mit lokalen Marktdaten.",
+    "financing": "Finanzierungsoptionen",
+    "financingDesc": "Informieren Sie sich über direkte und bankbasierte Finanzierungsoptionen für jedes Projekt."
+  },
+  "cta": {
+    "title": "Sind Sie Immobilienentwickler?",
+    "subtitle": "Veröffentlichen Sie Ihre Projekte auf Paraguays führender Neubau-Plattform. Erreichen Sie qualifizierte Investoren.",
+    "publishBtn": "Mein Projekt veröffentlichen",
+    "plansBtn": "Pläne und Preise ansehen"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "namePlaceholder": "Vollständiger Name",
+    "emailPlaceholder": "E-Mail",
+    "phonePlaceholder": "Telefon (optional)",
+    "messagePlaceholder": "Nachricht (optional)",
+    "send": "Nachricht senden"
+  },
+  "newsletter": {
+    "title": "Markteinblicke erhalten",
+    "subtitle": "Abonnieren Sie unseren Newsletter und erhalten Sie Analysen, Chancen und Trends des paraguayischen Immobilienmarktes direkt in Ihrem Posteingang.",
+    "subscribe": "Abonnieren",
+    "successTitle": "Abonnement bestätigt!",
+    "successDesc": "Sie erhalten unsere besten Artikel und Einblicke in den paraguayischen Immobilienmarkt.",
+    "noSpam": "Kein Spam. Jederzeit abbestellen.",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "brandDesc": "Die spezialisierte Plattform für Neubauprojekte in Paraguay. Sichere Investition, verifizierte Informationen.",
+    "explore": "Erkunden",
+    "exploreProjects": "Projekte",
+    "exploreNew": "Neue Starts",
+    "exploreOpportunities": "Gelegenheiten",
+    "exploreComparator": "Vergleich",
+    "exploreBlog": "Blog",
+    "forDevelopers": "Für Entwickler",
+    "publish": "Projekt veröffentlichen",
+    "plans": "Pläne & Preise",
+    "dashboard": "Dashboard",
+    "support": "Support",
+    "contactTitle": "Kontakt",
+    "rights": "© 2026 ProyectPY. Alle Rechte vorbehalten.",
+    "terms": "AGB",
+    "privacy": "Datenschutz",
+    "cookies": "Cookies"
+  },
+  "detail": {
+    "notFound": "Projekt nicht gefunden",
+    "backHome": "Zurück zur Startseite",
+    "contact": "Kontakt",
+    "financingAvailable": "Finanzierung verfügbar",
+    "fromPrice": "Ab",
+    "estYield": "Gesch. Rendite",
+    "deliveryLabel": "Übergabe",
+    "typeLabel": "Typ",
+    "aboutProject": "Über das Projekt",
+    "interestedTitle": "Interesse an diesem Projekt?",
+    "interestedDesc": "Erhalten Sie detaillierte Informationen, Pläne und Finanzierungsbedingungen.",
+    "requestInfo": "Informationen anfordern",
+    "downloadDossier": "Dossier herunterladen",
+    "location": "Standort"
+  },
+  "timeline": {
+    "title": "Bauzeitplan",
+    "completed": "{{percent}}% abgeschlossen",
+    "estimatedDelivery": "Geschätzte Übergabe:",
+    "currentPhase": "Aktuelle Phase",
+    "current": "Aktuell",
+    "preventa": "Vorverkauf",
+    "preventaDesc": "Markteinführung",
+    "enPozo": "Im Bau geplant",
+    "enPozoDesc": "Baubeginn",
+    "construccion": "Bau",
+    "construccionDesc": "Struktur und Ausbau",
+    "entrega": "Übergabe",
+    "entregaDesc": "Bezugsfertig"
+  }
+}

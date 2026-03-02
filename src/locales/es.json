@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "projects": "Proyectos",
+    "investment": "Inversión",
+    "forDevelopers": "Para Promotores",
+    "blog": "Blog",
+    "admin": "Admin",
+    "adminPanel": "Panel Admin",
+    "publishProject": "Publicar Proyecto",
+    "themeSystem": "Sistema",
+    "themeDark": "Oscuro",
+    "themeLight": "Claro"
+  },
+  "hero": {
+    "badge": "Especialistas en Obra Nueva",
+    "title": "Tu próxima inversión en <italic>obra nueva</italic> en Paraguay",
+    "subtitle": "Explorá proyectos verificados, compará desarrollos y tomá decisiones de inversión con confianza.",
+    "statsProjects": "Proyectos activos",
+    "statsDevelopers": "Desarrolladores",
+    "statsCities": "Ciudades"
+  },
+  "search": {
+    "city": "Ciudad",
+    "cityPlaceholder": "¿Dónde buscas?",
+    "type": "Tipo",
+    "typePlaceholder": "Tipo de proyecto",
+    "price": "Precio",
+    "pricePlaceholder": "Rango de precio",
+    "status": "Estado",
+    "statusPlaceholder": "Etapa de obra",
+    "search": "Buscar",
+    "clear": "Limpiar"
+  },
+  "projectTypes": {
+    "departamentos": "Departamentos",
+    "casas": "Casas",
+    "barrio_cerrado": "Barrio Cerrado",
+    "mixto": "Mixto"
+  },
+  "projectStatus": {
+    "preventa": "Preventa",
+    "en_pozo": "En Pozo",
+    "en_construccion": "En Construcción",
+    "entrega_inmediata": "Entrega Inmediata"
+  },
+  "featured": {
+    "curated": "Selección curada",
+    "searchResults": "Resultados de búsqueda",
+    "featuredTitle": "Proyectos Destacados",
+    "foundTitle": "Proyectos Encontrados",
+    "featuredDesc": "Desarrollos verificados con la mejor relación inversión-rentabilidad del mercado paraguayo.",
+    "foundDesc": "{{count}} proyecto coincide con tu búsqueda.",
+    "foundDesc_other": "{{count}} proyectos coinciden con tu búsqueda.",
+    "noResults": "No se encontraron proyectos con los filtros seleccionados.",
+    "exploreAll": "Explorar todos los proyectos",
+    "featured": "Destacado",
+    "from": "Desde",
+    "yield": "Rent. {{value}}%",
+    "delivery": "Entrega: {{date}}"
+  },
+  "benefits": {
+    "tag": "¿Por qué ProyectPY?",
+    "title": "La plataforma que necesitabas",
+    "subtitle": "Herramientas diseñadas para inversores y compradores exigentes que buscan obra nueva en Paraguay.",
+    "newBuild": "Solo Obra Nueva",
+    "newBuildDesc": "Nos enfocamos exclusivamente en proyectos nuevos verificados. Sin reventa, sin intermediarios innecesarios.",
+    "verified": "Información Verificada",
+    "verifiedDesc": "Cada proyecto pasa por un proceso de verificación. Datos reales, desarrolladores confirmados.",
+    "renders": "Renders y Recorridos 3D",
+    "rendersDesc": "Visualizá cada proyecto con renders profesionales, planos interactivos y tours virtuales.",
+    "comparator": "Comparador de Proyectos",
+    "comparatorDesc": "Compará hasta 3 proyectos lado a lado: precios, amenities, rentabilidad y más.",
+    "simulator": "Simulador de Rentabilidad",
+    "simulatorDesc": "Calculá el retorno estimado de tu inversión con datos del mercado local.",
+    "financing": "Opciones de Financiación",
+    "financingDesc": "Conocé las opciones de financiamiento directo y bancario de cada proyecto."
+  },
+  "cta": {
+    "title": "¿Sos desarrollador inmobiliario?",
+    "subtitle": "Publicá tus proyectos en la plataforma especializada de obra nueva más importante de Paraguay. Llegá a inversores calificados.",
+    "publishBtn": "Publicar mi desarrollo",
+    "plansBtn": "Ver planes y precios"
+  },
+  "contact": {
+    "title": "Contactar",
+    "namePlaceholder": "Nombre completo",
+    "emailPlaceholder": "Email",
+    "phonePlaceholder": "Teléfono (opcional)",
+    "messagePlaceholder": "Mensaje (opcional)",
+    "send": "Enviar mensaje"
+  },
+  "newsletter": {
+    "title": "Recibí insights del mercado",
+    "subtitle": "Suscribite al newsletter y recibí análisis, oportunidades y tendencias del mercado inmobiliario paraguayo directamente en tu email.",
+    "subscribe": "Suscribirme",
+    "successTitle": "¡Suscripción confirmada!",
+    "successDesc": "Vas a recibir nuestros mejores artículos e insights del mercado inmobiliario paraguayo.",
+    "noSpam": "Sin spam. Cancelá cuando quieras.",
+    "error": "Ocurrió un error. Intentá de nuevo."
+  },
+  "footer": {
+    "brandDesc": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
+    "explore": "Explorar",
+    "exploreProjects": "Proyectos",
+    "exploreNew": "Nuevos Lanzamientos",
+    "exploreOpportunities": "Oportunidades",
+    "exploreComparator": "Comparador",
+    "exploreBlog": "Blog",
+    "forDevelopers": "Para Promotores",
+    "publish": "Publicar Proyecto",
+    "plans": "Planes y Precios",
+    "dashboard": "Dashboard",
+    "support": "Soporte",
+    "contactTitle": "Contacto",
+    "rights": "© 2026 ProyectPY. Todos los derechos reservados.",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "cookies": "Cookies"
+  },
+  "detail": {
+    "notFound": "Proyecto no encontrado",
+    "backHome": "Volver al inicio",
+    "contact": "Contactar",
+    "financingAvailable": "Financiación disponible",
+    "fromPrice": "Desde",
+    "estYield": "Rentabilidad est.",
+    "deliveryLabel": "Entrega",
+    "typeLabel": "Tipo",
+    "aboutProject": "Sobre el Proyecto",
+    "interestedTitle": "¿Te interesa este proyecto?",
+    "interestedDesc": "Recibí información detallada, planos y condiciones de financiación.",
+    "requestInfo": "Solicitar información",
+    "downloadDossier": "Descargar dossier",
+    "location": "Ubicación"
+  },
+  "timeline": {
+    "title": "Cronograma de Obra",
+    "completed": "{{percent}}% completado",
+    "estimatedDelivery": "Entrega estimada:",
+    "currentPhase": "Fase actual",
+    "current": "Actual",
+    "preventa": "Preventa",
+    "preventaDesc": "Lanzamiento comercial",
+    "enPozo": "En Pozo",
+    "enPozoDesc": "Inicio de obra",
+    "construccion": "Construcción",
+    "construccionDesc": "Estructura y terminaciones",
+    "entrega": "Entrega",
+    "entregaDesc": "Listo para habitar"
+  }
+}

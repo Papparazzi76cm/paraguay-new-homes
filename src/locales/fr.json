@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "projects": "Projets",
+    "investment": "Investissement",
+    "forDevelopers": "Pour Promoteurs",
+    "blog": "Blog",
+    "admin": "Admin",
+    "adminPanel": "Panneau Admin",
+    "publishProject": "Publier un projet",
+    "themeSystem": "Système",
+    "themeDark": "Sombre",
+    "themeLight": "Clair"
+  },
+  "hero": {
+    "badge": "Spécialistes de la construction neuve",
+    "title": "Votre prochain investissement en <italic>construction neuve</italic> au Paraguay",
+    "subtitle": "Explorez des projets vérifiés, comparez les développements et prenez des décisions d'investissement en toute confiance.",
+    "statsProjects": "Projets actifs",
+    "statsDevelopers": "Promoteurs",
+    "statsCities": "Villes"
+  },
+  "search": {
+    "city": "Ville",
+    "cityPlaceholder": "Où cherchez-vous ?",
+    "type": "Type",
+    "typePlaceholder": "Type de projet",
+    "price": "Prix",
+    "pricePlaceholder": "Fourchette de prix",
+    "status": "Statut",
+    "statusPlaceholder": "Étape de construction",
+    "search": "Rechercher",
+    "clear": "Effacer"
+  },
+  "projectTypes": {
+    "departamentos": "Appartements",
+    "casas": "Maisons",
+    "barrio_cerrado": "Quartier fermé",
+    "mixto": "Mixte"
+  },
+  "projectStatus": {
+    "preventa": "Prévente",
+    "en_pozo": "Sur plan",
+    "en_construccion": "En construction",
+    "entrega_inmediata": "Livraison immédiate"
+  },
+  "featured": {
+    "curated": "Sélection curatée",
+    "searchResults": "Résultats de recherche",
+    "featuredTitle": "Projets en vedette",
+    "foundTitle": "Projets trouvés",
+    "featuredDesc": "Développements vérifiés avec le meilleur rapport investissement-rendement du marché paraguayen.",
+    "foundDesc": "{{count}} projet correspond à votre recherche.",
+    "foundDesc_other": "{{count}} projets correspondent à votre recherche.",
+    "noResults": "Aucun projet trouvé avec les filtres sélectionnés.",
+    "exploreAll": "Explorer tous les projets",
+    "featured": "En vedette",
+    "from": "À partir de",
+    "yield": "Rend. {{value}}%",
+    "delivery": "Livraison : {{date}}"
+  },
+  "benefits": {
+    "tag": "Pourquoi ProyectPY ?",
+    "title": "La plateforme dont vous aviez besoin",
+    "subtitle": "Outils conçus pour les investisseurs et acheteurs exigeants à la recherche de constructions neuves au Paraguay.",
+    "newBuild": "Construction neuve uniquement",
+    "newBuildDesc": "Nous nous concentrons exclusivement sur les projets neufs vérifiés. Pas de revente, pas d'intermédiaires inutiles.",
+    "verified": "Informations vérifiées",
+    "verifiedDesc": "Chaque projet passe par un processus de vérification. Données réelles, promoteurs confirmés.",
+    "renders": "Rendus et visites 3D",
+    "rendersDesc": "Visualisez chaque projet avec des rendus professionnels, des plans interactifs et des visites virtuelles.",
+    "comparator": "Comparateur de projets",
+    "comparatorDesc": "Comparez jusqu'à 3 projets côte à côte : prix, équipements, rendement et plus.",
+    "simulator": "Simulateur de rendement",
+    "simulatorDesc": "Calculez le rendement estimé de votre investissement avec les données du marché local.",
+    "financing": "Options de financement",
+    "financingDesc": "Découvrez les options de financement direct et bancaire pour chaque projet."
+  },
+  "cta": {
+    "title": "Êtes-vous promoteur immobilier ?",
+    "subtitle": "Publiez vos projets sur la plateforme spécialisée en construction neuve la plus importante du Paraguay. Atteignez des investisseurs qualifiés.",
+    "publishBtn": "Publier mon développement",
+    "plansBtn": "Voir les plans et tarifs"
+  },
+  "contact": {
+    "title": "Contacter",
+    "namePlaceholder": "Nom complet",
+    "emailPlaceholder": "E-mail",
+    "phonePlaceholder": "Téléphone (optionnel)",
+    "messagePlaceholder": "Message (optionnel)",
+    "send": "Envoyer le message"
+  },
+  "newsletter": {
+    "title": "Recevez des analyses de marché",
+    "subtitle": "Abonnez-vous à notre newsletter et recevez analyses, opportunités et tendances du marché immobilier paraguayen directement dans votre boîte mail.",
+    "subscribe": "S'abonner",
+    "successTitle": "Abonnement confirmé !",
+    "successDesc": "Vous recevrez nos meilleurs articles et analyses du marché immobilier paraguayen.",
+    "noSpam": "Pas de spam. Désabonnement à tout moment.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "footer": {
+    "brandDesc": "La plateforme spécialisée dans les projets de construction neuve au Paraguay. Investissement sûr, informations vérifiées.",
+    "explore": "Explorer",
+    "exploreProjects": "Projets",
+    "exploreNew": "Nouveaux lancements",
+    "exploreOpportunities": "Opportunités",
+    "exploreComparator": "Comparateur",
+    "exploreBlog": "Blog",
+    "forDevelopers": "Pour Promoteurs",
+    "publish": "Publier un projet",
+    "plans": "Plans et tarifs",
+    "dashboard": "Tableau de bord",
+    "support": "Support",
+    "contactTitle": "Contact",
+    "rights": "© 2026 ProyectPY. Tous droits réservés.",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "cookies": "Cookies"
+  },
+  "detail": {
+    "notFound": "Projet non trouvé",
+    "backHome": "Retour à l'accueil",
+    "contact": "Contacter",
+    "financingAvailable": "Financement disponible",
+    "fromPrice": "À partir de",
+    "estYield": "Rend. est.",
+    "deliveryLabel": "Livraison",
+    "typeLabel": "Type",
+    "aboutProject": "À propos du projet",
+    "interestedTitle": "Intéressé par ce projet ?",
+    "interestedDesc": "Recevez des informations détaillées, des plans et les conditions de financement.",
+    "requestInfo": "Demander des informations",
+    "downloadDossier": "Télécharger le dossier",
+    "location": "Emplacement"
+  },
+  "timeline": {
+    "title": "Calendrier de construction",
+    "completed": "{{percent}}% terminé",
+    "estimatedDelivery": "Livraison estimée :",
+    "currentPhase": "Phase actuelle",
+    "current": "Actuel",
+    "preventa": "Prévente",
+    "preventaDesc": "Lancement commercial",
+    "enPozo": "Sur plan",
+    "enPozoDesc": "Début de construction",
+    "construccion": "Construction",
+    "construccionDesc": "Structure et finitions",
+    "entrega": "Livraison",
+    "entregaDesc": "Prêt à habiter"
+  }
+}
