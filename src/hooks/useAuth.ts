@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
@@ -35,6 +35,17 @@ export const useAuth = () => {
 export const useIsAdmin = (userId: string | undefined) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const checkedUserId = useRef<string | undefined>(undefined);
+
+  // Synchronously reset loading when userId changes
+  if (checkedUserId.current !== userId) {
+    checkedUserId.current = userId;
+    if (userId) {
+      // New userId to check — mark as loading synchronously
+      if (!loading) setLoading(true);
+      if (isAdmin) setIsAdmin(false);
+    }
+  }
 
   useEffect(() => {
     if (!userId) {
@@ -42,6 +53,7 @@ export const useIsAdmin = (userId: string | undefined) => {
       setLoading(false);
       return;
     }
+    let cancelled = false;
     supabase
       .from("user_roles")
       .select("role")
@@ -49,9 +61,12 @@ export const useIsAdmin = (userId: string | undefined) => {
       .eq("role", "admin")
       .maybeSingle()
       .then(({ data }) => {
-        setIsAdmin(!!data);
-        setLoading(false);
+        if (!cancelled) {
+          setIsAdmin(!!data);
+          setLoading(false);
+        }
       });
+    return () => { cancelled = true; };
   }, [userId]);
 
   return { isAdmin, loading };
