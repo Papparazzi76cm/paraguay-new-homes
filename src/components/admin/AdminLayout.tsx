@@ -11,11 +11,16 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("[AdminLayout] authLoading:", authLoading, "roleLoading:", roleLoading, "user:", user?.email, "isAdmin:", isAdmin);
     if (authLoading || roleLoading) return;
     if (!user) {
+      console.log("[AdminLayout] No user, redirecting to /auth");
       navigate("/auth");
     } else if (!isAdmin) {
+      console.log("[AdminLayout] Not admin, redirecting to /");
       navigate("/");
+    } else {
+      console.log("[AdminLayout] Admin confirmed, staying on /admin");
     }
   }, [authLoading, roleLoading, user, isAdmin, navigate]);
 
