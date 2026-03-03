@@ -35,23 +35,19 @@ export const useAuth = () => {
 export const useIsAdmin = (userId: string | undefined) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const checkedUserId = useRef<string | undefined>(undefined);
-
-  // Synchronously reset loading when userId changes
-  if (checkedUserId.current !== userId) {
-    checkedUserId.current = userId;
-    if (userId) {
-      // New userId to check — mark as loading synchronously
-      if (!loading) setLoading(true);
-      if (isAdmin) setIsAdmin(false);
-    }
-  }
+  const prevUserId = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     if (!userId) {
       setIsAdmin(false);
       setLoading(false);
       return;
+    }
+    // Reset when userId changes
+    if (prevUserId.current !== userId) {
+      prevUserId.current = userId;
+      setIsAdmin(false);
+      setLoading(true);
     }
     let cancelled = false;
     supabase
