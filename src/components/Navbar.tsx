@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon, Monitor, Shield } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth, useIsAdmin } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const ThemeIcon = ({ theme }: { theme: string }) => {
@@ -66,9 +67,9 @@ const Navbar = () => {
             <ThemeIcon theme={theme} />
           </button>
           {isAdmin && (
-            <a href="/admin" className="flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-medium transition-colors">
+            <Link to="/admin" className="flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-medium transition-colors">
               <Shield className="w-4 h-4" /> {t("nav.admin")}
-            </a>
+            </Link>
           )}
           <button className="bg-white/10 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors">
             {t("nav.publishProject")}
@@ -102,9 +103,9 @@ const Navbar = () => {
             ))}
             <LanguageSwitcher variant="dark" />
             {isAdmin && (
-              <a href="/admin" className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+              <Link to="/admin" className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                 <Shield className="w-4 h-4" /> {t("nav.adminPanel")}
-              </a>
+              </Link>
             )}
             <button className="bg-primary text-primary-foreground px-5 py-3 rounded-xl text-sm font-medium mt-2">
               {t("nav.publishProject")}
