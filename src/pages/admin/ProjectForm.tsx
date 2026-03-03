@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, Star, Loader2 } from "lucide-react";
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -19,6 +19,7 @@ const ProjectForm = () => {
   const isEditing = !!id;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [uploading, setUploading] = useState(false);
 
   const [form, setForm] = useState({
     title: "",
@@ -49,6 +50,20 @@ const ProjectForm = () => {
     queryKey: ["admin-project", id],
     queryFn: async () => {
       const { data, error } = await supabase.from("projects").select("*").eq("id", id!).single();
+      if (error) throw error;
+      return data;
+    },
+    enabled: isEditing,
+  });
+
+  const { data: images, isLoading: imagesLoading } = useQuery({
+    queryKey: ["admin-project-images", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("project_images")
+        .select("*")
+        .eq("project_id", id!)
+        .order("sort_order", { ascending: true });
       if (error) throw error;
       return data;
     },
@@ -122,15 +137,20 @@ const ProjectForm = () => {
       if (isEditing) {
         const { error } = await supabase.from("projects").update(payload).eq("id", id!);
         if (error) throw error;
+        return id!;
       } else {
-        const { error } = await supabase.from("projects").insert(payload);
+        const { data, error } = await supabase.from("projects").insert(payload).select("id").single();
         if (error) throw error;
+        return data.id;
       }
     },
-    onSuccess: () => {
+    onSuccess: (projectId: string) => {
       queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
       toast.success(isEditing ? "Proyecto actualizado" : "Proyecto creado");
-      navigate("/admin/projects");
+      if (!isEditing) {
+        // Redirect to edit mode so images can be uploaded
+        navigate(`/admin/projects/${projectId}`, { replace: true });
+      }
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -138,6 +158,61 @@ const ProjectForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     mutation.mutate();
+  };
+
+  // Image upload
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0 || !id) return;
+    setUploading(true);
+
+    let currentCount = images?.length ?? 0;
+
+    for (const file of Array.from(files)) {
+      const fileExt = file.name.split(".").pop();
+      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage.from("project-images").upload(filePath, file);
+      if (uploadError) { toast.error(`Error al subir ${file.name}`); continue; }
+
+      const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
+
+      const { error: insertError } = await supabase.from("project_images").insert({
+        project_id: id,
+        image_url: urlData.publicUrl,
+        alt_text: file.name,
+        sort_order: ++currentCount,
+      });
+      if (insertError) toast.error(`Error al guardar ${file.name}`);
+    }
+
+    queryClient.invalidateQueries({ queryKey: ["admin-project-images", id] });
+    toast.success(`${files.length} imagen(es) subida(s)`);
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  // Delete image
+  const deleteImage = async (imageId: string, imageUrl: string) => {
+    if (!confirm("¿Eliminar esta imagen?")) return;
+    const { error } = await supabase.from("project_images").delete().eq("id", imageId);
+    if (error) { toast.error("Error al eliminar"); return; }
+    // If it was the cover, clear it
+    if (form.cover_image_url === imageUrl) {
+      set("cover_image_url", "");
+      await supabase.from("projects").update({ cover_image_url: null }).eq("id", id!);
+    }
+    queryClient.invalidateQueries({ queryKey: ["admin-project-images", id] });
+    toast.success("Imagen eliminada");
+  };
+
+  // Set cover image
+  const setCoverImage = async (imageUrl: string) => {
+    set("cover_image_url", imageUrl);
+    const { error } = await supabase.from("projects").update({ cover_image_url: imageUrl }).eq("id", id!);
+    if (error) toast.error("Error al actualizar portada");
+    else toast.success("Imagen de portada actualizada");
+    queryClient.invalidateQueries({ queryKey: ["admin-project", id] });
   };
 
   return (
@@ -196,10 +271,6 @@ const ProjectForm = () => {
           <div className="space-y-2">
             <Label>Desarrollador</Label>
             <Input value={form.developer_name} onChange={(e) => set("developer_name", e.target.value)} />
-          </div>
-          <div className="space-y-2">
-            <Label>URL imagen portada</Label>
-            <Input value={form.cover_image_url} onChange={(e) => set("cover_image_url", e.target.value)} />
           </div>
         </div>
 
@@ -294,6 +365,62 @@ const ProjectForm = () => {
           {mutation.isPending ? "Guardando..." : isEditing ? "Guardar cambios" : "Crear proyecto"}
         </Button>
       </form>
+
+      {/* Images section — only visible after project is saved */}
+      {isEditing && (
+        <div className="mt-10 border-t border-border pt-8">
+          <h3 className="text-xl font-bold text-foreground mb-2">Imágenes del proyecto</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Subí imágenes y hacé clic en la estrella para elegir la imagen de portada.
+          </p>
+
+          <div className="mb-6">
+            <Label htmlFor="img-upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
+              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+              {uploading ? "Subiendo..." : "Subir imágenes"}
+            </Label>
+            <Input id="img-upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
+          </div>
+
+          {imagesLoading ? (
+            <p className="text-muted-foreground">Cargando imágenes...</p>
+          ) : !images?.length ? (
+            <p className="text-muted-foreground">No hay imágenes aún. Subí la primera.</p>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {images.map((img) => {
+                const isCover = form.cover_image_url === img.image_url;
+                return (
+                  <div key={img.id} className={`relative group rounded-xl overflow-hidden border-2 transition-colors ${isCover ? "border-primary ring-2 ring-primary/30" : "border-border"}`}>
+                    <img src={img.image_url} alt={img.alt_text ?? ""} className="w-full h-40 object-cover" />
+                    {isCover && (
+                      <div className="absolute top-2 left-2 bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded-md flex items-center gap-1">
+                        <Star className="w-3 h-3 fill-current" /> Portada
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
+                      {!isCover && (
+                        <Button size="sm" variant="secondary" className="text-xs" onClick={() => setCoverImage(img.image_url)}>
+                          <Star className="w-3 h-3 mr-1" /> Portada
+                        </Button>
+                      )}
+                      <Button size="sm" variant="destructive" className="text-xs" onClick={() => deleteImage(img.id, img.image_url)}>
+                        <Trash2 className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {!isEditing && (
+        <p className="mt-6 text-sm text-muted-foreground italic">
+          Guardá el proyecto primero para poder subir imágenes.
+        </p>
+      )}
     </div>
   );
 };
