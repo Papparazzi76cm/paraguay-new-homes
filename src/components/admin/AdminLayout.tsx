@@ -11,13 +11,10 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (authLoading || roleLoading) return;
+    if (!user) {
       navigate("/auth");
-    }
-  }, [authLoading, user, navigate]);
-
-  useEffect(() => {
-    if (!authLoading && !roleLoading && user && !isAdmin) {
+    } else if (!isAdmin) {
       navigate("/");
     }
   }, [authLoading, roleLoading, user, isAdmin, navigate]);
