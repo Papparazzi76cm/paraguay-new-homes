@@ -10,8 +10,8 @@ const Footer = () => {
       <div className="container">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <img src={takohaLogo} alt="Takoha" className="h-7 w-auto brightness-0 invert" />
+            <div className="flex items-center mb-4">
+              <img src={takohaLogo} alt="Takoha" className="h-10 w-auto brightness-0 invert" />
             </div>
             <p className="text-background/50 text-sm leading-relaxed">{t("footer.brandDesc")}</p>
           </div>
