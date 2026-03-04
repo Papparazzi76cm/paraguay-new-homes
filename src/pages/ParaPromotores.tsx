@@ -118,20 +118,20 @@ const ParaPromotores = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Para Promotores | ProyectPY — Publicá tus proyectos</title>
-        <meta name="description" content="Publicá tus desarrollos inmobiliarios en ProyectPY. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
-        <meta property="og:title" content="Para Promotores | ProyectPY" />
+        <title>Para Promotores | Takoha — Publicá tus proyectos</title>
+        <meta name="description" content="Publicá tus desarrollos inmobiliarios en Takoha. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
+        <meta property="og:title" content="Para Promotores | Takoha" />
         <meta property="og:description" content="Conectá tus proyectos con miles de inversores. Planes desde USD 149/mes." />
 ...
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
           "mainEntity": [
-            { "@type": "Question", "name": "¿Cómo publico mi proyecto en ProyectPY?", "acceptedAnswer": { "@type": "Answer", "text": "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos." }},
+            { "@type": "Question", "name": "¿Cómo publico mi proyecto en Takoha?", "acceptedAnswer": { "@type": "Answer", "text": "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos." }},
             { "@type": "Question", "name": "¿Puedo cambiar de plan en cualquier momento?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Podés subir o bajar de plan cuando quieras. El cambio se aplica en tu próximo ciclo de facturación y la diferencia se prorratea automáticamente." }},
             { "@type": "Question", "name": "¿Qué tipo de leads voy a recibir?", "acceptedAnswer": { "@type": "Answer", "text": "Recibís contactos de inversores y compradores que están activamente buscando proyectos de obra nueva en Paraguay. Cada lead incluye nombre, email, teléfono y el proyecto específico por el que consultan." }},
             { "@type": "Question", "name": "¿Hay algún contrato de permanencia?", "acceptedAnswer": { "@type": "Answer", "text": "No. Todos nuestros planes son mensuales y podés cancelar cuando quieras sin penalización. Si cancelás, tu cuenta permanece activa hasta el final del período pagado." }},
-            { "@type": "Question", "name": "¿Puedo integrar ProyectPY con mi CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses." }},
+            { "@type": "Question", "name": "¿Puedo integrar Takoha con mi CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses." }},
             { "@type": "Question", "name": "¿Cómo funciona el posicionamiento destacado?", "acceptedAnswer": { "@type": "Answer", "text": "Los proyectos de planes Profesional y Premium aparecen primero en los resultados de búsqueda y en la sección de destacados de la home. Esto aumenta significativamente la visibilidad y los leads generados." }},
             { "@type": "Question", "name": "¿Qué métodos de pago aceptan?", "acceptedAnswer": { "@type": "Answer", "text": "Aceptamos tarjetas de crédito y débito (Visa, Mastercard), transferencia bancaria y pagos vía Tigo Money. La facturación es mensual en USD." }}
           ]

@@ -59,7 +59,7 @@
     "delivery": "Delivery: {{date}}"
   },
   "benefits": {
-    "tag": "Why ProyectPY?",
+    "tag": "Why Takoha?",
     "title": "The platform you needed",
     "subtitle": "Tools designed for demanding investors and buyers looking for new builds in Paraguay.",
     "newBuild": "New Build Only",
@@ -112,7 +112,7 @@
     "dashboard": "Dashboard",
     "support": "Support",
     "contactTitle": "Contact",
-    "rights": "© 2026 ProyectPY. All rights reserved.",
+    "rights": "© 2026 Takoha. All rights reserved.",
     "terms": "Terms",
     "privacy": "Privacy",
     "cookies": "Cookies"
@@ -220,7 +220,7 @@
     "backHome": "Return to Home"
   },
   "chatbot": {
-    "assistant": "ProyectPY Assistant",
+    "assistant": "Takoha Assistant",
     "subtitle": "Real Estate • Online",
     "openChat": "Open chat",
     "newConversation": "New conversation",
@@ -229,10 +229,10 @@
     "minimize": "Minimize",
     "placeholder": "Write your question...",
     "dataSent": "Data sent! We'll contact you soon.",
-    "contactSuccess": "✅ Perfect! We received your information. A ProyectPY advisor will contact you shortly. Is there anything else I can help with?",
+    "contactSuccess": "✅ Perfect! We received your information. A Takoha advisor will contact you shortly. Is there anything else I can help with?",
     "errorConnect": "Error connecting to the assistant",
     "errorGeneric": "Sorry, an error occurred. Please try again.",
-    "welcome": "Hello! 👋 I'm the ProyectPY assistant. How can I help you today? I can guide you about real estate projects, investment or project publishing.",
+    "welcome": "Hello! 👋 I'm the Takoha assistant. How can I help you today? I can guide you about real estate projects, investment or project publishing.",
     "interestedCta": "Interested in a project? Leave your info",
     "leaveDataTitle": "📋 Leave your info and we'll contact you",
     "required": "Required",
@@ -250,7 +250,7 @@
     "chip4": "Do you offer financing?"
   },
   "investment": {
-    "pageTitle": "Real Estate Investment in Paraguay | ProyectPY",
+    "pageTitle": "Real Estate Investment in Paraguay | Takoha",
     "pageDesc": "Discover why investing in new builds in Paraguay. 6-12% annual returns, investment simulator and complete guide for investors.",
     "badge": "Investment Guide",
     "heroTitle": "Invest in the real estate future of",
@@ -309,8 +309,8 @@
     "talkAdvisor": "Talk to an advisor"
   },
   "promoters": {
-    "pageTitle": "For Developers | ProyectPY — Publish your projects",
-    "pageDesc": "Publish your real estate developments on ProyectPY. Generate qualified leads, access analytics and connect with thousands of investors in Paraguay.",
+    "pageTitle": "For Developers | Takoha — Publish your projects",
+    "pageDesc": "Publish your real estate developments on Takoha. Generate qualified leads, access analytics and connect with thousands of investors in Paraguay.",
     "badge": "For Developers",
     "heroTitle": "Connect your projects with",
     "heroHighlight": "thousands of investors",
@@ -370,7 +370,7 @@
     "plan3Feat8": "Maximum search priority",
     "faqTitle": "Frequently asked questions",
     "faqSubtitle": "Everything you need to know before publishing your project.",
-    "faq1Q": "How do I publish my project on ProyectPY?",
+    "faq1Q": "How do I publish my project on Takoha?",
     "faq1A": "Once you choose your plan and create your account, you access a panel where you can upload all your project information: photos, plans, prices, amenities, location and more. The process takes less than 15 minutes.",
     "faq2Q": "Can I change plans at any time?",
     "faq2A": "Yes. You can upgrade or downgrade your plan anytime. The change applies in your next billing cycle and the difference is prorated automatically.",
@@ -378,18 +378,18 @@
     "faq3A": "You receive contacts from investors and buyers who are actively looking for new build projects in Paraguay. Each lead includes name, email, phone and the specific project they're interested in.",
     "faq4Q": "Is there a minimum commitment?",
     "faq4A": "No. All our plans are monthly and you can cancel anytime without penalty. If you cancel, your account remains active until the end of the paid period.",
-    "faq5Q": "Can I integrate ProyectPY with my CRM?",
+    "faq5Q": "Can I integrate Takoha with my CRM?",
     "faq5A": "With the Premium plan you have access to our integration API, which allows you to connect leads directly to your CRM (Salesforce, HubSpot, Pipedrive, etc.) or any tool you use.",
     "faq6Q": "How does featured positioning work?",
     "faq6A": "Projects from Professional and Premium plans appear first in search results and in the featured section of the homepage. This significantly increases visibility and generated leads.",
     "faq7Q": "What payment methods do you accept?",
     "faq7A": "We accept credit and debit cards (Visa, Mastercard), bank transfers and Tigo Money payments. Billing is monthly in USD.",
     "ctaTitle": "Ready to boost your sales?",
-    "ctaSubtitle": "Join over 50 developers who already trust ProyectPY to connect with qualified investors.",
+    "ctaSubtitle": "Join over 50 developers who already trust Takoha to connect with qualified investors.",
     "ctaBtn": "Start now"
   },
   "blog": {
-    "pageTitle": "Blog | ProyectPY — Real estate market insights",
+    "pageTitle": "Blog | Takoha — Real estate market insights",
     "pageDesc": "Analysis, guides and trends for better investment decisions in Paraguay's real estate sector.",
     "badge": "Blog",
     "heroTitle": "Real estate market insights",
