@@ -59,7 +59,7 @@
     "delivery": "Livraison : {{date}}"
   },
   "benefits": {
-    "tag": "Pourquoi Takoha ?",
+    "tag": "Pourquoi Tekoha ?",
     "title": "La plateforme qu'il vous fallait",
     "subtitle": "Outils conçus pour les investisseurs et acheteurs exigeants à la recherche de neuf au Paraguay.",
     "newBuild": "Neuf uniquement",
@@ -112,7 +112,7 @@
     "dashboard": "Tableau de bord",
     "support": "Support",
     "contactTitle": "Contact",
-    "rights": "© 2026 Takoha. Tous droits réservés.",
+    "rights": "© 2026 Tekoha. Tous droits réservés.",
     "terms": "Conditions",
     "privacy": "Confidentialité",
     "cookies": "Cookies"
@@ -220,7 +220,7 @@
     "backHome": "Retour à l'accueil"
   },
   "chatbot": {
-    "assistant": "Assistant Takoha",
+    "assistant": "Assistant Tekoha",
     "subtitle": "Immobilier • En ligne",
     "openChat": "Ouvrir le chat",
     "newConversation": "Nouvelle conversation",
@@ -229,10 +229,10 @@
     "minimize": "Réduire",
     "placeholder": "Écrivez votre question...",
     "dataSent": "Données envoyées ! Nous vous contacterons bientôt.",
-    "contactSuccess": "✅ Parfait ! Nous avons reçu vos informations. Un conseiller Takoha vous contactera sous peu. Puis-je vous aider avec autre chose ?",
+    "contactSuccess": "✅ Parfait ! Nous avons reçu vos informations. Un conseiller Tekoha vous contactera sous peu. Puis-je vous aider avec autre chose ?",
     "errorConnect": "Erreur de connexion à l'assistant",
     "errorGeneric": "Désolé, une erreur s'est produite. Veuillez réessayer.",
-    "welcome": "Bonjour ! 👋 Je suis l'assistant Takoha. Comment puis-je vous aider aujourd'hui ? Je peux vous guider sur les projets immobiliers, l'investissement ou la publication de projets.",
+    "welcome": "Bonjour ! 👋 Je suis l'assistant Tekoha. Comment puis-je vous aider aujourd'hui ? Je peux vous guider sur les projets immobiliers, l'investissement ou la publication de projets.",
     "interestedCta": "Intéressé par un projet ? Laissez vos coordonnées",
     "leaveDataTitle": "📋 Laissez vos coordonnées et nous vous contacterons",
     "required": "Requis",
@@ -250,7 +250,7 @@
     "chip4": "Proposez-vous un financement ?"
   },
   "investment": {
-    "pageTitle": "Investissement Immobilier au Paraguay | Takoha",
+    "pageTitle": "Investissement Immobilier au Paraguay | Tekoha",
     "pageDesc": "Découvrez pourquoi investir dans le neuf au Paraguay. 6-12% de rendement annuel, simulateur d'investissement et guide complet.",
     "badge": "Guide d'investissement",
     "heroTitle": "Investissez dans l'avenir immobilier du",
@@ -309,8 +309,8 @@
     "talkAdvisor": "Parler à un conseiller"
   },
   "promoters": {
-    "pageTitle": "Pour Promoteurs | Takoha — Publiez vos projets",
-    "pageDesc": "Publiez vos développements immobiliers sur Takoha. Générez des leads qualifiés et connectez-vous avec des investisseurs au Paraguay.",
+    "pageTitle": "Pour Promoteurs | Tekoha — Publiez vos projets",
+    "pageDesc": "Publiez vos développements immobiliers sur Tekoha. Générez des leads qualifiés et connectez-vous avec des investisseurs au Paraguay.",
     "badge": "Pour Promoteurs",
     "heroTitle": "Connectez vos projets avec",
     "heroHighlight": "des milliers d'investisseurs",
@@ -370,7 +370,7 @@
     "plan3Feat8": "Priorité maximale en recherche",
     "faqTitle": "Questions fréquentes",
     "faqSubtitle": "Tout ce que vous devez savoir avant de publier votre projet.",
-    "faq1Q": "Comment publier mon projet sur Takoha ?",
+    "faq1Q": "Comment publier mon projet sur Tekoha ?",
     "faq1A": "Une fois votre plan choisi et votre compte créé, vous accédez à un panneau pour télécharger toutes les informations. Le processus prend moins de 15 minutes.",
     "faq2Q": "Puis-je changer de plan à tout moment ?",
     "faq2A": "Oui. Vous pouvez upgrader ou downgrader votre plan quand vous voulez.",
@@ -378,18 +378,18 @@
     "faq3A": "Vous recevez des contacts d'investisseurs et acheteurs recherchant activement des projets neufs au Paraguay.",
     "faq4Q": "Y a-t-il un engagement minimum ?",
     "faq4A": "Non. Tous nos plans sont mensuels et vous pouvez annuler à tout moment sans pénalité.",
-    "faq5Q": "Puis-je intégrer Takoha avec mon CRM ?",
+    "faq5Q": "Puis-je intégrer Tekoha avec mon CRM ?",
     "faq5A": "Avec le plan Premium, vous avez accès à notre API d'intégration pour connecter vos leads à votre CRM.",
     "faq6Q": "Comment fonctionne le positionnement en vedette ?",
     "faq6A": "Les projets des plans Professionnel et Premium apparaissent en premier dans les résultats de recherche.",
     "faq7Q": "Quels moyens de paiement acceptez-vous ?",
     "faq7A": "Nous acceptons cartes de crédit et débit (Visa, Mastercard), virement bancaire et Tigo Money.",
     "ctaTitle": "Prêt à booster vos ventes ?",
-    "ctaSubtitle": "Rejoignez plus de 50 promoteurs qui font confiance à Takoha.",
+    "ctaSubtitle": "Rejoignez plus de 50 promoteurs qui font confiance à Tekoha.",
     "ctaBtn": "Commencer maintenant"
   },
   "blog": {
-    "pageTitle": "Blog | Takoha — Insights du marché immobilier",
+    "pageTitle": "Blog | Tekoha — Insights du marché immobilier",
     "pageDesc": "Analyses, guides et tendances pour de meilleures décisions d'investissement dans l'immobilier paraguayen.",
     "badge": "Blog",
     "heroTitle": "Insights du marché immobilier",

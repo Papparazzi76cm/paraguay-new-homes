@@ -27,9 +27,9 @@ const Blog = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Blog | Takoha — Insights del mercado inmobiliario</title>
+        <title>Blog | Tekoha — Insights del mercado inmobiliario</title>
         <meta name="description" content="Análisis, guías y tendencias para tomar mejores decisiones de inversión en el sector inmobiliario de Paraguay." />
-        <meta property="og:title" content="Blog | Takoha" />
+        <meta property="og:title" content="Blog | Tekoha" />
         <meta property="og:description" content="Insights del mercado inmobiliario paraguayo: análisis, guías y tendencias." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/blog" />

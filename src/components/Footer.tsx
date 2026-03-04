@@ -1,6 +1,6 @@
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import takohaLogo from "@/assets/takoha-logo.png";
+import tekohaLogo from "@/assets/tekoha-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
             <div className="flex items-center mb-4">
-              <img src={takohaLogo} alt="Takoha" className="h-40 w-auto brightness-0 invert" />
+              <img src={tekohaLogo} alt="Tekoha" className="h-40 w-auto brightness-0 invert" />
             </div>
             <p className="text-background/50 text-sm leading-relaxed">{t("footer.brandDesc")}</p>
           </div>
@@ -45,7 +45,7 @@ const Footer = () => {
                 <MapPin className="w-4 h-4 shrink-0" /> Asunción, Paraguay
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
-                <Mail className="w-4 h-4 shrink-0" /> info@takoha.estate
+                <Mail className="w-4 h-4 shrink-0" /> info@tekoha.estate
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
                 <Phone className="w-4 h-4 shrink-0" /> +595 21 000 0000

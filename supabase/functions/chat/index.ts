@@ -63,7 +63,7 @@ const LANG_INSTRUCTIONS: Record<string, string> = {
 function buildSystemPrompt(lang: string, projectsText: string): string {
   const langRule = LANG_INSTRUCTIONS[lang] || LANG_INSTRUCTIONS["es"];
   
-  return `You are a virtual real estate assistant for Takoha, the leading new-build project platform in Paraguay.
+  return `You are a virtual real estate assistant for Tekoha, the leading new-build project platform in Paraguay.
 
 Your role:
 - Help users find real estate projects that match their needs
