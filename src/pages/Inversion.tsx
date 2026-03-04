@@ -118,9 +118,9 @@ const Inversion = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Inversión Inmobiliaria en Paraguay | Takoha</title>
+        <title>Inversión Inmobiliaria en Paraguay | Tekoha</title>
         <meta name="description" content="Descubrí por qué invertir en obra nueva en Paraguay. Rentabilidad del 6-12% anual, simulador de inversión y guía completa para inversores." />
-        <meta property="og:title" content="Inversión Inmobiliaria en Paraguay | Takoha" />
+        <meta property="og:title" content="Inversión Inmobiliaria en Paraguay | Tekoha" />
         <meta property="og:description" content="Guía completa de inversión inmobiliaria en Paraguay con simulador de rentabilidad." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/inversion" />

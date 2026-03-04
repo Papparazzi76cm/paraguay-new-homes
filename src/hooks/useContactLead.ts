@@ -18,7 +18,7 @@ export const useSubmitLead = () => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("¡Mensaje enviado! Te contactaremos pronto a través de info@takoha.estate.");
+      toast.success("¡Mensaje enviado! Te contactaremos pronto a través de info@tekoha.estate.");
     },
     onError: () => {
       toast.error("Error al enviar. Intentá nuevamente.");

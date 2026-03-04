@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import takohaLogo from "@/assets/takoha-logo.png";
+import tekohaLogo from "@/assets/tekoha-logo.png";
 
 interface AnimatedLogoProps {
   className?: string;
@@ -34,8 +34,8 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
   if (hasPlayed) {
     return (
       <img
-        src={takohaLogo}
-        alt="Takoha"
+        src={tekohaLogo}
+        alt="Tekoha"
         className={`${className} w-auto brightness-0 invert`}
       />
     );
@@ -116,7 +116,7 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
         viewBox="0 0 320 100"
         className="w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="Takoha"
+        aria-label="Tekoha"
       >
         {/* Blueprint grid */}
         <defs>
@@ -213,7 +213,7 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
           <text x="312" y="52" textAnchor="start" fill="rgba(255,255,255,0.15)" fontSize="3.5" fontFamily="monospace" transform="rotate(90, 312, 52)">44.0</text>
         </g>
 
-        {/* ===== TAKOHA letterforms — structural strokes ===== */}
+        {/* ===== TEKOHA letterforms — structural strokes ===== */}
         {/* T */}
         <path
           d="M 38 30 L 68 30 M 53 30 L 53 70"
@@ -226,9 +226,9 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
           style={{ "--dash-length": 110 } as React.CSSProperties}
         />
 
-        {/* A */}
+        {/* E */}
         <path
-          d="M 72 70 L 87 30 L 102 70 M 78 55 L 96 55"
+          d="M 100 30 L 72 30 L 72 70 L 100 70 M 72 50 L 95 50"
           fill="none"
           stroke="white"
           strokeWidth="2.2"
@@ -299,8 +299,8 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
           <g className="fill-transition" opacity="0">
             {/* T */}
             <path d="M 38 30 L 68 30 M 53 30 L 53 70" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* A */}
-            <path d="M 72 70 L 87 30 L 102 70 M 78 55 L 96 55" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
+            {/* E */}
+            <path d="M 100 30 L 72 30 L 72 70 L 100 70 M 72 50 L 95 50" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
             {/* K */}
             <path d="M 108 30 L 108 70 M 108 52 L 130 30 M 114 50 L 132 70" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
             {/* O */}
@@ -342,7 +342,7 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
         {/* Project label — architectural drawing style */}
         <g className="cota-text">
           <text x="280" y="90" textAnchor="end" fill="rgba(255,255,255,0.12)" fontSize="3" fontFamily="monospace">DWG-001 REV.A</text>
-          <text x="280" y="95" textAnchor="end" fill="rgba(255,255,255,0.1)" fontSize="2.5" fontFamily="monospace">LOGOTYPE — TAKOHA ESTATE</text>
+          <text x="280" y="95" textAnchor="end" fill="rgba(255,255,255,0.1)" fontSize="2.5" fontFamily="monospace">LOGOTYPE — TEKOHA ESTATE</text>
         </g>
       </svg>
     </div>
