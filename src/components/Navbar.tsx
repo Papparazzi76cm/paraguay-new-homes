@@ -45,7 +45,7 @@ const Navbar = () => {
     >
       <div className="container flex items-center justify-between py-5">
         <a href="/" className="flex items-center">
-          <img src={takohaLogo} alt="Takoha" className="h-40 w-auto brightness-0 invert" />
+          <img src={takohaLogo} alt="Takoha" className="h-8 sm:h-10 md:h-14 lg:h-16 w-auto brightness-0 invert" />
         </a>
 
         {/* Desktop */}
