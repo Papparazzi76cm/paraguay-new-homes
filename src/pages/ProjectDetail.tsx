@@ -50,7 +50,7 @@ const ProjectDetail = () => {
         <div className="container flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-5 h-5" />
-            <img src={tekohaLogo} alt="Tekoha" className="h-8 w-auto dark:brightness-0 dark:invert" />
+            <img src={tekohaLogo} alt="Tekoha" className="h-16 w-auto dark:brightness-0 dark:invert" />
           </Link>
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
