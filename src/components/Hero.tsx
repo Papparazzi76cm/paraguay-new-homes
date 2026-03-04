@@ -36,7 +36,7 @@ const Hero = ({ filters, onFiltersChange }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-white font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-3xl mb-5"
+          className="text-white font-display text-4xl md:text-4xl lg:text-6xl font-bold leading-tight max-w-3xl mb-5"
         >
           <Trans i18nKey="hero.title" components={{ italic: <span className="italic" /> }} />
         </motion.h1>
