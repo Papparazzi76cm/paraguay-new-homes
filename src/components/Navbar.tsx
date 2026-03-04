@@ -6,7 +6,7 @@ import { useAuth, useIsAdmin } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
-import takohaLogo from "@/assets/takoha-logo.png";
+import AnimatedLogo from "./AnimatedLogo";
 
 const ThemeIcon = ({ theme }: { theme: string }) => {
   if (theme === "dark") return <Sun className="w-5 h-5" />;
@@ -45,7 +45,7 @@ const Navbar = () => {
     >
       <div className="container flex items-center justify-between py-5">
         <a href="/" className="flex items-center">
-          <img src={takohaLogo} alt="Takoha" className="h-20 md:h-24 w-auto brightness-0 invert" />
+          <AnimatedLogo className="h-20 md:h-24" />
         </a>
 
         {/* Desktop */}
