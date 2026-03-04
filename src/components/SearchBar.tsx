@@ -195,18 +195,18 @@ const FilterButton = ({
 }) => (
   <button
     onClick={onClick}
-    className={`flex items-center gap-3 px-4 py-3 rounded-xl flex-1 text-left transition-colors ${
+    className={`flex items-center gap-2 md:gap-1.5 lg:gap-3 px-3 md:px-2 lg:px-4 py-3 md:py-2 lg:py-3 rounded-xl flex-1 text-left transition-colors ${
       active ? "bg-secondary" : "hover:bg-secondary/50"
     }`}
   >
-    <span className={selected ? "text-primary" : "text-muted-foreground"}>{icon}</span>
+    <span className={`${selected ? "text-primary" : "text-muted-foreground"} shrink-0`}>{icon}</span>
     <div className="min-w-0">
-      <p className="text-xs font-semibold text-foreground">{label}</p>
-      <p className={`text-sm truncate ${selected ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+      <p className="text-xs font-semibold text-foreground md:text-[10px] lg:text-xs">{label}</p>
+      <p className={`text-sm md:text-xs lg:text-sm truncate ${selected ? "text-foreground font-medium" : "text-muted-foreground"}`}>
         {placeholder}
       </p>
     </div>
-    <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground ml-auto transition-transform ${active ? "rotate-180" : ""}`} />
+    <ChevronDown className={`w-3.5 h-3.5 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 text-muted-foreground ml-auto transition-transform shrink-0 ${active ? "rotate-180" : ""}`} />
   </button>
 );
 
