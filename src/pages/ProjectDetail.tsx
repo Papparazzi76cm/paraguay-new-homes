@@ -47,18 +47,18 @@ const ProjectDetail = () => {
   return (
     <main className="min-h-screen bg-background">
       <nav className="bg-card border-b border-border sticky top-0 z-40">
-        <div className="container flex items-center justify-between py-3">
-          <Link to="/" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-            <img src={tekohaLogo} alt="Tekoha" className="h-32 w-auto dark:brightness-0 dark:invert" />
+        <div className="container flex items-center justify-between py-2 md:py-3">
+          <Link to="/" className="flex items-center gap-1.5 md:gap-2 text-foreground hover:text-primary transition-colors shrink-0">
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+            <img src={tekohaLogo} alt="Tekoha" className="h-12 md:h-20 lg:h-28 w-auto dark:brightness-0 dark:invert" />
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 md:gap-2">
             <LanguageSwitcher />
-            <button onClick={handleShare} className="p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" title={t("detail.share")}>
+            <button onClick={handleShare} className="p-1.5 md:p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" title={t("detail.share")}>
               {copied ? <Check className="w-4 h-4 text-primary" /> : <Share2 className="w-4 h-4" />}
             </button>
-            <button onClick={() => setContactOpen(true)} className="bg-primary text-primary-foreground px-5 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
-              <Send className="w-4 h-4" /> {t("detail.contact")}
+            <button onClick={() => setContactOpen(true)} className="bg-primary text-primary-foreground px-3 md:px-5 py-1.5 md:py-2 rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-1.5 md:gap-2">
+              <Send className="w-3.5 h-3.5 md:w-4 md:h-4" /> {t("detail.contact")}
             </button>
           </div>
         </div>
