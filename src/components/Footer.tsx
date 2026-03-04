@@ -1,5 +1,6 @@
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import takohaLogo from "@/assets/takoha-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -10,10 +11,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold">P</span>
-              </div>
-              <span className="text-background font-display text-lg font-bold">ProyectPY</span>
+              <img src={takohaLogo} alt="Takoha" className="h-7 w-auto brightness-0 invert" />
             </div>
             <p className="text-background/50 text-sm leading-relaxed">{t("footer.brandDesc")}</p>
           </div>
@@ -47,7 +45,7 @@ const Footer = () => {
                 <MapPin className="w-4 h-4 shrink-0" /> Asunción, Paraguay
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
-                <Mail className="w-4 h-4 shrink-0" /> info@proyectpy.com
+                <Mail className="w-4 h-4 shrink-0" /> info@takoha.estate
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
                 <Phone className="w-4 h-4 shrink-0" /> +595 21 000 0000

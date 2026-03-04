@@ -13,22 +13,22 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>ProyectPY — Proyectos de obra nueva en Paraguay</title>
+        <title>Takoha — Proyectos de obra nueva en Paraguay</title>
         <meta name="description" content="Explorá los mejores proyectos inmobiliarios de obra nueva en Paraguay. Departamentos, casas y barrios cerrados con información verificada para inversores." />
-        <meta property="og:title" content="ProyectPY — Proyectos de obra nueva en Paraguay" />
+        <meta property="og:title" content="Takoha — Proyectos de obra nueva en Paraguay" />
         <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Paraguay." />
 ...
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "ProyectPY",
-          "url": "https://proyectpy.com",
+          "name": "Takoha",
+          "url": "https://takoha.estate",
           "description": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+595-21-000-0000",
             "contactType": "customer service",
-            "email": "info@proyectpy.com",
+            "email": "info@takoha.estate",
             "areaServed": "PY",
             "availableLanguage": "Spanish"
           },
