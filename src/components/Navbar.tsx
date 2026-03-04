@@ -45,31 +45,31 @@ const Navbar = () => {
     >
       <div className="container flex items-center justify-between py-5">
         <a href="/" className="flex items-center">
-          <AnimatedLogo className="h-20 md:h-24" />
+          <AnimatedLogo className="h-20 md:h-14 lg:h-24" />
         </a>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Desktop / Tablet */}
+        <div className="hidden md:flex items-center gap-3 lg:gap-6">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-white/80 hover:text-white text-sm font-medium transition-colors">
+            <a key={item.href} href={item.href} className="text-white/80 hover:text-white text-xs lg:text-sm font-medium transition-colors whitespace-nowrap">
               {item.label}
             </a>
           ))}
           <LanguageSwitcher variant="light" />
           <button
             onClick={() => setTheme(nextTheme(theme))}
-            className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 lg:p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
             aria-label="Toggle theme"
             title={themeTitle}
           >
             <ThemeIcon theme={theme} />
           </button>
           {isAdmin && (
-            <Link to="/admin" className="flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-medium transition-colors">
-              <Shield className="w-4 h-4" /> {t("nav.admin")}
+            <Link to="/admin" className="flex items-center gap-1 text-white/80 hover:text-white text-xs lg:text-sm font-medium transition-colors whitespace-nowrap">
+              <Shield className="w-3.5 h-3.5 lg:w-4 lg:h-4" /> {t("nav.admin")}
             </Link>
           )}
-          <Link to="/auth" className="bg-white/10 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors">
+          <Link to="/auth" className="bg-white/10 backdrop-blur-sm text-white px-3 lg:px-5 py-2 lg:py-2.5 rounded-xl text-xs lg:text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors whitespace-nowrap">
             {t("nav.publishProject")}
           </Link>
         </div>
