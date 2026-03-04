@@ -1,32 +1,30 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import tekohaLogo from "@/assets/tekoha-logo.png";
 
 interface AnimatedLogoProps {
   className?: string;
 }
 
-const ANIM_DURATION = 2800; // ms total
+const ANIM_DURATION = 2800;
 
 const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
   const [hasPlayed, setHasPlayed] = useState(() => {
     return sessionStorage.getItem("logo-animated") === "true";
   });
-  const [phase, setPhase] = useState<"drawing" | "filling" | "done">("drawing");
-  const svgRef = useRef<SVGSVGElement>(null);
+  const [phase, setPhase] = useState<"construction" | "reveal" | "done">("construction");
 
   useEffect(() => {
     if (hasPlayed) return;
 
-    // Phase transitions
-    const fillTimer = setTimeout(() => setPhase("filling"), ANIM_DURATION * 0.75);
+    const revealTimer = setTimeout(() => setPhase("reveal"), ANIM_DURATION * 0.35);
     const doneTimer = setTimeout(() => {
       setPhase("done");
       sessionStorage.setItem("logo-animated", "true");
       setHasPlayed(true);
-    }, ANIM_DURATION + 400);
+    }, ANIM_DURATION + 600);
 
     return () => {
-      clearTimeout(fillTimer);
+      clearTimeout(revealTimer);
       clearTimeout(doneTimer);
     };
   }, [hasPlayed]);
@@ -41,310 +39,139 @@ const AnimatedLogo = ({ className = "h-20 md:h-24" }: AnimatedLogoProps) => {
     );
   }
 
-  const strokeDuration = `${ANIM_DURATION * 0.65}ms`;
-  const detailDelay = `${ANIM_DURATION * 0.2}ms`;
-  const guidesDuration = `${ANIM_DURATION * 0.5}ms`;
+  const guideDur = `${ANIM_DURATION * 0.4}ms`;
+  const revealDur = `${ANIM_DURATION * 0.55}ms`;
+  const revealDelay = `${ANIM_DURATION * 0.35}ms`;
+  const fadeOutDelay = `${ANIM_DURATION * 0.7}ms`;
+  const fadeOutDur = `${ANIM_DURATION * 0.3}ms`;
 
   return (
-    <div className={`${className} w-auto relative`} style={{ aspectRatio: "3.2 / 1" }}>
+    <div className={`${className} w-auto relative`} style={{ aspectRatio: "1 / 1" }}>
       <style>{`
-        @keyframes drawStroke {
-          from { stroke-dashoffset: var(--dash-length); }
-          to { stroke-dashoffset: 0; }
-        }
         @keyframes drawGuide {
-          from { stroke-dashoffset: 600; }
+          from { stroke-dashoffset: 800; }
           to { stroke-dashoffset: 0; }
         }
-        @keyframes fadeGuide {
-          0%, 70% { opacity: 1; }
+        @keyframes fadeOutGuide {
+          0% { opacity: 1; }
           100% { opacity: 0; }
-        }
-        @keyframes fadeInFill {
-          from { opacity: 0; }
-          to { opacity: 1; }
         }
         @keyframes cornerPulse {
           0% { r: 0; opacity: 0; }
-          30% { r: 2; opacity: 0.7; }
-          70% { r: 2; opacity: 0.7; }
+          25% { r: 3; opacity: 0.6; }
+          75% { r: 3; opacity: 0.6; }
           100% { r: 0; opacity: 0; }
-        }
-        @keyframes scanLine {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(400%); }
         }
         @keyframes cotaAppear {
           0% { opacity: 0; }
-          20% { opacity: 0.5; }
-          75% { opacity: 0.5; }
+          15% { opacity: 0.5; }
+          70% { opacity: 0.5; }
           100% { opacity: 0; }
         }
-        .logo-stroke-main {
-          stroke-dasharray: var(--dash-length);
-          stroke-dashoffset: var(--dash-length);
-          animation: drawStroke ${strokeDuration} cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        @keyframes revealLogo {
+          0% { clip-path: inset(0 100% 0 0); }
+          100% { clip-path: inset(0 0% 0 0); }
         }
-        .logo-stroke-detail {
-          stroke-dasharray: var(--dash-length);
-          stroke-dashoffset: var(--dash-length);
-          animation: drawStroke ${strokeDuration} cubic-bezier(0.4, 0, 0.2, 1) ${detailDelay} forwards;
+        @keyframes revealLogoFinal {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
         }
-        .guide-line {
-          stroke-dasharray: 6 4;
-          stroke-dashoffset: 600;
+        .anim-guide {
+          stroke-dasharray: 8 5;
+          stroke-dashoffset: 800;
           animation: 
-            drawGuide ${guidesDuration} ease-out forwards,
-            fadeGuide ${ANIM_DURATION}ms ease-in-out forwards;
+            drawGuide ${guideDur} ease-out forwards,
+            fadeOutGuide ${fadeOutDur} ease-in ${fadeOutDelay} forwards;
         }
-        .corner-mark {
+        .anim-corner {
           animation: cornerPulse ${ANIM_DURATION}ms ease-in-out forwards;
         }
-        .scan-line {
-          animation: scanLine ${ANIM_DURATION * 0.6}ms ease-in-out forwards;
-        }
-        .cota-text {
+        .anim-cota {
           animation: cotaAppear ${ANIM_DURATION}ms ease-in-out forwards;
         }
-        .fill-transition {
-          animation: fadeInFill 400ms ease-in-out forwards;
+        .anim-reveal {
+          clip-path: inset(0 100% 0 0);
+          animation: revealLogo ${revealDur} cubic-bezier(0.25, 0.1, 0.25, 1) ${revealDelay} forwards;
+        }
+        .anim-grid-fade {
+          animation: fadeOutGuide ${fadeOutDur} ease-in ${fadeOutDelay} forwards;
         }
       `}</style>
 
+      {/* SVG construction overlay */}
       <svg
-        ref={svgRef}
-        viewBox="0 0 320 100"
-        className="w-full h-full"
+        viewBox="0 0 100 100"
+        className="absolute inset-0 w-full h-full anim-grid-fade"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="Tekoha"
       >
         {/* Blueprint grid */}
         <defs>
-          <pattern id="bp-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.3" />
+          <pattern id="anim-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.3" />
           </pattern>
-          <pattern id="bp-grid-major" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="0.4" />
+          <pattern id="anim-grid-lg" width="25" height="25" patternUnits="userSpaceOnUse">
+            <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.4" />
           </pattern>
-          <clipPath id="scan-clip">
-            <rect x="0" y="0" width="80" height="100" className="scan-line" />
-          </clipPath>
         </defs>
 
-        {/* Grid background */}
-        <rect width="320" height="100" fill="url(#bp-grid)" opacity="0.6" />
-        <rect width="320" height="100" fill="url(#bp-grid-major)" opacity="0.4" />
+        <rect width="100" height="100" fill="url(#anim-grid)" />
+        <rect width="100" height="100" fill="url(#anim-grid-lg)" />
 
-        {/* Guide lines - horizontal */}
-        <line
-          x1="10" y1="50" x2="310" y2="50"
-          stroke="rgba(255,255,255,0.12)"
-          strokeWidth="0.3"
-          className="guide-line"
-        />
-        {/* Guide lines - baseline */}
-        <line
-          x1="10" y1="72" x2="310" y2="72"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="0.3"
-          className="guide-line"
-          style={{ animationDelay: "100ms" }}
-        />
-        {/* Guide lines - cap height */}
-        <line
-          x1="10" y1="28" x2="310" y2="28"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="0.3"
-          className="guide-line"
-          style={{ animationDelay: "150ms" }}
-        />
-        {/* Vertical center */}
-        <line
-          x1="160" y1="5" x2="160" y2="95"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="0.3"
-          className="guide-line"
-          style={{ animationDelay: "200ms" }}
-        />
+        {/* Horizontal guides */}
+        <line x1="5" y1="30" x2="95" y2="30" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" className="anim-guide" />
+        <line x1="5" y1="50" x2="95" y2="50" stroke="rgba(255,255,255,0.12)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: "80ms" }} />
+        <line x1="5" y1="70" x2="95" y2="70" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: "160ms" }} />
 
-        {/* Corner construction marks */}
+        {/* Vertical guides */}
+        <line x1="15" y1="5" x2="15" y2="95" stroke="rgba(255,255,255,0.1)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: "120ms" }} />
+        <line x1="50" y1="5" x2="50" y2="95" stroke="rgba(255,255,255,0.1)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: "200ms" }} />
+        <line x1="85" y1="5" x2="85" y2="95" stroke="rgba(255,255,255,0.1)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: "240ms" }} />
+
+        {/* Corner crosshairs */}
         {[
-          [15, 20], [305, 20], [15, 80], [305, 80]
+          [15, 30], [85, 30], [15, 70], [85, 70]
         ].map(([cx, cy], i) => (
           <g key={i}>
-            <circle
-              cx={cx} cy={cy} r="0"
-              fill="none"
-              stroke="rgba(255,255,255,0.35)"
-              strokeWidth="0.5"
-              className="corner-mark"
-              style={{ animationDelay: `${i * 80}ms` }}
-            />
-            {/* Cross hairs */}
-            <line
-              x1={cx as number - 4} y1={cy} x2={cx as number + 4} y2={cy}
-              stroke="rgba(255,255,255,0.2)"
-              strokeWidth="0.3"
-              className="guide-line"
-              style={{ animationDelay: `${i * 80 + 50}ms` }}
-            />
-            <line
-              x1={cx} y1={cy as number - 4} x2={cx} y2={cy as number + 4}
-              stroke="rgba(255,255,255,0.2)"
-              strokeWidth="0.3"
-              className="guide-line"
-              style={{ animationDelay: `${i * 80 + 50}ms` }}
-            />
+            <circle cx={cx} cy={cy} r="0" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" className="anim-corner" style={{ animationDelay: `${i * 60}ms` }} />
+            <line x1={cx as number - 5} y1={cy} x2={cx as number + 5} y2={cy} stroke="rgba(255,255,255,0.25)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: `${i * 60 + 40}ms` }} />
+            <line x1={cx} y1={cy as number - 5} x2={cx} y2={cy as number + 5} stroke="rgba(255,255,255,0.25)" strokeWidth="0.3" className="anim-guide" style={{ animationDelay: `${i * 60 + 40}ms` }} />
           </g>
         ))}
 
-        {/* Dimension / cota marks */}
-        <g className="cota-text">
-          {/* Top dimension line */}
-          <line x1="38" y1="18" x2="282" y2="18" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" />
-          <line x1="38" y1="16" x2="38" y2="20" stroke="rgba(255,255,255,0.2)" strokeWidth="0.3" />
-          <line x1="282" y1="16" x2="282" y2="20" stroke="rgba(255,255,255,0.2)" strokeWidth="0.3" />
-          <text x="160" y="16" textAnchor="middle" fill="rgba(255,255,255,0.2)" fontSize="4" fontFamily="monospace">244.0</text>
-          
-          {/* Side dimension */}
-          <line x1="308" y1="28" x2="308" y2="72" stroke="rgba(255,255,255,0.12)" strokeWidth="0.3" />
-          <line x1="306" y1="28" x2="310" y2="28" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" />
-          <line x1="306" y1="72" x2="310" y2="72" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" />
-          <text x="312" y="52" textAnchor="start" fill="rgba(255,255,255,0.15)" fontSize="3.5" fontFamily="monospace" transform="rotate(90, 312, 52)">44.0</text>
+        {/* Dimension marks */}
+        <g className="anim-cota">
+          <line x1="15" y1="22" x2="85" y2="22" stroke="rgba(255,255,255,0.18)" strokeWidth="0.3" />
+          <line x1="15" y1="20" x2="15" y2="24" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" />
+          <line x1="85" y1="20" x2="85" y2="24" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" />
+          <text x="50" y="20" textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize="3" fontFamily="monospace">70.0</text>
+
+          <line x1="92" y1="30" x2="92" y2="70" stroke="rgba(255,255,255,0.15)" strokeWidth="0.3" />
+          <line x1="90" y1="30" x2="94" y2="30" stroke="rgba(255,255,255,0.2)" strokeWidth="0.3" />
+          <line x1="90" y1="70" x2="94" y2="70" stroke="rgba(255,255,255,0.2)" strokeWidth="0.3" />
+          <text x="95" y="52" textAnchor="start" fill="rgba(255,255,255,0.18)" fontSize="2.5" fontFamily="monospace" transform="rotate(90, 95, 52)">40.0</text>
         </g>
 
-        {/* ===== TEKOHA letterforms — structural strokes ===== */}
-        {/* T */}
-        <path
-          d="M 38 30 L 68 30 M 53 30 L 53 70"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-main"
-          style={{ "--dash-length": 110 } as React.CSSProperties}
-        />
-
-        {/* E */}
-        <path
-          d="M 100 30 L 72 30 L 72 70 L 100 70 M 72 50 L 95 50"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-main"
-          style={{ "--dash-length": 160, animationDelay: "100ms" } as React.CSSProperties}
-        />
-
-        {/* K */}
-        <path
-          d="M 108 30 L 108 70 M 108 52 L 130 30 M 114 50 L 132 70"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-main"
-          style={{ "--dash-length": 140, animationDelay: "200ms" } as React.CSSProperties}
-        />
-
-        {/* O */}
-        <path
-          d="M 155 30 C 140 30, 136 45, 136 50 C 136 55, 140 70, 155 70 C 170 70, 174 55, 174 50 C 174 45, 170 30, 155 30 Z"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-main"
-          style={{ "--dash-length": 140, animationDelay: "300ms" } as React.CSSProperties}
-        />
-
-        {/* H */}
-        <path
-          d="M 182 30 L 182 70 M 210 30 L 210 70 M 182 50 L 210 50"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-detail"
-          style={{ "--dash-length": 120 } as React.CSSProperties}
-        />
-
-        {/* A */}
-        <path
-          d="M 218 70 L 237 30 L 256 70 M 224 55 L 250 55"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="logo-stroke-detail"
-          style={{ "--dash-length": 160, animationDelay: "100ms" } as React.CSSProperties}
-        />
-
-        {/* Secondary detail strokes — subtle architectural serif/accent marks */}
-        <g className="logo-stroke-detail" style={{ "--dash-length": 20, animationDelay: "300ms" } as React.CSSProperties}>
-          {/* Small baseline accent under T */}
-          <line x1="48" y1="71" x2="58" y2="71" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" strokeDasharray="20" strokeDashoffset="20">
-            <animate attributeName="stroke-dashoffset" from="20" to="0" dur={strokeDuration} begin={detailDelay} fill="freeze" />
-          </line>
+        {/* Scale mark */}
+        <g className="anim-cota">
+          <line x1="8" y1="90" x2="28" y2="90" stroke="rgba(255,255,255,0.2)" strokeWidth="0.4" />
+          <line x1="8" y1="88" x2="8" y2="92" stroke="rgba(255,255,255,0.3)" strokeWidth="0.4" />
+          <line x1="28" y1="88" x2="28" y2="92" stroke="rgba(255,255,255,0.3)" strokeWidth="0.4" />
+          <text x="18" y="95" textAnchor="middle" fill="rgba(255,255,255,0.2)" fontSize="2.5" fontFamily="monospace">1:1</text>
         </g>
 
-        {/* Fill overlay — fades in during "filling" phase */}
-        {phase === "filling" && (
-          <g className="fill-transition" opacity="0">
-            {/* T */}
-            <path d="M 38 30 L 68 30 M 53 30 L 53 70" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* E */}
-            <path d="M 100 30 L 72 30 L 72 70 L 100 70 M 72 50 L 95 50" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* K */}
-            <path d="M 108 30 L 108 70 M 108 52 L 130 30 M 114 50 L 132 70" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* O */}
-            <path d="M 155 30 C 140 30, 136 45, 136 50 C 136 55, 140 70, 155 70 C 170 70, 174 55, 174 50 C 174 45, 170 30, 155 30 Z" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* H */}
-            <path d="M 182 30 L 182 70 M 210 30 L 210 70 M 182 50 L 210 50" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-            {/* A */}
-            <path d="M 218 70 L 237 30 L 256 70 M 224 55 L 250 55" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" />
-          </g>
-        )}
-
-        {/* Scan line effect */}
-        <rect
-          x="-40"
-          y="0"
-          width="40"
-          height="100"
-          fill="url(#scan-gradient)"
-          className="scan-line"
-          opacity="0.15"
-        >
-          <defs>
-            <linearGradient id="scan-gradient" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="white" stopOpacity="0" />
-              <stop offset="50%" stopColor="white" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </rect>
-
-        {/* Scale reference mark — bottom left */}
-        <g className="cota-text">
-          <line x1="20" y1="88" x2="50" y2="88" stroke="rgba(255,255,255,0.2)" strokeWidth="0.4" />
-          <line x1="20" y1="86" x2="20" y2="90" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" />
-          <line x1="50" y1="86" x2="50" y2="90" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" />
-          <text x="35" y="93" textAnchor="middle" fill="rgba(255,255,255,0.18)" fontSize="3" fontFamily="monospace">1:1</text>
-        </g>
-
-        {/* Project label — architectural drawing style */}
-        <g className="cota-text">
-          <text x="280" y="90" textAnchor="end" fill="rgba(255,255,255,0.12)" fontSize="3" fontFamily="monospace">DWG-001 REV.A</text>
-          <text x="280" y="95" textAnchor="end" fill="rgba(255,255,255,0.1)" fontSize="2.5" fontFamily="monospace">LOGOTYPE — TEKOHA ESTATE</text>
+        {/* Drawing label */}
+        <g className="anim-cota">
+          <text x="88" y="90" textAnchor="end" fill="rgba(255,255,255,0.14)" fontSize="2.5" fontFamily="monospace">DWG-001 REV.A</text>
+          <text x="88" y="94" textAnchor="end" fill="rgba(255,255,255,0.11)" fontSize="2" fontFamily="monospace">LOGOTYPE — TEKOHA</text>
         </g>
       </svg>
+
+      {/* Actual logo image — revealed progressively */}
+      <img
+        src={tekohaLogo}
+        alt="Tekoha"
+        className="absolute inset-0 w-full h-full object-contain brightness-0 invert anim-reveal"
+      />
     </div>
   );
 };
