@@ -32,35 +32,43 @@ export const useAuth = () => {
   return { user, session, loading, signOut };
 };
 
-export const useIsAdmin = (userId: string | undefined) => {
-  const [isAdmin, setIsAdmin] = useState(false);
+const useRoleCheck = (userId: string | undefined, role: "admin" | "moderator" | "user" | "developer") => {
+  const [hasRole, setHasRole] = useState(false);
   const [checkedUserId, setCheckedUserId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (!userId) {
-      setIsAdmin(false);
+      setHasRole(false);
       setCheckedUserId(userId);
       return;
     }
     let cancelled = false;
-    setCheckedUserId(undefined); // mark as "checking"
+    setCheckedUserId(undefined);
     supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", userId)
-      .eq("role", "admin")
+      .eq("role", role)
       .maybeSingle()
       .then(({ data }) => {
         if (!cancelled) {
-          setIsAdmin(!!data);
+          setHasRole(!!data);
           setCheckedUserId(userId);
         }
       });
     return () => { cancelled = true; };
-  }, [userId]);
+  }, [userId, role]);
 
-  // loading = we haven't finished checking the current userId yet
   const loading = checkedUserId !== userId;
+  return { hasRole, loading };
+};
 
-  return { isAdmin, loading };
+export const useIsAdmin = (userId: string | undefined) => {
+  const { hasRole, loading } = useRoleCheck(userId, "admin");
+  return { isAdmin: hasRole, loading };
+};
+
+export const useIsDeveloper = (userId: string | undefined) => {
+  const { hasRole, loading } = useRoleCheck(userId, "developer");
+  return { isDeveloper: hasRole, loading };
 };

@@ -20,6 +20,10 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import ProjectImages from "./pages/admin/ProjectImages";
 import LeadsList from "./pages/admin/LeadsList";
 import SubscribersList from "./pages/admin/SubscribersList";
+import DeveloperApprovals from "./pages/admin/DeveloperApprovals";
+import DeveloperLayout from "./components/developer/DeveloperLayout";
+import DeveloperDashboard from "./pages/developer/DeveloperDashboard";
+import Marketplace from "./pages/developer/Marketplace";
 import { useTheme } from "./hooks/useTheme";
 
 const queryClient = new QueryClient();
@@ -51,6 +55,18 @@ const App = () => {
             <Route path="projects/:id/images" element={<ProjectImages />} />
             <Route path="leads" element={<LeadsList />} />
             <Route path="subscribers" element={<SubscribersList />} />
+            <Route path="developers" element={<DeveloperApprovals />} />
+          </Route>
+
+          {/* Developer routes */}
+          <Route path="/developer" element={<DeveloperLayout />}>
+            <Route index element={<DeveloperDashboard />} />
+            <Route path="projects" element={<ProjectsList />} />
+            <Route path="projects/new" element={<ProjectForm />} />
+            <Route path="projects/:id" element={<ProjectForm />} />
+            <Route path="projects/:id/images" element={<ProjectImages />} />
+            <Route path="leads" element={<LeadsList />} />
+            <Route path="marketplace" element={<Marketplace />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

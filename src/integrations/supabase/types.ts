@@ -55,6 +55,42 @@ export type Database = {
           },
         ]
       }
+      marketplace_services: {
+        Row: {
+          active: boolean | null
+          category: string
+          created_at: string | null
+          description: string | null
+          icon_name: string | null
+          id: string
+          price_label: string | null
+          sort_order: number | null
+          title: string
+        }
+        Insert: {
+          active?: boolean | null
+          category: string
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          price_label?: string | null
+          sort_order?: number | null
+          title: string
+        }
+        Update: {
+          active?: boolean | null
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          price_label?: string | null
+          sort_order?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           active: boolean
@@ -80,6 +116,7 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          developer_status: string | null
           display_name: string | null
           id: string
           updated_at: string
@@ -88,6 +125,7 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          developer_status?: string | null
           display_name?: string | null
           id?: string
           updated_at?: string
@@ -96,6 +134,7 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           created_at?: string
+          developer_status?: string | null
           display_name?: string | null
           id?: string
           updated_at?: string
@@ -269,6 +308,47 @@ export type Database = {
         }
         Relationships: []
       }
+      service_requests: {
+        Row: {
+          created_at: string | null
+          id: string
+          notes: string | null
+          service_id: string | null
+          service_title: string
+          status: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          service_id?: string | null
+          service_title: string
+          status?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          service_id?: string | null
+          service_title?: string
+          status?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_requests_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "marketplace_services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
@@ -301,7 +381,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
+      app_role: "admin" | "moderator" | "user" | "developer"
       project_status:
         | "preventa"
         | "en_pozo"
@@ -440,7 +520,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
+      app_role: ["admin", "moderator", "user", "developer"],
       project_status: [
         "preventa",
         "en_pozo",
