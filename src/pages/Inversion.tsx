@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
+import CurrencyToggle, { type DisplayCurrency, convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { motion } from "framer-motion";
 import {
   TrendingUp,
@@ -98,6 +99,7 @@ const comparisons = [
 
 const Inversion = () => {
   const [contactOpen, setContactOpen] = useState(false);
+  const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>("USD");
 
   // Standalone simulator state
   const [investment, setInvestment] = useState(80000);
@@ -112,8 +114,7 @@ const Inversion = () => {
     return { annualReturn, totalReturn, finalValue, monthlyIncome };
   }, [investment, years]);
 
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("es-PY", { maximumFractionDigits: 0 }).format(n);
+  const fmtDisplay = (n: number) => formatCurrency(convertCurrency(n, "USD", displayCurrency), displayCurrency);
 
   return (
     <main className="min-h-screen">
@@ -266,21 +267,24 @@ const Inversion = () => {
           </motion.div>
 
           <motion.div {...fadeUp} className="max-w-2xl mx-auto bg-card rounded-2xl border border-border p-6 md:p-8 shadow-[var(--shadow-card)]">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-accent" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-foreground">Simulador de Rentabilidad</h3>
+                  <p className="text-xs text-muted-foreground">Rendimiento promedio estimado: {yieldRate}% anual</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">Simulador de Rentabilidad</h3>
-                <p className="text-xs text-muted-foreground">Rendimiento promedio estimado: {yieldRate}% anual</p>
-              </div>
+              <CurrencyToggle value={displayCurrency} onChange={setDisplayCurrency} />
             </div>
 
             <div className="space-y-5">
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-muted-foreground">Inversión inicial</span>
-                  <span className="font-semibold text-foreground">USD {fmt(investment)}</span>
+                  <span className="font-semibold text-foreground">{fmtDisplay(investment)}</span>
                 </div>
                 <input
                   type="range"
@@ -292,8 +296,8 @@ const Inversion = () => {
                   className="w-full accent-primary h-2 rounded-full appearance-none bg-secondary cursor-pointer"
                 />
                 <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>USD 20.000</span>
-                  <span>USD 500.000</span>
+                  <span>{fmtDisplay(20000)}</span>
+                  <span>{fmtDisplay(500000)}</span>
                 </div>
               </div>
 
@@ -319,10 +323,10 @@ const Inversion = () => {
 
               <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border">
                 {[
-                  { icon: DollarSign, label: "Ingreso mensual", value: `USD ${fmt(results.monthlyIncome)}` },
-                  { icon: TrendingUp, label: "Retorno anual", value: `USD ${fmt(results.annualReturn)}` },
-                  { icon: Calendar, label: `Retorno a ${years} años`, value: `USD ${fmt(results.totalReturn)}` },
-                  { icon: DollarSign, label: "Valor final", value: `USD ${fmt(results.finalValue)}`, highlight: true },
+                  { icon: DollarSign, label: "Ingreso mensual", value: fmtDisplay(results.monthlyIncome) },
+                  { icon: TrendingUp, label: "Retorno anual", value: fmtDisplay(results.annualReturn) },
+                  { icon: Calendar, label: `Retorno a ${years} años`, value: fmtDisplay(results.totalReturn) },
+                  { icon: DollarSign, label: "Valor final", value: fmtDisplay(results.finalValue), highlight: true },
                 ].map((card) => (
                   <div key={card.label} className={`p-3 rounded-xl ${card.highlight ? "bg-primary/10" : "bg-secondary/50"}`}>
                     <div className="flex items-center gap-1.5 mb-1">
