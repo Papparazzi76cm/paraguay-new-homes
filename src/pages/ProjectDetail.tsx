@@ -21,6 +21,7 @@ const ProjectDetail = () => {
   const { data: project, isLoading, error } = useProjectBySlug(slug || "");
   const { data: images } = useProjectImages(project?.id || "");
   const [contactOpen, setContactOpen] = useState(false);
+  const [contactLeadType, setContactLeadType] = useState<string>("info_request");
   const { translated: translatedDesc, isTranslating } = useTranslatedText(project?.description);
   const [copied, setCopied] = useState(false);
   const { t } = useTranslation();
@@ -57,7 +58,7 @@ const ProjectDetail = () => {
             <button onClick={handleShare} className="p-1.5 md:p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" title={t("detail.share")}>
               {copied ? <Check className="w-4 h-4 text-primary" /> : <Share2 className="w-4 h-4" />}
             </button>
-            <button onClick={() => setContactOpen(true)} className="bg-primary text-primary-foreground px-3 md:px-5 py-1.5 md:py-2 rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-1.5 md:gap-2">
+            <button onClick={() => { setContactLeadType("info_request"); setContactOpen(true); }} className="bg-primary text-primary-foreground px-3 md:px-5 py-1.5 md:py-2 rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-1.5 md:gap-2">
               <Send className="w-3.5 h-3.5 md:w-4 md:h-4" /> {t("detail.contact")}
             </button>
           </div>
@@ -109,8 +110,8 @@ const ProjectDetail = () => {
               <h3 className="font-display text-lg font-semibold text-foreground mb-2">{t("detail.interestedTitle")}</h3>
               <p className="text-sm text-muted-foreground mb-5">{t("detail.interestedDesc")}</p>
               <div className="space-y-3">
-                <button onClick={() => setContactOpen(true)} className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"><Send className="w-4 h-4" /> {t("detail.requestInfo")}</button>
-                <button onClick={() => setContactOpen(true)} className="w-full bg-secondary text-secondary-foreground py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors flex items-center justify-center gap-2"><FileText className="w-4 h-4" /> {t("detail.downloadDossier")}</button>
+                <button onClick={() => { setContactLeadType("info_request"); setContactOpen(true); }} className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"><Send className="w-4 h-4" /> {t("detail.requestInfo")}</button>
+                <button onClick={() => { setContactLeadType("dossier_download"); setContactOpen(true); }} className="w-full bg-secondary text-secondary-foreground py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors flex items-center justify-center gap-2"><FileText className="w-4 h-4" /> {t("detail.downloadDossier")}</button>
               </div>
             </motion.div>
           </div>
@@ -118,7 +119,7 @@ const ProjectDetail = () => {
       </div>
 
       <Footer />
-      <ContactDialog open={contactOpen} onClose={() => setContactOpen(false)} projectId={project.id} projectTitle={project.title} leadType="project_inquiry" />
+      <ContactDialog open={contactOpen} onClose={() => setContactOpen(false)} projectId={project.id} projectTitle={project.title} leadType={contactLeadType} />
     </main>
   );
 };
