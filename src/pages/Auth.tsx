@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet-async";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { MailCheck } from "lucide-react";
 
 type RegisterMode = "user" | "developer";
 
@@ -19,6 +21,7 @@ const Auth = () => {
   const [registerMode, setRegisterMode] = useState<RegisterMode>("user");
   const [loading, setLoading] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -30,7 +33,6 @@ const Auth = () => {
       if (error) {
         toast.error(error.message);
       } else {
-        // Check role to redirect
         const userId = data.user?.id;
         if (userId) {
           const { data: adminRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "admin").maybeSingle();
@@ -40,18 +42,8 @@ const Auth = () => {
           } else {
             const { data: devRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "developer").maybeSingle();
             if (devRole) {
-              // Check approval status
-              const { data: profile } = await supabase.from("profiles").select("developer_status").eq("user_id", userId).maybeSingle();
-              if (profile?.developer_status === "approved") {
-                toast.success(t("auth.sessionStarted"));
-                navigate("/developer");
-              } else if (profile?.developer_status === "pending") {
-                toast.info("Tu cuenta de desarrollador está pendiente de aprobación.");
-                await supabase.auth.signOut();
-              } else {
-                toast.success(t("auth.sessionStarted"));
-                navigate("/developer");
-              }
+              toast.success(t("auth.sessionStarted"));
+              navigate("/developer");
             } else {
               toast.success(t("auth.sessionStarted"));
               navigate("/");
@@ -70,17 +62,13 @@ const Auth = () => {
         password,
         options: {
           data: metadata,
-          emailRedirectTo: window.location.origin,
+          emailRedirectTo: window.location.origin + "/auth",
         },
       });
       if (error) {
         toast.error(error.message);
       } else {
-        if (registerMode === "developer") {
-          toast.success("¡Registro enviado! Revisaremos tu cuenta de desarrollador y te notificaremos por email.");
-        } else {
-          toast.success(t("auth.checkEmail"));
-        }
+        setShowConfirmDialog(true);
       }
     }
     setLoading(false);
@@ -117,22 +105,10 @@ const Auth = () => {
 
         {!isLogin && (
           <div className="flex gap-2">
-            <Button
-              type="button"
-              variant={registerMode === "user" ? "default" : "outline"}
-              size="sm"
-              className="flex-1"
-              onClick={() => setRegisterMode("user")}
-            >
+            <Button type="button" variant={registerMode === "user" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setRegisterMode("user")}>
               Usuario
             </Button>
-            <Button
-              type="button"
-              variant={registerMode === "developer" ? "default" : "outline"}
-              size="sm"
-              className="flex-1"
-              onClick={() => setRegisterMode("developer")}
-            >
+            <Button type="button" variant={registerMode === "developer" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setRegisterMode("developer")}>
               Desarrollador
             </Button>
           </div>
@@ -161,6 +137,23 @@ const Auth = () => {
           <button type="button" className="text-primary underline" onClick={() => setIsLogin(!isLogin)}>{isLogin ? t("auth.signupLink") : t("auth.loginLink")}</button>
         </p>
       </form>
+
+      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <DialogContent className="sm:max-w-md text-center">
+          <DialogHeader className="items-center">
+            <div className="mx-auto mb-2 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+              <MailCheck className="h-7 w-7 text-primary" />
+            </div>
+            <DialogTitle className="text-xl">¡Revisa tu correo!</DialogTitle>
+            <DialogDescription className="text-base pt-2">
+              Te hemos enviado un enlace de confirmación a <span className="font-semibold text-foreground">{email}</span>. Haz clic en el enlace para activar tu cuenta y acceder a tu panel.
+            </DialogDescription>
+          </DialogHeader>
+          <Button className="w-full mt-2" onClick={() => { setShowConfirmDialog(false); setIsLogin(true); }}>
+            Entendido, ir al login
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
