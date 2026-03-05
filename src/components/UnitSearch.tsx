@@ -3,14 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Search, BedDouble, Banknote, X, Expand } from "lucide-react";
 import { useProjectUnits, type UnitFilters, type UnitTypology } from "@/hooks/useProjectUnits";
+import CurrencyToggle, { type DisplayCurrency, convertCurrency, formatCurrency } from "./CurrencyToggle";
 
 const typologyKeys: UnitTypology[] = ["monoambiente", "1_dormitorio", "2_dormitorios", "3_dormitorios"];
 
-const priceRanges = [
-  { label: "0 - 50.000$", min: 0, max: 50000 },
-  { label: "50.000 - 100.000$", min: 50000, max: 100000 },
-  { label: "100.000 - 200.000$", min: 100000, max: 200000 },
-  { label: "+ 200.000$", min: 200000, max: undefined },
+const priceRangesUSD = [
+  { label: "0 - 50k", min: 0, max: 50000 },
+  { label: "50k - 100k", min: 50000, max: 100000 },
+  { label: "100k - 200k", min: 100000, max: 200000 },
+  { label: "+ 200k", min: 200000, max: undefined },
 ];
 
 interface UnitSearchProps {
@@ -21,13 +22,17 @@ interface UnitSearchProps {
 const UnitSearch = ({ projectId, currency }: UnitSearchProps) => {
   const { t } = useTranslation();
   const [filters, setFilters] = useState<UnitFilters>({});
+  const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>((currency === "PYG" ? "PYG" : "USD") as DisplayCurrency);
   const { data: units, isLoading } = useProjectUnits(projectId, filters);
 
   const hasFilters = filters.typology || filters.priceMin != null;
 
-  const selectedPriceLabel = priceRanges.find(
+  const selectedPriceLabel = priceRangesUSD.find(
     (r) => r.min === filters.priceMin && r.max === filters.priceMax
   )?.label || null;
+
+  const fmtPrice = (price: number, fromCurrency: string) =>
+    formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
 
   return (
     <motion.div
@@ -36,10 +41,13 @@ const UnitSearch = ({ projectId, currency }: UnitSearchProps) => {
       viewport={{ once: true }}
       className="bg-card rounded-2xl p-6 md:p-8 shadow-card"
     >
-      <h3 className="font-display text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-        <Search className="w-5 h-5 text-primary" />
-        {t("units.title")}
-      </h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-display text-xl font-semibold text-foreground flex items-center gap-2">
+          <Search className="w-5 h-5 text-primary" />
+          {t("units.title")}
+        </h3>
+        <CurrencyToggle value={displayCurrency} onChange={setDisplayCurrency} />
+      </div>
 
       {/* Filters */}
       <div className="space-y-3 mb-6">
@@ -71,7 +79,7 @@ const UnitSearch = ({ projectId, currency }: UnitSearchProps) => {
             <Banknote className="w-3.5 h-3.5" /> {t("units.priceRange")}
           </p>
           <div className="flex flex-wrap gap-2">
-            {priceRanges.map((range) => {
+            {priceRangesUSD.map((range) => {
               const isSelected = filters.priceMin === range.min && filters.priceMax === range.max;
               return (
                 <button
@@ -137,7 +145,7 @@ const UnitSearch = ({ projectId, currency }: UnitSearchProps) => {
                   </div>
                   {unit.price && (
                     <p className="font-bold text-foreground text-sm shrink-0 ml-4">
-                      {unit.price_currency} {unit.price.toLocaleString()}
+                      {fmtPrice(unit.price, unit.price_currency)}
                     </p>
                   )}
                 </div>
