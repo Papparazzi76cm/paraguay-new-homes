@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Search, BedDouble, Banknote, X, Expand } from "lucide-react";
 import { useProjectUnits, type UnitFilters, type UnitTypology } from "@/hooks/useProjectUnits";
-import CurrencyToggle, { type DisplayCurrency, convertCurrency, formatCurrency } from "./CurrencyToggle";
+import CurrencyToggle, { convertCurrency, formatCurrency } from "./CurrencyToggle";
+import { useCurrency } from "@/hooks/useCurrency";
 
 const typologyKeys: UnitTypology[] = ["monoambiente", "1_dormitorio", "2_dormitorios", "3_dormitorios"];
 
@@ -22,14 +23,10 @@ interface UnitSearchProps {
 const UnitSearch = ({ projectId, currency }: UnitSearchProps) => {
   const { t } = useTranslation();
   const [filters, setFilters] = useState<UnitFilters>({});
-  const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>((currency === "PYG" ? "PYG" : "USD") as DisplayCurrency);
+  const { displayCurrency, setDisplayCurrency } = useCurrency();
   const { data: units, isLoading } = useProjectUnits(projectId, filters);
 
   const hasFilters = filters.typology || filters.priceMin != null;
-
-  const selectedPriceLabel = priceRangesUSD.find(
-    (r) => r.min === filters.priceMin && r.max === filters.priceMax
-  )?.label || null;
 
   const fmtPrice = (price: number, fromCurrency: string) =>
     formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
