@@ -24,7 +24,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const { user } = useAuth();
-  const { isAdmin } = useIsAdmin(user?.id);
+  const { isAdmin } = useIsAdmin(user ? user.id : undefined);
   const { t } = useTranslation();
 
   const navItems = [
