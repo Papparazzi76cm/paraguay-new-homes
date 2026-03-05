@@ -9,7 +9,10 @@ const DeveloperDashboard = () => {
   const { data: projectCount } = useQuery({
     queryKey: ["dev-project-count", user?.id],
     queryFn: async () => {
-      const { count } = await supabase.from("projects").select("*", { count: "exact", head: true });
+      const { count } = await supabase
+        .from("projects")
+        .select("*", { count: "exact", head: true })
+        .eq("developer_id", user!.id);
       return count ?? 0;
     },
     enabled: !!user,
@@ -18,8 +21,10 @@ const DeveloperDashboard = () => {
   const { data: leadCount } = useQuery({
     queryKey: ["dev-lead-count", user?.id],
     queryFn: async () => {
-      const { count } = await supabase.from("contact_leads").select("*", { count: "exact", head: true });
-      return count ?? 0;
+      const { data } = await supabase.rpc("get_matched_leads_for_developer", {
+        _developer_id: user!.id,
+      });
+      return data?.length ?? 0;
     },
     enabled: !!user,
   });
@@ -27,15 +32,18 @@ const DeveloperDashboard = () => {
   const { data: requestCount } = useQuery({
     queryKey: ["dev-request-count", user?.id],
     queryFn: async () => {
-      const { count } = await supabase.from("service_requests").select("*", { count: "exact", head: true }).eq("user_id", user!.id);
+      const { count } = await supabase
+        .from("service_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user!.id);
       return count ?? 0;
     },
     enabled: !!user,
   });
 
   const stats = [
-    { label: "Proyectos", value: projectCount, icon: Building2 },
-    { label: "Leads", value: leadCount, icon: Mail },
+    { label: "Mis Proyectos", value: projectCount, icon: Building2 },
+    { label: "Leads cualificados", value: leadCount, icon: Mail },
     { label: "Servicios contratados", value: requestCount, icon: ShoppingBag },
   ];
 
