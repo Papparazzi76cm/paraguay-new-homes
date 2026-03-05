@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import CurrencyToggle, { type DisplayCurrency, convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
+import CurrencyToggle, { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
+import { useCurrency } from "@/hooks/useCurrency";
 import { motion } from "framer-motion";
 import {
   TrendingUp,
@@ -99,7 +100,7 @@ const comparisons = [
 
 const Inversion = () => {
   const [contactOpen, setContactOpen] = useState(false);
-  const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>("USD");
+  const { displayCurrency, setDisplayCurrency } = useCurrency();
 
   // Standalone simulator state
   const [investment, setInvestment] = useState(80000);

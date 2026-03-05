@@ -3,6 +3,8 @@ import { MapPin, TrendingUp, Building, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFeaturedProjects, type Project, type ProjectFilters } from "@/hooks/useProjects";
+import { useCurrency } from "@/hooks/useCurrency";
+import { convertCurrency, formatCurrency } from "./CurrencyToggle";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -23,7 +25,9 @@ interface FeaturedProjectsProps {
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const { t } = useTranslation();
-
+  const { displayCurrency } = useCurrency();
+  const fmtPrice = (price: number, fromCurrency: string) =>
+    formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
   return (
     <Link to={`/proyecto/${project.slug}`}>
       <motion.article
@@ -56,7 +60,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           <div className="flex items-center justify-between border-t border-border pt-4">
             <div>
               <p className="text-xs text-muted-foreground">{t("featured.from")}</p>
-              <p className="text-lg font-bold text-foreground">{project.price_currency} {project.price_from?.toLocaleString()}</p>
+              <p className="text-lg font-bold text-foreground">{project.price_from ? fmtPrice(project.price_from, project.price_currency) : "—"}</p>
             </div>
             {project.estimated_yield && (
               <div className="flex items-center gap-1 text-primary">

@@ -2,7 +2,8 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, DollarSign, Calendar } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import CurrencyToggle, { type DisplayCurrency, convertCurrency, formatCurrency } from "./CurrencyToggle";
+import CurrencyToggle, { convertCurrency, formatCurrency } from "./CurrencyToggle";
+import { useCurrency } from "@/hooks/useCurrency";
 
 interface YieldSimulatorProps {
   priceFrom: number;
@@ -13,7 +14,7 @@ interface YieldSimulatorProps {
 const YieldSimulator = ({ priceFrom, estimatedYield, currency }: YieldSimulatorProps) => {
   const [investment, setInvestment] = useState(priceFrom);
   const [years, setYears] = useState(5);
-  const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>((currency === "PYG" ? "PYG" : "USD") as DisplayCurrency);
+  const { displayCurrency, setDisplayCurrency } = useCurrency();
   const { t } = useTranslation();
 
   const results = useMemo(() => {

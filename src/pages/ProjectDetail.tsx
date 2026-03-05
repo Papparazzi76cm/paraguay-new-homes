@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
+import { useCurrency } from "@/hooks/useCurrency";
+import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { useTranslation } from "react-i18next";
 import { useProjectBySlug, useProjectImages } from "@/hooks/useProjectDetail";
 import { useTranslatedText } from "@/hooks/useTranslatedText";
@@ -25,6 +27,9 @@ const ProjectDetail = () => {
   const { translated: translatedDesc, isTranslating } = useTranslatedText(project?.description);
   const [copied, setCopied] = useState(false);
   const { t } = useTranslation();
+  const { displayCurrency } = useCurrency();
+  const fmtPrice = (price: number, fromCurrency: string) =>
+    formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
 
   const handleShare = async () => {
     await navigator.clipboard.writeText(window.location.href);
@@ -83,7 +88,7 @@ const ProjectDetail = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-            {project.price_from && (<MetricCard icon={CreditCard} label={t("detail.fromPrice")} value={`${project.price_currency} ${project.price_from.toLocaleString()}`} />)}
+            {project.price_from && (<MetricCard icon={CreditCard} label={t("detail.fromPrice")} value={fmtPrice(project.price_from, project.price_currency)} />)}
             {project.estimated_yield && (<MetricCard icon={TrendingUp} label={t("detail.estYield")} value={`${project.estimated_yield}%`} />)}
             {project.delivery_date && (<MetricCard icon={CalendarDays} label={t("detail.deliveryLabel")} value={project.delivery_date} />)}
             <MetricCard icon={FileText} label={t("detail.typeLabel")} value={t(`projectTypes.${project.project_type}`)} />
