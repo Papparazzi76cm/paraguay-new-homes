@@ -5,7 +5,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useSubmitLead } from "@/hooks/useContactLead";
-import { useProjects } from "@/hooks/useProjects";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { parseAssistantMessage } from "@/components/chatbot/useMessageParser";
 import ProjectCard from "@/components/chatbot/ProjectCard";
 
@@ -112,7 +113,16 @@ const ChatBot = () => {
   const INITIAL_CHIPS = [t("chatbot.chip1"), t("chatbot.chip2"), t("chatbot.chip3"), t("chatbot.chip4")];
   const DEFAULT_MSG: Msg = { role: "assistant", content: t("chatbot.welcome") };
 
-  const { data: allProjects } = useProjects();
+  const { data: allProjects } = useQuery({
+    queryKey: ["projects-chatbot"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("projects").select("*").order("featured", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+    enabled: open,
+  });
 
   // Initialize with welcome message if empty, and update when language changes
   useEffect(() => {
