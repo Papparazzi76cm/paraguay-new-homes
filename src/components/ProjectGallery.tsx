@@ -6,11 +6,15 @@ import { useTranslation } from "react-i18next";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
+import project5 from "@/assets/project-5.jpg";
 
 const fallbackImages = [
   { url: project1, alt: "Vista del proyecto" },
   { url: project2, alt: "Interior del proyecto" },
   { url: project3, alt: "Amenities del proyecto" },
+  { url: project4, alt: "Exterior del proyecto" },
+  { url: project5, alt: "Living del proyecto" },
 ];
 
 interface ProjectGalleryProps {
@@ -31,6 +35,10 @@ const ProjectGallery = ({ images, coverUrl, title }: ProjectGalleryProps) => {
         ? [{ url: coverUrl, alt: title }, ...fallbackImages.slice(1)]
         : fallbackImages;
 
+  // Side thumbnails: show indices 1 and 2 (or whatever is available)
+  const sideThumbs = gallery.length > 1 ? gallery.slice(1, 3) : [];
+  const extraCount = gallery.length - 3;
+
   const navigate = (dir: 1 | -1) => {
     setActiveIndex((prev) => (prev + dir + gallery.length) % gallery.length);
   };
@@ -38,21 +46,41 @@ const ProjectGallery = ({ images, coverUrl, title }: ProjectGalleryProps) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 rounded-2xl overflow-hidden h-[320px] md:h-[480px]">
+        {/* Main image */}
         <div className="md:col-span-3 md:row-span-2 relative cursor-pointer group" onClick={() => setLightbox(true)}>
           <img src={gallery[activeIndex].url} alt={gallery[activeIndex].alt} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors" />
         </div>
-        {gallery.slice(0, 3).map((img, i) => (
-          <div key={i} className="hidden md:block relative cursor-pointer group" onClick={() => { setActiveIndex(i); if (i === activeIndex) setLightbox(true); }}>
-            <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
-            <div className={`absolute inset-0 transition-colors ${i === activeIndex ? "ring-2 ring-inset ring-primary" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
-            {i === 2 && gallery.length > 3 && (
-              <div className="absolute inset-0 bg-foreground/50 flex items-center justify-center">
-                <span className="text-background font-semibold text-sm">+{gallery.length - 3} {t("detail.photos")}</span>
-              </div>
-            )}
-          </div>
-        ))}
+
+        {/* Side thumbnails — exactly 2 slots */}
+        {sideThumbs.map((img, i) => {
+          const realIndex = i + 1;
+          const isLast = i === sideThumbs.length - 1;
+          return (
+            <div
+              key={realIndex}
+              className="hidden md:block relative cursor-pointer group"
+              onClick={() => {
+                setActiveIndex(realIndex);
+                if (realIndex === activeIndex) setLightbox(true);
+              }}
+            >
+              <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
+              <div
+                className={`absolute inset-0 transition-colors ${
+                  realIndex === activeIndex
+                    ? "ring-2 ring-inset ring-primary"
+                    : "bg-foreground/0 group-hover:bg-foreground/10"
+                }`}
+              />
+              {isLast && extraCount > 0 && (
+                <div className="absolute inset-0 bg-foreground/50 flex items-center justify-center" onClick={(e) => { e.stopPropagation(); setLightbox(true); }}>
+                  <span className="text-background font-semibold text-sm">+{extraCount} {t("detail.photos")}</span>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <AnimatePresence>
