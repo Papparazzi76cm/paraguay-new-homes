@@ -35,52 +35,66 @@ const ProjectGallery = ({ images, coverUrl, title }: ProjectGalleryProps) => {
         ? [{ url: coverUrl, alt: title }, ...fallbackImages.slice(1)]
         : fallbackImages;
 
-  // Side thumbnails: show indices 1 and 2 (or whatever is available)
-  const sideThumbs = gallery.length > 1 ? gallery.slice(1, 3) : [];
-  const extraCount = gallery.length - 3;
+  const sideThumbs = gallery.slice(1, 6);
+  const topRow = sideThumbs.slice(0, 3);
+  const bottomRow = sideThumbs.slice(3, 5);
+  const extraCount = gallery.length - 6;
 
   const navigate = (dir: 1 | -1) => {
     setActiveIndex((prev) => (prev + dir + gallery.length) % gallery.length);
   };
 
+  const openLightbox = (index: number) => {
+    setActiveIndex(index);
+    setLightbox(true);
+  };
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 rounded-2xl overflow-hidden h-[320px] md:h-[480px]">
-        {/* Main image */}
-        <div className="md:col-span-3 md:row-span-2 relative cursor-pointer group" onClick={() => setLightbox(true)}>
-          <img src={gallery[activeIndex].url} alt={gallery[activeIndex].alt} className="w-full h-full object-cover" />
+      <div className="flex gap-2 rounded-2xl overflow-hidden h-[320px] md:h-[480px]">
+        {/* Main image — ~60% width */}
+        <div className="flex-[3] relative cursor-pointer group" onClick={() => openLightbox(0)}>
+          <img src={gallery[0].url} alt={gallery[0].alt} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors" />
         </div>
 
-        {/* Side thumbnails — exactly 2 slots */}
-        {sideThumbs.map((img, i) => {
-          const realIndex = i + 1;
-          const isLast = i === sideThumbs.length - 1;
-          return (
-            <div
-              key={realIndex}
-              className="hidden md:block relative cursor-pointer group"
-              onClick={() => {
-                setActiveIndex(realIndex);
-                if (realIndex === activeIndex) setLightbox(true);
-              }}
-            >
-              <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
-              <div
-                className={`absolute inset-0 transition-colors ${
-                  realIndex === activeIndex
-                    ? "ring-2 ring-inset ring-primary"
-                    : "bg-foreground/0 group-hover:bg-foreground/10"
-                }`}
-              />
-              {isLast && extraCount > 0 && (
-                <div className="absolute inset-0 bg-foreground/50 flex items-center justify-center" onClick={(e) => { e.stopPropagation(); setLightbox(true); }}>
-                  <span className="text-background font-semibold text-sm">+{extraCount} {t("detail.photos")}</span>
-                </div>
-              )}
+        {/* Side thumbnails — ~40% width, 2 rows */}
+        {sideThumbs.length > 0 && (
+          <div className="hidden md:flex flex-col gap-2 flex-[2]">
+            {/* Top row: up to 3 images */}
+            <div className="flex gap-2 flex-1 min-h-0">
+              {topRow.map((img, i) => {
+                const realIndex = i + 1;
+                return (
+                  <div key={realIndex} className="flex-1 relative cursor-pointer group" onClick={() => openLightbox(realIndex)}>
+                    <img src={img.url} alt={img.alt} className="w-full h-full object-cover rounded-sm" />
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors" />
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+            {/* Bottom row: up to 2 images */}
+            {bottomRow.length > 0 && (
+              <div className="flex gap-2 flex-1 min-h-0">
+                {bottomRow.map((img, i) => {
+                  const realIndex = i + 4;
+                  const isLast = i === bottomRow.length - 1;
+                  return (
+                    <div key={realIndex} className="flex-1 relative cursor-pointer group" onClick={() => openLightbox(realIndex)}>
+                      <img src={img.url} alt={img.alt} className="w-full h-full object-cover rounded-sm" />
+                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors" />
+                      {isLast && extraCount > 0 && (
+                        <div className="absolute inset-0 bg-foreground/50 flex items-center justify-center">
+                          <span className="text-background font-semibold text-sm">+{extraCount} {t("detail.photos")}</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
