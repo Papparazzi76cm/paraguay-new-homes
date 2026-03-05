@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,14 @@ import { MailCheck } from "lucide-react";
 type RegisterMode = "user" | "developer";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [searchParams] = useSearchParams();
+  const forceDeveloper = searchParams.get("role") === "developer";
+  const [isLogin, setIsLogin] = useState(!forceDeveloper);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [registerMode, setRegisterMode] = useState<RegisterMode>("user");
+  const [registerMode, setRegisterMode] = useState<RegisterMode>(forceDeveloper ? "developer" : "user");
   const [loading, setLoading] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -103,7 +105,7 @@ const Auth = () => {
       <form onSubmit={handleAuth} className="w-full max-w-sm space-y-4 bg-card p-8 rounded-2xl shadow-lg">
         <h1 className="text-2xl font-bold text-foreground">{isLogin ? t("auth.login") : t("auth.signup")}</h1>
 
-        {!isLogin && (
+        {!isLogin && !forceDeveloper && (
           <div className="flex gap-2">
             <Button type="button" variant={registerMode === "user" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setRegisterMode("user")}>
               Usuario
