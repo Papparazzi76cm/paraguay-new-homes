@@ -15,7 +15,7 @@ const Benefits = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 md:py-28 bg-secondary">
+    <section id="por-que-tekoha" className="py-20 md:py-28 bg-secondary" aria-label="Ventajas de usar Tekoha para obra nueva en Paraguay">
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">{t("benefits.tag")}</span>

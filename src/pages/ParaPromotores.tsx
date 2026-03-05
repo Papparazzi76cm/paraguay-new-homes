@@ -118,11 +118,12 @@ const ParaPromotores = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Para Promotores | Tekoha — Publicá tus proyectos</title>
-        <meta name="description" content="Publicá tus desarrollos inmobiliarios en Tekoha. Generá leads calificados, accedé a analytics y conectá con miles de inversores en Paraguay." />
-        <meta property="og:title" content="Para Promotores | Tekoha" />
-        <meta property="og:description" content="Conectá tus proyectos con miles de inversores. Planes desde USD 149/mes." />
-...
+        <title>Para Promotores Inmobiliarios | Tekoha — Publicá tus proyectos de obra nueva</title>
+        <meta name="description" content="Publicá tus desarrollos inmobiliarios en Tekoha. Generá leads calificados de inversores en Asunción, Ciudad del Este y Encarnación. Analytics y herramientas profesionales." />
+        <meta property="og:title" content="Para Promotores Inmobiliarios | Tekoha" />
+        <meta property="og:description" content="Conectá tus proyectos de obra nueva con miles de inversores en Paraguay. Planes desde USD 149/mes." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tekoha.estate/para-promotores" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
@@ -310,7 +311,7 @@ const ParaPromotores = () => {
             <Accordion type="single" collapsible className="space-y-3">
               {[
                 {
-                  q: "¿Cómo publico mi proyecto en ProyectPY?",
+                  q: "¿Cómo publico mi proyecto en Tekoha?",
                   a: "Una vez que elegís tu plan y creás tu cuenta, accedés a un panel donde podés cargar toda la información de tu proyecto: fotos, planos, precios, amenities, ubicación y más. El proceso toma menos de 15 minutos.",
                 },
                 {
@@ -326,7 +327,7 @@ const ParaPromotores = () => {
                   a: "No. Todos nuestros planes son mensuales y podés cancelar cuando quieras sin penalización. Si cancelás, tu cuenta permanece activa hasta el final del período pagado.",
                 },
                 {
-                  q: "¿Puedo integrar ProyectPY con mi CRM?",
+                  q: "¿Puedo integrar Tekoha con mi CRM?",
                   a: "Con el plan Premium tenés acceso a nuestra API de integración, que te permite conectar los leads directamente con tu CRM (Salesforce, HubSpot, Pipedrive, etc.) o cualquier herramienta que uses.",
                 },
                 {
@@ -369,7 +370,7 @@ const ParaPromotores = () => {
                 ¿Listo para potenciar tus ventas?
               </h2>
               <p className="text-background/60 text-lg mb-8">
-                Unite a más de 50 promotores que ya confían en ProyectPY para conectar con inversores calificados.
+                Unite a más de 50 promotores que ya confían en Tekoha para conectar con inversores calificados.
               </p>
               <button
                 onClick={() => setContactOpen(true)}

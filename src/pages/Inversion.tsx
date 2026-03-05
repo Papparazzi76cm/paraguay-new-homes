@@ -125,7 +125,15 @@ const Inversion = () => {
         <meta property="og:title" content="Inversión Inmobiliaria en Paraguay | Tekoha" />
         <meta property="og:description" content="Guía completa de inversión inmobiliaria en Paraguay con simulador de rentabilidad." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="/inversion" />
+        <link rel="canonical" href="https://tekoha.estate/inversion" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://tekoha.estate/" },
+            { "@type": "ListItem", "position": 2, "name": "Inversión Inmobiliaria", "item": "https://tekoha.estate/inversion" }
+          ]
+        })}</script>
       </Helmet>
       {/* Hero */}
       <section className="relative bg-foreground overflow-hidden">

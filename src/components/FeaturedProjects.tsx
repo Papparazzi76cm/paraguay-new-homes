@@ -92,7 +92,7 @@ const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
   const { t } = useTranslation();
 
   return (
-    <section id="proyectos" className="py-20 md:py-28 bg-background">
+    <section id="proyectos" className="py-20 md:py-28 bg-background" aria-label="Proyectos de obra nueva destacados en Paraguay">
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">

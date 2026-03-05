@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -50,13 +51,70 @@ const ProjectDetail = () => {
     );
   }
 
+  const pageTitle = `${project.title} — Obra Nueva en ${project.location_city} | Tekoha`;
+  const pageDesc = project.description
+    ? project.description.substring(0, 155) + "…"
+    : `${project.title}: proyecto de ${t(`projectTypes.${project.project_type}`).toLowerCase()} en ${project.location_city}${project.location_zone ? `, ${project.location_zone}` : ""}. ${project.price_from ? `Desde ${fmtPrice(project.price_from, project.price_currency)}.` : ""} Información verificada en Tekoha.`;
+
   return (
     <main className="min-h-screen bg-background">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href={`https://tekoha.estate/proyecto/${slug}`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:url" content={`https://tekoha.estate/proyecto/${slug}`} />
+        <meta property="og:type" content="website" />
+        {project.cover_image_url && <meta property="og:image" content={project.cover_image_url} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDesc} />
+        {project.cover_image_url && <meta name="twitter:image" content={project.cover_image_url} />}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RealEstateListing",
+          "name": project.title,
+          "description": project.description || pageDesc,
+          "url": `https://tekoha.estate/proyecto/${slug}`,
+          "image": project.cover_image_url,
+          "datePosted": project.created_at,
+          "offers": project.price_from ? {
+            "@type": "Offer",
+            "priceCurrency": project.price_currency,
+            "price": project.price_from,
+            "availability": "https://schema.org/InStock"
+          } : undefined,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": project.location_city,
+            "addressRegion": project.location_zone || undefined,
+            "addressCountry": "PY"
+          },
+          ...(project.latitude && project.longitude ? {
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": project.latitude,
+              "longitude": project.longitude
+            }
+          } : {})
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://tekoha.estate/" },
+            { "@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://tekoha.estate/#proyectos" },
+            { "@type": "ListItem", "position": 3, "name": project.title, "item": `https://tekoha.estate/proyecto/${slug}` }
+          ]
+        })}</script>
+      </Helmet>
+
       <nav className="bg-card border-b border-border sticky top-0 z-40">
         <div className="container flex items-center justify-between py-2 md:py-3">
           <Link to="/" className="flex items-center gap-1.5 md:gap-2 text-foreground hover:text-primary transition-colors shrink-0">
             <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
-            <img src={tekohaLogo} alt="Tekoha" className="h-12 md:h-20 lg:h-28 w-auto dark:brightness-0 dark:invert" />
+            <img src={tekohaLogo} alt="Tekoha — Obra Nueva en Paraguay" className="h-12 md:h-20 lg:h-28 w-auto dark:brightness-0 dark:invert" />
           </Link>
           <div className="flex items-center gap-1.5 md:gap-2">
             <LanguageSwitcher />
@@ -99,7 +157,7 @@ const ProjectDetail = () => {
           <div className="lg:col-span-2 space-y-6">
             {project.description && (
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card rounded-2xl p-6 md:p-8 shadow-card">
-                <h3 className="font-display text-xl font-semibold text-foreground mb-4">{t("detail.aboutProject")}</h3>
+                <h2 className="font-display text-xl font-semibold text-foreground mb-4">{t("detail.aboutProject")}</h2>
                 <p className="text-muted-foreground leading-relaxed">{isTranslating ? <span className="animate-pulse">{project.description}</span> : translatedDesc}</p>
               </motion.div>
             )}
@@ -109,7 +167,7 @@ const ProjectDetail = () => {
             {project.latitude && project.longitude && (<ProjectMap latitude={project.latitude} longitude={project.longitude} title={project.title} city={project.location_city} />)}
           </div>
 
-          <div className="space-y-6">
+          <aside className="space-y-6">
             {project.price_from && project.estimated_yield && (<YieldSimulator priceFrom={project.price_from} estimatedYield={project.estimated_yield} currency={project.price_currency} />)}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card rounded-2xl p-6 shadow-card lg:sticky lg:top-20">
               <h3 className="font-display text-lg font-semibold text-foreground mb-2">{t("detail.interestedTitle")}</h3>
@@ -119,7 +177,7 @@ const ProjectDetail = () => {
                 <button onClick={() => { setContactLeadType("dossier_download"); setContactOpen(true); }} className="w-full bg-secondary text-secondary-foreground py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors flex items-center justify-center gap-2"><FileText className="w-4 h-4" /> {t("detail.downloadDossier")}</button>
               </div>
             </motion.div>
-          </div>
+          </aside>
         </div>
       </div>
 
