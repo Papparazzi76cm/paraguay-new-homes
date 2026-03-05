@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, Monitor, Shield } from "lucide-react";
+import { Menu, X, Sun, Moon, Monitor, Shield, UserCog } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
-import { useAuth, useIsAdmin } from "@/hooks/useAuth";
+import { useAuth, useIsAdmin, useIsDeveloper } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -25,7 +25,9 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const { user } = useAuth();
   const { isAdmin } = useIsAdmin(user ? user.id : undefined);
+  const { isDeveloper } = useIsDeveloper(user ? user.id : undefined);
   const { t } = useTranslation();
+  const showPreferences = !!user && !isAdmin && !isDeveloper;
 
   const navItems = [
     { label: t("nav.projects"), href: "/#proyectos" },
@@ -64,6 +66,11 @@ const Navbar = () => {
           >
             <ThemeIcon theme={theme} />
           </button>
+          {showPreferences && (
+            <Link to="/mis-preferencias" className="flex items-center gap-1 text-white/80 hover:text-white text-xs lg:text-sm font-medium transition-colors whitespace-nowrap">
+              <UserCog className="w-3.5 h-3.5 lg:w-4 lg:h-4" /> Mis preferencias
+            </Link>
+          )}
           {isAdmin && (
             <Link to="/admin" className="flex items-center gap-1 text-white/80 hover:text-white text-xs lg:text-sm font-medium transition-colors whitespace-nowrap">
               <Shield className="w-3.5 h-3.5 lg:w-4 lg:h-4" /> {t("nav.admin")}
@@ -100,6 +107,11 @@ const Navbar = () => {
               </a>
             ))}
             <LanguageSwitcher variant="dark" />
+            {showPreferences && (
+              <Link to="/mis-preferencias" className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                <UserCog className="w-4 h-4" /> Mis preferencias
+              </Link>
+            )}
             {isAdmin && (
               <Link to="/admin" className="text-primary-foreground/80 hover:text-primary-foreground text-base font-medium py-2 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                 <Shield className="w-4 h-4" /> {t("nav.adminPanel")}
