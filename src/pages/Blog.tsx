@@ -32,7 +32,7 @@ const Blog = () => {
         <meta property="og:title" content="Blog | Tekoha" />
         <meta property="og:description" content="Insights del mercado inmobiliario paraguayo: análisis, guías y tendencias." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="/blog" />
+        <link rel="canonical" href="https://tekoha.estate/blog" />
       </Helmet>
 
       {/* Hero */}

@@ -13,30 +13,40 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>Tekoha — Proyectos de obra nueva en Paraguay</title>
-        <meta name="description" content="Explorá los mejores proyectos inmobiliarios de obra nueva en Paraguay. Departamentos, casas y barrios cerrados con información verificada para inversores." />
-        <meta property="og:title" content="Tekoha — Proyectos de obra nueva en Paraguay" />
-        <meta property="og:description" content="La plataforma líder de proyectos inmobiliarios de obra nueva en Paraguay." />
-...
+        <title>Tekoha — Obra Nueva en Paraguay | Departamentos y Casas en Asunción</title>
+        <meta name="description" content="Explorá los mejores proyectos de obra nueva en Paraguay. Departamentos, casas y barrios cerrados verificados en Asunción, Ciudad del Este y Encarnación. Compará desarrollos e invertí con confianza." />
+        <link rel="canonical" href="https://tekoha.estate/" />
+        <meta property="og:title" content="Tekoha — Obra Nueva en Paraguay | Proyectos Inmobiliarios Verificados" />
+        <meta property="og:description" content="Portal inmobiliario líder en proyectos de obra nueva en Paraguay. Departamentos, casas y barrios cerrados en Asunción, Ciudad del Este y Encarnación." />
+        <meta property="og:url" content="https://tekoha.estate/" />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Tekoha",
           "url": "https://tekoha.estate",
-          "description": "La plataforma especializada en proyectos de obra nueva en Paraguay. Inversión segura, información verificada.",
+          "logo": "https://tekoha.estate/favicon.jpg",
+          "description": "Plataforma líder en proyectos de obra nueva en Paraguay. Departamentos, casas y barrios cerrados en Asunción, Ciudad del Este y Encarnación.",
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+595-21-000-0000",
-            "contactType": "customer service",
             "email": "info@tekoha.estate",
+            "contactType": "customer service",
             "areaServed": "PY",
-            "availableLanguage": "Spanish"
+            "availableLanguage": ["Spanish", "English"]
           },
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Asunción",
             "addressCountry": "PY"
           }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Proyectos de Obra Nueva en Paraguay",
+          "description": "Proyectos inmobiliarios de obra nueva verificados en Asunción, Ciudad del Este y Encarnación",
+          "itemListOrder": "https://schema.org/ItemListUnordered",
+          "numberOfItems": 120
         })}</script>
       </Helmet>
       <Hero filters={filters} onFiltersChange={setFilters} />

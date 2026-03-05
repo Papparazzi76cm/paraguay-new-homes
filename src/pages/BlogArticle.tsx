@@ -15,7 +15,7 @@ const BlogArticlePage = () => {
     return (
       <main className="min-h-screen">
         <Helmet>
-          <title>Artículo no encontrado | ProyectPY Blog</title>
+          <title>Artículo no encontrado | Blog Tekoha</title>
         </Helmet>
         <section className="bg-foreground">
           <Navbar />
@@ -36,14 +36,14 @@ const BlogArticlePage = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>{article.title} | ProyectPY Blog</title>
+        <title>{article.title} | Blog Tekoha</title>
         <meta name="description" content={article.excerpt} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:image" content={article.imageUrl} />
         <meta property="og:type" content="article" />
         <meta property="article:author" content={article.author.name} />
-        <link rel="canonical" href={`/blog/${article.slug}`} />
+        <link rel="canonical" href={`https://tekoha.estate/blog/${article.slug}`} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
@@ -57,13 +57,13 @@ const BlogArticlePage = () => {
           },
           "publisher": {
             "@type": "Organization",
-            "name": "ProyectPY",
-            "url": "https://proyectpy.com"
+            "name": "Tekoha",
+            "url": "https://tekoha.estate"
           },
           "datePublished": article.date,
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `/blog/${article.slug}`
+            "@id": `https://tekoha.estate/blog/${article.slug}`
           }
         })}</script>
       </Helmet>
