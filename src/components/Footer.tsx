@@ -1,4 +1,4 @@
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import tekohaLogo from "@/assets/tekoha-logo.png";
 
@@ -46,9 +46,6 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-background/50 text-sm">
                 <Mail className="w-4 h-4 shrink-0" /> info@tekoha.estate
-              </li>
-              <li className="flex items-center gap-2 text-background/50 text-sm">
-                <Phone className="w-4 h-4 shrink-0" /> +595 21 000 0000
               </li>
             </ul>
           </div>
