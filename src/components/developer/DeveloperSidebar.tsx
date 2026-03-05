@@ -1,4 +1,4 @@
-import { Building2, Image, Mail, Users, LogOut, LayoutDashboard, UserCheck } from "lucide-react";
+import { Building2, Mail, LogOut, LayoutDashboard, ShoppingBag } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
@@ -17,28 +17,26 @@ import {
 import { Button } from "@/components/ui/button";
 
 const items = [
-  { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "Proyectos", url: "/admin/projects", icon: Building2 },
-  { title: "Leads", url: "/admin/leads", icon: Mail },
-  { title: "Suscriptores", url: "/admin/subscribers", icon: Users },
-  { title: "Desarrolladores", url: "/admin/developers", icon: UserCheck },
+  { title: "Dashboard", url: "/developer", icon: LayoutDashboard },
+  { title: "Proyectos", url: "/developer/projects", icon: Building2 },
+  { title: "Leads", url: "/developer/leads", icon: Mail },
+  { title: "Marketplace", url: "/developer/marketplace", icon: ShoppingBag },
 ];
 
-interface AdminSidebarProps {
+interface DeveloperSidebarProps {
   user: User;
   onSignOut: () => void;
 }
 
-export function AdminSidebar({ user, onSignOut }: AdminSidebarProps) {
+export function DeveloperSidebar({ user, onSignOut }: DeveloperSidebarProps) {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
 
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Admin</SidebarGroupLabel>
+          <SidebarGroupLabel>Desarrollador</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -46,7 +44,7 @@ export function AdminSidebar({ user, onSignOut }: AdminSidebarProps) {
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
-                      end={item.url === "/admin"}
+                      end={item.url === "/developer"}
                       className="hover:bg-muted/50"
                       activeClassName="bg-muted text-primary font-medium"
                     >
