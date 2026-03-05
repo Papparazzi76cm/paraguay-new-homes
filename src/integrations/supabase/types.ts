@@ -231,6 +231,7 @@ export type Database = {
           created_at: string
           delivery_date: string | null
           description: string | null
+          developer_id: string | null
           developer_name: string | null
           estimated_yield: number | null
           featured: boolean | null
@@ -258,6 +259,7 @@ export type Database = {
           created_at?: string
           delivery_date?: string | null
           description?: string | null
+          developer_id?: string | null
           developer_name?: string | null
           estimated_yield?: number | null
           featured?: boolean | null
@@ -285,6 +287,7 @@ export type Database = {
           created_at?: string
           delivery_date?: string | null
           description?: string | null
+          developer_id?: string | null
           developer_name?: string | null
           estimated_yield?: number | null
           featured?: boolean | null
@@ -349,6 +352,48 @@ export type Database = {
           },
         ]
       }
+      user_preferences: {
+        Row: {
+          created_at: string | null
+          id: string
+          preferred_cities: string[] | null
+          preferred_project_types: string[] | null
+          preferred_typologies: string[] | null
+          preferred_zones: string[] | null
+          price_currency: string | null
+          price_max: number | null
+          price_min: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          preferred_cities?: string[] | null
+          preferred_project_types?: string[] | null
+          preferred_typologies?: string[] | null
+          preferred_zones?: string[] | null
+          price_currency?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          preferred_cities?: string[] | null
+          preferred_project_types?: string[] | null
+          preferred_typologies?: string[] | null
+          preferred_zones?: string[] | null
+          price_currency?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -372,6 +417,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_matched_leads_for_developer: {
+        Args: { _developer_id: string }
+        Returns: {
+          created_at: string
+          email: string
+          full_name: string
+          lead_id: string
+          lead_type: string
+          match_count: number
+          phone: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

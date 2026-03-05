@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import UserPreferences from "./pages/UserPreferences";
 import AdminLayout from "./components/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import ProjectsList from "./pages/admin/ProjectsList";
@@ -23,6 +24,9 @@ import SubscribersList from "./pages/admin/SubscribersList";
 import DeveloperApprovals from "./pages/admin/DeveloperApprovals";
 import DeveloperLayout from "./components/developer/DeveloperLayout";
 import DeveloperDashboard from "./pages/developer/DeveloperDashboard";
+import DeveloperProjectsList from "./pages/developer/DeveloperProjectsList";
+import DeveloperProjectForm from "./pages/developer/DeveloperProjectForm";
+import DeveloperLeadsList from "./pages/developer/DeveloperLeadsList";
 import Marketplace from "./pages/developer/Marketplace";
 import { useTheme } from "./hooks/useTheme";
 
@@ -45,6 +49,7 @@ const App = () => {
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/mis-preferencias" element={<UserPreferences />} />
 
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -61,11 +66,10 @@ const App = () => {
           {/* Developer routes */}
           <Route path="/developer" element={<DeveloperLayout />}>
             <Route index element={<DeveloperDashboard />} />
-            <Route path="projects" element={<ProjectsList />} />
-            <Route path="projects/new" element={<ProjectForm />} />
-            <Route path="projects/:id" element={<ProjectForm />} />
-            <Route path="projects/:id/images" element={<ProjectImages />} />
-            <Route path="leads" element={<LeadsList />} />
+            <Route path="projects" element={<DeveloperProjectsList />} />
+            <Route path="projects/new" element={<DeveloperProjectForm />} />
+            <Route path="projects/:id" element={<DeveloperProjectForm />} />
+            <Route path="leads" element={<DeveloperLeadsList />} />
             <Route path="marketplace" element={<Marketplace />} />
           </Route>
 
