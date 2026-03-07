@@ -254,6 +254,27 @@ const DeveloperProjectForm = () => {
 
         <div className="flex flex-wrap gap-6">
           <div className="flex items-center gap-2"><Switch checked={form.financing_available} onCheckedChange={(v) => set("financing_available", v)} /><Label>Financiamiento disponible</Label></div>
+          <div className="flex items-center gap-2"><Switch checked={form.subsidio_estado} onCheckedChange={(v) => set("subsidio_estado", v)} /><Label>Subsidio estatal</Label></div>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Programa Che Róga Porã</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Programa de financiación</Label>
+              <Select value={form.programa_financiacion} onValueChange={(v) => set("programa_financiacion", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">Ninguno</SelectItem>
+                  <SelectItem value="che_roga_pora">Che Róga Porã</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2"><Label>Entidad financiera</Label><Input value={form.entidad_financiera} onChange={(e) => set("entidad_financiera", e.target.value)} placeholder="Ej: Banco Nacional de Fomento" /></div>
+            <div className="space-y-2"><Label>Precio financiable (Gs.)</Label><Input type="number" value={form.precio_financiable} onChange={(e) => set("precio_financiable", e.target.value)} /></div>
+            <div className="space-y-2"><Label>Cuota estimativa (Gs.)</Label><Input type="number" value={form.cuota_estimativa} onChange={(e) => set("cuota_estimativa", e.target.value)} /></div>
+            <div className="space-y-2"><Label>Plazo máximo (años)</Label><Input type="number" value={form.plazo_maximo} onChange={(e) => set("plazo_maximo", e.target.value)} placeholder="Ej: 30" /></div>
+          </div>
         </div>
 
         <Button type="submit" disabled={mutation.isPending} className="w-full md:w-auto">
