@@ -114,7 +114,7 @@ const Inversion = () => {
     const finalValue = investment + totalReturn;
     const monthlyIncome = annualReturn / 12;
     return { annualReturn, totalReturn, finalValue, monthlyIncome , yieldRate};
-  }, [investment, years]);
+  }, [investment, years, yieldRate]);
 
   const fmtDisplay = (n: number) => formatCurrency(convertCurrency(n, "USD", displayCurrency), displayCurrency);
 
