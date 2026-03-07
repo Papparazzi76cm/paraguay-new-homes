@@ -28,7 +28,7 @@ const useFinanceableProjects = (cityFilter?: string) => {
       let query = supabase
         .from("projects")
         .select("*")
-        .eq("programa_financiacion" as any, "che_roga_pora")
+        .eq("programa_financiacion", "che_roga_pora")
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false });
 
