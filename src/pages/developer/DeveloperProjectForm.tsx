@@ -108,6 +108,12 @@ const DeveloperProjectForm = () => {
         phase_entrega_date: form.phase_entrega_date || null,
         latitude: form.latitude ? parseFloat(form.latitude) : null,
         longitude: form.longitude ? parseFloat(form.longitude) : null,
+        programa_financiacion: form.programa_financiacion || null,
+        precio_financiable: form.precio_financiable ? parseFloat(form.precio_financiable) : null,
+        cuota_estimativa: form.cuota_estimativa ? parseFloat(form.cuota_estimativa) : null,
+        entidad_financiera: form.entidad_financiera || null,
+        plazo_maximo: form.plazo_maximo ? parseInt(form.plazo_maximo) : null,
+        subsidio_estado: form.subsidio_estado,
       };
 
       if (isEditing) {
