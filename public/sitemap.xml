@@ -11,6 +11,11 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://tekoha.estate/" />
   </url>
   <url>
+    <loc>https://tekoha.estate/che-roga-pora</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://tekoha.estate/inversion</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
