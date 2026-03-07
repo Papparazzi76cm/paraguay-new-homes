@@ -106,14 +106,14 @@ const Inversion = () => {
   // Standalone simulator state
   const [investment, setInvestment] = useState(80000);
   const [years, setYears] = useState(5);
-  const [yieldRate, setYieldRate] = useState(8);
+  const [yieldRate, setYieldRate] = useState(8)etYieldRate] = useState(8);
 
   const results = useMemo(() => {
     const annualReturn = investment * (yieldRate / 100);
     const totalReturn = annualReturn * years;
     const finalValue = investment + totalReturn;
     const monthlyIncome = annualReturn / 12;
-    return { annualReturn, totalReturn, finalValue, monthlyIncome };
+    return { annualReturn, totalReturn, finalValue, monthlyIncome , yieldRate};
   }, [investment, years]);
 
   const fmtDisplay = (n: number) => formatCurrency(convertCurrency(n, "USD", displayCurrency), displayCurrency);
