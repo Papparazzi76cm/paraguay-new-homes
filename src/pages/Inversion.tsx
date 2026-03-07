@@ -106,7 +106,7 @@ const Inversion = () => {
   // Standalone simulator state
   const [investment, setInvestment] = useState(80000);
   const [years, setYears] = useState(5);
-  const yieldRate = 8;
+  const [yieldRate, setYieldRate] = useState(8);
 
   const results = useMemo(() => {
     const annualReturn = investment * (yieldRate / 100);
