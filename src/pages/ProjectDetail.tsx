@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
+import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check, Home } from "lucide-react";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { useTranslation } from "react-i18next";
