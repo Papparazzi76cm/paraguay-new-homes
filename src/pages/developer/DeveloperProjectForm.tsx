@@ -31,6 +31,8 @@ const DeveloperProjectForm = () => {
     developer_name: "", amenities: "",
     phase_preventa_date: "", phase_en_pozo_date: "", phase_construccion_date: "", phase_entrega_date: "",
     latitude: "", longitude: "",
+    programa_financiacion: "", precio_financiable: "", cuota_estimativa: "",
+    entidad_financiera: "", plazo_maximo: "", subsidio_estado: false,
   });
 
   const { data: existing } = useQuery({
