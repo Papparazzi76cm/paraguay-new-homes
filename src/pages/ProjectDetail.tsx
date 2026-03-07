@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check } from "lucide-react";
+import { ArrowLeft, MapPin, Building, TrendingUp, CreditCard, CalendarDays, Send, FileText, Loader2, Share2, Check, Home } from "lucide-react";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { useTranslation } from "react-i18next";
@@ -136,6 +136,11 @@ const ProjectDetail = () => {
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">{t(`projectStatus.${project.status}`)}</span>
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">{t(`projectTypes.${project.project_type}`)}</span>
             {project.financing_available && (<span className="px-3 py-1 rounded-full text-xs font-semibold bg-accent/15 text-accent">{t("detail.financingAvailable")}</span>)}
+            {(project as any).programa_financiacion === "che_roga_pora" && (
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground flex items-center gap-1">
+                <Home className="w-3 h-3" /> Financiable con Che Róga Porã
+              </span>
+            )}
           </div>
 
           <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">{project.title}</h1>

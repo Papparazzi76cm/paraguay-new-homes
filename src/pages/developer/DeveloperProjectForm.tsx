@@ -31,6 +31,8 @@ const DeveloperProjectForm = () => {
     developer_name: "", amenities: "",
     phase_preventa_date: "", phase_en_pozo_date: "", phase_construccion_date: "", phase_entrega_date: "",
     latitude: "", longitude: "",
+    programa_financiacion: "", precio_financiable: "", cuota_estimativa: "",
+    entidad_financiera: "", plazo_maximo: "", subsidio_estado: false,
   });
 
   const { data: existing } = useQuery({
@@ -70,6 +72,12 @@ const DeveloperProjectForm = () => {
         phase_entrega_date: (existing as any).phase_entrega_date ?? "",
         latitude: (existing as any).latitude?.toString() ?? "",
         longitude: (existing as any).longitude?.toString() ?? "",
+        programa_financiacion: (existing as any).programa_financiacion ?? "",
+        precio_financiable: (existing as any).precio_financiable?.toString() ?? "",
+        cuota_estimativa: (existing as any).cuota_estimativa?.toString() ?? "",
+        entidad_financiera: (existing as any).entidad_financiera ?? "",
+        plazo_maximo: (existing as any).plazo_maximo?.toString() ?? "",
+        subsidio_estado: (existing as any).subsidio_estado ?? false,
       });
     }
   }, [existing]);
@@ -100,6 +108,12 @@ const DeveloperProjectForm = () => {
         phase_entrega_date: form.phase_entrega_date || null,
         latitude: form.latitude ? parseFloat(form.latitude) : null,
         longitude: form.longitude ? parseFloat(form.longitude) : null,
+        programa_financiacion: form.programa_financiacion || null,
+        precio_financiable: form.precio_financiable ? parseFloat(form.precio_financiable) : null,
+        cuota_estimativa: form.cuota_estimativa ? parseFloat(form.cuota_estimativa) : null,
+        entidad_financiera: form.entidad_financiera || null,
+        plazo_maximo: form.plazo_maximo ? parseInt(form.plazo_maximo) : null,
+        subsidio_estado: form.subsidio_estado,
       };
 
       if (isEditing) {
@@ -240,6 +254,27 @@ const DeveloperProjectForm = () => {
 
         <div className="flex flex-wrap gap-6">
           <div className="flex items-center gap-2"><Switch checked={form.financing_available} onCheckedChange={(v) => set("financing_available", v)} /><Label>Financiamiento disponible</Label></div>
+          <div className="flex items-center gap-2"><Switch checked={form.subsidio_estado} onCheckedChange={(v) => set("subsidio_estado", v)} /><Label>Subsidio estatal</Label></div>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Programa Che Róga Porã</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Programa de financiación</Label>
+              <Select value={form.programa_financiacion} onValueChange={(v) => set("programa_financiacion", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">Ninguno</SelectItem>
+                  <SelectItem value="che_roga_pora">Che Róga Porã</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2"><Label>Entidad financiera</Label><Input value={form.entidad_financiera} onChange={(e) => set("entidad_financiera", e.target.value)} placeholder="Ej: Banco Nacional de Fomento" /></div>
+            <div className="space-y-2"><Label>Precio financiable (Gs.)</Label><Input type="number" value={form.precio_financiable} onChange={(e) => set("precio_financiable", e.target.value)} /></div>
+            <div className="space-y-2"><Label>Cuota estimativa (Gs.)</Label><Input type="number" value={form.cuota_estimativa} onChange={(e) => set("cuota_estimativa", e.target.value)} /></div>
+            <div className="space-y-2"><Label>Plazo máximo (años)</Label><Input type="number" value={form.plazo_maximo} onChange={(e) => set("plazo_maximo", e.target.value)} placeholder="Ej: 30" /></div>
+          </div>
         </div>
 
         <Button type="submit" disabled={mutation.isPending} className="w-full md:w-auto">
