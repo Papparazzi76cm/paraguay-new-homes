@@ -106,14 +106,14 @@ const Inversion = () => {
   // Standalone simulator state
   const [investment, setInvestment] = useState(80000);
   const [years, setYears] = useState(5);
-  const yieldRate = 8;
+  const [yieldRate, setYieldRate] = useState(8);
 
   const results = useMemo(() => {
     const annualReturn = investment * (yieldRate / 100);
     const totalReturn = annualReturn * years;
     const finalValue = investment + totalReturn;
     const monthlyIncome = annualReturn / 12;
-    return { annualReturn, totalReturn, finalValue, monthlyIncome };
+    return { annualReturn, totalReturn, finalValue, monthlyIncome , yieldRate};
   }, [investment, years]);
 
   const fmtDisplay = (n: number) => formatCurrency(convertCurrency(n, "USD", displayCurrency), displayCurrency);
@@ -331,6 +331,26 @@ const Inversion = () => {
                 <div className="flex justify-between text-xs text-muted-foreground mt-1">
                   <span>1 año</span>
                   <span>15 años</span>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-muted-foreground">Rendimiento anual estimado</span>
+                  <span className="font-semibold text-foreground">{yieldRate}%</span>
+                </div>
+                <input
+                  type="range"
+                  min={4}
+                  max={12}
+                  step={0.5}
+                  value={yieldRate}
+                  onChange={(e) => setYieldRate(Number(e.target.value))}
+                  className="w-full accent-primary h-2 rounded-full appearance-none bg-secondary cursor-pointer"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>4%</span>
+                  <span>12%</span>
                 </div>
               </div>
 
