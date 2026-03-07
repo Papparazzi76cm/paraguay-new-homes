@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, TrendingUp, Building, Loader2 } from "lucide-react";
+import { MapPin, TrendingUp, Building, Loader2, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFeaturedProjects, type Project, type ProjectFilters } from "@/hooks/useProjects";
