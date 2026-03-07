@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import heroInversionImg from "@/assets/hero-inversion.jpg";
 import { Helmet } from "react-helmet-async";
 import CurrencyToggle, { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -136,8 +137,11 @@ const Inversion = () => {
         })}</script>
       </Helmet>
       {/* Hero */}
-      <section className="relative bg-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsla(38,60%,55%,0.1),_transparent_60%)]" />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroInversionImg} alt="Inversión inmobiliaria en Paraguay" className="w-full h-full object-cover" loading="eager" />
+          <div className="absolute inset-0 bg-foreground/75" />
+        </div>
         <Navbar />
         <div className="container pt-32 pb-20 md:pt-40 md:pb-28 relative z-10">
           <motion.div
