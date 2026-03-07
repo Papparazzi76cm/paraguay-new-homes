@@ -229,10 +229,12 @@ export type Database = {
           amenities: string[] | null
           cover_image_url: string | null
           created_at: string
+          cuota_estimativa: number | null
           delivery_date: string | null
           description: string | null
           developer_id: string | null
           developer_name: string | null
+          entidad_financiera: string | null
           estimated_yield: number | null
           featured: boolean | null
           financing_available: boolean | null
@@ -245,11 +247,16 @@ export type Database = {
           phase_en_pozo_date: string | null
           phase_entrega_date: string | null
           phase_preventa_date: string | null
+          plazo_maximo: number | null
+          precio_financiable: number | null
           price_currency: string
           price_from: number | null
+          programa_financiacion: string | null
           project_type: Database["public"]["Enums"]["project_type"]
           slug: string
           status: Database["public"]["Enums"]["project_status"]
+          subsidio_estado: boolean | null
+          tipo_financiacion: string | null
           title: string
           updated_at: string
         }
@@ -257,10 +264,12 @@ export type Database = {
           amenities?: string[] | null
           cover_image_url?: string | null
           created_at?: string
+          cuota_estimativa?: number | null
           delivery_date?: string | null
           description?: string | null
           developer_id?: string | null
           developer_name?: string | null
+          entidad_financiera?: string | null
           estimated_yield?: number | null
           featured?: boolean | null
           financing_available?: boolean | null
@@ -273,11 +282,16 @@ export type Database = {
           phase_en_pozo_date?: string | null
           phase_entrega_date?: string | null
           phase_preventa_date?: string | null
+          plazo_maximo?: number | null
+          precio_financiable?: number | null
           price_currency?: string
           price_from?: number | null
+          programa_financiacion?: string | null
           project_type?: Database["public"]["Enums"]["project_type"]
           slug: string
           status?: Database["public"]["Enums"]["project_status"]
+          subsidio_estado?: boolean | null
+          tipo_financiacion?: string | null
           title: string
           updated_at?: string
         }
@@ -285,10 +299,12 @@ export type Database = {
           amenities?: string[] | null
           cover_image_url?: string | null
           created_at?: string
+          cuota_estimativa?: number | null
           delivery_date?: string | null
           description?: string | null
           developer_id?: string | null
           developer_name?: string | null
+          entidad_financiera?: string | null
           estimated_yield?: number | null
           featured?: boolean | null
           financing_available?: boolean | null
@@ -301,11 +317,16 @@ export type Database = {
           phase_en_pozo_date?: string | null
           phase_entrega_date?: string | null
           phase_preventa_date?: string | null
+          plazo_maximo?: number | null
+          precio_financiable?: number | null
           price_currency?: string
           price_from?: number | null
+          programa_financiacion?: string | null
           project_type?: Database["public"]["Enums"]["project_type"]
           slug?: string
           status?: Database["public"]["Enums"]["project_status"]
+          subsidio_estado?: boolean | null
+          tipo_financiacion?: string | null
           title?: string
           updated_at?: string
         }
