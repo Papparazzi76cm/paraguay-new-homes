@@ -45,6 +45,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/che-roga-pora" element={<CheRogaPora />} />
           <Route path="/proyecto/:slug" element={<ProjectDetail />} />
           <Route path="/para-promotores" element={<ParaPromotores />} />
           <Route path="/inversion" element={<Inversion />} />

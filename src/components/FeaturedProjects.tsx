@@ -46,6 +46,11 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             {project.featured && (
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-foreground">{t("featured.featured")}</span>
             )}
+            {(project as any).programa_financiacion === "che_roga_pora" && (
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground flex items-center gap-1">
+                <Home className="w-3 h-3" /> Che Róga Porã
+              </span>
+            )}
           </div>
         </div>
 
