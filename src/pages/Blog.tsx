@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import heroBlogImg from "@/assets/hero-blog.jpg";
 import { Clock, ArrowRight, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";

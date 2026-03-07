@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import heroInversionImg from "@/assets/hero-inversion.jpg";
 import { Helmet } from "react-helmet-async";
 import CurrencyToggle, { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { useCurrency } from "@/hooks/useCurrency";

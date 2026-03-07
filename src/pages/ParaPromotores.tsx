@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import heroPromotoresImg from "@/assets/hero-promotores.jpg";
 import { Helmet } from "react-helmet-async";
 import { Check, BarChart3, Users, Download, Building2, Eye, Zap, Shield, ArrowRight, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
