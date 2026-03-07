@@ -36,8 +36,11 @@ const Blog = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="relative bg-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsla(160,35%,25%,0.12),_transparent_60%)]" />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroBlogImg} alt="Blog inmobiliario Paraguay" className="w-full h-full object-cover" loading="eager" />
+          <div className="absolute inset-0 bg-foreground/75" />
+        </div>
         <Navbar />
         <div className="container pt-32 pb-16 md:pt-40 md:pb-20 relative z-10">
           <motion.div

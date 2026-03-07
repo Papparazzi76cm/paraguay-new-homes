@@ -139,8 +139,11 @@ const ParaPromotores = () => {
         })}</script>
       </Helmet>
       {/* Hero */}
-      <section className="relative bg-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsla(160,35%,30%,0.15),_transparent_60%)]" />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroPromotoresImg} alt="Promotores inmobiliarios Paraguay" className="w-full h-full object-cover" loading="eager" />
+          <div className="absolute inset-0 bg-foreground/75" />
+        </div>
         <Navbar />
         <div className="container pt-32 pb-20 md:pt-40 md:pb-28 relative z-10">
           <motion.div
