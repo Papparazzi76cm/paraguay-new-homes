@@ -334,6 +334,26 @@ const Inversion = () => {
                 </div>
               </div>
 
+              <div>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-muted-foreground">Rendimiento anual estimado</span>
+                  <span className="font-semibold text-foreground">{yieldRate}%</span>
+                </div>
+                <input
+                  type="range"
+                  min={4}
+                  max={12}
+                  step={0.5}
+                  value={yieldRate}
+                  onChange={(e) => setYieldRate(Number(e.target.value))}
+                  className="w-full accent-primary h-2 rounded-full appearance-none bg-secondary cursor-pointer"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>4%</span>
+                  <span>12%</span>
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border">
                 {[
                   { icon: DollarSign, label: "Ingreso mensual", value: fmtDisplay(results.monthlyIncome) },
