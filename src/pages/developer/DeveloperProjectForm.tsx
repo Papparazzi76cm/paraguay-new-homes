@@ -72,6 +72,12 @@ const DeveloperProjectForm = () => {
         phase_entrega_date: (existing as any).phase_entrega_date ?? "",
         latitude: (existing as any).latitude?.toString() ?? "",
         longitude: (existing as any).longitude?.toString() ?? "",
+        programa_financiacion: (existing as any).programa_financiacion ?? "",
+        precio_financiable: (existing as any).precio_financiable?.toString() ?? "",
+        cuota_estimativa: (existing as any).cuota_estimativa?.toString() ?? "",
+        entidad_financiera: (existing as any).entidad_financiera ?? "",
+        plazo_maximo: (existing as any).plazo_maximo?.toString() ?? "",
+        subsidio_estado: (existing as any).subsidio_estado ?? false,
       });
     }
   }, [existing]);
