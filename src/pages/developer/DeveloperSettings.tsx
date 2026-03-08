@@ -50,6 +50,7 @@ const DeveloperSettings = () => {
   useEffect(() => {
     if (profile) {
       setDisplayName(profile.display_name ?? "");
+      setLogoUrl(profile.avatar_url ?? null);
     }
     if (user) {
       setPhone(user.user_metadata?.phone ?? "");
@@ -60,6 +61,81 @@ const DeveloperSettings = () => {
       setCompanyEmail(user.email ?? "");
     }
   }, [profile, user]);
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+
+    const allowedTypes = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Formato no soportado. Usá PNG, JPG, WebP o SVG.");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("El archivo no debe superar 2 MB.");
+      return;
+    }
+
+    setUploading(true);
+    const ext = file.name.split(".").pop();
+    const filePath = `${user.id}/logo.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("developer-logos")
+      .upload(filePath, file, { upsert: true });
+
+    if (uploadError) {
+      toast.error("Error al subir el logo: " + uploadError.message);
+      setUploading(false);
+      return;
+    }
+
+    const { data: publicData } = supabase.storage
+      .from("developer-logos")
+      .getPublicUrl(filePath);
+
+    const newUrl = publicData.publicUrl + "?t=" + Date.now();
+
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .update({ avatar_url: newUrl })
+      .eq("user_id", user.id);
+
+    if (profileError) {
+      toast.error(profileError.message);
+    } else {
+      setLogoUrl(newUrl);
+      queryClient.invalidateQueries({ queryKey: ["dev-profile"] });
+      toast.success("Logo actualizado");
+    }
+    setUploading(false);
+  };
+
+  const handleLogoRemove = async () => {
+    if (!user) return;
+    setUploading(true);
+
+    // List and delete files in user folder
+    const { data: files } = await supabase.storage
+      .from("developer-logos")
+      .list(user.id);
+
+    if (files?.length) {
+      await supabase.storage
+        .from("developer-logos")
+        .remove(files.map((f) => `${user.id}/${f.name}`));
+    }
+
+    await supabase
+      .from("profiles")
+      .update({ avatar_url: null })
+      .eq("user_id", user.id);
+
+    setLogoUrl(null);
+    queryClient.invalidateQueries({ queryKey: ["dev-profile"] });
+    toast.success("Logo eliminado");
+    setUploading(false);
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
