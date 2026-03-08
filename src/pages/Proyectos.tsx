@@ -36,7 +36,7 @@ const Proyectos = () => {
         </div>
       </section>
 
-      <FeaturedProjects filters={filters} showAll />
+      <FeaturedProjects filters={{ ...filters, _showAll: true } as any} />
 
       <Footer />
     </main>

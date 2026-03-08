@@ -91,9 +91,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   );
 };
 
-const FeaturedProjects = ({ filters, showAll }: FeaturedProjectsProps) => {
-  const { data: projects, isLoading } = useFeaturedProjects(showAll ? { ...filters, _all: true } as any : filters);
-  const hasFilters = (filters && Object.values(filters).some((v) => v != null && v !== "")) || showAll;
+const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
+  const { data: projects, isLoading } = useFeaturedProjects(filters);
+  const hasFilters = filters && Object.values(filters).some((v) => v != null && v !== "");
   const { t } = useTranslation();
 
   return (
