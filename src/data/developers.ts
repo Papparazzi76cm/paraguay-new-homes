@@ -351,20 +351,6 @@ export const developers: DeveloperInfo[] = [
   },
   
   {
-    slug: "nicasio-acosta",
-    name: "Nicasio Acosta e Hijos S.A",
-    website: "http://www.nicasioacosta.com.py",
-    email: "",
-    phone: "",
-    description:
-      "Grupo empresarial con más de 27 años de trayectoria, enfocado en agro business y desarrollo inmobiliario en Paraguay. Presidido por Luis Acosta Montanaro, arquitecto con formación en la Université Paris X Nanterre (Francia). Empresa de carácter privado con sede en Asunción.",
-    logo: "/images/nicasioacosta-logo.png",
-    stats: [
-      { label: "Años de trayectoria", value: "27+" },
-      { label: "Sectores", value: "Agro / Real Estate" },
-    ],
-  },
-  {
     slug: "cci",
     name: "CCI S.A",
     website: "https://www.cci.com.py",
