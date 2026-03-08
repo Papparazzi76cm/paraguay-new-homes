@@ -281,7 +281,23 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.petraurbana.com",
     email: "contacto@petraurbana.com",
     phone: "+595 974 400 800",
-    description: "Desarrolladora de proyectos en ubicaciones privilegiadas de Asunción.",
+    description:
+      "Conglomerado de real estate más grande de Paraguay. #1 líderes en el mercado con 21 proyectos desarrollados, más de 598 unidades entregadas, 179.676 m² construidos y 1.497 unidades vendidas. Líneas de productos: Rascacielos (Petra Imperiale, Petra Icon, Petra Tower), Spirit (domótica y tecnología), Life (pet-friendly), Forvm y Ágora. Más de 10 años de experiencia comprobada. Parte del Grupo Petra junto a Cronos, Alma, RE/MAX, Hestia, Ciudad Modelo y Cikla.",
+    logo: "/images/petra-logo.svg",
+    heroImage: "/images/petra-hero.jpg",
+    stats: [
+      { label: "Proyectos desarrollados", value: "21" },
+      { label: "Unidades vendidas", value: "1.497+" },
+      { label: "M² construidos", value: "179.676+" },
+      { label: "Unidades entregadas", value: "598+" },
+    ],
+    certifications: [
+      "#1 Líderes en el mercado inmobiliario",
+      "Conglomerado de real estate más grande de Paraguay",
+      "Hotel NH Collection en Petra Imperiale",
+      "Financiación directa a 10 años",
+      "Primera línea pet-friendly del país (Life)",
+    ],
   },
   {
     slug: "gomez-abente",
