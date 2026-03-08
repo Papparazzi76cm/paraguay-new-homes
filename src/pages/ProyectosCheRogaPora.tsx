@@ -10,6 +10,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import Navbar from "@/components/Navbar";
 import CheRogaLeadForm from "@/components/CheRogaLeadForm";
+import CheRogaProjectsMap from "@/components/CheRogaProjectsMap";
 import Footer from "@/components/Footer";
 
 import project1 from "@/assets/project-1.jpg";
