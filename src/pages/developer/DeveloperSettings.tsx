@@ -21,6 +21,11 @@ const DeveloperSettings = () => {
   const [displayName, setDisplayName] = useState("");
   const [phone, setPhone] = useState("");
 
+  // Logo
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   // Company data from developer info (stored in user metadata + profile)
   const [companyName, setCompanyName] = useState("");
   const [companyWebsite, setCompanyWebsite] = useState("");
