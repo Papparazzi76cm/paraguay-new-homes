@@ -101,7 +101,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
             selected={!!selectedPriceLabel}
             onClick={() => setActiveFilter(activeFilter === "precio" ? null : "precio")}
           />
-          <div className="hidden md:block w-px h-8 bg-border" />
+          <div className="hidden lg:block w-px h-8 bg-border" />
           <FilterButton
             icon={<CalendarDays className="w-4 h-4" />}
             label={t("search.status")}
