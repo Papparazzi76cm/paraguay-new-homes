@@ -612,11 +612,27 @@ export const developers: DeveloperInfo[] = [
   },
   {
     slug: "raices-real-state",
-    name: "Raíces Real State",
+    name: "Raíces Real Estate",
     website: "https://www.raices.com.py",
     email: "contactos@raices.com.py",
     phone: "+595 21 688 7000",
-    description: "Empresa inmobiliaria con presencia en el mercado paraguayo.",
+    description:
+      "Grupo líder en desarrollos inmobiliarios en Paraguay, fundado en 2004 por el Lic. Jorge Figueredo Fleitas. Con más de 300 colaboradores y presencia en múltiples departamentos del país, Raíces se especializa en condominios cerrados con lagunas cristalinas Crystal Lagoons®, loteos y edificios de departamentos. Su misión es mejorar la calidad de vida de las familias paraguayas mediante soluciones inmobiliarias innovadoras y amigables con el entorno.",
+    logo: "/images/raices-logo.png",
+    heroImage: "/images/raices-hero.jpg",
+    stats: [
+      { label: "Años de trayectoria", value: "20+" },
+      { label: "Colaboradores", value: "300+" },
+      { label: "Condominios activos", value: "6" },
+      { label: "Áreas de negocio", value: "3" },
+    ],
+    certifications: [
+      "Certificación Internacional NAR / CIPS",
+      "Miembro CILA (Confederación Inmobiliaria Latinoamericana)",
+      "Miembro CAPELI (Cámara Paraguaya de Empresas Loteadoras e Inmobiliarias)",
+      "Miembro FIABCI (Federación Internacional de Profesiones Inmobiliarias)",
+    ],
+    esg: "Fundación ALDA, Paraguay APO y Asociación de Empresarios Cristianos — compromiso activo con responsabilidad social y sostenibilidad.",
   },
   {
     slug: "altamira-group",
