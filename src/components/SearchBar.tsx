@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown, X } from "lucide-react";
+import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown, X, HardHat } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useProjectCities, type ProjectFilters } from "@/hooks/useProjects";
+import { useProjectCities, useProjectDevelopers, type ProjectFilters } from "@/hooks/useProjects";
 
 const priceRanges = [
   { label: "0 - 50.000$", min: 0, max: 50000 },
