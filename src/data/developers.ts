@@ -678,7 +678,23 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.habitalis.com.py",
     email: "habitalis@habitalis.com.py",
     phone: "+595 982 224 433",
-    description: "Incorpora especialistas en arquitectura para brindar consultoría en sus proyectos.",
+    description:
+      "Desarrolladora inmobiliaria liderada por el Arq. Víctor González Acosta, con más de 1.000.000 m² construidos y 150 proyectos desarrollados. Responsable del Sheraton Hotel, World Trade Center, Hotel Aloft y la Embajada de Estados Unidos en Asunción. HABITALIS aplica la metodología Wellness Design —arquitectura del bienestar— con la única especialista paraguaya en el área, creando edificios que mejoran el bienestar físico, mental y emocional de sus residentes. Incorpora domótica, inmótica y soluciones de ahorro energético en todos sus proyectos.",
+    logo: "/images/habitalis-logo.png",
+    heroImage: "/images/habitalis-hero.jpg",
+    stats: [
+      { label: "m² construidos", value: "100.000+" },
+      { label: "Edificios", value: "8" },
+      { label: "Barrios de Asunción", value: "6" },
+      { label: "Proyectos emblemáticos", value: "150+" },
+    ],
+    certifications: [
+      "Wellness Design — Arquitectura del Bienestar",
+      "Domótica e Inmótica integrada",
+      "Cerraduras inteligentes Bluetooth/WiFi",
+      "Impermeabilización integral de seguridad",
+    ],
+    esg: "Diseño basado en evidencia científica para mejorar la calidad de vida: iluminación circadiana, biofilia, confort acústico-térmico y materialidad saludable en cada proyecto.",
   },
   {
     slug: "altius",
