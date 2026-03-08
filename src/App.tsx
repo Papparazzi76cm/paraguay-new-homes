@@ -10,6 +10,7 @@ import ProyectosCheRogaPora from "./pages/ProyectosCheRogaPora";
 import ProjectDetail from "./pages/ProjectDetail";
 import ParaPromotores from "./pages/ParaPromotores";
 import Inversion from "./pages/Inversion";
+import Proyectos from "./pages/Proyectos";
 import DeveloperProfile from "./pages/DeveloperProfile";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
