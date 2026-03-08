@@ -1,4 +1,4 @@
-import { Building2, Mail, LogOut, LayoutDashboard, ShoppingBag } from "lucide-react";
+import { Building2, Mail, LogOut, LayoutDashboard, ShoppingBag, Settings } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
@@ -21,6 +21,7 @@ const items = [
   { title: "Proyectos", url: "/developer/projects", icon: Building2 },
   { title: "Leads", url: "/developer/leads", icon: Mail },
   { title: "Marketplace", url: "/developer/marketplace", icon: ShoppingBag },
+  { title: "Ajustes", url: "/developer/settings", icon: Settings },
 ];
 
 interface DeveloperSidebarProps {

@@ -84,6 +84,7 @@ const App = () => {
             <Route path="projects/:id" element={<DeveloperProjectForm />} />
             <Route path="leads" element={<DeveloperLeadsList />} />
             <Route path="marketplace" element={<Marketplace />} />
+            <Route path="settings" element={<DeveloperSettings />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
