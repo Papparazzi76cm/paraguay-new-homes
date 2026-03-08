@@ -189,7 +189,22 @@ export const developers: DeveloperInfo[] = [
     website: "https://tierraalta.com.py",
     email: "informes@tierraalta.com.py",
     phone: "+595 982 525500",
-    description: "Desarrolladora de viviendas en entornos con centros comerciales, financieros y de entretenimiento.",
+    description:
+      "Empresa fundada en 2005 que desarrolla exclusivos departamentos de primer nivel en las zonas residenciales más importantes de Asunción. Sus proyectos se destacan por ofrecer la mejor relación precio-calidad, con 94% de ocupación promedio en los últimos 5 años. Edificios de máximo 8 pisos y 49 departamentos, en locaciones premium cerca de centros comerciales, financieros y de entretenimiento.",
+    logo: "/images/tierraalta-logo.png",
+    heroImage: "/images/tierraalta-hero.jpg",
+    stats: [
+      { label: "Años desarrollando", value: "20" },
+      { label: "Edificios", value: "12" },
+      { label: "M² construidos", value: "50.000+" },
+      { label: "Ocupación promedio", value: "94%" },
+    ],
+    certifications: [
+      "Mejor relación precio-calidad del mercado",
+      "94% de ocupación promedio en últimos 5 años",
+      "Edificios de máximo 8 pisos y 49 departamentos",
+      "Locaciones premium en zonas estratégicas",
+    ],
   },
   {
     slug: "blue-tower-paraguay",
