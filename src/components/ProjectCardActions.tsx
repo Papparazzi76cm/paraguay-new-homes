@@ -29,13 +29,17 @@ const ProjectCardActions = ({ projectId, projectTitle, projectSlug }: ProjectCar
     toggleFavorite.mutate({ projectId, isFavorited });
   };
 
-  const handleShare = (e: React.MouseEvent) => {
+  const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     const url = `${window.location.origin}/proyecto/${projectSlug}`;
-    navigator.clipboard.writeText(url).then(() => {
+    const shareData = { title: projectTitle, text: `Mirá este proyecto: ${projectTitle}`, url };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch {}
+    } else {
+      await navigator.clipboard.writeText(url);
       toast.success(`Enlace de "${projectTitle}" copiado`);
-    });
+    }
   };
 
   return (
