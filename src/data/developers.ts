@@ -233,9 +233,24 @@ export const developers: DeveloperInfo[] = [
     slug: "paraguay-development",
     name: "Paraguay Development S.A",
     website: "http://paraguaydevelopment.com.py",
-    email: "",
+    email: "info@paraguaydevelopment.com.py",
     phone: "+595 986 900 828",
-    description: "Desarrollo inmobiliario focalizado en las mejores ubicaciones de Paraguay.",
+    description:
+      "Desarrolladora inmobiliaria con más de 100.000 m² construidos en los últimos 15 años, posicionándose como una de las que más metros ha construido en Asunción. Sus edificios The One, The Tower, The One Downtown, The Forest, The Top Business Center, The Avenue y Menabi representan una propuesta innovadora y de calidad. Administra más de 190 unidades entre departamentos de alquiler y oficinas corporativas. Inversiones gestionadas por más de USD 135 millones.",
+    logo: "/images/pydev-logo.png",
+    heroImage: "/images/pydev-hero.jpg",
+    stats: [
+      { label: "M² construidos", value: "100.000+" },
+      { label: "Inversión total", value: "USD 135M+" },
+      { label: "Edificios", value: "8" },
+      { label: "Años de experiencia", value: "15+" },
+    ],
+    certifications: [
+      "Una de las desarrolladoras con más m² construidos en Asunción",
+      "Administración de +190 unidades (alquiler y corporativo)",
+      "Financiación directa disponible",
+      "Enfoque ecológico en manejo de residuos",
+    ],
   },
   {
     slug: "grupo-barcelona",
