@@ -258,7 +258,22 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.grupobarcelona.com.py",
     email: "info@grupobarcelona.com.py",
     phone: "+595 986 157 077",
-    description: "Proyectos inmobiliarios en zonas estratégicas del centro de Asunción.",
+    description:
+      "Grupo Barcelona impulsa proyectos que combinan diseño, innovación y calidad. Con más de 15 años de experiencia, se especializan en el ciclo completo del desarrollo inmobiliario: desde la idea del proyecto hasta la postventa. Sus unidades de negocio incluyen BCN Construcciones, Hotel Palmaroga (Tapestry Collection by Hilton) y B360 (administración de edificios). Presencia en Asunción, Encarnación y Ciudad del Este. Compromiso social con Fundación Alda.",
+    logo: "/images/gbarcelona-logo.png",
+    heroImage: "/images/gbarcelona-hero.jpg",
+    stats: [
+      { label: "Años de experiencia", value: "15+" },
+      { label: "Proyectos activos", value: "8" },
+      { label: "Ciudades", value: "3" },
+      { label: "Unidades de negocio", value: "4" },
+    ],
+    certifications: [
+      "BCN Construcciones — construcción con altos estándares",
+      "Hotel Palmaroga — Tapestry Collection by Hilton",
+      "B360 — administración de edificios y departamentos",
+      "Compromiso social con Fundación Alda",
+    ],
   },
   {
     slug: "petra-urbana",
