@@ -355,6 +355,34 @@ const ProjectForm = () => {
           <Input value={form.amenities} onChange={(e) => set("amenities", e.target.value)} placeholder="Piscina, Gym, Quincho" />
         </div>
 
+        {/* Units */}
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Unidades por tipología</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {unitTypologies.map((typ) => (
+              <div key={typ.value} className="flex items-center justify-between bg-muted/50 rounded-xl px-4 py-3">
+                <span className="text-sm font-medium text-foreground">{typ.label}</span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setUnits((prev) => ({ ...prev, [typ.value]: Math.max(0, (prev[typ.value] || 0) - 1) }))}
+                    className="w-7 h-7 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="w-8 text-center text-sm font-semibold text-foreground">{units[typ.value] || 0}</span>
+                  <button
+                    type="button"
+                    onClick={() => setUnits((prev) => ({ ...prev, [typ.value]: Math.min(200, (prev[typ.value] || 0) + 1) }))}
+                    className="w-7 h-7 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Phase dates */}
         <div>
           <h3 className="font-semibold text-foreground mb-3">Fechas del cronograma</h3>
