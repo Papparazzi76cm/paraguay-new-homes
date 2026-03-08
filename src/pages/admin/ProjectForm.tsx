@@ -178,11 +178,26 @@ const ProjectForm = () => {
         return data.id;
       }
     },
-    onSuccess: (projectId: string) => {
+    onSuccess: async (projectId: string) => {
+      // Save units
+      // Delete existing units for this project
+      await supabase.from("project_units").delete().eq("project_id", projectId);
+      // Insert new units
+      const unitRows = Object.entries(units).flatMap(([typology, count]) =>
+        Array.from({ length: count }, (_, i) => ({
+          project_id: projectId,
+          typology: typology as any,
+          unit_name: `${typology.replace(/_/g, " ")} ${i + 1}`,
+        }))
+      );
+      if (unitRows.length > 0) {
+        await supabase.from("project_units").insert(unitRows);
+      }
+
       queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-project-units", projectId] });
       toast.success(isEditing ? "Proyecto actualizado" : "Proyecto creado");
       if (!isEditing) {
-        // Redirect to edit mode so images can be uploaded
         navigate(`/admin/projects/${projectId}`, { replace: true });
       }
     },
