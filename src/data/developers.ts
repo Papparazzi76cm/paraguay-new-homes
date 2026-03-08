@@ -374,8 +374,23 @@ export const developers: DeveloperInfo[] = [
     name: "Escala Desarrollos S.A",
     website: "https://escaladesarrollos.com",
     email: "info@escaladesarrollos.com",
-    phone: "+595 21 338 4133",
-    description: "Desarrolladora inmobiliaria en Paraguay.",
+    phone: "+595 984 200 820",
+    description:
+      "Desarrolladora inmobiliaria con equipo de profesionales con amplia trayectoria en Uruguay, Paraguay y otros países de la región. Trabajan con convicción y transparencia desarrollando proyectos que aporten valor, mejorando la calidad de vida de las personas y generando un entorno más sustentable. Proyectos en locaciones estratégicas con diseño, calidad y estándares internacionales. Asociados con Grupo Casal y Millenia.",
+    logo: "/images/escala-logo.png",
+    heroImage: "/images/escala-hero.jpg",
+    stats: [
+      { label: "Proyectos activos", value: "3" },
+      { label: "Países", value: "2" },
+      { label: "Equipo directivo", value: "6" },
+      { label: "Enfoque", value: "Sustentable" },
+    ],
+    certifications: [
+      "Presencia en Uruguay y Paraguay",
+      "Estándares internacionales de diseño",
+      "Asociados con Grupo Casal y Millenia",
+      "Foco en rentabilidad para inversores",
+    ],
   },
   {
     slug: "san-gerardo",
