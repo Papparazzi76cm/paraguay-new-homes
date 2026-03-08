@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
+import ProjectCardActions from "@/components/ProjectCardActions";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import { useNonFeaturedProjects, type ProjectFilters, type Project } from "@/hooks/useProjects";
 import { useCurrency } from "@/hooks/useCurrency";
