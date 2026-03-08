@@ -599,7 +599,16 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.vivabien.com.py",
     email: "contactos@vivabien.com.py",
     phone: "+595 982 806 166",
-    description: "Encontrá tu hogar ideal que se ajuste a tu estilo de vida y preferencias.",
+    description:
+      "VIVABIEN S.A. fue creada en 2005 como un sistema innovador de ahorro e inversión inmobiliaria en Paraguay. Permite formar capital respaldado en metros cuadrados con cuotas en guaraníes, brindando seguridad única en el mercado. Con más de Gs. 109.000 millones invertidos en obras, ofrece planes Classic y Premium con financiación propia y licitaciones mensuales. Sede en Av. Aviadores del Chaco 2812, Asunción.",
+    logo: "/images/vivabien-logo.svg",
+    heroImage: "/images/vivabien-hero.jpg",
+    stats: [
+      { label: "Inversión total en obras", value: "Gs. 109B+" },
+      { label: "Años de trayectoria", value: "20" },
+      { label: "Edificios propios", value: "4" },
+      { label: "Ciudades", value: "3" },
+    ],
   },
   {
     slug: "raices-real-state",
