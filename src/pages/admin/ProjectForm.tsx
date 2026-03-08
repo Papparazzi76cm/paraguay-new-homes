@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { ArrowLeft, Upload, Trash2, Star, Loader2, Plus, Minus } from "lucide-react";
 import UnitDetailEditor from "@/components/admin/UnitDetailEditor";
+import AmenitiesGrid from "@/components/admin/AmenitiesGrid";
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
