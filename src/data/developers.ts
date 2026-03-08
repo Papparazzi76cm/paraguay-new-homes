@@ -698,11 +698,27 @@ export const developers: DeveloperInfo[] = [
   },
   {
     slug: "altius",
-    name: "Altius",
+    name: "Altius Group",
     website: "https://www.altius.com.py",
     email: "info@altius.com.py",
     phone: "+595 972 150 100",
-    description: "Desarrolladora inmobiliaria en Paraguay.",
+    description:
+      "Altius Group es uno de los principales desarrolladores inmobiliarios de Uruguay, con operaciones en Paraguay, Panamá y México. Respaldado por Peninsula Investments Group, uno de los fondos de desarrollo inmobiliario más importantes de Latinoamérica con +$5.2B en activos bajo gestión. En Paraguay desde 2019, desarrolla proyectos de primera categoría bajo la marca MORE y proyectos residenciales como Nostrum Trinidad y Los Pingos Club de Campo.",
+    logo: "/images/altius-logo.png",
+    heroImage: "/images/altius-hero.jpg",
+    stats: [
+      { label: "Proyectos desarrollados", value: "+79" },
+      { label: "Millones m² construidos", value: "1.9" },
+      { label: "Unidades residenciales", value: "28.000" },
+      { label: "m² comerciales", value: "64.000" },
+    ],
+    certifications: [
+      "Respaldo de Peninsula Investments Group",
+      "Presencia en 4 países de América",
+      "Arquitectura de Julia Galanti y Gómez Platero",
+      "Tour virtual 360° en todos los proyectos",
+    ],
+    esg: "Integración de jardines internos y espacios verdes en proyectos urbanos. Diseño enfocado en bienestar, conectividad y comunidad.",
   },
 ];
 
