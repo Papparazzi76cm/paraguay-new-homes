@@ -13,6 +13,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { Link } from "react-router-dom";
 import { MapPin, TrendingUp, Building, Loader2, Home } from "lucide-react";
+import { getDeveloperByName } from "@/data/developers";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
