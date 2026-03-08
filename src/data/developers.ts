@@ -373,23 +373,7 @@ export const developers: DeveloperInfo[] = [
       "Foco en rentabilidad para inversores",
     ],
   },
-  {
-    slug: "san-gerardo",
-    name: "San Gerardo Inmobiliaria S.A",
-    website: "https://www.sangerardoinmobiliaria.com",
-    email: "info@sangerardoinmobiliaria.com",
-    phone: "+595 982 822 328",
-    description:
-      "Empresa inmobiliaria en Asunción conformada por un staff de jóvenes profesionales que se capacitan permanentemente para proveer el mejor servicio inmobiliario. Cuentan con diversos tipos de inmuebles en venta o alquiler: casas, terrenos, departamentos, oficinas y locales comerciales en Asunción, Gran Asunción y el resto del país. Operan como intermediarios inmobiliarios con cartera de propiedades en zonas premium como Santísima Trinidad, Carmelitas, San Bernardino y más.",
-    logo: "/images/sangerardo-logo.png",
-    heroImage: "/images/sangerardo-hero.jpg",
-    stats: [
-      { label: "Tipo", value: "Inmobiliaria" },
-      { label: "Cobertura", value: "Nacional" },
-      { label: "Zonas", value: "10+" },
-      { label: "Servicios", value: "Venta/Alquiler" },
-    ],
-  },
+  
   {
     slug: "nicasio-acosta",
     name: "Nicasio Acosta e Hijos S.A",
