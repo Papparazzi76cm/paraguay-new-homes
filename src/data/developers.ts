@@ -54,6 +54,7 @@ export const developers: DeveloperInfo[] = [
     email: "info@cvsa.com.py",
     phone: "+595 981 909706",
     description: "Empresa constructora y de ingeniería con amplia trayectoria en Paraguay.",
+    logo: "/images/codasvuyk-logo.png",
   },
   {
     slug: "block",
