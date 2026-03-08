@@ -305,7 +305,22 @@ export const developers: DeveloperInfo[] = [
     website: "http://www.gomezabente.com.py",
     email: "info@gomezabente.com.py",
     phone: "+595 21 604 960",
-    description: "Empresa constructora con trayectoria en el mercado inmobiliario paraguayo.",
+    description:
+      "Empresa constructora fundada en 2012 por los ingenieros Santiago Gómez Grassi y Miguel Abente Brun, con más de 34 años de experiencia en el mundo de la construcción en Paraguay. Servicios integrales de calidad superior en edificios en altura, obras industriales, comerciales y residenciales. Clientes destacados: BMW, Unilever, Cervepar, Mapfre, Banco Familiar, Index. Oficinas corporativas sustentables con concepto eco-friendly. Obras emblemáticas: The One (21 pisos), Paraqvaria, The Tower, Torre Pride, Noray Tower, Caja Mutual.",
+    logo: "/images/gomezabente-logo.png",
+    heroImage: "/images/gomezabente-hero.jpg",
+    stats: [
+      { label: "Años de experiencia", value: "34+" },
+      { label: "Edificios en altura", value: "7" },
+      { label: "Obras industriales", value: "15+" },
+      { label: "Obras comerciales", value: "10+" },
+    ],
+    certifications: [
+      "Oficinas corporativas sustentables y eco-friendly",
+      "Servicios llave en mano",
+      "Obras para BMW, Unilever, Cervepar, Mapfre",
+      "Equipo con formación internacional",
+    ],
   },
   {
     slug: "park-avenue-eminent",
