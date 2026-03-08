@@ -54,6 +54,7 @@ const App = () => {
           <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
           <Route path="/proyecto/:slug" element={<ProjectDetail />} />
           <Route path="/para-promotores" element={<ParaPromotores />} />
+          <Route path="/promotores" element={<Promotores />} />
           <Route path="/promotor/:slug" element={<DeveloperProfile />} />
           <Route path="/inversion" element={<Inversion />} />
           <Route path="/blog" element={<Blog />} />
