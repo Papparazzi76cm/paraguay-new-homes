@@ -189,6 +189,7 @@ export type Database = {
           project_id: string
           typology: Database["public"]["Enums"]["unit_typology"]
           unit_name: string
+          unit_type: string | null
         }
         Insert: {
           area_m2?: number | null
@@ -201,6 +202,7 @@ export type Database = {
           project_id: string
           typology?: Database["public"]["Enums"]["unit_typology"]
           unit_name: string
+          unit_type?: string | null
         }
         Update: {
           area_m2?: number | null
@@ -213,6 +215,7 @@ export type Database = {
           project_id?: string
           typology?: Database["public"]["Enums"]["unit_typology"]
           unit_name?: string
+          unit_type?: string | null
         }
         Relationships: [
           {
@@ -369,6 +372,44 @@ export type Database = {
             columns: ["service_id"]
             isOneToOne: false
             referencedRelation: "marketplace_services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      unit_media: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          id: string
+          media_type: string
+          media_url: string
+          sort_order: number | null
+          unit_id: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          media_type: string
+          media_url: string
+          sort_order?: number | null
+          unit_id: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          media_type?: string
+          media_url?: string
+          sort_order?: number | null
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_media_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "project_units"
             referencedColumns: ["id"]
           },
         ]
