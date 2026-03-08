@@ -133,9 +133,9 @@ const DeveloperProfile = () => {
             transition={{ duration: 0.7 }}
             className="flex flex-col md:flex-row items-start md:items-center gap-6"
           >
-            {meta.logo ? (
+            {resolvedLogo ? (
               <img
-                src={meta.logo}
+                src={resolvedLogo}
                 alt={`Logo ${meta.name}`}
                 className="h-20 md:h-24 w-auto rounded-xl bg-background/10 backdrop-blur-sm p-3"
               />
