@@ -132,7 +132,16 @@ export const developers: DeveloperInfo[] = [
     website: "http://www.miaterra.com",
     email: "",
     phone: "+595 986 888 279",
-    description: "Empresa paraguaya que combina profesionalismo, versatilidad y eficiencia en el desarrollo inmobiliario.",
+    description:
+      "Empresa paraguaya que combina profesionalismo, versatilidad y eficiencia para ofrecer soluciones inmobiliarias de calidad y alternativas confiables de inversión. Con más de 15 edificios terminados en Asunción, Mia Terra se posiciona como una desarrolladora de referencia en el mercado residencial paraguayo.",
+    logo: "/images/miaterra-logo.png",
+    heroImage: "/images/miaterra-hero.png",
+    stats: [
+      { label: "Edificios terminados", value: "15+" },
+      { label: "Proyectos en venta", value: "4" },
+      { label: "Años de experiencia", value: "10+" },
+      { label: "Departamentos entregados", value: "500+" },
+    ],
   },
   {
     slug: "delgado-arquitectos",
