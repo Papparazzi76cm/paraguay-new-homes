@@ -500,6 +500,8 @@ export type Database = {
         | "1_dormitorio"
         | "2_dormitorios"
         | "3_dormitorios"
+        | "4_dormitorios"
+        | "5_dormitorios"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -640,6 +642,8 @@ export const Constants = {
         "1_dormitorio",
         "2_dormitorios",
         "3_dormitorios",
+        "4_dormitorios",
+        "5_dormitorios",
       ],
     },
   },

@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { ArrowLeft, Upload, Trash2, Star, Loader2 } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, Star, Loader2, Plus, Minus } from "lucide-react";
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -20,6 +20,17 @@ const ProjectForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
+
+  const unitTypologies = [
+    { value: "monoambiente", label: "Monoambiente" },
+    { value: "1_dormitorio", label: "1 Dormitorio" },
+    { value: "2_dormitorios", label: "2 Dormitorios" },
+    { value: "3_dormitorios", label: "3 Dormitorios" },
+    { value: "4_dormitorios", label: "4 Dormitorios" },
+    { value: "5_dormitorios", label: "5 Dormitorios" },
+  ];
+
+  const [units, setUnits] = useState<Record<string, number>>({});
 
   const [form, setForm] = useState({
     title: "",
@@ -69,6 +80,29 @@ const ProjectForm = () => {
     },
     enabled: isEditing,
   });
+
+  // Load existing units
+  const { data: existingUnits } = useQuery({
+    queryKey: ["admin-project-units", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("project_units")
+        .select("typology, id")
+        .eq("project_id", id!);
+      if (error) throw error;
+      // Count units per typology
+      const counts: Record<string, number> = {};
+      for (const u of data) {
+        counts[u.typology] = (counts[u.typology] || 0) + 1;
+      }
+      return counts;
+    },
+    enabled: isEditing,
+  });
+
+  useEffect(() => {
+    if (existingUnits) setUnits(existingUnits);
+  }, [existingUnits]);
 
   useEffect(() => {
     if (existing) {
@@ -144,11 +178,26 @@ const ProjectForm = () => {
         return data.id;
       }
     },
-    onSuccess: (projectId: string) => {
+    onSuccess: async (projectId: string) => {
+      // Save units
+      // Delete existing units for this project
+      await supabase.from("project_units").delete().eq("project_id", projectId);
+      // Insert new units
+      const unitRows = Object.entries(units).flatMap(([typology, count]) =>
+        Array.from({ length: count }, (_, i) => ({
+          project_id: projectId,
+          typology: typology as any,
+          unit_name: `${typology.replace(/_/g, " ")} ${i + 1}`,
+        }))
+      );
+      if (unitRows.length > 0) {
+        await supabase.from("project_units").insert(unitRows);
+      }
+
       queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-project-units", projectId] });
       toast.success(isEditing ? "Proyecto actualizado" : "Proyecto creado");
       if (!isEditing) {
-        // Redirect to edit mode so images can be uploaded
         navigate(`/admin/projects/${projectId}`, { replace: true });
       }
     },
@@ -306,6 +355,34 @@ const ProjectForm = () => {
           <Input value={form.amenities} onChange={(e) => set("amenities", e.target.value)} placeholder="Piscina, Gym, Quincho" />
         </div>
 
+        {/* Units */}
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Unidades por tipología</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {unitTypologies.map((typ) => (
+              <div key={typ.value} className="flex items-center justify-between bg-muted/50 rounded-xl px-4 py-3">
+                <span className="text-sm font-medium text-foreground">{typ.label}</span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setUnits((prev) => ({ ...prev, [typ.value]: Math.max(0, (prev[typ.value] || 0) - 1) }))}
+                    className="w-7 h-7 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="w-8 text-center text-sm font-semibold text-foreground">{units[typ.value] || 0}</span>
+                  <button
+                    type="button"
+                    onClick={() => setUnits((prev) => ({ ...prev, [typ.value]: Math.min(200, (prev[typ.value] || 0) + 1) }))}
+                    className="w-7 h-7 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Phase dates */}
         <div>
           <h3 className="font-semibold text-foreground mb-3">Fechas del cronograma</h3>
