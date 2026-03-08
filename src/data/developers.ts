@@ -210,9 +210,24 @@ export const developers: DeveloperInfo[] = [
     slug: "blue-tower-paraguay",
     name: "Blue Tower Paraguay S.A",
     website: "https://www.paseolagaleria.com.py",
-    email: "atc@paseolagaleria.com.py",
+    email: "info@paseo55.com.py",
     phone: "+595 21 659 4000",
-    description: "Grupo empresarial con operaciones en Guatemala, El Salvador, Costa Rica y Paraguay.",
+    description:
+      "Grupo empresarial con operaciones en Guatemala, El Salvador, Costa Rica y Paraguay. Parte de Grupo Onyx, responsable de Paseo La Galería y del proyecto Paseo 55, la torre residencial más alta de Paraguay con 212 metros y 55 pisos. Inversión total de más de USD 500 millones desde su llegada al país en 2014.",
+    logo: "/images/bluetower-logo.png",
+    heroImage: "/images/bluetower-hero.jpg",
+    stats: [
+      { label: "Inversión total", value: "USD 500M+" },
+      { label: "Altura Paseo 55", value: "212m" },
+      { label: "Pisos", value: "55" },
+      { label: "Desde", value: "2014" },
+    ],
+    certifications: [
+      "Torre residencial más alta de Paraguay",
+      "Top 10 torres más altas del Cono Sur",
+      "Grupo Onyx — presencia regional",
+      "Conexión directa a Paseo La Galería",
+    ],
   },
   {
     slug: "paraguay-development",
