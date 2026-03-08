@@ -140,23 +140,7 @@ export const developers: DeveloperInfo[] = [
       { label: "Departamentos entregados", value: "500+" },
     ],
   },
-  {
-    slug: "delgado-arquitectos",
-    name: "Delgado Arquitectos",
-    website: "http://www.delgadoarquitectos.com",
-    email: "info@delgadoarquitectos.com",
-    phone: "+595 21 205 648",
-    description:
-      "Más de 30 años en el estudio de factibilidad, asesoramiento inmobiliario, diseño, desarrollo y construcción integral de proyectos habitacionales, comerciales, empresariales, corporativos e institucionales. Con 35 edificios construidos y 850 unidades habitacionales entregadas, Delgado Arquitectos (DASA Construye) es sinónimo de seriedad y solvencia en el mercado paraguayo.",
-    logo: "/images/delgado-logo.png",
-    heroImage: "/images/delgado-hero.jpg",
-    stats: [
-      { label: "Edificios construidos", value: "35" },
-      { label: "M² construidos", value: "51.000" },
-      { label: "Unidades entregadas", value: "850+" },
-      { label: "Años de experiencia", value: "30+" },
-    ],
-  },
+  
   {
     slug: "gonu",
     name: "Gonu S.A",
