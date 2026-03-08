@@ -74,7 +74,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
       className="w-full max-w-5xl mx-auto"
     >
       <div className="bg-card rounded-2xl shadow-elevated p-2 md:p-3">
-        <div className="flex flex-col md:flex-row md:items-center gap-2">
+        <div className="flex flex-col md:flex-wrap md:flex-row md:items-center gap-2">
           <FilterButton
             icon={<MapPin className="w-4 h-4" />}
             label={t("search.city")}
