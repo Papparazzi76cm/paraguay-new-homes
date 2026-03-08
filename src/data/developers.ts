@@ -76,30 +76,6 @@ export const developers: DeveloperInfo[] = [
     ],
   },
   {
-    slug: "inmobiliaria-del-este",
-    name: "Inmobiliaria del Este",
-    website: "https://www.idesa.com.py",
-    email: "contacto@idesa.com.py",
-    phone: "+595 972 413 100",
-    description:
-      "Empresa inmobiliaria líder en Paraguay con más de 53 años de trayectoria. #1 en recordación de marca del rubro inmobiliario y #1 en el ranking de aportes al fisco. Especializada en loteamientos, barrios cerrados y desarrollos de departamentos.",
-    logo: "/images/idesa-logo.svg",
-    heroImage: "/images/idesa-hero.webp",
-    stats: [
-      { label: "Años de trayectoria", value: "+53" },
-      { label: "Urbanizaciones desarrolladas", value: "+900" },
-      { label: "Clientes activos", value: "+50.000" },
-      { label: "Terrenos comercializados", value: "+150.000" },
-    ],
-    certifications: [
-      "Certificación ISO 9001:2015",
-      "#1 en recordación de marca inmobiliaria",
-      "#1 en ranking de aportes al fisco",
-      "+70 municipios con urbanizaciones",
-      "+3.500 hectáreas propias por desarrollar",
-    ],
-  },
-  {
     slug: "itasa",
     name: "Itasã S.A",
     website: "http://www.itasa.com.py",
