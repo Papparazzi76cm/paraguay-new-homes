@@ -46,6 +46,7 @@ export const developers: DeveloperInfo[] = [
     phone: "+595 21 201 791",
     description: "Empresa constructora responsable del primer edificio con Certificación LEED en Paraguay (BBVA Banco Casa Matriz).",
     logo: "/images/agb-logo.png",
+    heroImage: "/images/agb-hero.jpg",
   },
   {
     slug: "codas-vuyk",
