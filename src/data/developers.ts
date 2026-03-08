@@ -419,6 +419,7 @@ export const developers: DeveloperInfo[] = [
     phone: "",
     description:
       "Grupo empresarial con más de 27 años de trayectoria, enfocado en agro business y desarrollo inmobiliario en Paraguay. Presidido por Luis Acosta Montanaro, arquitecto con formación en la Université Paris X Nanterre (Francia). Empresa de carácter privado con sede en Asunción.",
+    logo: "/images/nicasioacosta-logo.png",
     stats: [
       { label: "Años de trayectoria", value: "27+" },
       { label: "Sectores", value: "Agro / Real Estate" },
