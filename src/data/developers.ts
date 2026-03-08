@@ -45,6 +45,7 @@ export const developers: DeveloperInfo[] = [
     email: "contacto@agb.com.py",
     phone: "+595 21 201 791",
     description: "Empresa constructora responsable del primer edificio con Certificación LEED en Paraguay (BBVA Banco Casa Matriz).",
+    logo: "/images/agb-logo.png",
   },
   {
     slug: "codas-vuyk",
