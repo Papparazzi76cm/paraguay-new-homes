@@ -34,6 +34,7 @@ import DeveloperProjectsList from "./pages/developer/DeveloperProjectsList";
 import DeveloperProjectForm from "./pages/developer/DeveloperProjectForm";
 import DeveloperLeadsList from "./pages/developer/DeveloperLeadsList";
 import Marketplace from "./pages/developer/Marketplace";
+import DeveloperSettings from "./pages/developer/DeveloperSettings";
 import { useTheme } from "./hooks/useTheme";
 
 const queryClient = new QueryClient();
@@ -83,6 +84,7 @@ const App = () => {
             <Route path="projects/:id" element={<DeveloperProjectForm />} />
             <Route path="leads" element={<DeveloperLeadsList />} />
             <Route path="marketplace" element={<Marketplace />} />
+            <Route path="settings" element={<DeveloperSettings />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
