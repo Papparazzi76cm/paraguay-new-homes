@@ -56,6 +56,31 @@ const DeveloperProfile = () => {
     enabled: !!meta,
   });
 
+  // Fetch uploaded logo from developer's profile (avatar_url) via developer_id on projects
+  const { data: devProfile } = useQuery({
+    queryKey: ["developer-profile-logo", meta?.name],
+    queryFn: async () => {
+      // Get the developer_id from the first project
+      const { data: proj } = await supabase
+        .from("projects")
+        .select("developer_id")
+        .eq("developer_name", meta!.name)
+        .not("developer_id", "is", null)
+        .limit(1)
+        .maybeSingle();
+      if (!proj?.developer_id) return null;
+      const { data } = await supabase
+        .from("profiles")
+        .select("avatar_url")
+        .eq("user_id", proj.developer_id)
+        .maybeSingle();
+      return data;
+    },
+    enabled: !!meta,
+  });
+
+  const resolvedLogo = devProfile?.avatar_url || meta?.logo;
+
   if (!meta) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -108,9 +133,9 @@ const DeveloperProfile = () => {
             transition={{ duration: 0.7 }}
             className="flex flex-col md:flex-row items-start md:items-center gap-6"
           >
-            {meta.logo ? (
+            {resolvedLogo ? (
               <img
-                src={meta.logo}
+                src={resolvedLogo}
                 alt={`Logo ${meta.name}`}
                 className="h-20 md:h-24 w-auto rounded-xl bg-background/10 backdrop-blur-sm p-3"
               />
