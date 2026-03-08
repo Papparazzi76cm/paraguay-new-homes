@@ -49,6 +49,7 @@ const SmallProjectCard = ({ project, index }: { project: Project; index: number 
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
+          <ProjectCardActions projectId={project.id} projectTitle={project.title} projectSlug={project.slug} />
           <div className="absolute top-4 left-4 flex gap-2">
             <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColor[project.status] || "bg-secondary text-secondary-foreground"}`}>
               {t(`projectStatus.${project.status}`)}
