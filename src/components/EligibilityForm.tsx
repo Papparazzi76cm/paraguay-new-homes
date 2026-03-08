@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle, AlertTriangle, ClipboardCheck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +13,7 @@ const SALARIO_MINIMO = 2_680_373;
 type Result = "elegible" | "elegible_con_condiciones" | "no_elegible" | null;
 
 const EligibilityForm = () => {
+  const { t } = useTranslation();
   const [age, setAge] = useState("");
   const [income, setIncome] = useState("");
   const [hasHome, setHasHome] = useState("");
@@ -35,13 +37,11 @@ const EligibilityForm = () => {
 
     const inSalarios = incomeNum / SALARIO_MINIMO;
 
-    // Hard disqualifiers
     if (ageNum < 18 || ageNum > 75) { setResult("no_elegible"); return; }
     if (hasHome === "si") { setResult("no_elegible"); return; }
     if (inSalarios > 6) { setResult("no_elegible"); return; }
     if (inSalarios < 1) { setResult("no_elegible"); return; }
 
-    // Conditions
     let conditions = 0;
     if (empYears && !isNaN(empYears) && empYears < 1) conditions++;
     if (ageNum > 65) conditions++;
@@ -63,9 +63,9 @@ const EligibilityForm = () => {
   };
 
   const resultConfig = {
-    elegible: { icon: CheckCircle, color: "text-primary", bg: "bg-primary/10 border-primary/20", title: "¡Cumplís los requisitos!", desc: "Según los datos ingresados, tenés alta probabilidad de ser elegible para el programa Che Róga Porã." },
-    elegible_con_condiciones: { icon: AlertTriangle, color: "text-accent", bg: "bg-accent/10 border-accent/20", title: "Elegible con condiciones", desc: "Podrías acceder al programa, pero hay factores que necesitan verificación adicional con la entidad financiera." },
-    no_elegible: { icon: XCircle, color: "text-destructive", bg: "bg-destructive/10 border-destructive/20", title: "No cumplís los requisitos", desc: "Según los datos ingresados, no cumplís con los requisitos actuales del programa. Consultá otras opciones de financiación." },
+    elegible: { icon: CheckCircle, color: "text-primary", bg: "bg-primary/10 border-primary/20", title: t("cheRoga.eligResultOk"), desc: t("cheRoga.eligResultOkDesc") },
+    elegible_con_condiciones: { icon: AlertTriangle, color: "text-accent", bg: "bg-accent/10 border-accent/20", title: t("cheRoga.eligResultCond"), desc: t("cheRoga.eligResultCondDesc") },
+    no_elegible: { icon: XCircle, color: "text-destructive", bg: "bg-destructive/10 border-destructive/20", title: t("cheRoga.eligResultNo"), desc: t("cheRoga.eligResultNoDesc") },
   };
 
   return (
@@ -77,54 +77,48 @@ const EligibilityForm = () => {
     >
       <div className="flex items-center gap-2 mb-6">
         <ClipboardCheck className="w-5 h-5 text-primary" />
-        <h3 className="font-display text-xl font-semibold text-foreground">Pre-calificación Che Róga Porã</h3>
+        <h3 className="font-display text-xl font-semibold text-foreground">{t("cheRoga.eligTitle")}</h3>
       </div>
 
-      <p className="text-muted-foreground text-sm mb-6">
-        Comprobá si cumplís con los requisitos básicos del programa de vivienda del gobierno paraguayo.
-      </p>
+      <p className="text-muted-foreground text-sm mb-6">{t("cheRoga.eligSubtitle")}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="space-y-2">
-          <Label>Edad</Label>
-          <Input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Ej: 32" min={18} max={99} />
+          <Label>{t("cheRoga.eligAge")}</Label>
+          <Input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder={t("cheRoga.eligAgePlaceholder")} min={18} max={99} />
         </div>
         <div className="space-y-2">
-          <Label>Ingreso mensual del hogar (Gs.)</Label>
-          <Input
-            value={income}
-            onChange={(e) => setIncome(e.target.value)}
-            placeholder="Ej: 5.000.000"
-          />
+          <Label>{t("cheRoga.eligIncome")}</Label>
+          <Input value={income} onChange={(e) => setIncome(e.target.value)} placeholder={t("cheRoga.eligIncomePlaceholder")} />
         </div>
         <div className="space-y-2">
-          <Label>¿Tenés vivienda propia?</Label>
+          <Label>{t("cheRoga.eligHasHome")}</Label>
           <Select value={hasHome} onValueChange={setHasHome}>
-            <SelectTrigger><SelectValue placeholder="Seleccioná" /></SelectTrigger>
+            <SelectTrigger><SelectValue placeholder={t("cheRoga.eligSelect")} /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="no">No</SelectItem>
-              <SelectItem value="si">Sí</SelectItem>
+              <SelectItem value="no">{t("cheRoga.eligNo")}</SelectItem>
+              <SelectItem value="si">{t("cheRoga.eligYes")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>¿Tenés terreno propio?</Label>
+          <Label>{t("cheRoga.eligHasTerrain")}</Label>
           <Select value={hasTerrain} onValueChange={setHasTerrain}>
-            <SelectTrigger><SelectValue placeholder="Seleccioná" /></SelectTrigger>
+            <SelectTrigger><SelectValue placeholder={t("cheRoga.eligSelect")} /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="no">No</SelectItem>
-              <SelectItem value="si">Sí</SelectItem>
+              <SelectItem value="no">{t("cheRoga.eligNo")}</SelectItem>
+              <SelectItem value="si">{t("cheRoga.eligYes")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>Años de estabilidad laboral</Label>
-          <Input type="number" value={employmentYears} onChange={(e) => setEmploymentYears(e.target.value)} placeholder="Ej: 3" min={0} />
+          <Label>{t("cheRoga.eligEmploymentYears")}</Label>
+          <Input type="number" value={employmentYears} onChange={(e) => setEmploymentYears(e.target.value)} placeholder={t("cheRoga.eligEmploymentPlaceholder")} min={0} />
         </div>
         <div className="space-y-2">
-          <Label>Ciudad</Label>
+          <Label>{t("cheRoga.eligCity")}</Label>
           <Select value={city} onValueChange={setCity}>
-            <SelectTrigger><SelectValue placeholder="Seleccioná" /></SelectTrigger>
+            <SelectTrigger><SelectValue placeholder={t("cheRoga.eligSelect")} /></SelectTrigger>
             <SelectContent>
               <SelectItem value="Asunción">Asunción</SelectItem>
               <SelectItem value="Ciudad del Este">Ciudad del Este</SelectItem>
@@ -132,27 +126,27 @@ const EligibilityForm = () => {
               <SelectItem value="Luque">Luque</SelectItem>
               <SelectItem value="San Lorenzo">San Lorenzo</SelectItem>
               <SelectItem value="Fernando de la Mora">Fernando de la Mora</SelectItem>
-              <SelectItem value="Otra">Otra ciudad</SelectItem>
+              <SelectItem value="Otra">{t("cheRoga.eligOtherCity")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>Estado civil</Label>
+          <Label>{t("cheRoga.eligMaritalStatus")}</Label>
           <Select value={maritalStatus} onValueChange={setMaritalStatus}>
-            <SelectTrigger><SelectValue placeholder="Seleccioná" /></SelectTrigger>
+            <SelectTrigger><SelectValue placeholder={t("cheRoga.eligSelect")} /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="soltero">Soltero/a</SelectItem>
-              <SelectItem value="casado">Casado/a</SelectItem>
-              <SelectItem value="union_libre">Unión libre</SelectItem>
-              <SelectItem value="divorciado">Divorciado/a</SelectItem>
-              <SelectItem value="viudo">Viudo/a</SelectItem>
+              <SelectItem value="soltero">{t("cheRoga.eligSingle")}</SelectItem>
+              <SelectItem value="casado">{t("cheRoga.eligMarried")}</SelectItem>
+              <SelectItem value="union_libre">{t("cheRoga.eligPartnership")}</SelectItem>
+              <SelectItem value="divorciado">{t("cheRoga.eligDivorced")}</SelectItem>
+              <SelectItem value="viudo">{t("cheRoga.eligWidowed")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
       <Button onClick={evaluate} className="w-full md:w-auto" size="lg">
-        Verificar elegibilidad
+        {t("cheRoga.eligVerify")}
       </Button>
 
       {result && (
@@ -176,27 +170,27 @@ const EligibilityForm = () => {
           onSubmit={handleContactSubmit}
           className="mt-6 space-y-4 border-t border-border pt-6"
         >
-          <h4 className="font-display text-lg font-semibold text-foreground">¿Querés que te contactemos?</h4>
-          <p className="text-sm text-muted-foreground">Dejá tus datos y te asesoramos sobre proyectos compatibles con Che Róga Porã.</p>
+          <h4 className="font-display text-lg font-semibold text-foreground">{t("cheRoga.eligContactTitle")}</h4>
+          <p className="text-sm text-muted-foreground">{t("cheRoga.eligContactDesc")}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Nombre completo *</Label>
+              <Label>{t("cheRoga.eligName")}</Label>
               <Input value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="space-y-2">
-              <Label>Email *</Label>
+              <Label>{t("cheRoga.eligEmail")}</Label>
               <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="space-y-2">
-              <Label>Teléfono</Label>
+              <Label>{t("cheRoga.eligPhone")}</Label>
               <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
             </div>
           </div>
           <Button type="submit" disabled={submitLead.isPending}>
-            {submitLead.isPending ? "Enviando..." : "Solicitar asesoramiento"}
+            {submitLead.isPending ? t("cheRoga.eligSubmitting") : t("cheRoga.eligSubmit")}
           </Button>
           {submitLead.isSuccess && (
-            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle className="w-4 h-4" /> ¡Datos enviados! Te contactaremos pronto.</p>
+            <p className="text-sm text-primary flex items-center gap-1"><CheckCircle className="w-4 h-4" /> {t("cheRoga.eligSuccess")}</p>
           )}
         </motion.form>
       )}

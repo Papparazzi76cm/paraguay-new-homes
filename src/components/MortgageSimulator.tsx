@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Calculator, Info } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +14,7 @@ const formatGs = (n: number) =>
   new Intl.NumberFormat("es-PY", { style: "currency", currency: "PYG", maximumFractionDigits: 0 }).format(n);
 
 const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
+  const { t } = useTranslation();
   const [capital, setCapital] = useState(defaultCapital || 350_000_000);
   const [plazo, setPlazo] = useState(25);
   const [salario, setSalario] = useState(SALARIO_MINIMO_PYG * 3);
@@ -38,13 +40,13 @@ const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
     >
       <div className="flex items-center gap-2 mb-6">
         <Calculator className="w-5 h-5 text-primary" />
-        <h3 className="font-display text-xl font-semibold text-foreground">Simulador de Cuota</h3>
+        <h3 className="font-display text-xl font-semibold text-foreground">{t("cheRoga.simTitle")}</h3>
       </div>
 
       <div className="space-y-6">
         {/* Capital */}
         <div className="space-y-2">
-          <Label className="text-sm text-muted-foreground">Monto del crédito</Label>
+          <Label className="text-sm text-muted-foreground">{t("cheRoga.simCreditAmount")}</Label>
           <Input
             type="text"
             value={formatGs(capital)}
@@ -69,7 +71,7 @@ const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
 
         {/* Plazo */}
         <div className="space-y-2">
-          <Label className="text-sm text-muted-foreground">Plazo: {plazo} años</Label>
+          <Label className="text-sm text-muted-foreground">{t("cheRoga.simTerm", { years: plazo })}</Label>
           <Slider
             value={[plazo]}
             onValueChange={([v]) => setPlazo(v)}
@@ -78,14 +80,14 @@ const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
             step={1}
           />
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>5 años</span>
-            <span>{PLAZO_MAX} años</span>
+            <span>{t("cheRoga.simTermMin")}</span>
+            <span>{t("cheRoga.simTermMax")}</span>
           </div>
         </div>
 
         {/* Salario */}
         <div className="space-y-2">
-          <Label className="text-sm text-muted-foreground">Ingreso mensual del hogar</Label>
+          <Label className="text-sm text-muted-foreground">{t("cheRoga.simHouseholdIncome")}</Label>
           <Input
             type="text"
             value={formatGs(salario)}
@@ -99,25 +101,25 @@ const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
         {/* Results */}
         <div className="bg-primary/5 rounded-xl p-5 space-y-3 border border-primary/10">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Cuota mensual estimada</span>
+            <span className="text-sm text-muted-foreground">{t("cheRoga.simMonthlyPayment")}</span>
             <span className="text-xl font-bold text-primary">{formatGs(result.cuota)}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Tasa de interés fija</span>
-            <span className="font-semibold text-foreground">{TASA_ANUAL}% anual</span>
+            <span className="text-sm text-muted-foreground">{t("cheRoga.simFixedRate")}</span>
+            <span className="font-semibold text-foreground">{TASA_ANUAL}% {t("cheRoga.simAnnual")}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Ingreso mínimo requerido</span>
+            <span className="text-sm text-muted-foreground">{t("cheRoga.simMinIncome")}</span>
             <span className="font-semibold text-foreground">{formatGs(result.ingresoMinimo)}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Ratio cuota/ingreso</span>
+            <span className="text-sm text-muted-foreground">{t("cheRoga.simPaymentRatio")}</span>
             <span className={`font-semibold ${eligibleBySalary ? "text-primary" : "text-destructive"}`}>
               {result.ratio.toFixed(1)}%
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Total a pagar</span>
+            <span className="text-sm text-muted-foreground">{t("cheRoga.simTotalPaid")}</span>
             <span className="font-semibold text-foreground">{formatGs(result.totalPagado)}</span>
           </div>
         </div>
@@ -125,13 +127,11 @@ const MortgageSimulator = ({ defaultCapital }: { defaultCapital?: number }) => {
         {!eligibleBySalary && (
           <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/10 rounded-lg p-3">
             <Info className="w-4 h-4 mt-0.5 shrink-0" />
-            <p>La cuota supera el 30% de tus ingresos. Considerá un plazo mayor o un monto menor.</p>
+            <p>{t("cheRoga.simWarning")}</p>
           </div>
         )}
 
-        <p className="text-xs text-muted-foreground">
-          * Simulación estimativa del programa Che Róga Porã. No constituye aprobación de crédito. Consultá con las entidades financieras intermediarias (IFIs) autorizadas.
-        </p>
+        <p className="text-xs text-muted-foreground">{t("cheRoga.simDisclaimer")}</p>
       </div>
     </motion.div>
   );
