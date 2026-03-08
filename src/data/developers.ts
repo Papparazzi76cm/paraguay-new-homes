@@ -57,10 +57,19 @@ export const developers: DeveloperInfo[] = [
   {
     slug: "block",
     name: "Block S.R.L",
-    website: "http://www.blok.com.py",
-    email: "",
-    phone: "",
-    description: "Empresa de construcción e ingeniería en Paraguay.",
+    website: "https://blok.com.py",
+    email: "info@blok.com.py",
+    phone: "+595 21 680 66 68",
+    description:
+      "Empresa de arquitectura e ingeniería con más de 30 años de experiencia en Paraguay. Proyectando y construyendo desde 1993, con más de 100 proyectos terminados y 15 obras en ejecución. Servicios integrales: diseño de proyectos, gerenciamiento y construcción de obras.",
+    logo: "/images/blok-logo.png",
+    heroImage: "/images/blok-hero.webp",
+    stats: [
+      { label: "Proyectos terminados", value: "100+" },
+      { label: "Obras en ejecución", value: "15+" },
+      { label: "Clientes satisfechos", value: "300+" },
+      { label: "Años de experiencia", value: "30" },
+    ],
   },
   {
     slug: "inmobiliaria-del-este",
