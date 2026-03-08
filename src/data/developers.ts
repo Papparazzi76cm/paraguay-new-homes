@@ -582,7 +582,16 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.genus.com.py",
     email: "info@genus.com.py",
     phone: "+595 983 724 950",
-    description: "Desarrolladora inmobiliaria con sede en Asunción.",
+    description:
+      "GENUS fue creado en 2015 con el objetivo de generar propuestas relevantes para el estilo de vida de Paraguay. Profesionales de trayectoria internacional que conjugan las tendencias arquitectónicas con las raíces y costumbres paraguayas, orientados hacia las personas con vocación de servicio. Más de 33.000 m² construidos y 150 departamentos vendidos.",
+    logo: "/images/genus-logo.png",
+    heroImage: "/images/genus-hero.jpg",
+    stats: [
+      { label: "m² construidos", value: "33.000+" },
+      { label: "Dptos. vendidos", value: "150" },
+      { label: "Años de experiencia", value: "6+" },
+      { label: "Equipo", value: "20" },
+    ],
   },
   {
     slug: "viva-bien",
