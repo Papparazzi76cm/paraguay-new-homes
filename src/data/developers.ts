@@ -490,10 +490,19 @@ export const developers: DeveloperInfo[] = [
   {
     slug: "urban-domus",
     name: "Urban Domus",
-    website: "http://urbandomus.com.py",
+    website: "https://urbandomus.com.py",
     email: "",
-    phone: "",
-    description: "Desarrolladora inmobiliaria urbana en Paraguay.",
+    phone: "+595 983 554 183",
+    description:
+      "Desarrolladora inmobiliaria con presencia en Chile, Ecuador, Perú y Paraguay desde 2014. Con más de 800 departamentos diseñados en 12 proyectos, Urban Domus se especializa en edificios residenciales con diseño contemporáneo, metros pensados y planes de financiación flexibles. 100% de ocupación en proyectos entregados y 7 proyectos completamente vendidos.",
+    logo: "/images/urbandomus-logo.png",
+    heroImage: "/images/urbandomus-hero.jpg",
+    stats: [
+      { label: "Departamentos diseñados", value: "800+" },
+      { label: "Proyectos", value: "12" },
+      { label: "Años en Paraguay", value: "11+" },
+      { label: "Ocupación entregados", value: "100%" },
+    ],
   },
   {
     slug: "eydi",
