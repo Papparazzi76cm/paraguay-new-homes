@@ -112,12 +112,12 @@ const Proyectos = () => {
 
       <Navbar />
 
-      <section className="pt-28 pb-10 md:pt-36 md:pb-14 bg-background">
+      <section className="pt-28 pb-10 md:pt-36 md:pb-14 bg-foreground">
         <div className="container">
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground text-center mb-3">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-background text-center mb-3">
             {t("allProjects.title")}
           </h1>
-          <p className="text-muted-foreground text-lg text-center max-w-xl mx-auto mb-10">
+          <p className="text-background/60 text-lg text-center max-w-xl mx-auto mb-10">
             {t("allProjects.subtitle")}
           </p>
           <SearchBar filters={filters} onFiltersChange={setFilters} />
