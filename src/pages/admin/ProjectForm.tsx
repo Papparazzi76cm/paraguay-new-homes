@@ -81,6 +81,29 @@ const ProjectForm = () => {
     enabled: isEditing,
   });
 
+  // Load existing units
+  const { data: existingUnits } = useQuery({
+    queryKey: ["admin-project-units", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("project_units")
+        .select("typology, id")
+        .eq("project_id", id!);
+      if (error) throw error;
+      // Count units per typology
+      const counts: Record<string, number> = {};
+      for (const u of data) {
+        counts[u.typology] = (counts[u.typology] || 0) + 1;
+      }
+      return counts;
+    },
+    enabled: isEditing,
+  });
+
+  useEffect(() => {
+    if (existingUnits) setUnits(existingUnits);
+  }, [existingUnits]);
+
   useEffect(() => {
     if (existing) {
       setForm({
