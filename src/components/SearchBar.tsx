@@ -32,6 +32,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
   const selectedPriceLabel = priceRanges.find(
     (r) => r.min === filters.priceMin && r.max === filters.priceMax
   )?.label || null;
+  const selectedDeveloper = filters.developer || null;
 
   const handleCitySelect = (city: string) => {
     onFiltersChange({ ...filters, city: filters.city === city ? undefined : city });
