@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useFeaturedProjects, type Project, type ProjectFilters } from "@/hooks/useProjects";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "./CurrencyToggle";
+import ProjectCardActions from "./ProjectCardActions";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -40,6 +41,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       >
         <div className="relative aspect-[4/3] overflow-hidden">
           <img src={project.cover_image_url || fallbackImages[index % fallbackImages.length]} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <ProjectCardActions projectId={project.id} projectTitle={project.title} projectSlug={project.slug} />
           <div className="absolute top-4 left-4 flex gap-2">
             <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColor[project.status] || "bg-secondary text-secondary-foreground"}`}>
               {t(`projectStatus.${project.status}`)}
