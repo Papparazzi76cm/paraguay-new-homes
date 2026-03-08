@@ -60,6 +60,10 @@
     "yield": "Rent. {{value}}%",
     "delivery": "Entrega: {{date}}"
   },
+  "allProjects": {
+    "title": "Todos los Proyectos",
+    "subtitle": "Explorá todos los desarrollos inmobiliarios disponibles y filtrá según tus preferencias."
+  },
   "benefits": {
     "tag": "¿Por qué Tekoha?",
     "title": "La plataforma que necesitabas",
