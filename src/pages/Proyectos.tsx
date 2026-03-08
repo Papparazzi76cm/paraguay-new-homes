@@ -13,6 +13,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import { Link } from "react-router-dom";
 import { MapPin, TrendingUp, Building, Loader2, Home } from "lucide-react";
+import { getDeveloperByName } from "@/data/developers";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -64,6 +65,21 @@ const SmallProjectCard = ({ project, index }: { project: Project; index: number 
           <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
             {project.title}
           </h3>
+          {project.developer_name && (() => {
+            const dev = getDeveloperByName(project.developer_name);
+            return (
+              <Link
+                to={dev ? `/promotor/${dev.slug}` : "#"}
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-2 mb-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {dev?.logo && (
+                  <img src={dev.logo} alt={dev.name} className="w-5 h-5 rounded object-contain" />
+                )}
+                <span>{project.developer_name}</span>
+              </Link>
+            );
+          })()}
           <div className="flex items-center justify-between border-t border-border pt-4">
             <div>
               <p className="text-xs text-muted-foreground">{t("featured.from")}</p>

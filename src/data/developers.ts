@@ -676,3 +676,6 @@ export const developers: DeveloperInfo[] = [
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
   developers.find((d) => d.slug === slug);
+
+export const getDeveloperByName = (name: string): DeveloperInfo | undefined =>
+  developers.find((d) => d.name.toLowerCase() === name.toLowerCase());
