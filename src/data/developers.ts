@@ -474,9 +474,18 @@ export const developers: DeveloperInfo[] = [
     slug: "creo-inmuebles",
     name: "Creo Inmuebles S.A",
     website: "https://www.creo.com.py",
-    email: "",
+    email: "info@creoinmuebles.com.py",
     phone: "+595 974 332 000",
-    description: "Departamentos en los mejores barrios de la ciudad de Asunción.",
+    description:
+      "Empresa inmobiliaria especializada en el desarrollo de proyectos de vivienda en los mejores barrios de Asunción. Con más de 6 años de experiencia, 453 departamentos diseñados, 6 edificios desarrollados y más de 60.890 m² construidos. Buscan la máxima eficiencia en la disposición de espacios, asegurando un alto estándar de calidad en diseños y materiales. Oficinas en el World Trade Center, Torre 2, Piso 18.",
+    logo: "/images/creo-logo.png",
+    heroImage: "/images/creo-hero.jpg",
+    stats: [
+      { label: "Años de experiencia", value: "6+" },
+      { label: "Departamentos diseñados", value: "453" },
+      { label: "Edificios desarrollados", value: "6" },
+      { label: "m² construidos", value: "60.890" },
+    ],
   },
   {
     slug: "urban-domus",
