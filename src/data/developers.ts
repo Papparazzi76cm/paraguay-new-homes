@@ -122,14 +122,7 @@ export const developers: DeveloperInfo[] = [
       "Complejos residenciales: Parque Pinar, Parque Perón, Parque Venezuela",
     ],
   },
-  {
-    slug: "romanach-y-mercado",
-    name: "Romañach Y Mercado Arq.",
-    website: "http://www.rym.com.py",
-    email: "",
-    phone: "",
-    description: "Estudio de arquitectura con proyectos en Paraguay.",
-  },
+  
   {
     slug: "jbermen-mia-terra",
     name: "Jbermen S.A – Mia Terra",
