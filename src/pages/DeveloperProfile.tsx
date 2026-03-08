@@ -56,19 +56,27 @@ const DeveloperProfile = () => {
     enabled: !!meta,
   });
 
-  // Fetch uploaded logo from developer's profile (avatar_url)
-  const developerId = projects?.[0]?.developer_id;
+  // Fetch uploaded logo from developer's profile (avatar_url) via developer_id on projects
   const { data: devProfile } = useQuery({
-    queryKey: ["developer-profile-logo", developerId],
+    queryKey: ["developer-profile-logo", meta?.name],
     queryFn: async () => {
+      // Get the developer_id from the first project
+      const { data: proj } = await supabase
+        .from("projects")
+        .select("developer_id")
+        .eq("developer_name", meta!.name)
+        .not("developer_id", "is", null)
+        .limit(1)
+        .maybeSingle();
+      if (!proj?.developer_id) return null;
       const { data } = await supabase
         .from("profiles")
         .select("avatar_url")
-        .eq("user_id", developerId!)
+        .eq("user_id", proj.developer_id)
         .maybeSingle();
       return data;
     },
-    enabled: !!developerId,
+    enabled: !!meta,
   });
 
   const resolvedLogo = devProfile?.avatar_url || meta?.logo;
