@@ -166,7 +166,22 @@ export const developers: DeveloperInfo[] = [
     website: "http://www.gonu.com.py",
     email: "info@gonu.com.py",
     phone: "+595 21 660 027",
-    description: "Obras residenciales, comerciales y barrios cerrados en Asunción, Gran Asunción y el interior del Paraguay.",
+    description:
+      "Empresa de desarrollo integral de proyectos y obras desde 1999. Líderes en el mercado de viviendas unifamiliares de lujo en Asunción. Se encargan desde el diseño hasta el mantenimiento y servicio posventa, ofreciendo obras residenciales, comerciales y barrios cerrados en Asunción, Gran Asunción y el interior del Paraguay.",
+    logo: "/images/gonu-logo.png",
+    heroImage: "/images/gonu-hero.jpg",
+    stats: [
+      { label: "Años construyendo", value: "+25" },
+      { label: "Proyectos ejecutados", value: "+400" },
+      { label: "Obras en ejecución", value: "+33" },
+      { label: "M² construidos", value: "+555.500" },
+    ],
+    certifications: [
+      "Líderes en viviendas unifamiliares de lujo",
+      "+9 barrios cerrados desarrollados",
+      "Desarrollo integral: diseño, construcción y posventa",
+      "Desde 1999 en el mercado paraguayo",
+    ],
   },
   {
     slug: "tierra-alta",
