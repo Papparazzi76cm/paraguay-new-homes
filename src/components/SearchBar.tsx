@@ -59,7 +59,12 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
     setActiveFilter(null);
   };
 
-  const hasAnyFilter = selectedCity || selectedType || selectedStatus || selectedPriceLabel;
+  const handleDeveloperSelect = (name: string) => {
+    onFiltersChange({ ...filters, developer: filters.developer === name ? undefined : name });
+    setActiveFilter(null);
+  };
+
+  const hasAnyFilter = selectedCity || selectedType || selectedStatus || selectedPriceLabel || selectedDeveloper;
 
   return (
     <motion.div
