@@ -37,7 +37,6 @@ const ProjectDetail = () => {
   const toggleFavorite = useToggleFavorite();
   const isFavorited = project ? favorites.includes(project.id) : false;
   const { displayCurrency } = useCurrency();
-  const { displayCurrency } = useCurrency();
   const fmtPrice = (price: number, fromCurrency: string) =>
     formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
 
