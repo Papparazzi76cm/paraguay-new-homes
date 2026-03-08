@@ -48,6 +48,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/che-roga-pora" element={<CheRogaPora />} />
           <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
           <Route path="/proyecto/:slug" element={<ProjectDetail />} />
