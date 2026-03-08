@@ -637,10 +637,23 @@ export const developers: DeveloperInfo[] = [
   {
     slug: "altamira-group",
     name: "Altamira Group",
-    website: "http://www.altamiragroup.com.py",
+    website: "https://altamiragroup.com.py",
     email: "info@altamiragroup.com.py",
     phone: "+595 992 764 000",
-    description: "Ubicación estratégica en Asunción para proyectos inmobiliarios.",
+    description:
+      "Con más de 25 años de trayectoria en la región y 8 años de sólida presencia en Paraguay, Altamira Group ofrece un servicio integral 360° en desarrollos inmobiliarios: desde arquitectura y proyecto, hasta construcción, comercialización y administración de condominios. Certificados Great Place To Work, crean espacios funcionales, sostenibles y de alta calidad que combinan estrategia, diseño y excelencia constructiva.",
+    logo: "/images/altamira-logo.png",
+    heroImage: "/images/altamira-hero.jpg",
+    stats: [
+      { label: "Años en la región", value: "25+" },
+      { label: "Años en Paraguay", value: "8" },
+      { label: "Proyectos activos", value: "4" },
+      { label: "Servicio", value: "360°" },
+    ],
+    certifications: [
+      "Great Place To Work Certified",
+      "Servicio integral 360°: arquitectura, construcción, comercialización y administración",
+    ],
   },
   {
     slug: "matrisa",
