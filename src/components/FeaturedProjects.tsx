@@ -21,6 +21,7 @@ const statusColor: Record<string, string> = {
 
 interface FeaturedProjectsProps {
   filters?: ProjectFilters;
+  showAll?: boolean;
 }
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
