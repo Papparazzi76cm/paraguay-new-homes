@@ -129,12 +129,28 @@ const ProjectDetail = () => {
             <button onClick={handleShare} className="p-1.5 md:p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" title={t("detail.share")}>
               {copied ? <Check className="w-4 h-4 text-primary" /> : <Share2 className="w-4 h-4" />}
             </button>
+            <button
+              onClick={() => {
+                if (!user) { setShowAuthDialog(true); return; }
+                if (project) toggleFavorite.mutate({ projectId: project.id, isFavorited });
+              }}
+              className={`p-1.5 md:p-2 rounded-xl border transition-colors ${
+                isFavorited
+                  ? "border-destructive bg-destructive/10 text-destructive"
+                  : "border-border text-muted-foreground hover:text-destructive hover:bg-destructive/5"
+              }`}
+              title="Favorito"
+            >
+              <Heart className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
+            </button>
             <button onClick={() => { setContactLeadType("info_request"); setContactOpen(true); }} className="bg-primary text-primary-foreground px-3 md:px-5 py-1.5 md:py-2 rounded-xl text-xs md:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-1.5 md:gap-2">
               <Send className="w-3.5 h-3.5 md:w-4 md:h-4" /> {t("detail.contact")}
             </button>
           </div>
         </div>
       </nav>
+
+      <AuthPromptDialog open={showAuthDialog} onOpenChange={setShowAuthDialog} />
 
       <div className="container py-6 md:py-10">
         <ProjectGallery images={images} coverUrl={project.cover_image_url} title={project.title} />
