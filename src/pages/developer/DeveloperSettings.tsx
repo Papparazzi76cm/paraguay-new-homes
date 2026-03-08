@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect, useRef } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Save, KeyRound, Building2, User } from "lucide-react";
+import { Save, KeyRound, Building2, User, Upload, X } from "lucide-react";
 
 const DeveloperSettings = () => {
   const { user } = useAuth();
@@ -20,6 +20,11 @@ const DeveloperSettings = () => {
   // Profile data
   const [displayName, setDisplayName] = useState("");
   const [phone, setPhone] = useState("");
+
+  // Logo
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Company data from developer info (stored in user metadata + profile)
   const [companyName, setCompanyName] = useState("");
@@ -45,6 +50,7 @@ const DeveloperSettings = () => {
   useEffect(() => {
     if (profile) {
       setDisplayName(profile.display_name ?? "");
+      setLogoUrl(profile.avatar_url ?? null);
     }
     if (user) {
       setPhone(user.user_metadata?.phone ?? "");
@@ -55,6 +61,81 @@ const DeveloperSettings = () => {
       setCompanyEmail(user.email ?? "");
     }
   }, [profile, user]);
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+
+    const allowedTypes = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Formato no soportado. Usá PNG, JPG, WebP o SVG.");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("El archivo no debe superar 2 MB.");
+      return;
+    }
+
+    setUploading(true);
+    const ext = file.name.split(".").pop();
+    const filePath = `${user.id}/logo.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("developer-logos")
+      .upload(filePath, file, { upsert: true });
+
+    if (uploadError) {
+      toast.error("Error al subir el logo: " + uploadError.message);
+      setUploading(false);
+      return;
+    }
+
+    const { data: publicData } = supabase.storage
+      .from("developer-logos")
+      .getPublicUrl(filePath);
+
+    const newUrl = publicData.publicUrl + "?t=" + Date.now();
+
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .update({ avatar_url: newUrl })
+      .eq("user_id", user.id);
+
+    if (profileError) {
+      toast.error(profileError.message);
+    } else {
+      setLogoUrl(newUrl);
+      queryClient.invalidateQueries({ queryKey: ["dev-profile"] });
+      toast.success("Logo actualizado");
+    }
+    setUploading(false);
+  };
+
+  const handleLogoRemove = async () => {
+    if (!user) return;
+    setUploading(true);
+
+    // List and delete files in user folder
+    const { data: files } = await supabase.storage
+      .from("developer-logos")
+      .list(user.id);
+
+    if (files?.length) {
+      await supabase.storage
+        .from("developer-logos")
+        .remove(files.map((f) => `${user.id}/${f.name}`));
+    }
+
+    await supabase
+      .from("profiles")
+      .update({ avatar_url: null })
+      .eq("user_id", user.id);
+
+    setLogoUrl(null);
+    queryClient.invalidateQueries({ queryKey: ["dev-profile"] });
+    toast.success("Logo eliminado");
+    setUploading(false);
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,6 +226,54 @@ const DeveloperSettings = () => {
           <h3 className="text-lg font-semibold text-foreground">Datos de la empresa</h3>
         </div>
         <form onSubmit={handleProfileSave} className="bg-muted/30 rounded-xl p-5 space-y-4">
+          {/* Logo upload */}
+          <div className="space-y-2">
+            <Label>Logo de la empresa</Label>
+            <div className="flex items-center gap-4">
+              {logoUrl ? (
+                <div className="relative group">
+                  <img
+                    src={logoUrl}
+                    alt="Logo"
+                    className="h-20 w-20 rounded-lg object-contain border border-border bg-background p-1"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleLogoRemove}
+                    disabled={uploading}
+                    className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <div className="h-20 w-20 rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/50">
+                  <Building2 className="w-8 h-8 text-muted-foreground/40" />
+                </div>
+              )}
+              <div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  className="hidden"
+                  onChange={handleLogoUpload}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={uploading}
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center gap-2"
+                >
+                  <Upload className="w-4 h-4" />
+                  {uploading ? "Subiendo..." : "Subir logo"}
+                </Button>
+                <p className="text-xs text-muted-foreground mt-1">PNG, JPG, WebP o SVG. Máx 2 MB.</p>
+              </div>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Nombre de la empresa</Label>
