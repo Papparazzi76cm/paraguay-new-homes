@@ -30,7 +30,13 @@ const ProjectDetail = () => {
   const [contactLeadType, setContactLeadType] = useState<string>("info_request");
   const { translated: translatedDesc, isTranslating } = useTranslatedText(project?.description);
   const [copied, setCopied] = useState(false);
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const { favorites } = useFavorites();
+  const toggleFavorite = useToggleFavorite();
+  const isFavorited = project ? favorites.includes(project.id) : false;
+  const { displayCurrency } = useCurrency();
   const { displayCurrency } = useCurrency();
   const fmtPrice = (price: number, fromCurrency: string) =>
     formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
