@@ -10,6 +10,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
 import Navbar from "@/components/Navbar";
 import CheRogaLeadForm from "@/components/CheRogaLeadForm";
+import CheRogaProjectsMap from "@/components/CheRogaProjectsMap";
 import Footer from "@/components/Footer";
 
 import project1 from "@/assets/project-1.jpg";
@@ -185,8 +186,17 @@ const ProyectosCheRogaPora = () => {
         </div>
       </section>
 
+      {/* Interactive map */}
+      {projects && projects.length > 0 && (
+        <section className="py-16 md:py-24 bg-secondary/30">
+          <div className="container">
+            <CheRogaProjectsMap projects={projects} />
+          </div>
+        </section>
+      )}
+
       {/* Lead capture */}
-      <section className="py-16 md:py-24 bg-secondary/30">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <CheRogaLeadForm />
         </div>

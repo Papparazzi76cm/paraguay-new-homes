@@ -600,6 +600,10 @@
     "eligPhone": "Phone",
     "eligSubmit": "Request advice",
     "eligSubmitting": "Sending...",
-    "eligSuccess": "Data sent! We'll contact you soon."
+    "eligSuccess": "Data sent! We'll contact you soon.",
+    "mapTitle": "Financeable projects map",
+    "mapSubtitle": "{{count}} project with location available",
+    "mapSubtitle_other": "{{count}} projects with location available",
+    "mapViewProject": "View project"
   }
 }

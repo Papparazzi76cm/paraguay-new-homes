@@ -600,6 +600,10 @@
     "eligPhone": "Telefon",
     "eligSubmit": "Beratung anfordern",
     "eligSubmitting": "Wird gesendet...",
-    "eligSuccess": "Daten gesendet! Wir kontaktieren Sie in Kürze."
+    "eligSuccess": "Daten gesendet! Wir kontaktieren Sie in Kürze.",
+    "mapTitle": "Karte finanzierbarer Projekte",
+    "mapSubtitle": "{{count}} Projekt mit verfügbarem Standort",
+    "mapSubtitle_other": "{{count}} Projekte mit verfügbarem Standort",
+    "mapViewProject": "Projekt ansehen"
   }
 }
