@@ -52,6 +52,7 @@ export const useProjects = (filters?: ProjectFilters) => {
       if (filters?.status) query = query.eq("status", filters.status as any);
       if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
       if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
+      if (filters?.developer) query = query.eq("developer_name", filters.developer);
 
       const { data, error } = await query;
       if (error) throw error;
