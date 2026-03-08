@@ -21,6 +21,17 @@ const ProjectForm = () => {
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
 
+  const unitTypologies = [
+    { value: "monoambiente", label: "Monoambiente" },
+    { value: "1_dormitorio", label: "1 Dormitorio" },
+    { value: "2_dormitorios", label: "2 Dormitorios" },
+    { value: "3_dormitorios", label: "3 Dormitorios" },
+    { value: "4_dormitorios", label: "4 Dormitorios" },
+    { value: "5_dormitorios", label: "5 Dormitorios" },
+  ];
+
+  const [units, setUnits] = useState<Record<string, number>>({});
+
   const [form, setForm] = useState({
     title: "",
     slug: "",
