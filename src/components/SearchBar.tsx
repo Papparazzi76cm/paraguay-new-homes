@@ -164,6 +164,18 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
               ))}
             </DropdownPanel>
           )}
+          {activeFilter === "promotor" && (
+            <DropdownPanel key="promotor">
+              {(developers || []).map((dev) => (
+                <OptionChip
+                  key={dev.name}
+                  label={`${dev.name} (${dev.projectCount})`}
+                  selected={selectedDeveloper === dev.name}
+                  onClick={() => handleDeveloperSelect(dev.name)}
+                />
+              ))}
+            </DropdownPanel>
+          )}
         </AnimatePresence>
       </div>
     </motion.div>
