@@ -328,7 +328,22 @@ export const developers: DeveloperInfo[] = [
     website: "http://eminent.com.py",
     email: "contacto@eminent.com.py",
     phone: "+595 983 777 478",
-    description: "Desarrolladora de proyectos que redefinen la nueva Asunción.",
+    description:
+      "Desarrolladora del complejo residencial de lujo Eminent, el primer proyecto en América Latina equipado con Armani/Casa en sus amenities y áreas comunes. Ubicado sobre Av. Santa Teresa, el boulevard residencial más exclusivo de Asunción, Eminent cuenta con tres torres que combinan diseño europeo, materiales nobles (mármol, acero, vidrio y concreto) y servicios premium. Desarrollado por ABV Arquitectura (Argentina), con más de 35 años de trayectoria y 600.000 m² proyectados.",
+    logo: "/images/eminent-logo.png",
+    heroImage: "/images/eminent-hero.webp",
+    stats: [
+      { label: "Torres", value: "3" },
+      { label: "Residencias Torre I", value: "100-450 m²" },
+      { label: "Residencias Torre II", value: "70-133 m²" },
+      { label: "Residencias Torre III", value: "76-200 m²" },
+    ],
+    certifications: [
+      "Primer proyecto en América Latina con Armani/Casa",
+      "Diseño europeo con materiales nobles premium",
+      "Desarrollado por ABV Arquitectura (35+ años)",
+      "Boulevard residencial más exclusivo de Asunción",
+    ],
   },
   {
     slug: "fortaleza-inmuebles",
