@@ -562,10 +562,19 @@ export const developers: DeveloperInfo[] = [
   {
     slug: "cesar-aquino",
     name: "AV S.A (César Aquino)",
-    website: "http://cesaraquino.net",
-    email: "info@cesaraquino.net",
+    website: "https://avdesarrolladora.com.py",
+    email: "info@avdesarrolladora.com.py",
     phone: "+595 971 543",
-    description: "Empresa constructora y de desarrollo inmobiliario en Paraguay.",
+    description:
+      "Desarrolladora inmobiliaria dedicada al desarrollo e implementación de proyectos de alta funcionalidad, calidad y diseño de primer nivel. Todos sus desarrollos están proyectados en locaciones estratégicas con alto potencial, ideales para inversores y para quienes buscan confort. Diseñados por el prestigioso estudio de arquitectura César Aquino (Aquino+), especializado en edificios, corporativo, comercial, industrial y residencial.",
+    logo: "/images/av-logo.png",
+    heroImage: "/images/av-hero.jpg",
+    stats: [
+      { label: "Proyectos activos", value: "3" },
+      { label: "Proyectos concluidos", value: "2" },
+      { label: "Unidades vendidas", value: "100%" },
+      { label: "Financiación", value: "Propia" },
+    ],
   },
   {
     slug: "victoria-genus",
