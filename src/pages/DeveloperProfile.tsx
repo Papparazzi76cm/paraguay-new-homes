@@ -53,7 +53,7 @@ const developerMeta: Record<
     stats: [
       { label: "Departamentos", value: "+3.500" },
       { label: "Edificios", value: "13" },
-      { label: "Proyectos", value: "39" },
+      { label: "Proyectos en Tekoha", value: "11" },
       { label: "En construcción", value: "26" },
     ],
     certifications: [
