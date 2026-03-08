@@ -415,7 +415,12 @@ export const developers: DeveloperInfo[] = [
     website: "http://www.nicasioacosta.com.py",
     email: "",
     phone: "",
-    description: "Empresa constructora con tradición en el mercado paraguayo.",
+    description:
+      "Grupo empresarial con más de 27 años de trayectoria, enfocado en agro business y desarrollo inmobiliario en Paraguay. Presidido por Luis Acosta Montanaro, arquitecto con formación en la Université Paris X Nanterre (Francia). Empresa de carácter privado con sede en Asunción.",
+    stats: [
+      { label: "Años de trayectoria", value: "27+" },
+      { label: "Sectores", value: "Agro / Real Estate" },
+    ],
   },
   {
     slug: "cci",
