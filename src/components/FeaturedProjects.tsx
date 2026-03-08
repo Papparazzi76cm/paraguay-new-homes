@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useFeaturedProjects, type Project, type ProjectFilters } from "@/hooks/useProjects";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "./CurrencyToggle";
+import ProjectCardActions from "./ProjectCardActions";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
