@@ -37,6 +37,34 @@ export interface ProjectFilters {
   developer?: string;
 }
 
+/** Deterministic daily seed for shuffling */
+function getDailySeed(): number {
+  const today = new Date();
+  return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+}
+
+/** Seeded pseudo-random shuffle (Fisher-Yates with simple LCG) */
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const result = [...arr];
+  let s = seed;
+  for (let i = result.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    const j = s % (i + 1);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+function applyFilters(query: any, filters?: ProjectFilters) {
+  if (filters?.city) query = query.eq("location_city", filters.city);
+  if (filters?.type) query = query.eq("project_type", filters.type as any);
+  if (filters?.status) query = query.eq("status", filters.status as any);
+  if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
+  if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
+  if (filters?.developer) query = query.eq("developer_name", filters.developer);
+  return query;
+}
+
 export const useProjects = (filters?: ProjectFilters) => {
   return useQuery({
     queryKey: ["projects", filters],
@@ -44,15 +72,9 @@ export const useProjects = (filters?: ProjectFilters) => {
       let query = supabase
         .from("projects")
         .select("*")
-        .order("featured", { ascending: false })
         .order("created_at", { ascending: false });
 
-      if (filters?.city) query = query.eq("location_city", filters.city);
-      if (filters?.type) query = query.eq("project_type", filters.type as any);
-      if (filters?.status) query = query.eq("status", filters.status as any);
-      if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
-      if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
-      if (filters?.developer) query = query.eq("developer_name", filters.developer);
+      query = applyFilters(query, filters);
 
       const { data, error } = await query;
       if (error) throw error;
@@ -61,30 +83,60 @@ export const useProjects = (filters?: ProjectFilters) => {
   });
 };
 
+/** Returns 15 featured projects shuffled daily, or all matching if filters are active */
 export const useFeaturedProjects = (filters?: ProjectFilters) => {
   const hasFilters = filters && Object.values(filters).some((v) => v != null && v !== "");
 
   return useQuery({
-    queryKey: ["projects", "featured", filters],
+    queryKey: ["projects", "featured", filters, getDailySeed()],
+    queryFn: async () => {
+      if (hasFilters) {
+        let query = supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: false });
+        query = applyFilters(query, filters);
+        const { data, error } = await query;
+        if (error) throw error;
+        return data as Project[];
+      }
+
+      // Fetch featured projects (up to 15)
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .eq("featured", true)
+        .limit(15);
+      if (error) throw error;
+
+      return seededShuffle(data as Project[], getDailySeed());
+    },
+  });
+};
+
+/** Returns all non-featured projects ordered by creation date desc */
+export const useNonFeaturedProjects = (filters?: ProjectFilters) => {
+  const hasFilters = filters && Object.values(filters).some((v) => v != null && v !== "");
+
+  return useQuery({
+    queryKey: ["projects", "non-featured", filters],
     queryFn: async () => {
       let query = supabase
         .from("projects")
         .select("*")
-        .order("featured", { ascending: false });
+        .order("created_at", { ascending: false });
 
-      if (filters?.city) query = query.eq("location_city", filters.city);
-      if (filters?.type) query = query.eq("project_type", filters.type as any);
-      if (filters?.status) query = query.eq("status", filters.status as any);
-      if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
-      if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
-      if (filters?.developer) query = query.eq("developer_name", filters.developer);
+      if (!hasFilters) {
+        query = query.eq("featured", false);
+      }
 
-      if (!hasFilters) query = query.limit(6);
+      query = applyFilters(query, filters);
 
       const { data, error } = await query;
       if (error) throw error;
       return data as Project[];
     },
+    enabled: hasFilters ? false : true, // only fetch when no filters (filters show all in featured)
   });
 };
 
