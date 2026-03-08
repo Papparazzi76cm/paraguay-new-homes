@@ -150,12 +150,12 @@ const Proyectos = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center mb-10"
+                  className="bg-foreground rounded-2xl px-8 py-8 text-center mb-10"
                 >
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-background mb-2">
                     Todos los proyectos
                   </h2>
-                  <p className="text-muted-foreground">
+                  <p className="text-background/60">
                     {nonFeatured?.length || 0} proyectos adicionales ordenados por fecha de publicación
                   </p>
                 </motion.div>
