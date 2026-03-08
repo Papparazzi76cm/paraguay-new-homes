@@ -351,7 +351,23 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.fortalezainmuebles.com",
     email: "seleccion@fortalezainmuebles.com",
     phone: "+595 21 614 412",
-    description: "Empresa inmobiliaria con presencia en Asunción y Alto Paraná.",
+    description:
+      "Empresa líder en sistema de inversión y ahorro en inmuebles desde 1992. Con más de 31 años de trayectoria, más de 1.200 departamentos en desarrollo simultáneo, 14 proyectos desarrollados, 11 edificios construidos y más de USD 120 millones invertidos en obras. Certificada como Empresa B, reconocida como Top of Mind y Great Place to Work. Oficinas en Asunción (Atlas Center y delSol Shopping) y Alto Paraná. Su sistema permite aportes accesibles en guaraníes para acceder a departamentos propios.",
+    logo: "/images/fortaleza-logo.png",
+    heroImage: "/images/fortaleza-hero.jpg",
+    stats: [
+      { label: "Años de trayectoria", value: "31+" },
+      { label: "Edificios construidos", value: "11" },
+      { label: "Dptos. en desarrollo", value: "1.200+" },
+      { label: "Inversión total", value: "USD 120M+" },
+    ],
+    certifications: [
+      "Empresa B Certificada",
+      "Top of Mind — #1 en recordación del rubro",
+      "Great Place to Work Certified",
+      "Sistema de inversión y ahorro en guaraníes",
+      "Más de 150 colaboradores directos",
+    ],
   },
   {
     slug: "escala-desarrollos",
