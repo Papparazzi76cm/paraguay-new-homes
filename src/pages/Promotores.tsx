@@ -27,18 +27,19 @@ const Promotores = () => {
 
       <Navbar />
 
-      <section className="pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="container">
+      <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 bg-gradient-to-b from-slate-900 via-slate-800 to-background">
+        <div className="absolute inset-0 bg-[url('/assets/hero-promotores.jpg')] bg-cover bg-center opacity-15" />
+        <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Promotores Inmobiliarios
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
               Directorio de {developers.length} empresas constructoras y desarrolladoras en Paraguay
             </p>
           </motion.div>
