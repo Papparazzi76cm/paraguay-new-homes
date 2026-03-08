@@ -28,6 +28,8 @@
     "pricePlaceholder": "Preisspanne",
     "status": "Status",
     "statusPlaceholder": "Bauphase",
+    "developer": "Entwickler",
+    "developerPlaceholder": "Alle Entwickler",
     "search": "Suchen",
     "clear": "Löschen"
   },

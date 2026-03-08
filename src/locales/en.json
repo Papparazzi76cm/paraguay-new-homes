@@ -28,6 +28,8 @@
     "pricePlaceholder": "Price range",
     "status": "Status",
     "statusPlaceholder": "Construction stage",
+    "developer": "Developer",
+    "developerPlaceholder": "All developers",
     "search": "Search",
     "clear": "Clear"
   },
