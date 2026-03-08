@@ -60,6 +60,10 @@
     "yield": "Yield {{value}}%",
     "delivery": "Delivery: {{date}}"
   },
+  "allProjects": {
+    "title": "All Projects",
+    "subtitle": "Browse all available real estate developments and filter by your preferences."
+  },
   "benefits": {
     "tag": "Why Tekoha?",
     "title": "The platform you needed",

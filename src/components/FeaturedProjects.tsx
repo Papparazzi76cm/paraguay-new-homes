@@ -129,9 +129,9 @@ const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
 
         {!hasFilters && (
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
-            <button className="bg-primary text-primary-foreground px-8 py-3.5 rounded-xl font-medium hover:opacity-90 transition-opacity text-base">
+            <Link to="/proyectos" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-xl font-medium hover:opacity-90 transition-opacity text-base inline-block">
               {t("featured.exploreAll")}
-            </button>
+            </Link>
           </motion.div>
         )}
       </div>
