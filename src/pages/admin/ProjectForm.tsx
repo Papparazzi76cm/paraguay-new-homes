@@ -384,6 +384,11 @@ const ProjectForm = () => {
             ))}
           </div>
         </div>
+        {/* Unit detail editor — only when editing */}
+        {isEditing && id && (
+          <UnitDetailEditor projectId={id} />
+        )}
+
         {/* Phase dates */}
         <div>
           <h3 className="font-semibold text-foreground mb-3">Fechas del cronograma</h3>
