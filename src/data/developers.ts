@@ -720,6 +720,30 @@ export const developers: DeveloperInfo[] = [
     ],
     esg: "Integración de jardines internos y espacios verdes en proyectos urbanos. Diseño enfocado en bienestar, conectividad y comunidad.",
   },
+  {
+    slug: "fronterra",
+    name: "Fronterra by Métrika",
+    website: "https://www.fronterra.com.py",
+    email: "contacto@fronterra.com.py",
+    phone: "+595 983 000 000",
+    description:
+      "Métrika es una empresa desarrolladora que nace con el propósito de crear negocios inmobiliarios rentables y sostenibles, centrados en la investigación y el análisis. Con opciones para todos los segmentos, desarrollan proyectos en todas sus etapas — desde el análisis de factibilidad hasta la comercialización y administración. En alianza con la constructora Gómez Núñez y el estudio Arquetipo, su proyecto insignia Fronterra se posiciona como uno de los edificios más lujosos de Ciudad del Este, con terminaciones de alta calidad y diseño funcional que equilibra confort y estética.",
+    logo: "/images/fronterra-logo.png",
+    heroImage: "/images/fronterra-hero.jpg",
+    stats: [
+      { label: "Unidades", value: "57" },
+      { label: "Tipologías", value: "4" },
+      { label: "Amenities", value: "5+" },
+      { label: "Ciudad", value: "CDE" },
+    ],
+    certifications: [
+      "Constructora Gómez Núñez",
+      "Diseño Estudio Arquetipo",
+      "Edificio de alta gama",
+      "Infinity Pool & Co-working",
+    ],
+    esg: "Diseño vanguardista con amplios ventanales para máximo aprovechamiento de luz natural y vistas panorámicas de la ciudad.",
+  },
 ];
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
