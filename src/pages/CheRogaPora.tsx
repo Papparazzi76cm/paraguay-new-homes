@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Home, Shield, Percent, Clock, MapPin, Building, TrendingUp, Loader2, ArrowRight, BadgeCheck, Calculator, ClipboardCheck, FileText, BookOpen } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
@@ -42,6 +43,7 @@ const useFinanceableProjects = (cityFilter?: string) => {
 };
 
 const CheRogaPora = () => {
+  const { t } = useTranslation();
   const [cityFilter, setCityFilter] = useState("");
   const { data: projects, isLoading } = useFinanceableProjects(cityFilter || undefined);
   const { displayCurrency } = useCurrency();
@@ -49,27 +51,41 @@ const CheRogaPora = () => {
     formatCurrency(convertCurrency(price, from, displayCurrency), displayCurrency);
 
   const benefits = [
-    { icon: Percent, title: "Tasa fija 6,5%", desc: "La tasa más competitiva del mercado paraguayo, subsidiada por el gobierno." },
-    { icon: Clock, title: "Hasta 30 años", desc: "Plazos extendidos que permiten cuotas accesibles adaptadas a tu capacidad." },
-    { icon: Shield, title: "Período de gracia", desc: "Empezás a pagar recién cuando te mudás. Sin solapamiento con tu alquiler." },
-    { icon: Home, title: "Hasta Gs. 725M", desc: "Montos ampliados en la versión 2.0 para cubrir viviendas de clase media." },
+    { icon: Percent, title: t("cheRoga.benefit1Title"), desc: t("cheRoga.benefit1Desc") },
+    { icon: Clock, title: t("cheRoga.benefit2Title"), desc: t("cheRoga.benefit2Desc") },
+    { icon: Shield, title: t("cheRoga.benefit3Title"), desc: t("cheRoga.benefit3Desc") },
+    { icon: Home, title: t("cheRoga.benefit4Title"), desc: t("cheRoga.benefit4Desc") },
   ];
 
   const modalities = [
-    { title: "Vivienda en pozo", desc: "Adquisición de unidades en proyectos en fase de construcción." },
-    { title: "Construcción en terreno propio", desc: "Financiamiento para edificar en tu lote." },
-    { title: "Terreno + construcción", desc: "Financiación del 100% de la inversión." },
-    { title: "Vivienda terminada", desc: "Compra de casas o departamentos listos." },
-    { title: "Ampliación o refacción", desc: "Mejoras en vivienda existente." },
+    { title: t("cheRoga.mod1Title"), desc: t("cheRoga.mod1Desc") },
+    { title: t("cheRoga.mod2Title"), desc: t("cheRoga.mod2Desc") },
+    { title: t("cheRoga.mod3Title"), desc: t("cheRoga.mod3Desc") },
+    { title: t("cheRoga.mod4Title"), desc: t("cheRoga.mod4Desc") },
+    { title: t("cheRoga.mod5Title"), desc: t("cheRoga.mod5Desc") },
   ];
 
   const requirements = [
-    "Ser paraguayo natural o naturalizado, o residente permanente",
-    "Tener entre 18 y 75 años",
-    "Ingresos familiares entre 1 y 6 salarios mínimos",
-    "No poseer vivienda edificada a su nombre",
-    "Estabilidad laboral demostrable",
-    "Documentación personal vigente (CI, comprobante de ingresos)",
+    t("cheRoga.req1"), t("cheRoga.req2"), t("cheRoga.req3"),
+    t("cheRoga.req4"), t("cheRoga.req5"), t("cheRoga.req6"),
+  ];
+
+  const faqs = [
+    { q: t("cheRoga.faq1Q"), a: t("cheRoga.faq1A") },
+    { q: t("cheRoga.faq2Q"), a: t("cheRoga.faq2A") },
+    { q: t("cheRoga.faq3Q"), a: t("cheRoga.faq3A") },
+    { q: t("cheRoga.faq4Q"), a: t("cheRoga.faq4A") },
+    { q: t("cheRoga.faq5Q"), a: t("cheRoga.faq5A") },
+    { q: t("cheRoga.faq6Q"), a: t("cheRoga.faq6A") },
+    { q: t("cheRoga.faq7Q"), a: t("cheRoga.faq7A") },
+  ];
+
+  const steps = [
+    { step: "1", title: t("cheRoga.step1Title"), desc: t("cheRoga.step1Desc"), link: "#elegibilidad" },
+    { step: "2", title: t("cheRoga.step2Title"), desc: t("cheRoga.step2Desc"), link: "/proyectos-che-roga-pora" },
+    { step: "3", title: t("cheRoga.step3Title"), desc: t("cheRoga.step3Desc"), link: "#simulador" },
+    { step: "4", title: t("cheRoga.step4Title"), desc: t("cheRoga.step4Desc") },
+    { step: "5", title: t("cheRoga.step5Title"), desc: t("cheRoga.step5Desc") },
   ];
 
   return (
@@ -119,23 +135,23 @@ const CheRogaPora = () => {
         <div className="container relative z-10 pt-36 pb-20 md:pt-44 md:pb-28">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              <Home className="w-4 h-4" /> Programa de Vivienda
+              <Home className="w-4 h-4" /> {t("cheRoga.programBadge")}
             </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Tu primera casa con <span className="text-accent">Che Róga Porã</span>
+              {t("cheRoga.heroTitle")} <span className="text-accent">{t("cheRoga.heroHighlight")}</span>
             </h1>
             <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-8">
-              Accedé a vivienda propia con financiación del gobierno paraguayo. Tasa fija del 6,5%, plazos de hasta 30 años y empezás a pagar cuando te mudás.
+              {t("cheRoga.heroSubtitle")}
             </p>
             <div className="flex flex-wrap gap-3">
               <a href="#simulador" className="bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 text-base">
-                <Calculator className="w-5 h-5" /> Simular mi cuota
+                <Calculator className="w-5 h-5" /> {t("cheRoga.simulateCta")}
               </a>
               <a href="#elegibilidad" className="bg-white/10 backdrop-blur-sm text-white px-6 py-3.5 rounded-xl font-semibold border border-white/20 hover:bg-white/20 transition-colors inline-flex items-center gap-2 text-base">
-                <ClipboardCheck className="w-5 h-5" /> ¿Puedo acceder?
+                <ClipboardCheck className="w-5 h-5" /> {t("cheRoga.canIAccess")}
               </a>
               <Link to="/proyectos-che-roga-pora" className="bg-accent text-accent-foreground px-6 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 text-base">
-                <Building className="w-5 h-5" /> Ver proyectos financiables
+                <Building className="w-5 h-5" /> {t("cheRoga.viewFinanceable")}
               </Link>
             </div>
           </motion.div>
@@ -147,16 +163,16 @@ const CheRogaPora = () => {
         <div className="container">
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
             <a href="#simulador" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
-              <Calculator className="w-4 h-4" /> Simular cuota
+              <Calculator className="w-4 h-4" /> {t("cheRoga.quickSimulate")}
             </a>
             <a href="#elegibilidad" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
-              <ClipboardCheck className="w-4 h-4" /> Comprobar si califico
+              <ClipboardCheck className="w-4 h-4" /> {t("cheRoga.quickCheck")}
             </a>
             <Link to="/proyectos-che-roga-pora" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
-              <Building className="w-4 h-4" /> Ver proyectos
+              <Building className="w-4 h-4" /> {t("cheRoga.quickProjects")}
             </Link>
             <a href="#lead-form" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
-              <FileText className="w-4 h-4" /> Recibir proyectos
+              <FileText className="w-4 h-4" /> {t("cheRoga.quickReceive")}
             </a>
           </div>
         </div>
@@ -166,11 +182,9 @@ const CheRogaPora = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="text-accent font-semibold text-sm uppercase tracking-wider">Beneficios del programa</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">¿Por qué Che Róga Porã?</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              El programa del gobierno paraguayo que transforma tu alquiler en cuotas de tu propia vivienda.
-            </p>
+            <span className="text-accent font-semibold text-sm uppercase tracking-wider">{t("cheRoga.benefitsTag")}</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">{t("cheRoga.benefitsTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.benefitsSubtitle")}</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((b, i) => (
@@ -188,10 +202,10 @@ const CheRogaPora = () => {
       {/* CTA Banner 1 */}
       <section className="py-10 bg-accent">
         <div className="container text-center">
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-3">¿Querés saber cuánto pagarías de cuota?</h3>
-          <p className="text-accent-foreground/80 mb-6 max-w-xl mx-auto">Usá nuestro simulador con las condiciones reales del programa: tasa fija 6,5%, hasta 30 años.</p>
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-3">{t("cheRoga.ctaBanner1Title")}</h3>
+          <p className="text-accent-foreground/80 mb-6 max-w-xl mx-auto">{t("cheRoga.ctaBanner1Subtitle")}</p>
           <a href="#simulador" className="bg-accent-foreground text-accent px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-            <Calculator className="w-5 h-5" /> Simular mi cuota ahora
+            <Calculator className="w-5 h-5" /> {t("cheRoga.ctaBanner1Btn")}
           </a>
         </div>
       </section>
@@ -200,13 +214,11 @@ const CheRogaPora = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-display text-3xl font-bold text-foreground mb-6">¿Cuánto se paga de cuota en Che Róga Porã?</h2>
+            <h2 className="font-display text-3xl font-bold text-foreground mb-6">{t("cheRoga.paymentTitle")}</h2>
             <div className="prose prose-lg text-muted-foreground space-y-4">
-              <p>
-                Las cuotas del programa Che Róga Porã dependen del monto financiado y el plazo elegido. Con la <strong className="text-foreground">tasa fija del 6,5% anual</strong>, las cuotas son significativamente más bajas que un crédito hipotecario convencional.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: t("cheRoga.paymentIntro") }} />
               <div className="bg-card rounded-xl p-5 shadow-card not-prose">
-                <h4 className="font-semibold text-foreground mb-3">Ejemplos de cuota mensual (plazo 25 años):</h4>
+                <h4 className="font-semibold text-foreground mb-3">{t("cheRoga.paymentExamples")}</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-2 border-b border-border">
                     <span className="text-muted-foreground">Gs. 200.000.000</span>
@@ -226,9 +238,6 @@ const CheRogaPora = () => {
                   </div>
                 </div>
               </div>
-              <p>
-                Usá nuestro <a href="#simulador" className="text-primary font-medium hover:underline">simulador de cuotas</a> para calcular tu caso específico según tus ingresos y el monto que necesitás.
-              </p>
             </div>
           </motion.div>
         </div>
@@ -238,8 +247,8 @@ const CheRogaPora = () => {
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">¿Qué casas se pueden comprar con Che Róga Porã?</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">El programa se adapta a distintas necesidades habitacionales con varias modalidades de financiación.</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">{t("cheRoga.modalitiesTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.modalitiesSubtitle")}</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {modalities.map((m, i) => (
@@ -255,11 +264,9 @@ const CheRogaPora = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* CTA inline */}
           <div className="text-center mt-10">
             <Link to="/proyectos-che-roga-pora" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-              <Building className="w-5 h-5" /> Ver proyectos financiables <ArrowRight className="w-4 h-4" />
+              <Building className="w-5 h-5" /> {t("cheRoga.viewFinanceableProjects")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -269,7 +276,7 @@ const CheRogaPora = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-display text-3xl font-bold text-foreground mb-6 text-center">Requisitos de Che Róga Porã</h2>
+            <h2 className="font-display text-3xl font-bold text-foreground mb-6 text-center">{t("cheRoga.requirementsTitle")}</h2>
             <div className="bg-card rounded-2xl p-6 md:p-8 shadow-card">
               <ul className="space-y-3">
                 {requirements.map((r, i) => (
@@ -280,10 +287,9 @@ const CheRogaPora = () => {
                 ))}
               </ul>
             </div>
-            {/* CTA after requirements */}
             <div className="text-center mt-8">
               <a href="#elegibilidad" className="bg-accent text-accent-foreground px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-                <ClipboardCheck className="w-5 h-5" /> Comprobar si califico <ArrowRight className="w-4 h-4" />
+                <ClipboardCheck className="w-5 h-5" /> {t("cheRoga.checkEligibility")} <ArrowRight className="w-4 h-4" />
               </a>
             </div>
           </motion.div>
@@ -294,8 +300,8 @@ const CheRogaPora = () => {
       <section id="simulador" className="py-16 md:py-24 bg-secondary/30">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Simulador de cuota Che Róga Porã</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Calculá cuánto pagarías por mes con las condiciones reales del programa: tasa fija 6,5% anual.</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">{t("cheRoga.simulatorTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.simulatorSubtitle")}</p>
           </motion.div>
           <div className="max-w-2xl mx-auto">
             <MortgageSimulator />
@@ -306,10 +312,10 @@ const CheRogaPora = () => {
       {/* CTA Banner 2 */}
       <section className="py-10 bg-primary">
         <div className="container text-center">
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3">¿Puedes acceder a Che Róga Porã?</h3>
-          <p className="text-primary-foreground/80 mb-6 max-w-xl mx-auto">Completá nuestro test de elegibilidad en 1 minuto y descubrí si cumplís los requisitos.</p>
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3">{t("cheRoga.ctaBanner2Title")}</h3>
+          <p className="text-primary-foreground/80 mb-6 max-w-xl mx-auto">{t("cheRoga.ctaBanner2Subtitle")}</p>
           <a href="#elegibilidad" className="bg-primary-foreground text-primary px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-            <ClipboardCheck className="w-5 h-5" /> Verificar elegibilidad gratis
+            <ClipboardCheck className="w-5 h-5" /> {t("cheRoga.ctaBanner2Btn")}
           </a>
         </div>
       </section>
@@ -318,8 +324,8 @@ const CheRogaPora = () => {
       <section id="elegibilidad" className="py-16 md:py-24 bg-secondary/30">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">¿Sos elegible para Che Róga Porã?</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Completá el formulario y verificá si cumplís con los requisitos del programa en 1 minuto.</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">{t("cheRoga.eligibilityTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.eligibilitySubtitle")}</p>
           </motion.div>
           <div className="max-w-3xl mx-auto">
             <EligibilityForm />
@@ -331,12 +337,11 @@ const CheRogaPora = () => {
       <section id="proyectos-financiables" className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <span className="text-accent font-semibold text-sm uppercase tracking-wider">Marketplace</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">Proyectos financiables con Che Róga Porã</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Casas y departamentos que podés comprar con crédito del gobierno paraguayo.</p>
+            <span className="text-accent font-semibold text-sm uppercase tracking-wider">{t("cheRoga.projectsTag")}</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">{t("cheRoga.projectsTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.projectsSubtitle")}</p>
           </motion.div>
 
-          {/* City filter */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             {["", "Asunción", "Ciudad del Este", "Encarnación", "Luque"].map((c) => (
               <button
@@ -348,7 +353,7 @@ const CheRogaPora = () => {
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
-                {c || "Todas las ciudades"}
+                {c || t("cheRoga.allCities")}
               </button>
             ))}
           </div>
@@ -383,15 +388,15 @@ const CheRogaPora = () => {
                         <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
                         <div className="flex items-center justify-between border-t border-border pt-3">
                           <div>
-                            <p className="text-xs text-muted-foreground">Desde</p>
+                            <p className="text-xs text-muted-foreground">{t("cheRoga.from")}</p>
                             <p className="text-lg font-bold text-foreground">
-                              {project.price_from ? fmtPrice(project.price_from, project.price_currency) : "Consultar"}
+                              {project.price_from ? fmtPrice(project.price_from, project.price_currency) : t("cheRoga.askPrice")}
                             </p>
                           </div>
                           {project.cuota_estimativa && (
                             <div className="text-right">
-                              <p className="text-xs text-muted-foreground">Cuota desde</p>
-                              <p className="text-sm font-semibold text-primary">{formatGs(project.cuota_estimativa)}/mes</p>
+                              <p className="text-xs text-muted-foreground">{t("cheRoga.installmentFrom")}</p>
+                              <p className="text-sm font-semibold text-primary">{formatGs(project.cuota_estimativa)}{t("cheRoga.perMonth")}</p>
                             </div>
                           )}
                         </div>
@@ -403,7 +408,7 @@ const CheRogaPora = () => {
               {projects.length > 6 && (
                 <div className="text-center mt-8">
                   <Link to="/proyectos-che-roga-pora" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-                    Ver todos los proyectos ({projects.length}) <ArrowRight className="w-4 h-4" />
+                    {t("cheRoga.viewAllProjects")} ({projects.length}) <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               )}
@@ -411,12 +416,10 @@ const CheRogaPora = () => {
           ) : (
             <div className="text-center py-16 bg-card rounded-2xl shadow-card">
               <Home className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="font-display text-xl font-semibold text-foreground mb-2">Próximamente</h3>
-              <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                Estamos incorporando proyectos compatibles con Che Róga Porã.
-              </p>
+              <h3 className="font-display text-xl font-semibold text-foreground mb-2">{t("cheRoga.comingSoon")}</h3>
+              <p className="text-muted-foreground max-w-md mx-auto mb-6">{t("cheRoga.comingSoonDesc")}</p>
               <a href="#lead-form" className="text-primary font-medium hover:underline inline-flex items-center gap-1">
-                Avisame cuando haya proyectos <ArrowRight className="w-4 h-4" />
+                {t("cheRoga.notifyMe")} <ArrowRight className="w-4 h-4" />
               </a>
             </div>
           )}
@@ -427,15 +430,9 @@ const CheRogaPora = () => {
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-display text-3xl font-bold text-foreground mb-6">¿Cómo solicitar el crédito Che Róga Porã?</h2>
+            <h2 className="font-display text-3xl font-bold text-foreground mb-6">{t("cheRoga.howToTitle")}</h2>
             <div className="space-y-4">
-              {[
-                { step: "1", title: "Verificá tu elegibilidad", desc: "Comprobá que cumplís con los requisitos del programa usando nuestro test de elegibilidad.", link: "#elegibilidad" },
-                { step: "2", title: "Elegí tu vivienda", desc: "Explorá los proyectos compatibles y encontrá la casa o departamento ideal.", link: "/proyectos-che-roga-pora" },
-                { step: "3", title: "Simulá tu cuota", desc: "Calculá cuánto pagarías por mes según el monto y plazo que necesitás.", link: "#simulador" },
-                { step: "4", title: "Acercate a una IFI", desc: "Presentá tu documentación en una entidad financiera intermediaria autorizada por la AFD." },
-                { step: "5", title: "Obtené tu crédito", desc: "Una vez aprobado, firmás el contrato y empezás a pagar cuando te mudás." },
-              ].map((s, i) => (
+              {steps.map((s, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                   className="flex gap-4 bg-card rounded-xl p-5 shadow-card">
                   <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold shrink-0">
@@ -447,11 +444,11 @@ const CheRogaPora = () => {
                     {s.link && (
                       s.link.startsWith("#") ? (
                         <a href={s.link} className="text-primary text-sm font-medium hover:underline inline-flex items-center gap-1 mt-1">
-                          Ir ahora <ArrowRight className="w-3 h-3" />
+                          {t("cheRoga.goNow")} <ArrowRight className="w-3 h-3" />
                         </a>
                       ) : (
                         <Link to={s.link} className="text-primary text-sm font-medium hover:underline inline-flex items-center gap-1 mt-1">
-                          Ver opciones <ArrowRight className="w-3 h-3" />
+                          {t("cheRoga.viewOptions")} <ArrowRight className="w-3 h-3" />
                         </Link>
                       )
                     )}
@@ -467,8 +464,8 @@ const CheRogaPora = () => {
       <section id="lead-form" className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Recibí proyectos compatibles con Che Róga Porã</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Dejá tus datos y te avisamos cuando tengamos nuevos proyectos financiables en tu ciudad.</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">{t("cheRoga.leadTitle")}</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t("cheRoga.leadSubtitle")}</p>
           </motion.div>
           <CheRogaLeadForm />
         </div>
@@ -477,17 +474,9 @@ const CheRogaPora = () => {
       {/* FAQ Section for SEO */}
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container max-w-3xl">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">Preguntas frecuentes sobre Che Róga Porã</h2>
+          <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">{t("cheRoga.faqTitle")}</h2>
           <div className="space-y-4">
-            {[
-              { q: "¿Qué es el programa Che Róga Porã?", a: "Es una política pública del gobierno paraguayo gestionada por el Ministerio de Urbanismo, Vivienda y Hábitat (MUVH) y financiada por la Agencia Financiera de Desarrollo (AFD). Permite acceder a créditos hipotecarios con tasa fija del 6,5% anual y plazos de hasta 30 años." },
-              { q: "¿Cuánto se paga de cuota en Che Róga Porã?", a: "Depende del monto y el plazo. Por ejemplo, un crédito de Gs. 350 millones a 25 años tiene una cuota de aproximadamente Gs. 2.360.000 por mes. Podés usar nuestro simulador para calcular tu caso específico." },
-              { q: "¿Qué casas se pueden comprar con Che Róga Porã?", a: "Casas, departamentos y terrenos con construcción en proyectos habilitados. Los montos van desde Gs. 100 millones hasta Gs. 725 millones según la versión 2.0 del programa." },
-              { q: "¿Cuáles son los requisitos de Che Róga Porã?", a: "Tener entre 18 y 75 años, ingresos familiares entre 1 y 6 salarios mínimos, no poseer vivienda edificada, estabilidad laboral demostrable y documentación personal vigente." },
-              { q: "¿Cómo solicitar el crédito Che Róga Porã?", a: "Primero verificá tu elegibilidad, luego elegí un proyecto compatible, y acercate a una entidad financiera intermediaria (IFI) autorizada por la AFD con tu documentación." },
-              { q: "¿Cuándo empiezo a pagar?", a: "Uno de los beneficios más importantes es el período de gracia: empezás a pagar la primera cuota recién cuando te mudás a tu nueva vivienda, evitando el solapamiento con el alquiler actual." },
-              { q: "¿Puedo usar el programa si ya tengo un terreno?", a: "Sí, el programa incluye la modalidad de 'Construcción en terreno propio', que financia la edificación en un lote que ya sea de tu propiedad." },
-            ].map((faq, i) => (
+            {faqs.map((faq, i) => (
               <motion.details key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                 className="bg-card rounded-xl p-5 shadow-card group">
                 <summary className="font-semibold text-foreground cursor-pointer list-none flex items-center justify-between">
@@ -504,27 +493,27 @@ const CheRogaPora = () => {
       {/* Interlinking Section */}
       <section className="py-16 bg-background">
         <div className="container">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">Explorá más en Tekoha</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">{t("cheRoga.interlinksTitle")}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link to="/proyectos-che-roga-pora" className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow group">
               <Building className="w-6 h-6 text-primary mb-3" />
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">Proyectos financiables</h3>
-              <p className="text-sm text-muted-foreground">Todos los proyectos compatibles con Che Róga Porã.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{t("cheRoga.linkFinanceable")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.linkFinanceableDesc")}</p>
             </Link>
             <Link to="/" className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow group">
               <Home className="w-6 h-6 text-primary mb-3" />
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">Todos los proyectos</h3>
-              <p className="text-sm text-muted-foreground">Explorá el catálogo completo de proyectos en Paraguay.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{t("cheRoga.linkAllProjects")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.linkAllProjectsDesc")}</p>
             </Link>
             <Link to="/inversion" className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow group">
               <TrendingUp className="w-6 h-6 text-primary mb-3" />
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">Invertir en Paraguay</h3>
-              <p className="text-sm text-muted-foreground">Guía de inversión inmobiliaria y simulador de rentabilidad.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{t("cheRoga.linkInvest")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.linkInvestDesc")}</p>
             </Link>
             <Link to="/blog" className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow group">
               <BookOpen className="w-6 h-6 text-primary mb-3" />
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">Blog inmobiliario</h3>
-              <p className="text-sm text-muted-foreground">Noticias y consejos sobre el mercado paraguayo.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{t("cheRoga.linkBlog")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.linkBlogDesc")}</p>
             </Link>
           </div>
         </div>
