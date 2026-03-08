@@ -23,6 +23,7 @@ interface SearchBarProps {
 const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const { data: cities } = useProjectCities();
+  const { data: developers } = useProjectDevelopers();
   const { t } = useTranslation();
 
   const selectedCity = filters.city || null;
