@@ -661,7 +661,16 @@ export const developers: DeveloperInfo[] = [
     website: "https://matrisa.com.py",
     email: "ventas@matrisa.com.py",
     phone: "+595 994 283 185",
-    description: "Proyectos en ubicación estratégica, cerca de centros comerciales, restaurantes, bares, hoteles y oficinas.",
+    description:
+      "Fundada en 2017 en Paraguay por un grupo de socios con amplia experiencia en desarrollo inmobiliario en Chile y Sudamérica. MATRISA aporta visión y conocimiento de mercados más maduros para fortalecer el crecimiento inmobiliario paraguayo. Garantiza tres pilares fundamentales en cada proyecto: ubicación estratégica, calidad y diseño, asegurando inversiones seguras, rentables y con alto potencial de plusvalía.",
+    logo: "/images/matrisa-logo.png",
+    heroImage: "/images/matrisa-hero.jpg",
+    stats: [
+      { label: "Años en Paraguay", value: "8" },
+      { label: "Edificios", value: "4" },
+      { label: "m² desarrollados", value: "36.850" },
+      { label: "Unidades entregadas", value: "194" },
+    ],
   },
   {
     slug: "habitalis",
