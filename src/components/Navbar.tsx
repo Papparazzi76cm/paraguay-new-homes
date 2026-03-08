@@ -33,6 +33,7 @@ const Navbar = () => {
     { label: t("nav.projects"), href: "/#proyectos" },
     { label: "Che Róga Porã", href: "/che-roga-pora" },
     { label: t("nav.investment"), href: "/inversion" },
+    { label: "Promotores", href: "/promotores" },
     { label: t("nav.forDevelopers"), href: "/para-promotores" },
     { label: t("nav.blog"), href: "/blog" },
   ];

@@ -96,6 +96,12 @@ const DeveloperProfile = () => {
         </div>
         <Navbar />
         <div className="container pt-32 pb-20 md:pt-40 md:pb-28 relative z-10">
+          <Link
+            to="/promotores"
+            className="inline-flex items-center gap-2 text-background/60 hover:text-background text-sm font-medium mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> Volver a Promotores
+          </Link>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
