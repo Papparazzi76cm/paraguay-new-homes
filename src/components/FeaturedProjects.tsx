@@ -92,10 +92,13 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   );
 };
 
-const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
+const FeaturedProjects = ({ filters, showExploreButton = true }: FeaturedProjectsProps) => {
   const { data: projects, isLoading } = useFeaturedProjects(filters);
   const hasFilters = filters && Object.values(filters).some((v) => v != null && v !== "");
   const { t } = useTranslation();
+
+  // On home page (showExploreButton=true), show max 6; on /proyectos show all 15
+  const displayProjects = showExploreButton ? projects?.slice(0, 6) : projects;
 
   return (
     <section id="proyectos" className="py-20 md:py-28 bg-background" aria-label="Proyectos de obra nueva destacados en Paraguay">
@@ -116,9 +119,9 @@ const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
 
         {isLoading ? (
           <div className="flex justify-center py-20"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>
-        ) : projects && projects.length > 0 ? (
+        ) : displayProjects && displayProjects.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {projects.map((project, i) => (
+            {displayProjects.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
             ))}
           </div>
@@ -128,7 +131,7 @@ const FeaturedProjects = ({ filters }: FeaturedProjectsProps) => {
           </div>
         )}
 
-        {!hasFilters && (
+        {showExploreButton && !hasFilters && (
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
             <Link to="/proyectos" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-xl font-medium hover:opacity-90 transition-opacity text-base inline-block">
               {t("featured.exploreAll")}
