@@ -41,9 +41,14 @@ const ProjectDetail = () => {
     formatCurrency(convertCurrency(price, fromCurrency, displayCurrency), displayCurrency);
 
   const handleShare = async () => {
-    await navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const shareData = { title: project?.title || "", text: `Mirá este proyecto: ${project?.title}`, url: window.location.href };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch {}
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   if (isLoading) {
