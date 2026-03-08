@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { ArrowLeft, Upload, Trash2, Star, Loader2 } from "lucide-react";
 import UnitDetailEditor from "@/components/admin/UnitDetailEditor";
+import AmenitiesGrid from "@/components/admin/AmenitiesGrid";
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -231,7 +232,13 @@ const DeveloperProjectForm = () => {
           <div className="space-y-2"><Label>Rendimiento estimado (%)</Label><Input type="number" step="0.1" value={form.estimated_yield} onChange={(e) => set("estimated_yield", e.target.value)} /></div>
         </div>
 
-        <div className="space-y-2"><Label>Amenities (separados por coma)</Label><Input value={form.amenities} onChange={(e) => set("amenities", e.target.value)} placeholder="Piscina, Gym, Quincho" /></div>
+        <div>
+          <h3 className="font-semibold text-foreground mb-3">Amenities</h3>
+          <AmenitiesGrid
+            selected={form.amenities ? form.amenities.split(",").map((a) => a.trim()).filter(Boolean) : []}
+            onChange={(amenities) => set("amenities", amenities.join(", "))}
+          />
+        </div>
 
         <div>
           <h3 className="font-semibold text-foreground mb-3">Fechas del cronograma</h3>
