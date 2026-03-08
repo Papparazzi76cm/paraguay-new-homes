@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Home, MapPin, Loader2, ArrowRight, Calculator, ClipboardCheck } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrency } from "@/hooks/useCurrency";
 import { convertCurrency, formatCurrency } from "@/components/CurrencyToggle";
@@ -21,6 +22,7 @@ const formatGs = (n: number) =>
   new Intl.NumberFormat("es-PY", { style: "currency", currency: "PYG", maximumFractionDigits: 0 }).format(n);
 
 const ProyectosCheRogaPora = () => {
+  const { t } = useTranslation();
   const [cityFilter, setCityFilter] = useState("");
   const { displayCurrency } = useCurrency();
   const fmtPrice = (price: number, from: string) =>
@@ -77,20 +79,20 @@ const ProyectosCheRogaPora = () => {
         <div className="container relative z-10 pt-36 pb-16 md:pt-44 md:pb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              <Home className="w-4 h-4" /> Programa Che Róga Porã
+              <Home className="w-4 h-4" /> {t("cheRoga.programBadge")}
             </span>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Proyectos financiables con <span className="text-accent">Che Róga Porã</span>
+              {t("cheRoga.projectsPageHeroTitle")} <span className="text-accent">{t("cheRoga.heroHighlight")}</span>
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mb-6">
-              Casas y departamentos que podés comprar con crédito del gobierno paraguayo. Tasa fija 6,5%, hasta 30 años.
+              {t("cheRoga.projectsPageHeroSubtitle")}
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/che-roga-pora#simulador" className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-                <Calculator className="w-4 h-4" /> Simular cuota
+                <Calculator className="w-4 h-4" /> {t("cheRoga.quickSimulate")}
               </Link>
               <Link to="/che-roga-pora#elegibilidad" className="bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-colors inline-flex items-center gap-2">
-                <ClipboardCheck className="w-4 h-4" /> ¿Soy elegible?
+                <ClipboardCheck className="w-4 h-4" /> {t("cheRoga.canIAccess")}
               </Link>
             </div>
           </motion.div>
@@ -111,7 +113,7 @@ const ProyectosCheRogaPora = () => {
                     : "bg-card text-foreground hover:bg-secondary"
                 }`}
               >
-                {c || "Todas las ciudades"}
+                {c || t("cheRoga.allCities")}
               </button>
             ))}
           </div>
@@ -125,7 +127,7 @@ const ProyectosCheRogaPora = () => {
             <div className="flex justify-center py-16"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>
           ) : projects && projects.length > 0 ? (
             <>
-              <p className="text-muted-foreground mb-8 text-center">{projects.length} proyecto{projects.length !== 1 ? "s" : ""} encontrado{projects.length !== 1 ? "s" : ""}</p>
+              <p className="text-muted-foreground mb-8 text-center">{t("cheRoga.projectsFound", { count: projects.length })}</p>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projects.map((project: any, i: number) => (
                   <Link to={`/proyecto/${project.slug}`} key={project.id}>
@@ -152,15 +154,15 @@ const ProyectosCheRogaPora = () => {
                         <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
                         <div className="flex items-center justify-between border-t border-border pt-3">
                           <div>
-                            <p className="text-xs text-muted-foreground">Desde</p>
+                            <p className="text-xs text-muted-foreground">{t("cheRoga.from")}</p>
                             <p className="text-lg font-bold text-foreground">
-                              {project.price_from ? fmtPrice(project.price_from, project.price_currency) : "Consultar"}
+                              {project.price_from ? fmtPrice(project.price_from, project.price_currency) : t("cheRoga.askPrice")}
                             </p>
                           </div>
                           {project.cuota_estimativa && (
                             <div className="text-right">
-                              <p className="text-xs text-muted-foreground">Cuota desde</p>
-                              <p className="text-sm font-semibold text-primary">{formatGs(project.cuota_estimativa)}/mes</p>
+                              <p className="text-xs text-muted-foreground">{t("cheRoga.installmentFrom")}</p>
+                              <p className="text-sm font-semibold text-primary">{formatGs(project.cuota_estimativa)}{t("cheRoga.perMonth")}</p>
                             </div>
                           )}
                         </div>
@@ -173,12 +175,10 @@ const ProyectosCheRogaPora = () => {
           ) : (
             <div className="text-center py-16 bg-card rounded-2xl shadow-card max-w-xl mx-auto">
               <Home className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="font-display text-xl font-semibold text-foreground mb-2">Próximamente</h3>
-              <p className="text-muted-foreground mb-6">
-                Estamos incorporando proyectos compatibles con Che Róga Porã.
-              </p>
+              <h3 className="font-display text-xl font-semibold text-foreground mb-2">{t("cheRoga.projectsPageComingSoon")}</h3>
+              <p className="text-muted-foreground mb-6">{t("cheRoga.projectsPageComingSoonDesc")}</p>
               <Link to="/che-roga-pora#elegibilidad" className="text-primary font-medium hover:underline inline-flex items-center gap-1">
-                Mientras tanto, verificá tu elegibilidad <ArrowRight className="w-4 h-4" />
+                {t("cheRoga.projectsPageCheckEligibility")} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           )}
@@ -197,16 +197,16 @@ const ProyectosCheRogaPora = () => {
         <div className="container">
           <div className="grid md:grid-cols-3 gap-4">
             <Link to="/che-roga-pora" className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow group">
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">Guía completa del programa</h3>
-              <p className="text-sm text-muted-foreground">Requisitos, modalidades, simulador y test de elegibilidad.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">{t("cheRoga.projectsPageGuide")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.projectsPageGuideDesc")}</p>
             </Link>
             <Link to="/che-roga-pora#simulador" className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow group">
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">Simulador de cuotas</h3>
-              <p className="text-sm text-muted-foreground">Calculá cuánto pagarías por mes con tasa fija del 6,5%.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">{t("cheRoga.projectsPageSimulator")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.projectsPageSimulatorDesc")}</p>
             </Link>
             <Link to="/blog" className="bg-card rounded-xl p-6 shadow-card hover:shadow-card-hover transition-shadow group">
-              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">Blog inmobiliario</h3>
-              <p className="text-sm text-muted-foreground">Novedades y consejos sobre el mercado inmobiliario paraguayo.</p>
+              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">{t("cheRoga.projectsPageBlog")}</h3>
+              <p className="text-sm text-muted-foreground">{t("cheRoga.projectsPageBlogDesc")}</p>
             </Link>
           </div>
         </div>

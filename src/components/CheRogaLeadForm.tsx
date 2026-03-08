@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useSubmitLead } from "@/hooks/useContactLead";
 
 const CheRogaLeadForm = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -36,37 +38,37 @@ const CheRogaLeadForm = () => {
       <div className="flex items-center gap-2 mb-4">
         <Mail className="w-5 h-5 text-primary" />
         <h3 className="font-display text-xl font-semibold text-foreground">
-          Recibí proyectos compatibles con Che Róga Porã
+          {t("cheRoga.leadFormTitle")}
         </h3>
       </div>
       <p className="text-muted-foreground text-sm mb-6">
-        Dejá tus datos y te avisamos cuando tengamos proyectos financiables en tu ciudad.
+        {t("cheRoga.leadFormSubtitle")}
       </p>
 
       {submitLead.isSuccess ? (
         <div className="flex items-center gap-3 py-6 text-primary">
           <CheckCircle className="w-6 h-6" />
-          <p className="font-semibold">¡Listo! Te contactaremos con proyectos compatibles.</p>
+          <p className="font-semibold">{t("cheRoga.leadFormSuccess")}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Nombre completo *</Label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Tu nombre" required />
+              <Label>{t("cheRoga.leadFormName")}</Label>
+              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder={t("cheRoga.leadFormName")} required />
             </div>
             <div className="space-y-2">
-              <Label>Email *</Label>
+              <Label>{t("cheRoga.leadFormEmail")}</Label>
               <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
             </div>
             <div className="space-y-2">
-              <Label>Teléfono</Label>
+              <Label>{t("cheRoga.leadFormPhone")}</Label>
               <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="0981 xxx xxx" />
             </div>
             <div className="space-y-2">
-              <Label>Ciudad de interés</Label>
+              <Label>{t("cheRoga.leadFormCity")}</Label>
               <Select value={city} onValueChange={setCity}>
-                <SelectTrigger><SelectValue placeholder="Seleccioná" /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder={t("cheRoga.leadFormCityPlaceholder")} /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Asunción">Asunción</SelectItem>
                   <SelectItem value="Ciudad del Este">Ciudad del Este</SelectItem>
@@ -74,13 +76,13 @@ const CheRogaLeadForm = () => {
                   <SelectItem value="Luque">Luque</SelectItem>
                   <SelectItem value="San Lorenzo">San Lorenzo</SelectItem>
                   <SelectItem value="Fernando de la Mora">Fernando de la Mora</SelectItem>
-                  <SelectItem value="Otra">Otra ciudad</SelectItem>
+                  <SelectItem value="Otra">{t("cheRoga.leadFormOtherCity")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
           <Button type="submit" size="lg" className="w-full md:w-auto" disabled={submitLead.isPending}>
-            {submitLead.isPending ? "Enviando..." : "Quiero recibir proyectos"}
+            {submitLead.isPending ? t("cheRoga.leadFormSubmitting") : t("cheRoga.leadFormSubmit")}
           </Button>
         </form>
       )}
