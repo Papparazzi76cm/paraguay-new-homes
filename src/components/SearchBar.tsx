@@ -110,6 +110,15 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
             selected={!!selectedStatus}
             onClick={() => setActiveFilter(activeFilter === "estado" ? null : "estado")}
           />
+          <div className="hidden md:block w-px h-8 bg-border" />
+          <FilterButton
+            icon={<HardHat className="w-4 h-4" />}
+            label={t("search.developer")}
+            placeholder={selectedDeveloper || t("search.developerPlaceholder")}
+            active={activeFilter === "promotor"}
+            selected={!!selectedDeveloper}
+            onClick={() => setActiveFilter(activeFilter === "promotor" ? null : "promotor")}
+          />
           {hasAnyFilter ? (
             <button
               onClick={() => onFiltersChange({})}
