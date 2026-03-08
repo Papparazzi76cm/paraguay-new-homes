@@ -186,8 +186,17 @@ const ProyectosCheRogaPora = () => {
         </div>
       </section>
 
+      {/* Interactive map */}
+      {projects && projects.length > 0 && (
+        <section className="py-16 md:py-24 bg-secondary/30">
+          <div className="container">
+            <CheRogaProjectsMap projects={projects} />
+          </div>
+        </section>
+      )}
+
       {/* Lead capture */}
-      <section className="py-16 md:py-24 bg-secondary/30">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <CheRogaLeadForm />
         </div>
