@@ -83,7 +83,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
             selected={!!selectedCity}
             onClick={() => setActiveFilter(activeFilter === "ciudad" ? null : "ciudad")}
           />
-          <div className="hidden md:block w-px h-8 bg-border" />
+          <div className="hidden lg:block w-px h-8 bg-border" />
           <FilterButton
             icon={<Building2 className="w-4 h-4" />}
             label={t("search.type")}
