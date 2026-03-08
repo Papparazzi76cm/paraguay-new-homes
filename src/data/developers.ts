@@ -97,11 +97,26 @@ export const developers: DeveloperInfo[] = [
   },
   {
     slug: "itasa",
-    name: "Itasa S.A",
+    name: "Itasã S.A",
     website: "http://www.itasa.com.py",
     email: "itasa@itasa.com.py",
     phone: "+595 21 201 711",
-    description: "Constructora con sede en Asunción, Paraguay.",
+    description:
+      "Más de 45 años brindando servicios de ingeniería y arquitectura. Especializada en generación de proyectos, construcción, fiscalización y gerenciamiento de obras civiles. Miembro de la Cámara Paraguaya de la Construcción, con certificación ISO 9001:2015.",
+    logo: "/images/itasa-logo.png",
+    heroImage: "/images/itasa-hero.jpg",
+    stats: [
+      { label: "Años de trayectoria", value: "+45" },
+      { label: "Obras residenciales", value: "6+" },
+      { label: "Obras públicas", value: "10+" },
+      { label: "Directores", value: "3" },
+    ],
+    certifications: [
+      "Certificación ISO 9001:2015 (SGS)",
+      "Miembro de la Cámara Paraguaya de la Construcción",
+      "Obras públicas: Congreso Nacional, Oficinas de Gobierno",
+      "Complejos residenciales: Parque Pinar, Parque Perón, Parque Venezuela",
+    ],
   },
   {
     slug: "romanach-y-mercado",
