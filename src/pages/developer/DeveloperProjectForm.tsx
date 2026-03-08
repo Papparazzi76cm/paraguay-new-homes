@@ -283,8 +283,13 @@ const DeveloperProjectForm = () => {
         </Button>
       </form>
 
-      {isEditing && (
+      {isEditing && id && (
         <div className="mt-10 border-t border-border pt-8">
+          <UnitDetailEditor projectId={id} />
+        </div>
+      )}
+
+      {isEditing && (
           <h3 className="text-xl font-bold text-foreground mb-2">Imágenes del proyecto</h3>
           <div className="mb-6">
             <Label htmlFor="img-upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
