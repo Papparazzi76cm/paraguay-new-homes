@@ -546,9 +546,18 @@ export const developers: DeveloperInfo[] = [
     slug: "invursa-insignia",
     name: "INVURSA S.A (Insignia)",
     website: "https://www.insigniapy.com",
-    email: "",
+    email: "administracion@invursa.com.py",
     phone: "+595 983 206 474",
-    description: "Desarrolladora inmobiliaria enfocada en lo que es importante para vos.",
+    description:
+      "Desarrolladora inmobiliaria del Grupo INVURSA — Inversiones Urbanas S.A., con más de 10 años construyendo confianza en el mercado paraguayo. Especializados en el desarrollo de emprendimientos inmobiliarios innovadores y de alta calidad, desde la selección de emplazamientos estratégicos hasta la comercialización. Bajo la marca Insignia, han entregado más de 10 proyectos en Asunción, Luque y San Bernardino con financiación propia.",
+    logo: "/images/insignia-logo.png",
+    heroImage: "/images/insignia-hero.webp",
+    stats: [
+      { label: "Década de operación", value: "10+" },
+      { label: "Proyectos activos", value: "7" },
+      { label: "Proyectos entregados", value: "8" },
+      { label: "Financiación propia", value: "Sí" },
+    ],
   },
   {
     slug: "cesar-aquino",
