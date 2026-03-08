@@ -510,7 +510,20 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.eydisa.com.py",
     email: "",
     phone: "+595 986 394 315",
-    description: "Proyectos en el eje corporativo de Asunción, cerca de shoppings y restaurantes.",
+    description:
+      "EYDISA (Estrategias y Desarrollos Inmobiliarios S.A.) es una empresa especializada en la gestión integral de emprendimientos inmobiliarios, desde el análisis de mercado y la estructuración financiera hasta la comercialización. Premiada como la mejor desarrolladora del sector corporativo por 6 años consecutivos (Top de Marcas de la Construcción). Con proyectos emblemáticos como SkyPark, ParkPlaza, Cruz del Chaco y el nuevo megaproyecto Marena con laguna Crystal Lagoons®.",
+    logo: "/images/eydisa-logo.png",
+    heroImage: "/images/eydisa-hero.jpg",
+    stats: [
+      { label: "Años consecutivos #1", value: "6" },
+      { label: "Unidades entregadas", value: "500+" },
+      { label: "Ocupación", value: "100%" },
+      { label: "Proyectos", value: "8+" },
+    ],
+    certifications: [
+      "1er Puesto Empresa Desarrolladora — Top de Marcas 2025 (6 años consecutivos)",
+      "Crystal Lagoons® Technology Partner",
+    ],
   },
   {
     slug: "az-inversiones",
