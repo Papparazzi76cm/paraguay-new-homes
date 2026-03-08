@@ -34,6 +34,7 @@ export interface ProjectFilters {
   status?: string;
   priceMin?: number;
   priceMax?: number;
+  developer?: string;
 }
 
 export const useProjects = (filters?: ProjectFilters) => {
