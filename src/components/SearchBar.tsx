@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown, X } from "lucide-react";
+import { Search, MapPin, Building2, Banknote, CalendarDays, ChevronDown, X, HardHat } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useProjectCities, type ProjectFilters } from "@/hooks/useProjects";
+import { useProjectCities, useProjectDevelopers, type ProjectFilters } from "@/hooks/useProjects";
 
 const priceRanges = [
   { label: "0 - 50.000$", min: 0, max: 50000 },
@@ -23,6 +23,7 @@ interface SearchBarProps {
 const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const { data: cities } = useProjectCities();
+  const { data: developers } = useProjectDevelopers();
   const { t } = useTranslation();
 
   const selectedCity = filters.city || null;
@@ -31,6 +32,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
   const selectedPriceLabel = priceRanges.find(
     (r) => r.min === filters.priceMin && r.max === filters.priceMax
   )?.label || null;
+  const selectedDeveloper = filters.developer || null;
 
   const handleCitySelect = (city: string) => {
     onFiltersChange({ ...filters, city: filters.city === city ? undefined : city });
@@ -57,7 +59,12 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
     setActiveFilter(null);
   };
 
-  const hasAnyFilter = selectedCity || selectedType || selectedStatus || selectedPriceLabel;
+  const handleDeveloperSelect = (name: string) => {
+    onFiltersChange({ ...filters, developer: filters.developer === name ? undefined : name });
+    setActiveFilter(null);
+  };
+
+  const hasAnyFilter = selectedCity || selectedType || selectedStatus || selectedPriceLabel || selectedDeveloper;
 
   return (
     <motion.div
@@ -103,6 +110,15 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
             selected={!!selectedStatus}
             onClick={() => setActiveFilter(activeFilter === "estado" ? null : "estado")}
           />
+          <div className="hidden md:block w-px h-8 bg-border" />
+          <FilterButton
+            icon={<HardHat className="w-4 h-4" />}
+            label={t("search.developer")}
+            placeholder={selectedDeveloper || t("search.developerPlaceholder")}
+            active={activeFilter === "promotor"}
+            selected={!!selectedDeveloper}
+            onClick={() => setActiveFilter(activeFilter === "promotor" ? null : "promotor")}
+          />
           {hasAnyFilter ? (
             <button
               onClick={() => onFiltersChange({})}
@@ -145,6 +161,18 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
             <DropdownPanel key="estado">
               {statusKeys.map((key) => (
                 <OptionChip key={key} label={t(`projectStatus.${key}`)} selected={selectedStatus === key} onClick={() => handleStatusSelect(key)} />
+              ))}
+            </DropdownPanel>
+          )}
+          {activeFilter === "promotor" && (
+            <DropdownPanel key="promotor">
+              {(developers || []).map((dev) => (
+                <OptionChip
+                  key={dev.name}
+                  label={`${dev.name} (${dev.projectCount})`}
+                  selected={selectedDeveloper === dev.name}
+                  onClick={() => handleDeveloperSelect(dev.name)}
+                />
               ))}
             </DropdownPanel>
           )}

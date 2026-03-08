@@ -34,6 +34,7 @@ export interface ProjectFilters {
   status?: string;
   priceMin?: number;
   priceMax?: number;
+  developer?: string;
 }
 
 export const useProjects = (filters?: ProjectFilters) => {
@@ -51,6 +52,7 @@ export const useProjects = (filters?: ProjectFilters) => {
       if (filters?.status) query = query.eq("status", filters.status as any);
       if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
       if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
+      if (filters?.developer) query = query.eq("developer_name", filters.developer);
 
       const { data, error } = await query;
       if (error) throw error;
@@ -75,6 +77,7 @@ export const useFeaturedProjects = (filters?: ProjectFilters) => {
       if (filters?.status) query = query.eq("status", filters.status as any);
       if (filters?.priceMin != null) query = query.gte("price_from", filters.priceMin);
       if (filters?.priceMax != null) query = query.lte("price_from", filters.priceMax);
+      if (filters?.developer) query = query.eq("developer_name", filters.developer);
 
       if (!hasFilters) query = query.limit(6);
 
@@ -93,6 +96,47 @@ export const useProjectCities = () => {
       if (error) throw error;
       const cities = [...new Set(data.map((d) => d.location_city))];
       return cities;
+    },
+  });
+};
+
+export interface DeveloperOption {
+  name: string;
+  projectCount: number;
+  firstCreated: string;
+}
+
+export const useProjectDevelopers = () => {
+  return useQuery({
+    queryKey: ["project-developers"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("projects")
+        .select("developer_name, created_at");
+      if (error) throw error;
+
+      const devMap = new Map<string, { count: number; firstCreated: string }>();
+      for (const row of data) {
+        if (!row.developer_name) continue;
+        const existing = devMap.get(row.developer_name);
+        if (existing) {
+          existing.count++;
+          if (row.created_at < existing.firstCreated) existing.firstCreated = row.created_at;
+        } else {
+          devMap.set(row.developer_name, { count: 1, firstCreated: row.created_at });
+        }
+      }
+
+      const developers: DeveloperOption[] = Array.from(devMap.entries()).map(
+        ([name, { count, firstCreated }]) => ({ name, projectCount: count, firstCreated })
+      );
+
+      developers.sort((a, b) => {
+        if (b.projectCount !== a.projectCount) return b.projectCount - a.projectCount;
+        return a.firstCreated.localeCompare(b.firstCreated);
+      });
+
+      return developers;
     },
   });
 };

@@ -28,6 +28,8 @@
     "pricePlaceholder": "Rango de precio",
     "status": "Estado",
     "statusPlaceholder": "Etapa de obra",
+    "developer": "Promotor",
+    "developerPlaceholder": "Todos los promotores",
     "search": "Buscar",
     "clear": "Limpiar"
   },

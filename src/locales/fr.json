@@ -28,6 +28,8 @@
     "pricePlaceholder": "Fourchette de prix",
     "status": "Statut",
     "statusPlaceholder": "Phase de construction",
+    "developer": "Promoteur",
+    "developerPlaceholder": "Tous les promoteurs",
     "search": "Rechercher",
     "clear": "Effacer"
   },
