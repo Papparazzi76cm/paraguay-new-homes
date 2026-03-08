@@ -71,7 +71,7 @@ const SearchBar = ({ filters, onFiltersChange }: SearchBarProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.6 }}
-      className="w-full max-w-4xl mx-auto"
+      className="w-full max-w-5xl mx-auto"
     >
       <div className="bg-card rounded-2xl shadow-elevated p-2 md:p-3">
         <div className="flex flex-col md:flex-row md:items-center gap-2">
