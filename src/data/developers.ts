@@ -428,7 +428,22 @@ export const developers: DeveloperInfo[] = [
     website: "https://www.cci.com.py",
     email: "ccisa@cci.com.py",
     phone: "+595 981 504 744",
-    description: "Desarrolladora de proyectos como Urban Ykua Sati, Tierra Alta, Malutín, Mangoré, Feel Asunción y Skytower.",
+    description:
+      "Empresa constructora y desarrolladora que inició operaciones en 1990, consolidándose como un actor importante del despegue inmobiliario de Paraguay. Sus servicios incluyen design-build, construcción y gerenciamiento de proyectos, desde el diseño hasta la entrega final. Realizan obras civiles, industriales, residenciales, comerciales y de servicios, con proyectos propios y de terceros. Portfolio destacado: Skytower (32 pisos, 135 dptos. de lujo), Urban Ykua Sati (72 dptos.), Mangoré, Malutín Lofts, Feel Asunción, Edificio Miami y Erasmus.",
+    logo: "/images/cci-logo.png",
+    heroImage: "/images/cci-hero.jpg",
+    stats: [
+      { label: "Años operando", value: "34+" },
+      { label: "Proyectos residenciales", value: "10+" },
+      { label: "Servicios", value: "Design-Build" },
+      { label: "Tipo de obras", value: "Civiles/Residenciales" },
+    ],
+    certifications: [
+      "Design-Build: servicio integral desde diseño hasta entrega",
+      "Proyectos de lujo con terminaciones Florense",
+      "Asociación con Casal Arquitectos (Uruguay)",
+      "Obras civiles, industriales y residenciales",
+    ],
   },
   {
     slug: "salum-wenz",
