@@ -46,6 +46,7 @@ export const developers: DeveloperInfo[] = [
     phone: "+595 21 201 791",
     description: "Empresa constructora responsable del primer edificio con Certificación LEED en Paraguay (BBVA Banco Casa Matriz).",
     logo: "/images/agb-logo.png",
+    heroImage: "/images/agb-hero.jpg",
   },
   {
     slug: "codas-vuyk",
@@ -53,8 +54,9 @@ export const developers: DeveloperInfo[] = [
     website: "http://www.codasvuyk.com.py",
     email: "info@cvsa.com.py",
     phone: "+595 981 909706",
-    description: "Empresa constructora y de ingeniería con amplia trayectoria en Paraguay.",
+    description: "Empresa constructora y de ingeniería con amplia trayectoria en Paraguay. Más de 40 años de experiencia, con un sello constructivo de gran calidad, confianza y garantía. Calidad y prestigio desde 1978.",
     logo: "/images/codasvuyk-logo.png",
+    heroImage: "/images/codasvuyk-hero.jpg",
   },
   {
     slug: "block",
@@ -120,14 +122,7 @@ export const developers: DeveloperInfo[] = [
       "Complejos residenciales: Parque Pinar, Parque Perón, Parque Venezuela",
     ],
   },
-  {
-    slug: "romanach-y-mercado",
-    name: "Romañach Y Mercado Arq.",
-    website: "http://www.rym.com.py",
-    email: "",
-    phone: "",
-    description: "Estudio de arquitectura con proyectos en Paraguay.",
-  },
+  
   {
     slug: "jbermen-mia-terra",
     name: "Jbermen S.A – Mia Terra",
@@ -145,23 +140,7 @@ export const developers: DeveloperInfo[] = [
       { label: "Departamentos entregados", value: "500+" },
     ],
   },
-  {
-    slug: "delgado-arquitectos",
-    name: "Delgado Arquitectos",
-    website: "http://www.delgadoarquitectos.com",
-    email: "info@delgadoarquitectos.com",
-    phone: "+595 21 205 648",
-    description:
-      "Más de 30 años en el estudio de factibilidad, asesoramiento inmobiliario, diseño, desarrollo y construcción integral de proyectos habitacionales, comerciales, empresariales, corporativos e institucionales. Con 35 edificios construidos y 850 unidades habitacionales entregadas, Delgado Arquitectos (DASA Construye) es sinónimo de seriedad y solvencia en el mercado paraguayo.",
-    logo: "/images/delgado-logo.png",
-    heroImage: "/images/delgado-hero.jpg",
-    stats: [
-      { label: "Edificios construidos", value: "35" },
-      { label: "M² construidos", value: "51.000" },
-      { label: "Unidades entregadas", value: "850+" },
-      { label: "Años de experiencia", value: "30+" },
-    ],
-  },
+  
   {
     slug: "gonu",
     name: "Gonu S.A",
@@ -394,23 +373,7 @@ export const developers: DeveloperInfo[] = [
       "Foco en rentabilidad para inversores",
     ],
   },
-  {
-    slug: "san-gerardo",
-    name: "San Gerardo Inmobiliaria S.A",
-    website: "https://www.sangerardoinmobiliaria.com",
-    email: "info@sangerardoinmobiliaria.com",
-    phone: "+595 982 822 328",
-    description:
-      "Empresa inmobiliaria en Asunción conformada por un staff de jóvenes profesionales que se capacitan permanentemente para proveer el mejor servicio inmobiliario. Cuentan con diversos tipos de inmuebles en venta o alquiler: casas, terrenos, departamentos, oficinas y locales comerciales en Asunción, Gran Asunción y el resto del país. Operan como intermediarios inmobiliarios con cartera de propiedades en zonas premium como Santísima Trinidad, Carmelitas, San Bernardino y más.",
-    logo: "/images/sangerardo-logo.png",
-    heroImage: "/images/sangerardo-hero.jpg",
-    stats: [
-      { label: "Tipo", value: "Inmobiliaria" },
-      { label: "Cobertura", value: "Nacional" },
-      { label: "Zonas", value: "10+" },
-      { label: "Servicios", value: "Venta/Alquiler" },
-    ],
-  },
+  
   {
     slug: "nicasio-acosta",
     name: "Nicasio Acosta e Hijos S.A",
