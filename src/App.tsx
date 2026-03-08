@@ -10,6 +10,7 @@ import ProyectosCheRogaPora from "./pages/ProyectosCheRogaPora";
 import ProjectDetail from "./pages/ProjectDetail";
 import ParaPromotores from "./pages/ParaPromotores";
 import Inversion from "./pages/Inversion";
+import DeveloperProfile from "./pages/DeveloperProfile";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
           <Route path="/proyecto/:slug" element={<ProjectDetail />} />
           <Route path="/para-promotores" element={<ParaPromotores />} />
+          <Route path="/promotor/:slug" element={<DeveloperProfile />} />
           <Route path="/inversion" element={<Inversion />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
