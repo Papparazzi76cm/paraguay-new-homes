@@ -531,7 +531,16 @@ export const developers: DeveloperInfo[] = [
     website: "https://azinversiones.com",
     email: "info@azinversiones.com",
     phone: "+595 21 452 000",
-    description: "Líderes en el desarrollo de proyectos inmobiliarios innovadores en Paraguay.",
+    description:
+      "Desarrolladora inmobiliaria parte del Grupo SINDEC, con más de 30 años de trayectoria. Líderes en proyectos innovadores en Paraguay con más de una década de experiencia, especializados en inversiones integrales que abarcan alianza con propietarios, desarrollo, construcción y soporte en venta y renta. Expertos en buenas raíces.",
+    logo: "/images/az-logo.png",
+    heroImage: "/images/az-hero.webp",
+    stats: [
+      { label: "Proyectos terminados", value: "10+" },
+      { label: "Años en el mercado", value: "7+" },
+      { label: "Unidades entregadas", value: "+177" },
+      { label: "Proyectos en desarrollo", value: "2" },
+    ],
   },
   {
     slug: "invursa-insignia",
