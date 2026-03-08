@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { ArrowLeft, Upload, Trash2, Star, Loader2 } from "lucide-react";
+import UnitDetailEditor from "@/components/admin/UnitDetailEditor";
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -281,6 +282,12 @@ const DeveloperProjectForm = () => {
           {mutation.isPending ? "Guardando..." : isEditing ? "Guardar cambios" : "Crear proyecto"}
         </Button>
       </form>
+
+      {isEditing && id && (
+        <div className="mt-10 border-t border-border pt-8">
+          <UnitDetailEditor projectId={id} />
+        </div>
+      )}
 
       {isEditing && (
         <div className="mt-10 border-t border-border pt-8">
