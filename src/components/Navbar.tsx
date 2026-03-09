@@ -119,7 +119,7 @@ const Navbar = () => {
                 <Shield className="w-4 h-4" /> {t("nav.adminPanel")}
               </Link>
             )}
-            <Link to="/auth?role=developer" className="bg-primary text-primary-foreground px-5 py-3 rounded-xl text-sm font-medium mt-2 block text-center" onClick={() => setMobileOpen(false)}>
+            <Link to={isAdmin ? "/admin/projects/new" : isDeveloper ? "/developer/projects/new" : "/auth?role=developer"} className="bg-primary text-primary-foreground px-5 py-3 rounded-xl text-sm font-medium mt-2 block text-center" onClick={() => setMobileOpen(false)}>
               {t("nav.publishProject")}
             </Link>
           </div>
