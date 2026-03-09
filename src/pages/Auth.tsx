@@ -53,6 +53,7 @@ const Auth = () => {
       if (error) {
         toast.error(error.message);
       } else {
+        await supabase.rpc("ensure_user_setup");
         const userId = data.user?.id;
         if (userId) {
           const { data: adminRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "admin").maybeSingle();

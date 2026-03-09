@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth, useIsDeveloper } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DeveloperSidebar } from "./DeveloperSidebar";
 import { Loader2 } from "lucide-react";
 
 const DeveloperLayout = () => {
   const { user, loading: authLoading, signOut } = useAuth();
-  const { isDeveloper, loading: roleLoading } = useIsDeveloper(user?.id);
+  const [setupDone, setSetupDone] = useState(false);
+  const { isDeveloper, loading: roleLoading } = useIsDeveloper(setupDone ? user?.id : undefined);
   const navigate = useNavigate();
   const location = useLocation();
   const [redirecting, setRedirecting] = useState(false);
+
+  // Ensure user setup before checking roles
+  useEffect(() => {
+    if (authLoading || !user) return;
+    supabase.rpc("ensure_user_setup").then(() => setSetupDone(true)).catch(() => setSetupDone(true));
+  }, [authLoading, user]);
 
   console.log("[DeveloperLayout] state:", { 
     authLoading, roleLoading, userId: user?.id, isDeveloper, 
