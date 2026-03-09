@@ -174,7 +174,7 @@ const CheRogaPora = () => {
             <a href="#lead-form" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
               <FileText className="w-4 h-4" /> {t("cheRoga.quickReceive")}
             </a>
-            <a href="https://www.muvh.gov.py/programa-che-roga-pora/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
+            <a href="https://www.cherogapora.gov.py/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
               <ExternalLink className="w-4 h-4" /> Sitio oficial MUVH
             </a>
           </div>
