@@ -78,7 +78,7 @@ const Navbar = () => {
               <Shield className="w-3.5 h-3.5 lg:w-4 lg:h-4" /> {t("nav.admin")}
             </Link>
           )}
-          <Link to={isAdmin ? "/admin/projects/new" : isDeveloper ? "/developer/projects/new" : "/auth?role=developer"} className="bg-white/10 backdrop-blur-sm text-white px-3 lg:px-5 py-2 lg:py-2.5 rounded-xl text-xs lg:text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors whitespace-nowrap">
+          <Link to={isDeveloper ? "/developer/projects/new" : "/auth?role=developer"} className="bg-white/10 backdrop-blur-sm text-white px-3 lg:px-5 py-2 lg:py-2.5 rounded-xl text-xs lg:text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors whitespace-nowrap">
             {t("nav.publishProject")}
           </Link>
         </div>
