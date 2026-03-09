@@ -35,6 +35,7 @@ export const useAuth = () => {
 const useRoleCheck = (userId: string | undefined, role: "admin" | "moderator" | "user" | "developer") => {
   const [hasRole, setHasRole] = useState(false);
   const [checkedUserId, setCheckedUserId] = useState<string | undefined>(undefined);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     if (!userId) {
@@ -44,7 +45,7 @@ const useRoleCheck = (userId: string | undefined, role: "admin" | "moderator" | 
     }
     let cancelled = false;
     setCheckedUserId(undefined);
-    console.log(`[useRoleCheck] Checking role "${role}" for user ${userId}`);
+    console.log(`[useRoleCheck] Checking role "${role}" for user ${userId} (attempt ${retryCount + 1})`);
     supabase
       .from("user_roles")
       .select("role")
@@ -52,15 +53,25 @@ const useRoleCheck = (userId: string | undefined, role: "admin" | "moderator" | 
       .eq("role", role)
       .maybeSingle()
       .then(({ data, error }) => {
-        if (!cancelled) {
-          if (error) console.error(`[useRoleCheck] Error checking role "${role}":`, error);
-          console.log(`[useRoleCheck] Result for "${role}":`, { hasRole: !!data, error });
-          setHasRole(!!data);
-          setCheckedUserId(userId);
+        if (cancelled) return;
+        if (error) {
+          console.error(`[useRoleCheck] Error checking role "${role}":`, error);
+          // Retry on network/server errors (max 3 retries with exponential backoff)
+          if (retryCount < 3) {
+            const delay = Math.min(1000 * Math.pow(2, retryCount), 8000);
+            console.log(`[useRoleCheck] Retrying in ${delay}ms...`);
+            setTimeout(() => {
+              if (!cancelled) setRetryCount((c) => c + 1);
+            }, delay);
+            return;
+          }
         }
+        console.log(`[useRoleCheck] Result for "${role}":`, { hasRole: !!data, error });
+        setHasRole(!!data);
+        setCheckedUserId(userId);
       });
     return () => { cancelled = true; };
-  }, [userId, role]);
+  }, [userId, role, retryCount]);
 
   const loading = checkedUserId !== userId;
   return { hasRole, loading };
