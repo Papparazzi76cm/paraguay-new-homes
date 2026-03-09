@@ -33,6 +33,7 @@ const Auth = () => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
+        await supabase.rpc("ensure_user_setup");
         const userId = session.user.id;
         const { data: adminRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "admin").maybeSingle();
         if (adminRole) { navigate("/admin", { replace: true }); return; }
