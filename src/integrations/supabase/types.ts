@@ -508,6 +508,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      ensure_user_setup: { Args: never; Returns: undefined }
       get_matched_leads_for_developer: {
         Args: { _developer_id: string }
         Returns: {
