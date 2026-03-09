@@ -1,43 +1,60 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CurrencyProvider } from "@/hooks/useCurrency";
-import Index from "./pages/Index";
-import CheRogaPora from "./pages/CheRogaPora";
-import ProyectosCheRogaPora from "./pages/ProyectosCheRogaPora";
-import ProjectDetail from "./pages/ProjectDetail";
-import ParaPromotores from "./pages/ParaPromotores";
-import Inversion from "./pages/Inversion";
-import Proyectos from "./pages/Proyectos";
-import DeveloperProfile from "./pages/DeveloperProfile";
-import Promotores from "./pages/Promotores";
-import Blog from "./pages/Blog";
-import BlogArticle from "./pages/BlogArticle";
-import NotFound from "./pages/NotFound";
-import ChatBot from "./components/ChatBot";
-import Auth from "./pages/Auth";
-import ResetPassword from "./pages/ResetPassword";
-import UserPreferences from "./pages/UserPreferences";
-import AdminLayout from "./components/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import ProjectsList from "./pages/admin/ProjectsList";
-import ProjectForm from "./pages/admin/ProjectForm";
-import ProjectImages from "./pages/admin/ProjectImages";
-import LeadsList from "./pages/admin/LeadsList";
-import SubscribersList from "./pages/admin/SubscribersList";
-import DeveloperApprovals from "./pages/admin/DeveloperApprovals";
-import DeveloperLayout from "./components/developer/DeveloperLayout";
-import DeveloperDashboard from "./pages/developer/DeveloperDashboard";
-import DeveloperProjectsList from "./pages/developer/DeveloperProjectsList";
-import DeveloperProjectForm from "./pages/developer/DeveloperProjectForm";
-import DeveloperLeadsList from "./pages/developer/DeveloperLeadsList";
-import Marketplace from "./pages/developer/Marketplace";
-import DeveloperSettings from "./pages/developer/DeveloperSettings";
 import { useTheme } from "./hooks/useTheme";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Eagerly load the landing page for fastest first paint
+import Index from "./pages/Index";
+
+// Lazy-load everything else
+const CheRogaPora = lazy(() => import("./pages/CheRogaPora"));
+const ProyectosCheRogaPora = lazy(() => import("./pages/ProyectosCheRogaPora"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const ParaPromotores = lazy(() => import("./pages/ParaPromotores"));
+const Inversion = lazy(() => import("./pages/Inversion"));
+const Proyectos = lazy(() => import("./pages/Proyectos"));
+const DeveloperProfile = lazy(() => import("./pages/DeveloperProfile"));
+const Promotores = lazy(() => import("./pages/Promotores"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ChatBot = lazy(() => import("./components/ChatBot"));
+const Auth = lazy(() => import("./pages/Auth"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const UserPreferences = lazy(() => import("./pages/UserPreferences"));
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const ProjectsList = lazy(() => import("./pages/admin/ProjectsList"));
+const ProjectForm = lazy(() => import("./pages/admin/ProjectForm"));
+const ProjectImages = lazy(() => import("./pages/admin/ProjectImages"));
+const LeadsList = lazy(() => import("./pages/admin/LeadsList"));
+const SubscribersList = lazy(() => import("./pages/admin/SubscribersList"));
+const DeveloperApprovals = lazy(() => import("./pages/admin/DeveloperApprovals"));
+const DeveloperLayout = lazy(() => import("./components/developer/DeveloperLayout"));
+const DeveloperDashboard = lazy(() => import("./pages/developer/DeveloperDashboard"));
+const DeveloperProjectsList = lazy(() => import("./pages/developer/DeveloperProjectsList"));
+const DeveloperProjectForm = lazy(() => import("./pages/developer/DeveloperProjectForm"));
+const DeveloperLeadsList = lazy(() => import("./pages/developer/DeveloperLeadsList"));
+const Marketplace = lazy(() => import("./pages/developer/Marketplace"));
+const DeveloperSettings = lazy(() => import("./pages/developer/DeveloperSettings"));
 
 const queryClient = new QueryClient();
+
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="space-y-4 w-full max-w-md px-6">
+      <Skeleton className="h-8 w-3/4 mx-auto" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-5/6" />
+      <Skeleton className="h-48 w-full rounded-xl" />
+    </div>
+  </div>
+);
 
 const App = () => {
   useTheme();
@@ -48,49 +65,51 @@ const App = () => {
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/proyectos" element={<Proyectos />} />
-          <Route path="/che-roga-pora" element={<CheRogaPora />} />
-          <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
-          <Route path="/proyecto/:slug" element={<ProjectDetail />} />
-          <Route path="/para-promotores" element={<ParaPromotores />} />
-          <Route path="/promotores" element={<Promotores />} />
-          <Route path="/promotor/:slug" element={<DeveloperProfile />} />
-          <Route path="/inversion" element={<Inversion />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogArticle />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/mis-preferencias" element={<UserPreferences />} />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/proyectos" element={<Proyectos />} />
+            <Route path="/che-roga-pora" element={<CheRogaPora />} />
+            <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
+            <Route path="/proyecto/:slug" element={<ProjectDetail />} />
+            <Route path="/para-promotores" element={<ParaPromotores />} />
+            <Route path="/promotores" element={<Promotores />} />
+            <Route path="/promotor/:slug" element={<DeveloperProfile />} />
+            <Route path="/inversion" element={<Inversion />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/mis-preferencias" element={<UserPreferences />} />
 
-          {/* Admin routes */}
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="projects" element={<ProjectsList />} />
-            <Route path="projects/new" element={<ProjectForm />} />
-            <Route path="projects/:id" element={<ProjectForm />} />
-            <Route path="projects/:id/images" element={<ProjectImages />} />
-            <Route path="leads" element={<LeadsList />} />
-            <Route path="subscribers" element={<SubscribersList />} />
-            <Route path="developers" element={<DeveloperApprovals />} />
-          </Route>
+            {/* Admin routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="projects" element={<ProjectsList />} />
+              <Route path="projects/new" element={<ProjectForm />} />
+              <Route path="projects/:id" element={<ProjectForm />} />
+              <Route path="projects/:id/images" element={<ProjectImages />} />
+              <Route path="leads" element={<LeadsList />} />
+              <Route path="subscribers" element={<SubscribersList />} />
+              <Route path="developers" element={<DeveloperApprovals />} />
+            </Route>
 
-          {/* Developer routes */}
-          <Route path="/developer" element={<DeveloperLayout />}>
-            <Route index element={<DeveloperDashboard />} />
-            <Route path="projects" element={<DeveloperProjectsList />} />
-            <Route path="projects/new" element={<DeveloperProjectForm />} />
-            <Route path="projects/:id" element={<DeveloperProjectForm />} />
-            <Route path="leads" element={<DeveloperLeadsList />} />
-            <Route path="marketplace" element={<Marketplace />} />
-            <Route path="settings" element={<DeveloperSettings />} />
-          </Route>
+            {/* Developer routes */}
+            <Route path="/developer" element={<DeveloperLayout />}>
+              <Route index element={<DeveloperDashboard />} />
+              <Route path="projects" element={<DeveloperProjectsList />} />
+              <Route path="projects/new" element={<DeveloperProjectForm />} />
+              <Route path="projects/:id" element={<DeveloperProjectForm />} />
+              <Route path="leads" element={<DeveloperLeadsList />} />
+              <Route path="marketplace" element={<Marketplace />} />
+              <Route path="settings" element={<DeveloperSettings />} />
+            </Route>
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <ChatBot />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <ChatBot />
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
     </CurrencyProvider>
