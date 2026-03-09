@@ -35,6 +35,17 @@ const Auth = () => {
       if (session?.user) {
         await supabase.rpc("ensure_user_setup");
         const userId = session.user.id;
+
+        // If ?role=developer is present, only redirect if user is already a developer
+        if (forceDeveloper) {
+          const { data: devRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "developer").maybeSingle();
+          if (devRole) {
+            navigate("/developer/projects/new", { replace: true });
+          }
+          // Otherwise stay on page — user needs to register as developer
+          return;
+        }
+
         const { data: adminRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "admin").maybeSingle();
         if (adminRole) { navigate("/admin", { replace: true }); return; }
         const { data: devRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "developer").maybeSingle();
@@ -43,7 +54,7 @@ const Auth = () => {
       }
     };
     checkSession();
-  }, [navigate]);
+  }, [navigate, forceDeveloper]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
