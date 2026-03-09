@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useAuth, useIsAdmin, useIsDeveloper } from "@/hooks/useAuth";
 
 const CtaBanner = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { isAdmin } = useIsAdmin(user?.id);
+  const { isDeveloper } = useIsDeveloper(user?.id);
 
   return (
     <section className="py-20 md:py-28 bg-primary">
