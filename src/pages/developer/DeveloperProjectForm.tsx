@@ -270,10 +270,10 @@ const DeveloperProjectForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Programa de financiación</Label>
-              <Select value={form.programa_financiacion} onValueChange={(v) => set("programa_financiacion", v)}>
+              <Select value={form.programa_financiacion || "ninguno"} onValueChange={(v) => set("programa_financiacion", v === "ninguno" ? "" : v)}>
                 <SelectTrigger><SelectValue placeholder="Seleccionar" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Ninguno</SelectItem>
+                  <SelectItem value="ninguno">Ninguno</SelectItem>
                   <SelectItem value="che_roga_pora">Che Róga Porã</SelectItem>
                 </SelectContent>
               </Select>
