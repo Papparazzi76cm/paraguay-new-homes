@@ -28,6 +28,22 @@ const Auth = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  // Detect existing session (e.g. after email confirmation redirect)
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const userId = session.user.id;
+        const { data: adminRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "admin").maybeSingle();
+        if (adminRole) { navigate("/admin", { replace: true }); return; }
+        const { data: devRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "developer").maybeSingle();
+        if (devRole) { navigate("/developer", { replace: true }); return; }
+        navigate("/", { replace: true });
+      }
+    };
+    checkSession();
+  }, [navigate]);
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

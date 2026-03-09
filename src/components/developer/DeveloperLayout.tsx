@@ -13,7 +13,7 @@ const DeveloperLayout = () => {
   useEffect(() => {
     if (authLoading || roleLoading) return;
     if (!user) {
-      navigate("/auth");
+      navigate("/auth?role=developer");
     } else if (!isDeveloper) {
       navigate("/");
     }
@@ -23,6 +23,7 @@ const DeveloperLayout = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <span className="ml-3 text-muted-foreground">Verificando acceso...</span>
       </div>
     );
   }
