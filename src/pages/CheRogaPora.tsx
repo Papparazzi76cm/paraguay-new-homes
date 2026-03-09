@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Home, Shield, Percent, Clock, MapPin, Building, TrendingUp, Loader2, ArrowRight, BadgeCheck, Calculator, ClipboardCheck, FileText, BookOpen } from "lucide-react";
+import { Home, Shield, Percent, Clock, MapPin, Building, TrendingUp, Loader2, ArrowRight, BadgeCheck, Calculator, ClipboardCheck, FileText, BookOpen, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -173,6 +173,9 @@ const CheRogaPora = () => {
             </Link>
             <a href="#lead-form" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
               <FileText className="w-4 h-4" /> {t("cheRoga.quickReceive")}
+            </a>
+            <a href="https://www.muvh.gov.py/programa-che-roga-pora/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground font-medium hover:underline inline-flex items-center gap-2 text-sm">
+              <ExternalLink className="w-4 h-4" /> Sitio oficial MUVH
             </a>
           </div>
         </div>
