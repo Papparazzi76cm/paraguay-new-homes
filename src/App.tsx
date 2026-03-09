@@ -6,12 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CurrencyProvider } from "@/hooks/useCurrency";
 import { useTheme } from "./hooks/useTheme";
-import { Skeleton } from "@/components/ui/skeleton";
 
 // Eagerly load the landing page for fastest first paint
 import Index from "./pages/Index";
 
-// Lazy-load everything else
+// Lazy-load other pages
 const CheRogaPora = lazy(() => import("./pages/CheRogaPora"));
 const ProyectosCheRogaPora = lazy(() => import("./pages/ProyectosCheRogaPora"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
@@ -45,15 +44,9 @@ const DeveloperSettings = lazy(() => import("./pages/developer/DeveloperSettings
 
 const queryClient = new QueryClient();
 
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="space-y-4 w-full max-w-md px-6">
-      <Skeleton className="h-8 w-3/4 mx-auto" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-5/6" />
-      <Skeleton className="h-48 w-full rounded-xl" />
-    </div>
-  </div>
+// Minimal fallback — just a transparent container so the transition feels instant
+const MinimalFallback = () => (
+  <div className="min-h-screen bg-background" />
 );
 
 const App = () => {
@@ -65,7 +58,7 @@ const App = () => {
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<MinimalFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/proyectos" element={<Proyectos />} />
@@ -108,6 +101,8 @@ const App = () => {
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+        </Suspense>
+        <Suspense fallback={null}>
           <ChatBot />
         </Suspense>
       </BrowserRouter>
