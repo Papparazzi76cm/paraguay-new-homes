@@ -38,7 +38,7 @@ const DeveloperLayout = () => {
     }
   }, [authLoading, roleLoading, user, isDeveloper, navigate]);
 
-  if (authLoading || roleLoading) {
+  if (authLoading || !setupDone || roleLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
