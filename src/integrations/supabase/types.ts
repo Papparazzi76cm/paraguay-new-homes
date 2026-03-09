@@ -55,6 +55,72 @@ export type Database = {
           },
         ]
       }
+      crm_sync_logs: {
+        Row: {
+          created_at: string
+          developer_id: string
+          endpoint: string
+          id: string
+          method: string
+          request_body: Json | null
+          response_summary: string | null
+          status_code: number
+        }
+        Insert: {
+          created_at?: string
+          developer_id: string
+          endpoint: string
+          id?: string
+          method: string
+          request_body?: Json | null
+          response_summary?: string | null
+          status_code: number
+        }
+        Update: {
+          created_at?: string
+          developer_id?: string
+          endpoint?: string
+          id?: string
+          method?: string
+          request_body?: Json | null
+          response_summary?: string | null
+          status_code?: number
+        }
+        Relationships: []
+      }
+      developer_api_keys: {
+        Row: {
+          active: boolean
+          api_key: string
+          created_at: string
+          developer_id: string
+          id: string
+          key_name: string
+          last_used_at: string | null
+          revoked_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          api_key: string
+          created_at?: string
+          developer_id: string
+          id?: string
+          key_name?: string
+          last_used_at?: string | null
+          revoked_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          api_key?: string
+          created_at?: string
+          developer_id?: string
+          id?: string
+          key_name?: string
+          last_used_at?: string | null
+          revoked_at?: string | null
+        }
+        Relationships: []
+      }
       marketplace_services: {
         Row: {
           active: boolean | null
@@ -528,6 +594,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      validate_api_key: { Args: { _api_key: string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user" | "developer"

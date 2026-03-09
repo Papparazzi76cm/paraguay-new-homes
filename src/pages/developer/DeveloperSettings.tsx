@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Save, KeyRound, Building2, User, Upload, X } from "lucide-react";
+import { Save, KeyRound, Building2, User, Upload, X, Plug } from "lucide-react";
+import ApiKeyManager from "@/components/developer/ApiKeyManager";
 
 const DeveloperSettings = () => {
   const { user } = useAuth();
@@ -323,6 +324,19 @@ const DeveloperSettings = () => {
             <KeyRound className="w-4 h-4" /> Cambiar contraseña
           </Button>
         </form>
+      </section>
+      {/* CRM Integration Section */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Plug className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-foreground">Integración CRM (API)</h3>
+        </div>
+        <div className="bg-muted/30 rounded-xl p-5">
+          <p className="text-sm text-muted-foreground mb-4">
+            Conectá tu CRM para sincronizar proyectos, unidades y disponibilidad en tiempo real.
+          </p>
+          <ApiKeyManager />
+        </div>
       </section>
     </div>
   );
