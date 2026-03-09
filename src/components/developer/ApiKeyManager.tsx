@@ -104,8 +104,8 @@ const ApiKeyManager = () => {
     <div className="space-y-6">
       {/* New key creation */}
       {newlyCreatedKey && (
-        <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl p-4 space-y-2">
-          <p className="text-sm font-semibold text-green-800 dark:text-green-300">
+        <div className="bg-accent/30 border border-accent rounded-xl p-4 space-y-2">
+          <p className="text-sm font-semibold text-foreground">
             🔑 Tu nueva API Key (copiala ahora, no se mostrará completa de nuevo):
           </p>
           <div className="flex items-center gap-2">
