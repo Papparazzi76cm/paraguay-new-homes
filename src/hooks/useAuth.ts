@@ -44,14 +44,17 @@ const useRoleCheck = (userId: string | undefined, role: "admin" | "moderator" | 
     }
     let cancelled = false;
     setCheckedUserId(undefined);
+    console.log(`[useRoleCheck] Checking role "${role}" for user ${userId}`);
     supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", userId)
       .eq("role", role)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error }) => {
         if (!cancelled) {
+          if (error) console.error(`[useRoleCheck] Error checking role "${role}":`, error);
+          console.log(`[useRoleCheck] Result for "${role}":`, { hasRole: !!data, error });
           setHasRole(!!data);
           setCheckedUserId(userId);
         }
