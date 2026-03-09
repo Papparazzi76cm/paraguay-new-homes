@@ -287,7 +287,7 @@ const ChatBot = () => {
             exit={{ scale: 0 }}
             whileHover={{ scale: 1.1 }}
             onClick={() => { setOpen(true); if (isMobile) setFullscreen(true); }}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow"
+            className="fixed bottom-6 right-6 md:bottom-20 md:bottom-20 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow"
             aria-label={t("chatbot.openChat")}
           >
             <MessageCircle className="w-6 h-6" />
@@ -306,7 +306,7 @@ const ChatBot = () => {
             className={`fixed z-50 border bg-background shadow-2xl flex flex-col overflow-hidden transition-all duration-300 ${
               fullscreen
                 ? "inset-0 rounded-none"
-                : "bottom-6 right-6 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-4rem)] rounded-2xl"
+                : "bottmd:bottom-20 om-6 right-6 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-4rem)] rounded-2xl"
             }`}
           >
             {/* Header */}
