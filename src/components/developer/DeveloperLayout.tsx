@@ -17,7 +17,7 @@ const DeveloperLayout = () => {
   // Ensure user setup before checking roles
   useEffect(() => {
     if (authLoading || !user) return;
-    supabase.rpc("ensure_user_setup").then(() => setSetupDone(true)).catch(() => setSetupDone(true));
+    supabase.rpc("ensure_user_setup").then(() => setSetupDone(true), () => setSetupDone(true));
   }, [authLoading, user]);
 
   console.log("[DeveloperLayout] state:", { 
