@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Home, Shield, Percent, Clock, MapPin, Building, TrendingUp, Loader2, ArrowRight, BadgeCheck, Calculator, ClipboardCheck, FileText, BookOpen } from "lucide-react";
+import { Home, Shield, Percent, Clock, MapPin, Building, TrendingUp, Loader2, ArrowRight, BadgeCheck, Calculator, ClipboardCheck, FileText, BookOpen, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
