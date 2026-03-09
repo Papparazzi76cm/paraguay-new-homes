@@ -26,7 +26,7 @@ const DeveloperLayout = () => {
   });
 
   useEffect(() => {
-    if (authLoading || roleLoading) return;
+    if (authLoading || !setupDone || roleLoading) return;
     if (!user) {
       console.log("[DeveloperLayout] No user, redirecting to auth");
       setRedirecting(true);
