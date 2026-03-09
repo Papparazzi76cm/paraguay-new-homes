@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth, useIsDeveloper } from "@/hooks/useAuth";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DeveloperSidebar } from "./DeveloperSidebar";
@@ -9,13 +9,24 @@ const DeveloperLayout = () => {
   const { user, loading: authLoading, signOut } = useAuth();
   const { isDeveloper, loading: roleLoading } = useIsDeveloper(user?.id);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [redirecting, setRedirecting] = useState(false);
+
+  console.log("[DeveloperLayout] state:", { 
+    authLoading, roleLoading, userId: user?.id, isDeveloper, 
+    path: location.pathname, redirecting 
+  });
 
   useEffect(() => {
     if (authLoading || roleLoading) return;
     if (!user) {
-      navigate("/auth?role=developer");
+      console.log("[DeveloperLayout] No user, redirecting to auth");
+      setRedirecting(true);
+      navigate("/auth?role=developer", { replace: true });
     } else if (!isDeveloper) {
-      navigate("/");
+      console.log("[DeveloperLayout] User not developer, redirecting to home");
+      setRedirecting(true);
+      navigate("/", { replace: true });
     }
   }, [authLoading, roleLoading, user, isDeveloper, navigate]);
 
@@ -28,7 +39,14 @@ const DeveloperLayout = () => {
     );
   }
 
-  if (!user || !isDeveloper) return null;
+  if (!user || !isDeveloper) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <span className="ml-3 text-muted-foreground">Redirigiendo...</span>
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>
