@@ -339,6 +339,19 @@ const DeveloperSettings = () => {
           <ApiKeyManager />
         </div>
       </section>
+      {/* Webhooks Section */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Webhook className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-foreground">Webhooks salientes</h3>
+        </div>
+        <div className="bg-muted/30 rounded-xl p-5">
+          <p className="text-sm text-muted-foreground mb-4">
+            Recibí notificaciones automáticas en tu CRM cuando se generen nuevos leads en tus proyectos.
+          </p>
+          <WebhookManager />
+        </div>
+      </section>
     </div>
   );
 };
