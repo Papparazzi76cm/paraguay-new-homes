@@ -121,6 +121,45 @@ export type Database = {
         }
         Relationships: []
       }
+      developer_webhooks: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          developer_id: string
+          events: string[]
+          id: string
+          last_status_code: number | null
+          last_triggered_at: string | null
+          secret: string | null
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          developer_id: string
+          events?: string[]
+          id?: string
+          last_status_code?: number | null
+          last_triggered_at?: string | null
+          secret?: string | null
+          url: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          developer_id?: string
+          events?: string[]
+          id?: string
+          last_status_code?: number | null
+          last_triggered_at?: string | null
+          secret?: string | null
+          url?: string
+        }
+        Relationships: []
+      }
       marketplace_services: {
         Row: {
           active: boolean | null
