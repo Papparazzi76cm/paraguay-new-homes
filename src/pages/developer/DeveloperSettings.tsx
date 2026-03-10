@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Save, KeyRound, Building2, User, Upload, X, Plug } from "lucide-react";
+import { Save, KeyRound, Building2, User, Upload, X, Plug, Webhook } from "lucide-react";
 import ApiKeyManager from "@/components/developer/ApiKeyManager";
+import WebhookManager from "@/components/developer/WebhookManager";
 
 const DeveloperSettings = () => {
   const { user } = useAuth();
@@ -336,6 +337,19 @@ const DeveloperSettings = () => {
             Conectá tu CRM para sincronizar proyectos, unidades y disponibilidad en tiempo real.
           </p>
           <ApiKeyManager />
+        </div>
+      </section>
+      {/* Webhooks Section */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Webhook className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-foreground">Webhooks salientes</h3>
+        </div>
+        <div className="bg-muted/30 rounded-xl p-5">
+          <p className="text-sm text-muted-foreground mb-4">
+            Recibí notificaciones automáticas en tu CRM cuando se generen nuevos leads en tus proyectos.
+          </p>
+          <WebhookManager />
         </div>
       </section>
     </div>
