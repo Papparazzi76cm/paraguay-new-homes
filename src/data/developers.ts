@@ -672,6 +672,29 @@ export const developers: DeveloperInfo[] = [
     ],
     esg: "Diseño vanguardista con amplios ventanales para máximo aprovechamiento de luz natural y espacios verdes integrados.",
   },
+  {
+    slug: "arquitectonica",
+    name: "Arquitectónica S.R.L",
+    website: "https://arquitectonica.com.py",
+    email: "",
+    phone: "",
+    description:
+      "Empresa fundada en 2005 en Asunción por los arquitectos Sebastián Pérez y Valeria Marcos. Con 20 años de excelencia, Arquitectónica ofrece servicios integrales de construcción y desarrollo inmobiliario, desde residenciales hasta complejos comerciales e industriales, con los más altos estándares de calidad. Transforman propiedades en emprendimientos rentables a través de estudios de viabilidad, análisis de mercado y gestión integral de proyectos.",
+    logo: "/images/arquitectonica-logo.png",
+    heroImage: "/images/arquitectonica-hero.jpg",
+    stats: [
+      { label: "Años de excelencia", value: "20" },
+      { label: "Servicios", value: "Construcción / Desarrollo" },
+      { label: "Fundación", value: "2005" },
+      { label: "Sede", value: "Asunción" },
+    ],
+    certifications: [
+      "Servicios integrales de construcción y desarrollo",
+      "Estudios de viabilidad y análisis de mercado",
+      "Formación internacional de fundadores (UNA, UC, IAE Business School)",
+      "Oportunidades de inversión para diversos perfiles",
+    ],
+  },
 ];
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
