@@ -695,6 +695,31 @@ export const developers: DeveloperInfo[] = [
       "Oportunidades de inversión para diversos perfiles",
     ],
   },
+  {
+    slug: "civis",
+    name: "Civis Soluciones Inmobiliarias",
+    website: "https://www.civis.com.py",
+    email: "",
+    phone: "+595 992 286 661",
+    description:
+      "Empresa paraguaya de desarrollo e inversión inmobiliaria con una propuesta única e innovadora en el país. Líder en urbanismo ecológico con proyectos que combinan domótica, terminaciones de lujo y arquitectura sostenible. Con 13 desarrollos entre Asunción y Gran Asunción, incluyendo torres de hasta 50 niveles, barrios cerrados y edificios de usos mixtos. Líneas de producto: Civis (torres de lujo), Flats (inversión accesible), Jardinia y Yvyra (barrios cerrados).",
+    logo: "/images/civis-logo.png",
+    heroImage: "/images/civis-hero.webp",
+    stats: [
+      { label: "Proyectos desarrollados", value: "13" },
+      { label: "Unidades vendidas", value: "1.000+" },
+      { label: "M² construidos", value: "100.000+" },
+      { label: "Ventas totales", value: "USD 100M+" },
+    ],
+    certifications: [
+      "Línea Civis: torres de lujo con urbanismo ecológico",
+      "Línea Flats: inversión accesible con amenidades premium",
+      "Domótica y terminaciones de lujo en todos los proyectos",
+      "Web multiidioma (ES, EN, DE, PT, PL) — alcance internacional",
+      "Recorridos virtuales 360° en proyectos principales",
+    ],
+    esg: "Pioneros en urbanismo ecológico en Paraguay con parques naturales elevados de 500m² y diseño sustentable integrado en sus torres Civis X y XI.",
+  },
 ];
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
