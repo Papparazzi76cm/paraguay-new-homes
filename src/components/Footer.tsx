@@ -1,90 +1,63 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { MapPin, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import tekohaLogo from "@/assets/tekoha-logo.png";
 
-/**
- * Footer optimizado para accesibilidad (ARIA) y SEO.
- */
 const Footer = () => {
   const { t } = useTranslation();
-  
+
   return (
-    <footer className="bg-slate-900 text-slate-300 py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Sección de Marca e Información */}
-          <div className="space-y-6">
-            <Link to="/" className="text-white text-2xl font-bold tracking-tight">
-              Tekoha
-            </Link>
-            <p className="text-sm leading-relaxed">
-              {t('footer.description')}
-            </p>
-            <div className="flex space-x-4">
-              {/* ACCESIBILIDAD: Se agregan aria-labels para navegación asistida */}
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visitar nuestra página de Facebook">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visitar nuestro perfil de Instagram">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Conectar con nosotros en LinkedIn">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Seguirnos en Twitter">
-                <Twitter size={20} />
-              </a>
+    <footer className="bg-foreground py-16">
+      <div className="container">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div>
+            <div className="flex items-center mb-4">
+              <img src={tekohaLogo} alt="Tekoha" className="h-40 w-auto brightness-0 invert" />
             </div>
+            <p className="text-background/50 text-sm leading-relaxed">{t("footer.brandDesc")}</p>
           </div>
 
-          {/* Enlaces de Navegación Rápida */}
           <div>
-            <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">
-              {t('footer.quickLinks')}
-            </h4>
-            <nav aria-label="Menú secundario de enlaces rápidos">
-              <ul className="space-y-4 text-sm">
-                <li><Link to="/proyectos" className="hover:text-white transition-colors">Todos los Proyectos</Link></li>
-                <li><Link to="/inversion" className="hover:text-white transition-colors">Guía de Inversión</Link></li>
-                <li><Link to="/promotores" className="hover:text-white transition-colors">Para Promotores</Link></li>
-                <li><Link to="/blog" className="hover:text-white transition-colors">Blog y Noticias</Link></li>
-              </ul>
-            </nav>
-          </div>
-
-          {/* Información Legal */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">
-              {t('footer.legal')}
-            </h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link to="/legal" className="hover:text-white transition-colors">Aviso Legal</Link></li>
-              <li><Link to="/privacy" className="hover:text-white transition-colors">Privacidad</Link></li>
-              <li><Link to="/cookies" className="hover:text-white transition-colors">Política de Cookies</Link></li>
+            <h4 className="text-background font-semibold text-sm mb-4 font-sans">{t("footer.explore")}</h4>
+            <ul className="space-y-2.5">
+              {[t("footer.exploreProjects"), t("footer.exploreNew"), t("footer.exploreOpportunities"), t("footer.exploreComparator"), t("footer.exploreBlog")].map((item) => (
+                <li key={item}>
+                  <a href="#" className="text-background/50 hover:text-background text-sm transition-colors">{item}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Datos de Contacto */}
           <div>
-            <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">
-              {t('footer.contact')}
-            </h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-center space-x-3">
-                <Mail size={16} className="text-teal-500" />
-                <a href="mailto:info@tekoha.estate" className="hover:text-white transition-colors">info@tekoha.estate</a>
+            <h4 className="text-background font-semibold text-sm mb-4 font-sans">{t("footer.forDevelopers")}</h4>
+            <ul className="space-y-2.5">
+              {[t("footer.publish"), t("footer.plans"), t("footer.dashboard"), t("footer.support")].map((item) => (
+                <li key={item}>
+                  <a href="#" className="text-background/50 hover:text-background text-sm transition-colors">{item}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-background font-semibold text-sm mb-4 font-sans">{t("footer.contactTitle")}</h4>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-background/50 text-sm">
+                <MapPin className="w-4 h-4 shrink-0" /> Asunción, Paraguay
               </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={16} className="text-teal-500" />
-                <a href="tel:+595900000000" className="hover:text-white transition-colors">+595 9XX XXX XXX</a>
+              <li className="flex items-center gap-2 text-background/50 text-sm">
+                <Mail className="w-4 h-4 shrink-0" /> info@tekoha.estate
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-16 pt-8 text-sm text-center">
-          <p>© {new Date().getFullYear()} Tekoha. Todos los derechos reservados.</p>
+        <div className="border-t border-background/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-background/40 text-sm">{t("footer.rights")}</p>
+          <div className="flex gap-6">
+            {[t("footer.terms"), t("footer.privacy"), t("footer.cookies")].map((item) => (
+              <a key={item} href="#" className="text-background/40 hover:text-background/60 text-sm transition-colors">{item}</a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
