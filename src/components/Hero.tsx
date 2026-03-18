@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { useTranslation, Trans } from "react-i18next";
-import heroImage from "@/assets/hero-building.jpg";
+import { Link } from "react-router-dom";
+import { Star, ArrowRight } from "lucide-react";
+import heroFallback from "@/assets/hero-building.jpg";
 import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
+import { useHeroProject } from "@/hooks/useHeroProject";
 import type { ProjectFilters } from "@/hooks/useProjects";
 
 interface HeroProps {
@@ -12,6 +15,9 @@ interface HeroProps {
 
 const Hero = ({ filters, onFiltersChange }: HeroProps) => {
   const { t } = useTranslation();
+  const { data: topProject } = useHeroProject();
+
+  const heroImage = topProject?.cover_image_url || heroFallback;
 
   return (
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
@@ -45,10 +51,43 @@ const Hero = ({ filters, onFiltersChange }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-white/75 text-lg md:text-xl max-w-xl mb-10"
+          className="text-white/75 text-lg md:text-xl max-w-xl mb-8"
         >
           {t("hero.subtitle")}
         </motion.p>
+
+        {topProject && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mb-10 w-full max-w-md"
+          >
+            <Link
+              to={`/proyecto/${topProject.slug}`}
+              className="group block bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 hover:bg-white/15 transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10"
+            >
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                <span className="text-xs font-bold tracking-widest uppercase text-amber-400">
+                  Proyecto Top del Mes
+                </span>
+                <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+              </div>
+              <p className="text-white font-display text-lg font-semibold mb-1">
+                {topProject.title}
+              </p>
+              {topProject.developer_name && (
+                <p className="text-white/60 text-sm mb-3">
+                  por {topProject.developer_name}
+                </p>
+              )}
+              <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:gap-2.5 transition-all duration-300">
+                Ver Proyecto <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          </motion.div>
+        )}
 
         <SearchBar filters={filters} onFiltersChange={onFiltersChange} />
 
