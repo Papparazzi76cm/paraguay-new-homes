@@ -7,7 +7,7 @@ export const useHeroProject = () => {
     queryKey: ["hero-project"],
     queryFn: async () => {
       // 1. Get the slug from site_settings
-      const { data: setting, error: settingError } = await supabase
+      const { data: setting, error: settingError } = await (supabase as any)
         .from("site_settings")
         .select("value")
         .eq("key", "hero_project_slug")
