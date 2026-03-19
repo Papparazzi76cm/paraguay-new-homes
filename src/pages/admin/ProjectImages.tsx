@@ -151,6 +151,11 @@ const ProjectImages = () => {
         continue;
       }
 
+      // Server-side re-optimization
+      supabase.functions.invoke("optimize-image", {
+        body: { bucket: "project-images", path: filePath },
+      }).catch(() => {});
+
       const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
 
       const { error: insertError } = await supabase.from("project_images").insert({

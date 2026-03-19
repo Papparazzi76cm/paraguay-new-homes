@@ -148,6 +148,10 @@ const DeveloperProjectForm = () => {
       const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
       const { error: uploadError } = await supabase.storage.from("project-images").upload(filePath, file);
       if (uploadError) { toast.error(`Error al subir ${file.name}`); continue; }
+      // Server-side re-optimization
+      supabase.functions.invoke("optimize-image", {
+        body: { bucket: "project-images", path: filePath },
+      }).catch(() => {});
       const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
       const { error: insertError } = await supabase.from("project_images").insert({ project_id: id, image_url: urlData.publicUrl, alt_text: file.name, sort_order: ++currentCount });
       if (insertError) toast.error(`Error al guardar ${file.name}`);
