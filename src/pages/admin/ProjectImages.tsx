@@ -182,11 +182,7 @@ const ProjectImages = () => {
       <p className="text-sm text-muted-foreground mb-4">Arrastrá las imágenes para reordenarlas.</p>
 
       <div className="mb-6">
-        <Label htmlFor="upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
-          <Upload className="w-4 h-4" />
-          {uploading ? "Subiendo..." : "Subir imagen"}
-        </Label>
-        <Input id="upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
+        <ImageOptimizer onFilesReady={handleOptimizedUpload} uploading={uploading} />
       </div>
 
       {isLoading ? (
