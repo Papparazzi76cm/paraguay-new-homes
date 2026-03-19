@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation, Trans } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Star, ArrowRight } from "lucide-react";
-import heroFallback from "@/assets/hero-building.jpg";
 import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
 import { useHeroProject } from "@/hooks/useHeroProject";
@@ -15,14 +15,25 @@ interface HeroProps {
 
 const Hero = ({ filters, onFiltersChange }: HeroProps) => {
   const { t } = useTranslation();
-  const { data: topProject } = useHeroProject();
+  const { data: topProject, isLoading } = useHeroProject();
+  const [imgLoaded, setImgLoaded] = useState(false);
 
-  const heroImage = topProject?.cover_image_url || heroFallback;
+  // Don't show any image until query resolves to avoid flash
+  const heroImage = topProject?.cover_image_url || null;
+  const showImage = !isLoading && heroImage;
 
   return (
     <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImage} alt="Modern real estate development in Paraguay" className="w-full h-full object-cover" loading="eager" />
+      <div className="absolute inset-0 bg-foreground">
+        {showImage && (
+          <img
+            src={heroImage}
+            alt="Modern real estate development in Paraguay"
+            className={`w-full h-full object-cover transition-opacity duration-500 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            loading="eager"
+            onLoad={() => setImgLoaded(true)}
+          />
+        )}
         <div className="absolute inset-0" style={{ background: "var(--hero-overlay)" }} />
       </div>
 

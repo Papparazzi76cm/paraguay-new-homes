@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ArrowLeft, Trash2, Upload, GripVertical } from "lucide-react";
+import { ArrowLeft, Trash2, GripVertical } from "lucide-react";
+import ImageOptimizer from "@/components/ImageOptimizer";
+
 import {
   DndContext,
   closestCenter,
@@ -133,16 +133,14 @@ const ProjectImages = () => {
     reorderMutation.mutate(reordered.map((img) => img.id));
   };
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0 || !id) return;
+  const handleOptimizedUpload = async (files: File[]) => {
+    if (!id) return;
     setUploading(true);
 
     let currentCount = images?.length ?? 0;
 
-    for (const file of Array.from(files)) {
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    for (const file of files) {
+      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
 
       const { error: uploadError } = await supabase.storage
         .from("project-images")
@@ -170,7 +168,6 @@ const ProjectImages = () => {
     queryClient.invalidateQueries({ queryKey: ["admin-project-images", id] });
     toast.success(`${files.length} imagen(es) subida(s)`);
     setUploading(false);
-    e.target.value = "";
   };
 
   return (
@@ -185,11 +182,7 @@ const ProjectImages = () => {
       <p className="text-sm text-muted-foreground mb-4">Arrastrá las imágenes para reordenarlas.</p>
 
       <div className="mb-6">
-        <Label htmlFor="upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
-          <Upload className="w-4 h-4" />
-          {uploading ? "Subiendo..." : "Subir imagen"}
-        </Label>
-        <Input id="upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
+        <ImageOptimizer onFilesReady={handleOptimizedUpload} uploading={uploading} />
       </div>
 
       {isLoading ? (

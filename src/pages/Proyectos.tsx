@@ -44,11 +44,12 @@ const SmallProjectCard = ({ project, index }: { project: Project; index: number 
         className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300"
       >
         <div className="relative aspect-[4/3] overflow-hidden">
-          <img
+            <img
             src={project.cover_image_url || fallbackImages[index % fallbackImages.length]}
             alt={project.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
+            decoding="async"
           />
           <ProjectCardActions projectId={project.id} projectTitle={project.title} projectSlug={project.slug} />
           <div className="absolute top-4 left-4 flex gap-2">

@@ -10,7 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { ArrowLeft, Upload, Trash2, Star, Loader2 } from "lucide-react";
+import { ArrowLeft, Trash2, Star, Loader2 } from "lucide-react";
+import ImageOptimizer from "@/components/ImageOptimizer";
 import UnitDetailEditor from "@/components/admin/UnitDetailEditor";
 import AmenitiesGrid from "@/components/admin/AmenitiesGrid";
 
@@ -139,14 +140,12 @@ const DeveloperProjectForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); mutation.mutate(); };
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0 || !id) return;
+  const handleOptimizedUpload = async (files: File[]) => {
+    if (!id) return;
     setUploading(true);
     let currentCount = images?.length ?? 0;
-    for (const file of Array.from(files)) {
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    for (const file of files) {
+      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
       const { error: uploadError } = await supabase.storage.from("project-images").upload(filePath, file);
       if (uploadError) { toast.error(`Error al subir ${file.name}`); continue; }
       const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
@@ -156,7 +155,6 @@ const DeveloperProjectForm = () => {
     queryClient.invalidateQueries({ queryKey: ["dev-project-images", id] });
     toast.success(`${files.length} imagen(es) subida(s)`);
     setUploading(false);
-    e.target.value = "";
   };
 
   const deleteImage = async (imageId: string, imageUrl: string) => {
@@ -300,11 +298,7 @@ const DeveloperProjectForm = () => {
         <div className="mt-10 border-t border-border pt-8">
           <h3 className="text-xl font-bold text-foreground mb-2">Imágenes del proyecto</h3>
           <div className="mb-6">
-            <Label htmlFor="img-upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
-              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-              {uploading ? "Subiendo..." : "Subir imágenes"}
-            </Label>
-            <Input id="img-upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
+            <ImageOptimizer onFilesReady={handleOptimizedUpload} uploading={uploading} />
           </div>
           {imagesLoading ? (
             <p className="text-muted-foreground">Cargando imágenes...</p>
