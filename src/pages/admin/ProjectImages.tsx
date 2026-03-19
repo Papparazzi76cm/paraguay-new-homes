@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ArrowLeft, Trash2, GripVertical } from "lucide-react";
 import ImageOptimizer from "@/components/ImageOptimizer";
-import { ArrowLeft, Trash2, Upload, GripVertical } from "lucide-react";
+
 import {
   DndContext,
   closestCenter,
