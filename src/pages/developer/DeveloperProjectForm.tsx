@@ -298,11 +298,7 @@ const DeveloperProjectForm = () => {
         <div className="mt-10 border-t border-border pt-8">
           <h3 className="text-xl font-bold text-foreground mb-2">Imágenes del proyecto</h3>
           <div className="mb-6">
-            <Label htmlFor="img-upload" className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition">
-              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-              {uploading ? "Subiendo..." : "Subir imágenes"}
-            </Label>
-            <Input id="img-upload" type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} disabled={uploading} />
+            <ImageOptimizer onFilesReady={handleOptimizedUpload} uploading={uploading} />
           </div>
           {imagesLoading ? (
             <p className="text-muted-foreground">Cargando imágenes...</p>
