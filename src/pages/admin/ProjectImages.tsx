@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { ArrowLeft, Trash2, GripVertical } from "lucide-react";
+import ImageOptimizer from "@/components/ImageOptimizer";
 import { ArrowLeft, Trash2, Upload, GripVertical } from "lucide-react";
 import {
   DndContext,
