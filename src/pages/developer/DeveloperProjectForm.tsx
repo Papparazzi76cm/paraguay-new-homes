@@ -140,14 +140,12 @@ const DeveloperProjectForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); mutation.mutate(); };
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0 || !id) return;
+  const handleOptimizedUpload = async (files: File[]) => {
+    if (!id) return;
     setUploading(true);
     let currentCount = images?.length ?? 0;
-    for (const file of Array.from(files)) {
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    for (const file of files) {
+      const filePath = `${id}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
       const { error: uploadError } = await supabase.storage.from("project-images").upload(filePath, file);
       if (uploadError) { toast.error(`Error al subir ${file.name}`); continue; }
       const { data: urlData } = supabase.storage.from("project-images").getPublicUrl(filePath);
@@ -157,7 +155,6 @@ const DeveloperProjectForm = () => {
     queryClient.invalidateQueries({ queryKey: ["dev-project-images", id] });
     toast.success(`${files.length} imagen(es) subida(s)`);
     setUploading(false);
-    e.target.value = "";
   };
 
   const deleteImage = async (imageId: string, imageUrl: string) => {
