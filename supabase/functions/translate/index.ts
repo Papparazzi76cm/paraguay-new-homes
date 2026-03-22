@@ -10,6 +10,8 @@ const langNames: Record<string, string> = {
   en: "English",
   de: "German",
   fr: "French",
+  pt: "Portuguese",
+  zh: "Chinese",
 };
 
 serve(async (req) => {
