@@ -4,6 +4,8 @@ import { Globe } from "lucide-react";
 const languages = [
   { code: "es", label: "ES" },
   { code: "en", label: "EN" },
+  { code: "pt", label: "PT" },
+  { code: "zh", label: "中" },
   { code: "de", label: "DE" },
   { code: "fr", label: "FR" },
 ];
