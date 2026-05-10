@@ -13,8 +13,6 @@ import { Check, BarChart3, Users, Download, Building2, Eye, Zap, Shield, ArrowRi
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactDialog from "@/components/ContactDialog";
-import { useStripeCheckout } from "@/hooks/useStripeCheckout";
-import { supabase } from "@/integrations/supabase/client";
 
 const plans = [
   {
@@ -30,7 +28,7 @@ const plans = [
       "Estadísticas de visualizaciones",
       "Soporte por email",
     ],
-    cta: "Suscribirme",
+    cta: "Empezar prueba gratis de 30 días",
     popular: false,
   },
   {
@@ -67,7 +65,7 @@ const plans = [
       "Branding personalizado",
       "Prioridad máxima en búsqueda",
     ],
-    cta: "Suscribirme a Premium",
+    cta: "Empezar prueba gratis de 30 días",
     popular: false,
   },
 ];
@@ -122,21 +120,10 @@ const fadeUp = {
 const ParaPromotores = () => {
   const [contactOpen, setContactOpen] = useState(false);
   const navigate = useNavigate();
-  const { openCheckout, checkoutElement } = useStripeCheckout();
 
-  const handleSubscribe = async (priceId: string, planName: string) => {
-    const { data } = await supabase.auth.getUser();
-    const user = data.user;
-    if (!user) {
-      navigate(`/auth?register_as=developer&redirect=/para-promotores`);
-      return;
-    }
-    openCheckout({
-      priceId,
-      userId: user.id,
-      customerEmail: user.email ?? undefined,
-      title: `Suscripción · ${planName}`,
-    });
+  const handleSubscribe = (priceId: string) => {
+    try { localStorage.setItem("selected_plan", priceId); } catch {}
+    navigate(`/auth?role=developer`);
   };
 
   return (
@@ -307,7 +294,7 @@ const ParaPromotores = () => {
                 </ul>
 
                 <button
-                  onClick={() => handleSubscribe(plan.priceId, plan.name)}
+                  onClick={() => handleSubscribe(plan.priceId)}
                   className={`w-full py-3 rounded-xl font-medium transition-opacity text-sm ${
                     plan.popular
                       ? "bg-primary text-primary-foreground hover:opacity-90"
@@ -417,7 +404,6 @@ const ParaPromotores = () => {
         onClose={() => setContactOpen(false)}
         leadType="promoter_inquiry"
       />
-      {checkoutElement}
     </main>
   );
 };
