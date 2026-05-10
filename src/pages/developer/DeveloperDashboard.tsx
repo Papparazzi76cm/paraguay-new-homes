@@ -5,6 +5,7 @@ import { Building2, Mail, ShoppingBag, Rocket, PlusCircle, Settings, ImagePlus, 
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import TrialBanner from "@/components/developer/TrialBanner";
 
 const DeveloperDashboard = () => {
   const { user } = useAuth();
@@ -141,6 +142,8 @@ const DeveloperDashboard = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-foreground mb-2">Dashboard</h2>
+
+      <TrialBanner />
 
       {showBanner && (
         <div
