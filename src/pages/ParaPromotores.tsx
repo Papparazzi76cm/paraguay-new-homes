@@ -417,6 +417,7 @@ const ParaPromotores = () => {
         onClose={() => setContactOpen(false)}
         leadType="promoter_inquiry"
       />
+      {checkoutElement}
     </main>
   );
 };
