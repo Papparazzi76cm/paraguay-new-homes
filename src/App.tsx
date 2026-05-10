@@ -15,6 +15,7 @@ const CheRogaPora = lazy(() => import("./pages/CheRogaPora"));
 const ProyectosCheRogaPora = lazy(() => import("./pages/ProyectosCheRogaPora"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const ParaPromotores = lazy(() => import("./pages/ParaPromotores"));
+const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
 const Inversion = lazy(() => import("./pages/Inversion"));
 const Proyectos = lazy(() => import("./pages/Proyectos"));
 const DeveloperProfile = lazy(() => import("./pages/DeveloperProfile"));
@@ -66,6 +67,7 @@ const App = () => {
             <Route path="/proyectos-che-roga-pora" element={<ProyectosCheRogaPora />} />
             <Route path="/proyecto/:slug" element={<ProjectDetail />} />
             <Route path="/para-promotores" element={<ParaPromotores />} />
+            <Route path="/checkout/return" element={<CheckoutReturn />} />
             <Route path="/promotores" element={<Promotores />} />
             <Route path="/promotor/:slug" element={<DeveloperProfile />} />
             <Route path="/inversion" element={<Inversion />} />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
@@ -12,12 +13,15 @@ import { Check, BarChart3, Users, Download, Building2, Eye, Zap, Shield, ArrowRi
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactDialog from "@/components/ContactDialog";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
+import { supabase } from "@/integrations/supabase/client";
 
 const plans = [
   {
     name: "Básico",
     price: "149",
     period: "/mes",
+    priceId: "basico_monthly",
     description: "Ideal para promotores que inician con 1-2 proyectos activos.",
     features: [
       "Hasta 2 proyectos publicados",
@@ -26,13 +30,14 @@ const plans = [
       "Estadísticas de visualizaciones",
       "Soporte por email",
     ],
-    cta: "Empezar Gratis",
+    cta: "Suscribirme",
     popular: false,
   },
   {
     name: "Profesional",
     price: "349",
     period: "/mes",
+    priceId: "profesional_monthly",
     description: "Para promotores consolidados que buscan maximizar su alcance.",
     features: [
       "Hasta 10 proyectos publicados",
@@ -50,6 +55,7 @@ const plans = [
     name: "Premium",
     price: "699",
     period: "/mes",
+    priceId: "premium_monthly",
     description: "Solución integral para grandes desarrolladores inmobiliarios.",
     features: [
       "Proyectos ilimitados",
@@ -61,7 +67,7 @@ const plans = [
       "Branding personalizado",
       "Prioridad máxima en búsqueda",
     ],
-    cta: "Contactar Ventas",
+    cta: "Suscribirme a Premium",
     popular: false,
   },
 ];
@@ -115,6 +121,23 @@ const fadeUp = {
 
 const ParaPromotores = () => {
   const [contactOpen, setContactOpen] = useState(false);
+  const navigate = useNavigate();
+  const { openCheckout, checkoutElement } = useStripeCheckout();
+
+  const handleSubscribe = async (priceId: string, planName: string) => {
+    const { data } = await supabase.auth.getUser();
+    const user = data.user;
+    if (!user) {
+      navigate(`/auth?register_as=developer&redirect=/para-promotores`);
+      return;
+    }
+    openCheckout({
+      priceId,
+      userId: user.id,
+      customerEmail: user.email ?? undefined,
+      title: `Suscripción · ${planName}`,
+    });
+  };
 
   return (
     <main className="min-h-screen">
@@ -284,7 +307,7 @@ const ParaPromotores = () => {
                 </ul>
 
                 <button
-                  onClick={() => setContactOpen(true)}
+                  onClick={() => handleSubscribe(plan.priceId, plan.name)}
                   className={`w-full py-3 rounded-xl font-medium transition-opacity text-sm ${
                     plan.popular
                       ? "bg-primary text-primary-foreground hover:opacity-90"
@@ -394,6 +417,7 @@ const ParaPromotores = () => {
         onClose={() => setContactOpen(false)}
         leadType="promoter_inquiry"
       />
+      {checkoutElement}
     </main>
   );
 };
