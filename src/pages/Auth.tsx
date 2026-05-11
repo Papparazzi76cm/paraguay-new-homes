@@ -40,7 +40,7 @@ const Auth = () => {
         if (forceDeveloper) {
           const { data: devRole } = await supabase.from("user_roles").select("role").eq("user_id", userId).eq("role", "developer").maybeSingle();
           if (devRole) {
-            navigate("/developer/projects/new", { replace: true });
+            navigate("/developer", { replace: true });
           }
           // Otherwise stay on page — user needs to register as developer
           return;
