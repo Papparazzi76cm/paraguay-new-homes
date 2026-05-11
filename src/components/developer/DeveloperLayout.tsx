@@ -13,6 +13,8 @@ const DeveloperLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [redirecting, setRedirecting] = useState(false);
+  const [onboardingChecked, setOnboardingChecked] = useState(false);
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
 
   // Ensure user setup before checking roles
   useEffect(() => {
@@ -38,7 +40,36 @@ const DeveloperLayout = () => {
     }
   }, [authLoading, roleLoading, user, isDeveloper, navigate]);
 
-  if (authLoading || !setupDone || roleLoading) {
+  // Check onboarding status — redirect to /developer/onboarding if incomplete
+  useEffect(() => {
+    if (!user || !isDeveloper) return;
+    let cancelled = false;
+    (async () => {
+      const { data: profile } = await (supabase.from("developer_profiles") as any)
+        .select("onboarding_status")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      const { data: sub } = await supabase
+        .from("subscriptions")
+        .select("status")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (cancelled) return;
+      const hasSub = !!sub && ["active", "trialing", "past_due"].includes(sub.status);
+      const isComplete = profile?.onboarding_status === "complete" && hasSub;
+      setOnboardingComplete(isComplete);
+      setOnboardingChecked(true);
+      if (!isComplete && !location.pathname.startsWith("/developer/onboarding")) {
+        setRedirecting(true);
+        navigate("/developer/onboarding", { replace: true });
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [user, isDeveloper, location.pathname, navigate]);
+
+  if (authLoading || !setupDone || roleLoading || (user && isDeveloper && !onboardingChecked)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
