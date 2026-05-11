@@ -42,6 +42,7 @@ const DeveloperProjectForm = lazy(() => import("./pages/developer/DeveloperProje
 const DeveloperLeadsList = lazy(() => import("./pages/developer/DeveloperLeadsList"));
 const Marketplace = lazy(() => import("./pages/developer/Marketplace"));
 const DeveloperSettings = lazy(() => import("./pages/developer/DeveloperSettings"));
+const DeveloperOnboarding = lazy(() => import("./pages/developer/Onboarding"));
 
 const queryClient = new QueryClient();
 
@@ -90,6 +91,8 @@ const App = () => {
             </Route>
 
             {/* Developer routes */}
+            <Route path="/developer/onboarding" element={<DeveloperOnboarding />} />
+            <Route path="/developer/onboarding/done" element={<DeveloperOnboarding />} />
             <Route path="/developer" element={<DeveloperLayout />}>
               <Route index element={<DeveloperDashboard />} />
               <Route path="projects" element={<DeveloperProjectsList />} />
