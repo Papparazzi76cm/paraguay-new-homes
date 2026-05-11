@@ -7,6 +7,7 @@ interface StripeEmbeddedCheckoutProps {
   customerEmail?: string;
   userId?: string;
   returnUrl?: string;
+  trialDays?: number;
 }
 
 export function StripeEmbeddedCheckoutForm({
@@ -14,6 +15,7 @@ export function StripeEmbeddedCheckoutForm({
   customerEmail,
   userId,
   returnUrl,
+  trialDays,
 }: StripeEmbeddedCheckoutProps) {
   const fetchClientSecret = async (): Promise<string> => {
     const finalReturnUrl =
@@ -25,6 +27,7 @@ export function StripeEmbeddedCheckoutForm({
         userId,
         returnUrl: finalReturnUrl,
         environment: getStripeEnvironment(),
+        trialDays,
       },
     });
     if (error || !data?.clientSecret) {
@@ -41,3 +44,5 @@ export function StripeEmbeddedCheckoutForm({
     </div>
   );
 }
+
+export { StripeEmbeddedCheckoutForm as StripeEmbeddedCheckout };
