@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
@@ -42,9 +42,24 @@ type CompanyForm = z.infer<typeof companySchema>;
 const Onboarding = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
   const [step, setStep] = useState<"company" | "payment" | "done">("company");
   const [saving, setSaving] = useState(false);
+
+  // Handle Stripe return — mark onboarding complete and forward to dashboard
+  useEffect(() => {
+    const isDone = location.pathname.endsWith("/done") || searchParams.get("session_id");
+    if (!isDone || !user) return;
+    (async () => {
+      await (supabase.from("developer_profiles") as any)
+        .update({ onboarding_status: "complete" })
+        .eq("user_id", user.id);
+      toast.success("¡Bienvenido! Tu prueba gratuita de 30 días está activa.");
+      navigate("/developer", { replace: true });
+    })();
+  }, [location.pathname, searchParams, user, navigate]);
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/auth?role=developer", { replace: true });
