@@ -121,6 +121,69 @@ export type Database = {
         }
         Relationships: []
       }
+      developer_profiles: {
+        Row: {
+          address: string
+          city: string
+          contact_email: string
+          contact_name: string
+          contact_role: string
+          country: string
+          created_at: string
+          description: string | null
+          id: string
+          legal_name: string
+          logo_url: string | null
+          onboarding_status: string
+          phone: string
+          selected_plan: string
+          tax_id: string
+          updated_at: string
+          user_id: string
+          website: string | null
+        }
+        Insert: {
+          address: string
+          city: string
+          contact_email: string
+          contact_name: string
+          contact_role: string
+          country?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          legal_name: string
+          logo_url?: string | null
+          onboarding_status?: string
+          phone: string
+          selected_plan?: string
+          tax_id: string
+          updated_at?: string
+          user_id: string
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          city?: string
+          contact_email?: string
+          contact_name?: string
+          contact_role?: string
+          country?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          legal_name?: string
+          logo_url?: string | null
+          onboarding_status?: string
+          phone?: string
+          selected_plan?: string
+          tax_id?: string
+          updated_at?: string
+          user_id?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       developer_webhooks: {
         Row: {
           active: boolean
