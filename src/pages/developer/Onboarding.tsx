@@ -79,7 +79,7 @@ const Onboarding = () => {
       contact_name: "",
       contact_role: "",
       contact_email: user?.email || "",
-      selected_plan: PLAN_PRICES[initialPlan] ? initialPlan : "basico",
+      selected_plan: (PLAN_PRICES[initialPlan] ? initialPlan : "basico") as CompanyForm["selected_plan"],
     },
   });
 
@@ -125,8 +125,7 @@ const Onboarding = () => {
       description: values.description || null,
       onboarding_status: "pending_payment",
     };
-    const { error } = await supabase
-      .from("developer_profiles")
+    const { error } = await (supabase.from("developer_profiles") as any)
       .upsert(payload, { onConflict: "user_id" });
     setSaving(false);
     if (error) {
