@@ -4,8 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Clock, Calendar, ShieldCheck } from "lucide-react";
 
-const TRIAL_DAYS = 30;
-
 function formatDate(d: Date) {
   return d.toLocaleDateString("es-PY", { day: "2-digit", month: "long", year: "numeric" });
 }
