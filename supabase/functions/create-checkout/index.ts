@@ -49,12 +49,13 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { priceId, customerEmail, userId, returnUrl, environment } = body as {
+    const { priceId, customerEmail, userId, returnUrl, environment, trialDays } = body as {
       priceId: string;
       customerEmail?: string;
       userId?: string;
       returnUrl: string;
       environment: StripeEnv;
+      trialDays?: number;
     };
 
     if (!priceId || !/^[a-zA-Z0-9_-]+$/.test(priceId)) throw new Error("Invalid priceId");
@@ -81,8 +82,16 @@ Deno.serve(async (req) => {
       ...(customerId && { customer: customerId }),
       ...(userId && {
         metadata: { userId },
-        ...(isRecurring && { subscription_data: { metadata: { userId } } }),
+        ...(isRecurring && {
+          subscription_data: {
+            metadata: { userId },
+            ...(trialDays && trialDays > 0 ? { trial_period_days: trialDays } : {}),
+          },
+        }),
       }),
+      ...(isRecurring && !userId && trialDays && trialDays > 0
+        ? { subscription_data: { trial_period_days: trialDays } }
+        : {}),
     });
 
     return new Response(JSON.stringify({ clientSecret: session.client_secret }), {

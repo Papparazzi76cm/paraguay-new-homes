@@ -4,8 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Clock, Calendar, ShieldCheck } from "lucide-react";
 
-const TRIAL_DAYS = 30;
-
 function formatDate(d: Date) {
   return d.toLocaleDateString("es-PY", { day: "2-digit", month: "long", year: "numeric" });
 }
@@ -19,23 +17,25 @@ const TrialBanner = () => {
     return () => clearInterval(t);
   }, []);
 
-  const { data: profile } = useQuery({
-    queryKey: ["dev-trial-profile", user?.id],
+  const { data: sub } = useQuery({
+    queryKey: ["dev-trial-sub", user?.id],
     queryFn: async () => {
       const { data } = await supabase
-        .from("profiles")
-        .select("created_at")
+        .from("subscriptions")
+        .select("status,current_period_end,cancel_at_period_end")
         .eq("user_id", user!.id)
+        .order("created_at", { ascending: false })
+        .limit(1)
         .maybeSingle();
       return data;
     },
     enabled: !!user,
   });
 
-  if (!profile?.created_at) return null;
+  if (!sub?.current_period_end) return null;
+  if (sub.status !== "trialing") return null;
 
-  const start = new Date(profile.created_at).getTime();
-  const end = start + TRIAL_DAYS * 24 * 60 * 60 * 1000;
+  const end = new Date(sub.current_period_end).getTime();
   const msLeft = end - now;
   const daysLeft = Math.max(0, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
   const hoursLeft = Math.max(0, Math.floor((msLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)));
