@@ -744,6 +744,30 @@ export const developers: DeveloperInfo[] = [
     ],
     esg: "Compromiso con la sostenibilidad mediante certificación LEED en Palmanova Center y empleo de más de 500 obreros de mano de obra paraguaya.",
   },
+  {
+    slug: "avanza-desarrollos",
+    name: "Avanza Desarrollos Inmobiliarios",
+    website: "https://avanza.com.py",
+    email: "ventas@avanza.com.py",
+    phone: "+595 991 830900",
+    description:
+      "Desarrolladora inmobiliaria con 7 años de trayectoria en Asunción, especializada en inversiones rentables en Real Estate con altísima calidad constructiva, innovación en diseño y usabilidad. Liderada por Leandro Terruli y Alexander Busse, suma 9 proyectos desarrollados, 52.554 m² en construcción y más de 822 unidades entregadas. Sus desarrollos finalizados (Harbor, Well Residences, Houze, Zentrum, Único e IN 1362) alcanzan 100% de comercialización.",
+    logo: "/images/avanza/logo.svg",
+    heroImage: "/images/avanza/hero.jpg",
+    stats: [
+      { label: "Años de experiencia", value: "7" },
+      { label: "Proyectos desarrollados", value: "9" },
+      { label: "M² en construcción", value: "52.554" },
+      { label: "Unidades entregadas", value: "822+" },
+    ],
+    certifications: [
+      "100% de comercialización en proyectos entregados",
+      "Equipo multidisciplinario: abogados, contadores y escribanos",
+      "Inversores de Argentina, Bolivia, Chile, Brasil y Perú",
+      "Ubicación estratégica en el corazón urbano de Asunción",
+    ],
+    esg: "Compromiso con la rápida adaptabilidad del producto al mercado y con experiencias de servicios constantes para inversores y usuarios finales.",
+  },
 ];
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
