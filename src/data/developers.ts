@@ -720,6 +720,30 @@ export const developers: DeveloperInfo[] = [
     ],
     esg: "Pioneros en urbanismo ecológico en Paraguay con parques naturales elevados de 500m² y diseño sustentable integrado en sus torres Civis X y XI.",
   },
+  {
+    slug: "grupo-palmanova",
+    name: "Grupo Palmanova",
+    website: "https://www.palmanova.com.py",
+    email: "",
+    phone: "",
+    description:
+      "Grupo Palmanova es un emprendimiento de Katuete S.R.L., empresa paraguaya con más de 26 años de experiencia en construcción. Con más de 50.000 m² construidos en Asunción y 205.000 m² en desarrollo, se ha consolidado como uno de los principales referentes en edificios de altura y proyectos urbanos de gran escala. Lidera proyectos como Palmanova Center, diseñado por Jasper Architects, premiado internacionalmente y en proceso de certificación LEED.",
+    logo: "/images/palmanova/palmanova-logo.avif",
+    heroImage: "/images/palmanova/center-hero.jpg",
+    stats: [
+      { label: "M² construidos", value: "50.000+" },
+      { label: "M² en construcción", value: "205.000+" },
+      { label: "Proyectos activos", value: "4+" },
+      { label: "Años de experiencia", value: "26+" },
+    ],
+    certifications: [
+      "International Architecture & Design Awards 2025 — Gold Winner",
+      "En proceso de certificación LEED",
+      "Diseño arquitectónico por Jasper Architects (Berlín / Buenos Aires / Asunción)",
+      "Emisión de bonos corporativos vía ASUCAPITAL Casa de Bolsa",
+    ],
+    esg: "Compromiso con la sostenibilidad mediante certificación LEED en Palmanova Center y empleo de más de 500 obreros de mano de obra paraguaya.",
+  },
 ];
 
 export const getDeveloperBySlug = (slug: string): DeveloperInfo | undefined =>
